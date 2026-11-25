@@ -1,0 +1,94 @@
+name: Security Hygiene
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  hygiene-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Scan for secrets, local path leaks, and PNG/PDF metadata
+        run: |
+          python3 - <<'PY'
+          import pathlib
+          import re
+          import struct
+          import subprocess
+          import sys
+
+          SKIP = {".github/workflows/security.yml"}
+
+          FORBIDDEN_FILES = [
+              re.compile(r"(^|/)\.env(\.|$)"),
+              re.compile(r"\.(pem|key|p12|pfx)$", re.I),
+              re.compile(r"(^|/)(id_rsa|id_ed25519|credentials\.json)$"),
+          ]
+
+          SECRET_PATTERNS = [
+              ("private-key", re.compile(r"-----BEGIN [A-Z0-9 ]*PRIVATE KEY-----")),
+              ("github-token", re.compile(r"\b(gh[pousr]_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,})\b")),
+              ("aws-key", re.compile(r"\bAKIA[0-9A-Z]{16}\b")),
+              ("api-token", re.compile(r"\b(sk-[A-Za-z0-9_-]{20,}|xai-[A-Za-z0-9_-]{20,}|xox[baprs]-[A-Za-z0-9-]{10,})\b")),
+          ]
+
+          PATH_PATTERNS = [
+              ("unix-home-path", re.compile(r"(/home/[A-Za-z0-9._-]+/|/Users/[A-Za-z0-9._-]+/)")),
+              ("windows-user-path", re.compile(r"[A-Za-z]:\\Users\\[A-Za-z0-9._-]+\\")),
+              ("file-uri", re.compile(r"file:///")),
+          ]
+
+          PDF_PATH_RX = re.compile(rb"(/home/[A-Za-z0-9._-]+/|/Users/[A-Za-z0-9._-]+/|[A-Za-z]:\\Users\\[A-Za-z0-9._-]+\\|file:///)")
+
+          tracked = subprocess.check_output(["git", "ls-files", "-z"]).decode("utf-8").split("\0")
+          tracked = [p for p in tracked if p]
+
+          errors = []
+
+          for rel in tracked:
+              if any(rx.search(rel) for rx in FORBIDDEN_FILES):
+                  errors.append(f"Forbidden filename: {rel}")
+
+              path = pathlib.Path(rel)
+              if not path.is_file() or rel in SKIP:
+                  continue
+
+              suffix = path.suffix.lower()
+              if suffix == ".png":
+                  data = path.read_bytes()
+                  pos = 8
+                  while pos + 8 <= len(data):
+                      length = struct.unpack(">I", data[pos:pos + 4])[0]
+                      ctype = data[pos + 4:pos + 8].decode("ascii", errors="replace")
+                      if ctype in ("tEXt", "iTXt", "zTXt"):
+                          errors.append(f"PNG text metadata chunk ({ctype}) in {rel}")
+                      pos += 12 + length
+                  continue
+
+              if suffix == ".pdf":
+                  if PDF_PATH_RX.search(path.read_bytes()):
+                      errors.append(f"Local path metadata match in PDF {rel}")
+                  continue
+
+              try:
+                  text = path.read_text(encoding="utf-8")
+              except UnicodeDecodeError:
+                  continue
+
+              for lineno, line in enumerate(text.splitlines(), 1):
+                  for label, rx in SECRET_PATTERNS + PATH_PATTERNS:
+                      if rx.search(line):
+                          errors.append(f"{label} match in {rel}:{lineno}")
+
+          if errors:
+              for err in errors:
+                  print(f"::error::{err}")
+              sys.exit(1)
+
+          print(f"Security hygiene check passed ({len(tracked)} tracked files).")
+          PY

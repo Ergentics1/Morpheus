@@ -1,0 +1,38 @@
+# Deep math audit — 36/36 PASS
+
+- PASS PLR group order 24 (sympy)
+- PASS PLR group is dihedral D12 (non-abelian, has element of order 12, all generators involutions)
+- PASS PLR acts simply transitively (regular)
+- PASS pi_1 free of rank E-V+1=13; prime cadences = primitive conj. classes of kernel of Z2*Z2*Z2->D12
+- PASS P=L(LR)^4, R=L(LR) as permutations
+- PASS chord graph max nontrivial eigenvalue = sqrt5 < 2sqrt2 (Ramanujan), exact — (x - 3)*(x - 1)**3*(x + 1)**3*(x + 3)*(x**2 - 5)**2*(x**2 - 3)**2*(x**4 - 4*x**2 + 1)**2
+- PASS Artin factorisation over D12 irreps (4 one-dim + 5 two-dim^2) at 50 digits
+- PASS 2-dim irrep rho_j of PLR group <-> triad Fourier index k=7j (fifths automorphism)
+- PASS Z12 transposition cover of theta graph: zeta = prod of 12 Artin-Ihara L-functions
+- PASS explicit (Ihara trace) formula N_m = sum of 48 poles + 12(1+(-1)^m), m<=40
+- PASS graph Chebotarev: Frobenius (net transposition) equidistributed 1/12 at m=40 (max dev <1e-6)
+- PASS Lemma: 3 moves at each triad move 3 different voices
+- PASS Lemma: only the backtrack moves the just-arrived note
+- PASS Lemma: no consonant triad contains a 1- or 2-semitone pair
+- PASS Tune theorem: local decoder recovers every chord of every prime from its tune alone (m<=16) — {'6': 32, '8': 78, '10': 240, '12': 576, '14': 2400, '16': 8196}
+- PASS Tune map injective and tunes primitive (m<=16)
+- PASS Lemma: flip vectors lie in coset lattice 2a+b=0 mod 3; step = -delta_a for all 72 directed moves
+- PASS Var(W)/m = 1/24 from curvature of twisted Perron root
+- PASS homology covariance = (1/2) Gram^{-1} of torus periods = [[1/24,1/36],[1/36,2/27]] (isotropic Brownian motion, MSD 1/step)
+- PASS 1/24 = |P_v|^2 / (2 Area^2) with Area^2 = 108 (torus of 24 unit triangles)
+- PASS exact prime counts m=40: Var(W)/m = 0.04167 — 0.041668
+- PASS local CLT: home fraction m=40 within 3% of sqrt(12/(pi m)) — (0.30059, 0.30902)
+- PASS RH window edge: sqrt(5+4cos(a/4)) = 2sqrt2 at a=4 arccos(3/4)
+- PASS half-flux (voice parity) top eigenvalue = sqrt(5+2sqrt2) exactly
+- PASS Z_n voice-winding covers Ramanujan iff n=2 (n=2..12), also for v and full torus
+- PASS voice parity (from steps) = u-parity cohomology class; Ramanujan 2-lift
+- PASS Ramanujan 2-lifts are abundant: 7675 of 8191 nontrivial signing classes; best max = 1+sqrt2
+- PASS chord graph = graphene tight-binding on 12-cell torus (bond offsets 0,4,9)
+- PASS honeycomb squared on major sublattice = 3I + note Tonnetz Cay(Z12,{±3,±4,±5})
+- PASS phasor step-twist = magnetic flux through the u-cycle of the torus
+- PASS flux 2pi/3 through u-cycle hits a Dirac point (eigenvalue 0); untwisted has none
+- PASS voice colouring = Kekule (sqrt3 x sqrt3) colouring: every pedal hexagon 2-coloured; not defined on torus (period shifts coset)
+- PASS Tonnetz kernel is NOT an ideal of Z[w] (explicit counterexample)
+- PASS obstruction: x^2+x+1 has no root mod 4 (2 inert in Z[w]); Z3 part is Eisenstein (root mod 3)
+- PASS Tonnetz torus tau = -3/8+3sqrt3 i/8 has CM by order of conductor 12, disc -432, class number 6
+- PASS twisted Ihara-Bass identity (fresh theta, 50 digits)

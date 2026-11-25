@@ -1,0 +1,59 @@
+{
+ "L1_moves_biject_voices": true,
+ "L1b_only_backtrack_moves_arrival": true,
+ "L4_steps_not_in_triads": true,
+ "steps_are_1_or_2": true,
+ "reconstruction": {
+  "6": {
+   "rooted": 192,
+   "primes": 32,
+   "reconstructed": 192,
+   "distinct_tunes": 32,
+   "injective": true,
+   "tunes_primitive": true
+  },
+  "8": {
+   "rooted": 624,
+   "primes": 78,
+   "reconstructed": 624,
+   "distinct_tunes": 78,
+   "injective": true,
+   "tunes_primitive": true
+  },
+  "10": {
+   "rooted": 2400,
+   "primes": 240,
+   "reconstructed": 2400,
+   "distinct_tunes": 240,
+   "injective": true,
+   "tunes_primitive": true
+  },
+  "12": {
+   "rooted": 6912,
+   "primes": 576,
+   "reconstructed": 6912,
+   "distinct_tunes": 576,
+   "injective": true,
+   "tunes_primitive": true
+  },
+  "14": {
+   "rooted": 33600,
+   "primes": 2400,
+   "reconstructed": 33600,
+   "distinct_tunes": 2400,
+   "injective": true,
+   "tunes_primitive": true
+  },
+  "16": {
+   "rooted": 131136,
+   "primes": 8196,
+   "reconstructed": 131136,
+   "distinct_tunes": 8196,
+   "injective": true,
+   "tunes_primitive": true
+  }
+ },
+ "flip_vectors_in_coset_lattice": true,
+ "minimal_step_equals_minus_delta_a": true,
+ "lattice_flip_step=-delta_a_all_72": true
+}

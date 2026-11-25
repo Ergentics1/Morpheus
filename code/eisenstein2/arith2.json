@@ -1,0 +1,98 @@
+{
+ "octic weil poly": "T**8 + 4*T**6 + 9*T**4 + 16*T**2 + 16",
+ "octic L(u)": "16*u**8 + 16*u**6 + 9*u**4 + 4*u**2 + 1",
+ "octic irreducible over Q": true,
+ "E+ (lam=1)": {
+  "poly": "T**2 - T + 2",
+  "weil": true,
+  "splits_over_Q_sqrt": [
+   -7
+  ],
+  "poly_disc": "{7: 1, -1: 1}",
+  "N1": 2,
+  "#A(F_2)=P(1)": 2
+ },
+ "E- (lam=-1)": {
+  "poly": "T**2 + T + 2",
+  "weil": true,
+  "splits_over_Q_sqrt": [
+   -7
+  ],
+  "poly_disc": "{7: 1, -1: 1}",
+  "N1": 4,
+  "#A(F_2)=P(1)": 4
+ },
+ "S5 (lam=\u00b1sqrt5)": {
+  "poly": "T**4 - T**2 + 4",
+  "weil": true,
+  "splits_over_Q_sqrt": [
+   -3,
+   -15,
+   5
+  ],
+  "poly_disc": "{2: 6, 3: 2, 5: 2}",
+  "N1": null,
+  "#A(F_2)=P(1)": 4
+ },
+ "S3 (lam=\u00b1sqrt3)": {
+  "poly": "T**4 + T**2 + 4",
+  "weil": true,
+  "splits_over_Q_sqrt": [
+   -5,
+   -15,
+   3
+  ],
+  "poly_disc": "{2: 6, 3: 2, 5: 2}",
+  "N1": null,
+  "#A(F_2)=P(1)": 6
+ },
+ "A4 (lam^2=2\u00b1sqrt3)": {
+  "poly": "T**8 + 4*T**6 + 9*T**4 + 16*T**2 + 16",
+  "weil": false,
+  "splits_over_Q_sqrt": [
+   2,
+   3,
+   6
+  ],
+  "poly_disc": "{2: 28, 3: 6, 11: 2}",
+  "N1": null,
+  "#A(F_2)=P(1)": 46
+ },
+ "elliptic curves over F2 by trace a (example [a1,a2,a3,a4,a6])": {
+  "-2": [
+   0,
+   0,
+   1,
+   1,
+   0
+  ],
+  "-1": [
+   1,
+   0,
+   0,
+   0,
+   1
+  ],
+  "0": [
+   0,
+   0,
+   1,
+   0,
+   0
+  ],
+  "1": [
+   1,
+   0,
+   1,
+   0,
+   1
+  ],
+  "2": [
+   0,
+   0,
+   1,
+   1,
+   1
+  ]
+ }
+}

@@ -1,0 +1,38 @@
+{
+ "A": {
+  "quadrics": [
+   "T*X + T*Z + Y**2 + Y*Z + Z**2",
+   "T**2 + T*U + T*Y + T*Z + U**2 + U*X + U*Z + X*Z + Y**2",
+   "T*Y + U**2 + U*X + U*Z + X**2 + X*Y + X*Z + Y**2 + Y*Z + Z**2"
+  ],
+  "N": [
+   2,
+   16,
+   14,
+   20,
+   22
+  ],
+  "L": "(2*u**2 - u + 1)*(16*u**8 + 16*u**6 + 9*u**4 + 4*u**2 + 1)",
+  "smooth": true,
+  "is_L1_times_octic": true,
+  "is_L1p_times_octic": false
+ },
+ "B": {
+  "quadrics": [
+   "T*X + T*Z + Y**2 + Y*Z + Z**2",
+   "T*X + U*X + U*Y + U*Z",
+   "T*U + U**2 + U*X + U*Y + U*Z + X**2 + X*Y + X*Z + Y**2 + Z**2"
+  ],
+  "N": [
+   4,
+   16,
+   4,
+   20,
+   44
+  ],
+  "L": "(2*u**2 + u + 1)*(16*u**8 + 16*u**6 + 9*u**4 + 4*u**2 + 1)",
+  "smooth": true,
+  "is_L1_times_octic": false,
+  "is_L1p_times_octic": true
+ }
+}

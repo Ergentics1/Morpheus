@@ -1,0 +1,178 @@
+[
+ {
+  "p": 3,
+  "N": 55,
+  "e2": 0,
+  "e3": 0,
+  "torsion_free": true,
+  "mass": "12",
+  "dim_pnew": 11,
+  "T2_charpoly": "(x - 1)**2*(x + 1)**2*(x**2 - 3)*(x**2 + 2*x - 1)*(x**3 + x**2 - 5*x - 1)",
+  "spectrum_matches": false
+ },
+ {
+  "p": 3,
+  "N": 65,
+  "e2": 8,
+  "e3": 0,
+  "torsion_free": false,
+  "mass": "14",
+  "dim_pnew": 15,
+  "T2_charpoly": "(x - 2)**3*(x - 1)**2*(x + 1)**3*(x**2 + 2*x - 1)**2*(x**3 - 7*x - 2)",
+  "spectrum_matches": false
+ },
+ {
+  "p": 3,
+  "N": 71,
+  "e2": 0,
+  "e3": 0,
+  "torsion_free": true,
+  "mass": "12",
+  "dim_pnew": 11,
+  "T2_charpoly": "(x - 1)*(x**2 - x - 3)*(x**2 + x - 1)*(x**2 + 3*x + 1)*(x**4 - 3*x**3 - 2*x**2 + 7*x + 1)",
+  "spectrum_matches": false
+ },
+ {
+  "p": 3,
+  "N": 79,
+  "e2": 0,
+  "e3": 4,
+  "torsion_free": false,
+  "mass": "40/3",
+  "dim_pnew": 13,
+  "T2_charpoly": "(x**2 - 2*x - 1)*(x**4 + 3*x**3 - x**2 - 5*x + 1)*(x**7 - 2*x**6 - 11*x**5 + 22*x**4 + 30*x**3 - 65*x**2 - 2*x + 23)",
+  "spectrum_matches": false
+ },
+ {
+  "p": 5,
+  "N": 27,
+  "e2": 0,
+  "e3": 0,
+  "torsion_free": true,
+  "mass": "12",
+  "dim_pnew": 11,
+  "T2_charpoly": "(x - 2)*(x - 1)**2*(x + 1)**3*(x + 2)*(x**2 - x - 3)*(x**2 + x - 3)",
+  "spectrum_matches": false
+ },
+ {
+  "p": 5,
+  "N": 43,
+  "e2": 0,
+  "e3": 8,
+  "torsion_free": false,
+  "mass": "44/3",
+  "dim_pnew": 15,
+  "T2_charpoly": "x*(x**3 + 2*x**2 - 3*x - 3)*(x**5 - 2*x**4 - 7*x**3 + 13*x**2 + 5*x - 4)*(x**6 - 3*x**5 - 5*x**4 + 17*x**3 + 3*x**2 - 17*x - 3)",
+  "spectrum_matches": false
+ },
+ {
+  "p": 7,
+  "N": 15,
+  "e2": 0,
+  "e3": 0,
+  "torsion_free": true,
+  "mass": "12",
+  "dim_pnew": 11,
+  "T2_charpoly": "x**2*(x - 1)*(x + 1)**2*(x**2 - 5)*(x**2 + x - 4)**2",
+  "spectrum_matches": false
+ },
+ {
+  "p": 7,
+  "N": 23,
+  "e2": 0,
+  "e3": 0,
+  "torsion_free": true,
+  "mass": "12",
+  "dim_pnew": 11,
+  "T2_charpoly": "(x + 1)*(x**2 + x - 1)*(x**3 + x**2 - 5*x - 1)*(x**5 - 2*x**4 - 9*x**3 + 17*x**2 + 16*x - 27)",
+  "spectrum_matches": false
+ },
+ {
+  "p": 13,
+  "N": 9,
+  "e2": 0,
+  "e3": 0,
+  "torsion_free": true,
+  "mass": "12",
+  "dim_pnew": 11,
+  "T2_charpoly": "(x - 1)**2*(x + 1)*(x**2 - 3)*(x**2 - 2*x - 1)*(x**2 + 2*x - 1)**2",
+  "spectrum_matches": false
+ },
+ {
+  "p": 13,
+  "N": 11,
+  "e2": 0,
+  "e3": 0,
+  "torsion_free": true,
+  "mass": "12",
+  "dim_pnew": 11,
+  "T2_charpoly": "x*(x**4 - 3*x**3 - x**2 + 5*x + 1)*(x**6 - 10*x**4 + 2*x**3 + 24*x**2 - 7*x - 12)",
+  "spectrum_matches": false
+ },
+ {
+  "p": 19,
+  "N": 7,
+  "e2": 0,
+  "e3": 0,
+  "torsion_free": true,
+  "mass": "12",
+  "dim_pnew": 11,
+  "T2_charpoly": "x**2*(x**2 - x - 1)*(x**2 + x - 3)*(x**2 + 3*x + 1)*(x**3 - 2*x**2 - 4*x + 7)",
+  "spectrum_matches": false
+ },
+ {
+  "p": 23,
+  "N": 7,
+  "e2": 0,
+  "e3": 8,
+  "torsion_free": false,
+  "mass": "44/3",
+  "dim_pnew": 15,
+  "T2_charpoly": "(x + 1)*(x**2 + x - 1)**3*(x**3 + x**2 - 5*x - 1)*(x**5 - 2*x**4 - 9*x**3 + 17*x**2 + 16*x - 27)",
+  "spectrum_matches": false
+ },
+ {
+  "p": 37,
+  "N": 3,
+  "e2": 0,
+  "e3": 0,
+  "torsion_free": true,
+  "mass": "12",
+  "dim_pnew": 11,
+  "T2_charpoly": "x**2*(x + 2)**2*(x**3 - 3*x**2 - x + 5)*(x**4 - 6*x**2 + 2*x + 5)",
+  "spectrum_matches": false
+ },
+ {
+  "p": 41,
+  "N": 3,
+  "e2": 0,
+  "e3": 4,
+  "torsion_free": false,
+  "mass": "40/3",
+  "dim_pnew": 13,
+  "T2_charpoly": "x*(x + 2)*(x**2 - 2)*(x**3 - x**2 - 4*x + 2)*(x**3 + x**2 - 5*x - 1)**2",
+  "spectrum_matches": false
+ },
+ {
+  "p": 151,
+  "N": 1,
+  "e2": 2,
+  "e3": 0,
+  "torsion_free": false,
+  "mass": "25/2",
+  "dim_pnew": 12,
+  "T2_charpoly": "(x**3 - 5*x + 3)*(x**3 + 2*x**2 - x - 1)*(x**6 - x**5 - 7*x**4 + 3*x**3 + 13*x**2 + 3*x - 1)",
+  "spectrum_matches": false
+ },
+ {
+  "p": 167,
+  "N": 1,
+  "e2": 2,
+  "e3": 4,
+  "torsion_free": false,
+  "mass": "83/6",
+  "dim_pnew": 14,
+  "T2_charpoly": "(x**2 + x - 1)*(x**12 - 2*x**11 - 17*x**10 + 33*x**9 + 103*x**8 - 189*x**7 - 277*x**6 + 447*x**5 + 363*x**4 - 433*x**3 - 205*x**2 + 120*x + 9)",
+  "spectrum_matches": false
+ }
+]

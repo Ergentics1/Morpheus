@@ -1,0 +1,47 @@
+# Secrets and local environment files
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+credentials.json
+
+# Lean 4
+.lake/
+
+# Rust
+target/
+
+# Swift
+.build/
+.swiftpm/
+
+# C / C++
+build/
+*.o
+*.obj
+*.so
+*.dylib
+*.a
+*.out
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+
+# LaTeX build artifacts (keep paper/prime-cadences.bbl for arXiv)
+paper/*.aux
+paper/*.blg
+paper/*.fdb_latexmk
+paper/*.fls
+paper/*.log
+paper/*.out
+paper/*.synctex.gz
+paper/*.toc
+
+# OS and editor junk
+.DS_Store
+Thumbs.db
+*.swp

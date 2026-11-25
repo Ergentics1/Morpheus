@@ -1,0 +1,223 @@
+\providecommand{\bysame}{\leavevmode\hbox to3em{\hrulefill}\thinspace}
+\providecommand{\MR}{\relax\ifhmode\unskip\space\fi MR }
+% \MRhref is called by the amsart/book/proc definition of \MR.
+\providecommand{\MRhref}[2]{%
+  \href{http://www.ams.org/mathscinet-getitem?mr=#1}{#2}
+}
+\providecommand{\href}[2]{#2}
+\begin{thebibliography}{10}
+
+\bibitem{amiot}
+Emmanuel Amiot, \emph{Music through {F}ourier space: Discrete {F}ourier
+  transform in music theory}, Springer, 2016.
+
+\bibitem{arkinstall}
+Joel Arkinstall, Mohammad~H. Teimourpour, Liang Feng, Ramy El-Ganainy, and
+  Henning Schomerus, \emph{Topological tight-binding models from nontrivial
+  square roots}, Phys. Rev. B \textbf{95} (2017), 165109.
+
+\bibitem{baker08}
+Matthew Baker, \emph{Specialization of linear systems from curves to graphs},
+  Algebra Number Theory \textbf{2} (2008), 613--653.
+
+\bibitem{bn07}
+Matthew Baker and Serguei Norine, \emph{{R}iemann--{R}och and {A}bel--{J}acobi
+  theory on a finite graph}, Adv. Math. \textbf{215} (2007), 766--788.
+
+\bibitem{bpr13}
+Matthew Baker, Sam Payne, and Joseph Rabinoff, \emph{On the structure of
+  non-archimedean analytic curves}, Tropical and Non-Archimedean Geometry,
+  Contemp. Math., vol. 605, Amer. Math. Soc., 2013, pp.~93--121.
+
+\bibitem{bass92}
+Hyman Bass, \emph{The {I}hara--{S}elberg zeta function of a tree lattice},
+  Internat. J. Math. \textbf{3} (1992), 717--797.
+
+\bibitem{berkovich90}
+Vladimir~G. Berkovich, \emph{Spectral theory and analytic geometry over
+  non-{A}rchimedean fields}, Math. Surveys Monogr., vol.~33, Amer. Math. Soc.,
+  1990.
+
+\bibitem{bl06}
+Yonatan Bilu and Nathan Linial, \emph{Lifts, discrepancy and nearly optimal
+  spectral gap}, Combinatorica \textbf{26} (2006), 495--519.
+
+\bibitem{cqt08}
+Clifton Callender, Ian Quinn, and Dmitri Tymoczko, \emph{Generalized
+  voice-leading spaces}, Science \textbf{320} (2008), 346--348.
+
+\bibitem{catanzaro}
+Michael~J. Catanzaro, \emph{Generalized {T}onnetze}, J. Math. Music \textbf{5}
+  (2011), 117--139.
+
+\bibitem{chan13}
+Melody Chan, \emph{Tropical hyperelliptic curves}, J. Algebraic Combin.
+  \textbf{37} (2013), 331--359.
+
+\bibitem{cohn96}
+Richard Cohn, \emph{Maximally smooth cycles, hexatonic systems, and the
+  analysis of late-romantic triadic progressions}, Music Analysis \textbf{15}
+  (1996), 9--40.
+
+\bibitem{cohn97}
+\bysame, \emph{Neo-{R}iemannian operations, parsimonious trichords, and their
+  \emph{Tonnetz} representations}, J. Music Theory \textbf{41} (1997), 1--66.
+
+\bibitem{cohn12}
+\bysame, \emph{Audacious euphony: Chromatic harmony and the triad's second
+  nature}, Oxford University Press, 2012.
+
+\bibitem{cfs09}
+Alissa~S. Crans, Thomas~M. Fiore, and Ramon Satyendra, \emph{Musical actions of
+  dihedral groups}, Amer. Math. Monthly \textbf{116} (2009), 479--495.
+
+\bibitem{deligne}
+Pierre Deligne, \emph{La conjecture de {W}eil. {I}}, Publ. Math. IH\'ES
+  \textbf{43} (1974), 273--307.
+
+\bibitem{ds98}
+Jack Douthett and Peter Steinbach, \emph{Parsimonious graphs: a study in
+  parsimony, contextual transformations, and modes of limited transposition},
+  J. Music Theory \textbf{42} (1998), 241--263.
+
+\bibitem{dragutinovic24}
+Du\v{s}an Dragutinovi\'c, \emph{Computing binary curves of genus five}, J. Pure
+  Appl. Algebra \textbf{228} (2024), no.~4, 107522.
+
+\bibitem{drinfeld76}
+V.~G. Drinfeld, \emph{Coverings of $p$-adic symmetric regions}, Funct. Anal.
+  Appl. \textbf{10} (1976), 107--115, Russian original: Funktsional. Anal. i
+  Prilozhen. \textbf{10} (1976), no.~2, 29--40.
+
+\bibitem{euler}
+Leonhard Euler, \emph{Tentamen novae theoriae musicae}, St.~Petersburg Academy,
+  1739, Enestr\"om index E33.
+
+\bibitem{gvdp80}
+Lothar Gerritzen and Marius van~der Put, \emph{Schottky groups and {M}umford
+  curves}, Lecture Notes in Math., vol. 817, Springer, 1980.
+
+\bibitem{hashimoto89}
+Ki-ichiro Hashimoto, \emph{Zeta functions of finite graphs and representations
+  of $p$-adic groups}, Adv. Stud. Pure Math. \textbf{15} (1989), 211--280.
+
+\bibitem{honda68}
+Taira Honda, \emph{Isogeny classes of abelian varieties over finite fields}, J.
+  Math. Soc. Japan \textbf{20} (1968), 83--95.
+
+\bibitem{ihara66}
+Yasutaka Ihara, \emph{On discrete subgroups of the two by two projective linear
+  group over $p$-adic fields}, J. Math. Soc. Japan \textbf{18} (1966),
+  219--235.
+
+\bibitem{ks90}
+Atsushi Katsuda and Toshikazu Sunada, \emph{Closed orbits in homology classes},
+  Publ. Math. IH\'ES \textbf{71} (1990), 5--32.
+
+\bibitem{kirchhoff1847}
+Gustav Kirchhoff, \emph{Ueber die {A}ufl\"osung der {G}leichungen, auf welche
+  man bei der {U}ntersuchung der linearen {V}ertheilung galvanischer {S}tr\"ome
+  gef\"uhrt wird}, Ann. Phys. Chem. \textbf{72} (1847), 497--508.
+
+\bibitem{kotani}
+Motoko Kotani and Toshikazu Sunada, \emph{Zeta functions of finite graphs}, J.
+  Math. Sci. Univ. Tokyo \textbf{7} (2000), 7--25.
+
+\bibitem{lalley89}
+Steven~P. Lalley, \emph{Renewal theorems in symbolic dynamics, with
+  applications to geodesic flows, noneuclidean tessellations and their fractal
+  limits}, Acta Math. \textbf{163} (1989), 1--55.
+
+\bibitem{lewin}
+David Lewin, \emph{Generalized musical intervals and transformations}, Yale
+  University Press, 1987.
+
+\bibitem{liu04}
+D.~Liu, \emph{Asymptotic expansion for cycles in homology classes for graphs},
+  2004.
+
+\bibitem{lps88}
+Alexander Lubotzky, Ralph Phillips, and Peter Sarnak, \emph{Ramanujan graphs},
+  Combinatorica \textbf{8} (1988), 261--277.
+
+\bibitem{luoroy}
+Y.~Luo and A.~Roy, \emph{Homological spectral graph theory and weighted cycle
+  counting}, 2024.
+
+\bibitem{mss15}
+Adam~W. Marcus, Daniel~A. Spielman, and Nikhil Srivastava, \emph{Interlacing
+  families {I}: bipartite {R}amanujan graphs of all degrees}, Ann. of Math.
+  \textbf{182} (2015), 307--325.
+
+\bibitem{marin}
+C.~Mar\'in Mu\~noz, \emph{The {T}onnetz spectrum is the generating triad's
+  {F}ourier balance profile}, Preprint, Zenodo, 2026.
+
+\bibitem{mumford72}
+David Mumford, \emph{An analytic construction of degenerating curves over
+  complete local rings}, Compositio Math. \textbf{24} (1972), 129--174.
+
+\bibitem{ps87}
+Ralph Phillips and Peter Sarnak, \emph{Geodesics in homology classes}, Duke
+  Math. J. \textbf{55} (1987), 287--297.
+
+\bibitem{ps01}
+Mark Pollicott and Richard Sharp, \emph{Asymptotic expansions for closed orbits
+  in homology classes}, Geom. Dedicata \textbf{87} (2001), 123--160.
+
+\bibitem{ramanujan}
+Srinivasa Ramanujan, \emph{On certain arithmetical functions}, Trans. Cambridge
+  Philos. Soc. \textbf{22} (1916), 159--184.
+
+\bibitem{raynaud70}
+Michel Raynaud, \emph{Sp\'ecialisation du foncteur de {P}icard}, Publ. Math.
+  IH\'ES \textbf{38} (1970), 27--76.
+
+\bibitem{ribet90}
+Kenneth~A. Ribet, \emph{On modular representations of
+  {$\mathrm{Gal}(\overline{\mathbb Q}/\mathbb Q)$} arising from modular forms},
+  Invent. Math. \textbf{100} (1990), 431--476.
+
+\bibitem{serre80}
+Jean-Pierre Serre, \emph{Trees}, Springer, 1980, Translation of \emph{Arbres,
+  amalgames, $SL_2$}, Ast\'erisque 46, 1977.
+
+\bibitem{st96}
+Harold~M. Stark and Audrey~A. Terras, \emph{Zeta functions of finite graphs and
+  coverings}, Adv. Math. \textbf{121} (1996), 124--165.
+
+\bibitem{sunada86}
+Toshikazu Sunada, \emph{{$L$}-functions in geometry and some applications},
+  Curvature and Topology of {R}iemannian Manifolds, Lecture Notes in Math.,
+  vol. 1201, Springer, 1986, pp.~266--284.
+
+\bibitem{tate66}
+John Tate, \emph{Endomorphisms of abelian varieties over finite fields},
+  Invent. Math. \textbf{2} (1966), 134--144.
+
+\bibitem{terras}
+Audrey Terras, \emph{Zeta functions of graphs: A stroll through the garden},
+  Cambridge University Press, 2011.
+
+\bibitem{lmfdb}
+{The LMFDB Collaboration}, \emph{The {L}-functions and modular forms database},
+  \url{https://www.lmfdb.org}, 2026, Accessed November 2026.
+
+\bibitem{tym06}
+Dmitri Tymoczko, \emph{The geometry of musical chords}, Science \textbf{313}
+  (2006), 72--74.
+
+\bibitem{tym12}
+\bysame, \emph{The generalized {T}onnetz}, J. Music Theory \textbf{56} (2012),
+  1--52.
+
+\bibitem{cerednik76}
+I.~V. \v{C}erednik, \emph{Uniformization of algebraic curves by discrete
+  arithmetic subgroups of {$PGL_2(k_w)$} with compact quotients}, Math. USSR
+  Sb. \textbf{29} (1976), 55--78.
+
+\bibitem{wallace}
+Philip~R. Wallace, \emph{The band theory of graphite}, Phys. Rev. \textbf{71}
+  (1947), 622--634.
+
+\end{thebibliography}

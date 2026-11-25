@@ -1,0 +1,42 @@
+{
+ "major_to_minor_cell_offsets": [
+  0,
+  4,
+  9
+ ],
+ "honeycomb_squared_is_note_tonnetz": true,
+ "step_twist_equals_u_flux": "3/3",
+ "cov_per_step": {
+  "uu": "0.0416666666667",
+  "vv": "0.0740740740741",
+  "uv": "0.0277777777778"
+ },
+ "cov_identify": {
+  "uu": "None",
+  "vv": "None",
+  "uv": "None"
+ },
+ "empirical_cov_over_m_14": [
+  0.03714,
+  0.08214,
+  0.02714
+ ],
+ "empirical_cov_over_m_16": [
+  0.03907,
+  0.07046,
+  0.02288
+ ],
+ "empirical_cov_over_m_18": [
+  0.04358,
+  0.07315,
+  0.02982
+ ],
+ "BZ_fraction_RH_ok": 0.9520305555555556,
+ "min_abs_eig_at_u_flux_2pi/3": "1.6272e-41",
+ "untwisted_has_no_zero_eig": true,
+ "period_vector_coset_shift": [
+  1,
+  0
+ ],
+ "pedal_hexagons_bicoloured": true
+}

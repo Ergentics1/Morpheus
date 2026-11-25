@@ -1,0 +1,46 @@
+{
+ "psi(1)=7 fifth, psi(1+w)=4 M3, psi(-w)=3 m3": [
+  7,
+  4,
+  3
+ ],
+ "kernel_is_w_stable(ideal)": false,
+ "counterexample (z, w z, psi(wz))": [
+  [
+   -12,
+   -8
+  ],
+  [
+   8,
+   -4
+  ],
+  8
+ ],
+ "roots_x2+x+1_mod_12": [],
+ "roots_mod_4": [],
+ "roots_mod_3": [
+  1
+ ],
+ "Z[w]/(2(1-w)) is Z2xZ2xZ3 (not cyclic) since (2) inert: F4 x F3": true,
+ "periods": [
+  "2 - 2*sqrt(3)*I",
+  "3/2 + 3*sqrt(3)*I/2"
+ ],
+ "periods_in_kernel": [
+  true,
+  true
+ ],
+ "index": "12",
+ "tau=P2/P1": "-3/8 + 3*sqrt(3)*I/8",
+ "min_poly_tau": "16*x**2 + 12*x + 9",
+ "discriminant": -432,
+ "conductor": 12,
+ "multiplier_ring_min_b": 12,
+ "class_number_h(-432)": 6,
+ "class_number_check_h(-3),h(-12),h(-48)": [
+  1,
+  1,
+  2
+ ],
+ "j(tau)": "(-38.33168599958936226623494 + 1114.634073907206065539435j)"
+}

@@ -1,0 +1,397 @@
+{
+ "sigma": {
+  "P": [
+   [
+    0,
+    1
+   ],
+   [
+    2,
+    0
+   ]
+  ],
+  "L": [
+   [
+    0,
+    -2
+   ],
+   [
+    -1,
+    0
+   ]
+  ],
+  "R": [
+   [
+    -1,
+    1
+   ],
+   [
+    1,
+    1
+   ]
+  ]
+ },
+ "generators": [
+  {
+   "edge": "Db -P- Dbm",
+   "word": "PLRLPRPL",
+   "matrix": [
+    [
+     -5,
+     12
+    ],
+    [
+     12,
+     -80
+    ]
+   ],
+   "det": 256,
+   "trace": -85,
+   "translation_length": 8,
+   "cycle_length": 8
+  },
+  {
+   "edge": "Dbm -L- A",
+   "word": "LPRLPR",
+   "matrix": [
+    [
+     20,
+     -12
+    ],
+    [
+     -3,
+     5
+    ]
+   ],
+   "det": 64,
+   "trace": 25,
+   "translation_length": 6,
+   "cycle_length": 6
+  },
+  {
+   "edge": "D -P- Dm",
+   "word": "LRLRPRLR",
+   "matrix": [
+    [
+     34,
+     6
+    ],
+    [
+     -3,
+     7
+    ]
+   ],
+   "det": 256,
+   "trace": 41,
+   "translation_length": 8,
+   "cycle_length": 8
+  },
+  {
+   "edge": "D -L- F#m",
+   "word": "LRLRLRPR",
+   "matrix": [
+    [
+     22,
+     -18
+    ],
+    [
+     -9,
+     19
+    ]
+   ],
+   "det": 256,
+   "trace": 41,
+   "translation_length": 8,
+   "cycle_length": 8
+  },
+  {
+   "edge": "Dm -L- Bb",
+   "word": "RLRLRLRP",
+   "matrix": [
+    [
+     34,
+     3
+    ],
+    [
+     -6,
+     7
+    ]
+   ],
+   "det": 256,
+   "trace": 41,
+   "translation_length": 8,
+   "cycle_length": 8
+  },
+  {
+   "edge": "Ebm -L- B",
+   "word": "PRPLRPLP",
+   "matrix": [
+    [
+     40,
+     3
+    ],
+    [
+     48,
+     10
+    ]
+   ],
+   "det": 256,
+   "trace": 50,
+   "translation_length": 6,
+   "cycle_length": 6
+  },
+  {
+   "edge": "E -L- Abm",
+   "word": "LPLPLP",
+   "matrix": [
+    [
+     -64,
+     0
+    ],
+    [
+     0,
+     -1
+    ]
+   ],
+   "det": 64,
+   "trace": -65,
+   "translation_length": 6,
+   "cycle_length": 6
+  },
+  {
+   "edge": "F -P- Fm",
+   "word": "RLPRLP",
+   "matrix": [
+    [
+     20,
+     -3
+    ],
+    [
+     -12,
+     5
+    ]
+   ],
+   "det": 64,
+   "trace": 25,
+   "translation_length": 6,
+   "cycle_length": 6
+  },
+  {
+   "edge": "F# -P- F#m",
+   "word": "PRPRPRPR",
+   "matrix": [
+    [
+     -17,
+     3
+    ],
+    [
+     -6,
+     -14
+    ]
+   ],
+   "det": 256,
+   "trace": -31,
+   "translation_length": 8,
+   "cycle_length": 8
+  },
+  {
+   "edge": "F# -L- Bbm",
+   "word": "PRPRLRLRLP",
+   "matrix": [
+    [
+     44,
+     9
+    ],
+    [
+     72,
+     38
+    ]
+   ],
+   "det": 1024,
+   "trace": 82,
+   "translation_length": 8,
+   "cycle_length": 8
+  },
+  {
+   "edge": "G -P- Gm",
+   "word": "LRPLRP",
+   "matrix": [
+    [
+     20,
+     6
+    ],
+    [
+     6,
+     5
+    ]
+   ],
+   "det": 64,
+   "trace": 25,
+   "translation_length": 6,
+   "cycle_length": 6
+  },
+  {
+   "edge": "Bb -P- Bbm",
+   "word": "PRLRPRLRLP",
+   "matrix": [
+    [
+     68,
+     3
+    ],
+    [
+     -24,
+     14
+    ]
+   ],
+   "det": 1024,
+   "trace": 82,
+   "translation_length": 8,
+   "cycle_length": 8
+  },
+  {
+   "edge": "B -P- Bm",
+   "word": "PLPRPLRL",
+   "matrix": [
+    [
+     -5,
+     -6
+    ],
+    [
+     -24,
+     -80
+    ]
+   ],
+   "det": 256,
+   "trace": -85,
+   "translation_length": 8,
+   "cycle_length": 8
+  }
+ ],
+ "audit": [
+  [
+   "tree: v0 has 3 neighbours (P^1(F_2))",
+   true,
+   "[(1, 0, 2), (1, 1, 2), (2, 0, 1)]"
+  ],
+  [
+   "sigma_P^2 is scalar (involution in PGL2)",
+   true,
+   "[[2, 0], [0, 2]]"
+  ],
+  [
+   "sigma_P moves v0 to a neighbour",
+   true,
+   "(1, 0, 2)"
+  ],
+  [
+   "sigma_P maps that neighbour back to v0 (edge inversion)",
+   true,
+   ""
+  ],
+  [
+   "sigma_L^2 is scalar (involution in PGL2)",
+   true,
+   "[[2, 0], [0, 2]]"
+  ],
+  [
+   "sigma_L moves v0 to a neighbour",
+   true,
+   "(2, 0, 1)"
+  ],
+  [
+   "sigma_L maps that neighbour back to v0 (edge inversion)",
+   true,
+   ""
+  ],
+  [
+   "sigma_R^2 is scalar (involution in PGL2)",
+   true,
+   "[[2, 0], [0, 2]]"
+  ],
+  [
+   "sigma_R moves v0 to a neighbour",
+   true,
+   "(1, 1, 2)"
+  ],
+  [
+   "sigma_R maps that neighbour back to v0 (edge inversion)",
+   true,
+   ""
+  ],
+  [
+   "the three sigma_i send v0 to the three distinct neighbours",
+   true,
+   ""
+  ],
+  [
+   "reduced words of length <=7 give pairwise distinct vertices",
+   true,
+   "382 words"
+  ],
+  [
+   "w and w[:-1] are adjacent in T (word path = geodesic)",
+   true,
+   ""
+  ],
+  [
+   "ball count 1+3*(2^n-1) matches tree ball of radius 7",
+   true,
+   ""
+  ],
+  [
+   "BFS tree reaches all 24 triads",
+   true,
+   ""
+  ],
+  [
+   "number of Schreier generators = 36-23 = 13 = rank pi_1(X)",
+   true,
+   ""
+  ],
+  [
+   "every Schreier word stabilises C major (lies in K)",
+   true,
+   ""
+  ],
+  [
+   "all 13 generators hyperbolic: 2 v2(tr) < v2(det)",
+   true,
+   ""
+  ],
+  [
+   "translation length on T = length of the closed cycle in X",
+   true,
+   "[8, 6, 8, 8, 8, 6, 6, 6, 8, 8, 6, 8, 8]"
+  ],
+  [
+   "stab(C)=kernel: every word fixing C fixes all 24 triads",
+   true,
+   "9 words checked"
+  ],
+  [
+   "covering T->X: adjacent vertices map to PLR-adjacent triads",
+   true,
+   ""
+  ],
+  [
+   "K has no inversions: all elements of K are even words (preserve bipartition)",
+   true,
+   ""
+  ],
+  [
+   "genus = rank H1(X) = E-V+1 = 13",
+   true,
+   ""
+  ],
+  [
+   "special fibre: 24 P^1 meeting in 36 F2-nodes, #C0(F_2^n)=24*2^n-12, N1=36 = all F2-points are nodes",
+   true,
+   ""
+  ],
+  [
+   "non-arithmetic witness: some generator is hyperbolic at the real place (tr^2>4|det|), impossible in a definite order",
+   true,
+   "PLRLPRPL"
+  ]
+ ]
+}

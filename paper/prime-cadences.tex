@@ -1,0 +1,454 @@
+\documentclass[11pt]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{mathtools,amssymb,graphicx,booktabs,enumitem}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{pdftitle={Prime cadences: Ihara zeta, graphene, and voice-leading homology on the Tonnetz},pdfauthor={Ergentics},pdfkeywords={Tonnetz, Ihara zeta function, Mumford curve, Schottky group}}
+\usepackage{microtype}
+\numberwithin{equation}{section}
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}\newtheorem{remark}[theorem]{Remark}
+\newcommand{\Z}{\mathbb{Z}}\newcommand{\Q}{\mathbb{Q}}\newcommand{\C}{\mathbb{C}}\newcommand{\F}{\mathbb{F}}\newcommand{\R}{\mathbb{R}}
+\emergencystretch=3em
+\raggedbottom
+
+\title[Prime cadences]{Prime cadences: Ihara zeta, graphene, and voice-leading homology on the Tonnetz}
+\author{Ergentics}
+\date{November 2026}
+\subjclass[2020]{Primary 05C50, 00A65; Secondary 11M41, 05C38, 14G22, 20E08, 11G18, 11G20}
+\keywords{Tonnetz, neo-Riemannian theory, Ihara zeta function, Ramanujan graph, honeycomb lattice, Mumford curve, Schottky group, \v{C}erednik--Drinfeld uniformisation, curves over finite fields, voice leading}
+
+\newcommand{\ctag}[1]{\textup{\textsf{\scriptsize[#1]}}}
+\begin{document}
+\begin{abstract}
+The 24 major and minor triads, joined by the neo-Riemannian moves $P$, $L$, $R$, form a 3-regular graph $X$. We call the primes of its Ihara zeta function \emph{prime cadences} and prove a number of exact statements about them. $X$ is the honeycomb lattice on a 12-cell torus; its zeta zeros are the tight-binding band energies, equal to the moduli of the triad's discrete Fourier coefficients, and $X$ is Ramanujan. Over $\Q$, $\zeta_X^{-1}$ factors into Weil polynomials over $\F_2$. The sequence of moving notes alone determines a cadence (\emph{tune theorem}), and for other equal-tempered systems the tune determines every moving voice. The voices' net winding is a torus homology coordinate, asymptotically Gaussian with variance $m/24$, and twisting by it preserves the Riemann hypothesis on an explicit window. Three involutions of $PGL_2(\Q_2)$, one per move, generate a Schottky group whose Mumford curve $C$ has genus 13, reduction graph $X$ and automorphism group the transposition/inversion group. We compute its component group and gonality, find its order-12 factor in an explicit genus-5 curve over $\F_2$ (genus 5 is minimal), and show via a trace invariant and a 2-adic edge-length argument that $C$ admits no \v{C}erednik--Drinfeld uniformisation except possibly by a group with torsion at a ramified or inert place above 2. We separate known results from new ones.
+\end{abstract}
+\maketitle
+
+
+\section{Introduction}
+Euler drew a lattice of fifths and thirds in 1739 \cite{euler}; Riemann's harmonic dualism and its neo-Riemannian revival \cite{lewin,cohn96,cohn97,cohn12} turned that lattice into a space of chords linked by parsimonious moves. Douthett and Steinbach \cite{ds98} identified the chord graph as the hexagonal ``chicken-wire torus'', and Crans, Fiore and Satyendra \cite{cfs09} showed that the $PLR$-group is dihedral of order 24 and acts simply transitively. Tymoczko and collaborators \cite{tym06,cqt08,tym12} placed these structures inside continuous voice-leading orbifolds.
+
+On the number-theoretic side, Ihara \cite{ihara66} attached a zeta function to discrete subgroups of $PGL_2$ over $p$-adic fields; Serre observed that it is the zeta function of a finite regular graph, and Sunada, Hashimoto and Bass \cite{sunada86,hashimoto89,bass92} developed the general theory (see also \cite{st96,terras}). Ramanujan graphs \cite{lps88}, named after Ramanujan's conjecture on $\tau(n)$ \cite{ramanujan} (proved by Deligne \cite{deligne}), are those whose zeta functions satisfy the analogue of the Riemann hypothesis.
+
+This note joins these lines. Throughout, a \emph{cadence} is a closed walk in the chord graph, and a \emph{prime cadence} is an Ihara prime. The results are of three kinds: identifications that are classical once stated (graphene, Coxeter groups); theorems that we believe are new (tune theorem, winding law, Riemann window, the arithmetic of the spectrum); and one refuted conjecture with its correction (Eisenstein ideals). All numerical claims were checked in exact or 50-digit arithmetic; Section~\ref{sec:known} lists what is known.
+
+\section{Set-up}
+\subsection{Triads, moves and the chord graph}
+Pitch classes are $\Z_{12}$. A major triad with root $r$ is $\{r,r+4,r+7\}$ and a minor triad with root $r$ is $\{r,r+3,r+7\}$. The moves are
+\begin{align*}P&:\ \{r,r+4,r+7\}\leftrightarrow\{r,r+3,r+7\},\\ L&:\ \{r,r+4,r+7\}\leftrightarrow\{r+4,r+7,r+11\},\\ R&:\ \{r,r+4,r+7\}\leftrightarrow\{r+9,r,r+4\}.\end{align*}
+Each move keeps two notes and moves the third by a semitone ($P$, $L$) or a whole tone ($R$). Let $X$ be the graph with the 24 triads as vertices and an edge for each move; it is 3-regular with $V=24$, $E=36$, and bipartite (major/minor).
+
+\begin{proposition}[\cite{cfs09}]\label{prop:cayley}
+\ctag{lit.}\ The group generated by $P,L,R$ acting on triads is dihedral of order 24 and acts simply transitively. Hence $X$ is the Cayley graph
+\[X\cong \mathrm{Cay}(D_{12},\{P,L,R\}),\qquad P=L(LR)^4,\quad R=L(LR).\]
+\end{proposition}
+
+Let $W_3=\Z_2*\Z_2*\Z_2=\langle p,l,r\rangle$ be the universal Coxeter group of rank 3; its Cayley graph is the 3-regular tree $T_3$, which is the Bruhat--Tits tree of $PGL_2(\Q_2)$.
+\begin{corollary}
+\ctag{GB}\ The kernel $K$ of $W_3\to D_{12}$ equals $\pi_1(X)$ and is free of rank $E-V+1=13$. Non-backtracking walks in $X$ are reduced words in $W_3$, and prime cadences are in bijection with the primitive conjugacy classes of $K$. Thus $\zeta_X$ is the Ihara--Selberg zeta function of the lattice $K$ acting on $T_3$, Ihara's original setting with $q=2$.
+\end{corollary}
+\begin{proof}
+$X=K\backslash T_3$ since $D_{12}$ acts simply transitively. A free action on a tree gives a free group of rank $E-V+1$. Closed non-backtracking, tailless walks up to rotation correspond to cyclically reduced words up to cyclic permutation, i.e.\ conjugacy classes in $K$.
+\end{proof}
+
+\subsection{The Ihara zeta function}
+For a finite graph, $\zeta_X(u)=\prod_{[\gamma]}(1-u^{\ell(\gamma)})^{-1}$ over prime cycles. For $X$ $(q+1)$-regular,
+\begin{equation}\label{eq:ib}
+\zeta_X(u)^{-1}=(1-u^2)^{E-V}\det(I-uA+qu^2I)=\det(I-uB),
+\end{equation}
+where $A$ is the adjacency matrix and $B$ is the $2E\times 2E$ Hashimoto (non-backtracking) matrix \cite{ihara66,hashimoto89,bass92,kotani}. $X$ is \emph{Ramanujan} if every eigenvalue $\lambda\neq\pm(q+1)$ of $A$ satisfies $|\lambda|\le 2\sqrt q$; equivalently all nontrivial poles lie on $|u|=q^{-1/2}$.
+
+\subsection{Tonnetz coordinates}
+Let $\Z^2\ni(a,b)$ map to the pitch class $7a+4b$ (fifths and major thirds). The kernel is the lattice $\Lambda$ with basis $P_u=(4,-4)$, $P_v=(0,3)$; $\Z^2/\Lambda\cong\Z_{12}$. With unit edges at $60^\circ$ the Gram matrix of $(P_u,P_v)$ is $G=\begin{psmallmatrix}16&-6\\-6&9\end{psmallmatrix}$, $\det G=108$. Triads are the triangles of the triangulated plane modulo $\Lambda$ (the Tonnetz torus), and $P,L,R$ are flips across the three edge directions. Dually, $X$ is the honeycomb lattice modulo $\Lambda$ (Figure~\ref{fig:hex}).
+
+\begin{figure}[htbp]\centering
+\includegraphics[width=0.48\textwidth]{figures/hexagon.pdf}\hfill
+\includegraphics[width=0.48\textwidth]{figures/fourier.pdf}
+\caption{Left: the Tonnetz with the six triads containing C; the length-6 prime cadence around them (a held-note hexagon) is a hexagonal face of the honeycomb. Right: the twelve Fourier coefficients $f_k$ of the major triad: units (red), the Gaussian primes $2\mp i$ (blue), $\pm i\sqrt3$ (green).}\label{fig:hex}
+\end{figure}
+
+\section{Spectrum, graphene and arithmetic}
+Write $\zeta=e^{2\pi i/12}$, $\omega=\zeta^4$, and $f_k=\zeta^{0}+\zeta^{4k}+\zeta^{7k}$, the $k$-th Fourier coefficient of the indicator of $\{0,4,7\}$.
+
+\begin{theorem}[spectrum]\label{thm:spec}
+\ctag{E$\to$GB}\ The adjacency eigenvalues of $X$ are $\pm|f_k|$, $k\in\Z_{12}$. Explicitly: $\pm3$ $(k=0)$; $\pm1$ three times each $(k=2,6,10)$; $\pm\sqrt5$ twice $(k=3,9)$; $\pm\sqrt3$ twice $(k=4,8)$; $\pm2\cos\frac{\pi}{12}$ and $\pm2\cos\frac{5\pi}{12}$ twice each $(k=1,5,7,11)$. In particular $X$ is Ramanujan, with largest nontrivial eigenvalue $\sqrt5<2\sqrt2$.
+\end{theorem}
+\begin{proof}
+Index triads by (type, root). From the major triad of root $r$, $P$, $L$, $R$ lead to the minor triads of roots $r$, $r+4$, $r+9$. Thus $A=\begin{psmallmatrix}0&C\\C^*&0\end{psmallmatrix}$ with $C$ the circulant $I+S^4+S^9$ ($S$ the shift). Fourier diagonalisation gives $C\mapsto g_k=1+\zeta^{4k}+\zeta^{9k}$, and the eigenvalues of $A$ are $\pm|g_k|$. Now $\{0,4,9\}=9+\{0,3,7\}$ and $\{0,3,7\}=7-\{0,4,7\}$; translation multiplies a Fourier coefficient by a root of unity and reflection conjugates it, so $|g_k|=|f_k|$. The values follow by direct evaluation. (This is an instance of the spectrum of a dihedral Cayley graph; cf.\ the discussion in \cite{marin}.) The 1-dimensional representations of $D_{12}$ give $k=0,6$ and the 2-dimensional ones $\rho_j$ give $k=7j$.
+\end{proof}
+
+\begin{remark}[graphene]
+$C$ is the Bloch matrix of nearest-neighbour hopping on the honeycomb with bonds from cell $r$ to cells $r,r+4,r+9$; the spectrum is $\pm|\Delta(\mathbf k)|$ (Wallace \cite{wallace}) sampled at the 12 momenta of $\Lambda^*/\Z^{2*}$. The identification of these numbers with the triad Fourier magnitudes is in Mar\'in Mu\~noz \cite{marin}. The Ramanujan property means that no allowed momentum lies in the cap $|\Delta|>2\sqrt2$ around $\Gamma$ (4.8\% of the Brillouin zone). The note Tonnetz is the ``square'' of the honeycomb: $A^2$ restricted to major triads is $3I+\mathrm{Cay}(\Z_{12},\{\pm3,\pm4,\pm5\})$, a square-root-lattice relation in the sense of \cite{arkinstall}.
+\end{remark}
+
+\begin{theorem}[counting]\label{thm:count}
+\ctag{GB}\ Let $N_m=\operatorname{tr}B^m$ and $\pi(m)$ the number of prime cadences of length $m$. Then $N_m=\sum_{j=1}^{48}u_j^{-m}+12(1+(-1)^m)$ where $u_j$ are the zeros of $\det(I-uA+2u^2)$, $\pi(m)=0$ for $m$ odd, $\pi(m)=\frac1m\sum_{d\mid m}\mu(m/d)N_d$, and $\pi(m)\sim 2^{m+1}/m$ for even $m\to\infty$.
+\end{theorem}
+\begin{proof}
+Take logarithmic derivatives in \eqref{eq:ib}; the factor $(1-u^2)^{12}$ contributes $12(1+(-1)^m)$. M\"obius inversion of $N_m=\sum_{d\mid m}d\,\pi(d)$ gives $\pi(m)$. Bipartiteness kills odd $m$, and the poles $u=\pm\frac12$ dominate, the others having $|u|\ge 2^{-1/2}$.
+\end{proof}
+
+\begin{table}[htbp]\centering\footnotesize\setlength{\tabcolsep}{3pt}
+\begin{tabular}{rrrrrrrrrr}\toprule
+$m$&6&8&10&12&14&16&20&24&40\\\midrule
+$\pi(m)$&32&78&240&576&2400&8196&105096&1394120&54975717792\\
+$\pi(m)\,m/2^{m+1}$&1.500&1.219&1.172&0.844&1.025&1.000&1.002&0.997&1.000\\\bottomrule
+\end{tabular}
+\caption{Prime cadences by length (exact, by transfer matrix; verified against \eqref{eq:ib}).}\label{tab:counts}
+\end{table}
+
+\begin{figure}[htbp]\centering\includegraphics[width=0.95\textwidth]{figures/counts_poles.pdf}
+\caption{Left: prime cadence counts against the prime number theorem $2^{m+1}/m$. Right: poles of $\zeta_X$; the 44 nontrivial ones lie on $|u|=2^{-1/2}$ (Riemann hypothesis); crosses mark $u=\pm1,\pm\frac12$.}\label{fig:counts}
+\end{figure}
+
+Chebotarev for graph coverings \cite{st96,hashimoto89}: $X$ is a $\Z_{12}$ (transposition) cover of the theta graph, so long cadences return to their starting chord with density $1/12$; we observed maximal deviation below $10^{-6}$ at $m=40$.
+
+\subsection{The arithmetic of the spectrum}
+\begin{theorem}\label{thm:arith}
+\ctag{E$\to$GB}\ The coefficients $f_k$ lie in $\Z[\zeta]$, and
+\begin{enumerate}[nosep]
+\item $f_3=2-i$, $f_9=2+i$: the split Gaussian primes above $5$;
+\item $f_4=i\sqrt3=1+2\omega$, $f_8=-i\sqrt3$: the ramified prime of $\Z[\omega]$ above $3$;
+\item for $k\in\{1,5,7,11\}$, $f_k$ is a unit of $\Z[\zeta]$, with $|f_5|^2=|f_7|^2=2+\sqrt3=\varepsilon$, the fundamental unit of $\Q(\sqrt3)$, and $|f_1|^2=|f_{11}|^2=\varepsilon^{-1}$; the minimal polynomial of $f_1$ is $x^4-2x^3+2x^2+2x+1$.
+\end{enumerate}
+The Galois group $(\Z/12)^\times$ acts by $\sigma_a f_k=f_{ak}$. The element $\sigma_{11}$ is induced by inversion $x\mapsto -x$, an automorphism of $X$ exchanging major and minor. The elements $\sigma_5,\sigma_7$ are induced by the multiplications $M_5,M_7$; they are not automorphisms of $X$, but $M_7$ maps the 24 consonant triads bijectively onto the 24 transpositions and inversions of the set class $[0,1,4]$ and maps $X$ isomorphically onto the graph of single-note parsimonious moves among them.
+\end{theorem}
+\begin{proof}
+(1)--(2): $f_3=1+\zeta^{12}+\zeta^{21}=2+\zeta^9=2-i$, and $f_4=1+\zeta^{16}+\zeta^{28}=1+2\omega$ with $(1+2\omega)^2=-3$. (3): the minimal polynomial of $f_1$ (computed exactly) has constant term $1$, so $N_{\Q(\zeta)/\Q}(f_1)=1$ and $f_1$ is a unit; its conjugates are the $f_k$, $k\in(\Z/12)^\times$. Further $f_5=1+\zeta^{8}+\zeta^{11}$, so $|f_5|^2=3+2(\cos240^\circ+\cos330^\circ+\cos90^\circ)=2+\sqrt3$, and $|f_1|^2|f_5|^2=N(f_1)=1$. Galois: $\sigma_a(\zeta^{kx})=\zeta^{akx}$. $M_7\{0,4,7\}=\{0,4,1\}$; the edge correspondence was checked on all 36 edges.
+\end{proof}
+
+So, read arithmetically, the eigenvalue $\sqrt5$ (the augmented-triad / diminished-seventh character of order~4) is the modulus of a Gaussian prime, $\sqrt3$ (the order-3 character) the modulus of the Eisenstein prime, and the primitive characters give square roots of $\varepsilon^{\pm1}$.
+
+\begin{theorem}[$\zeta_X$ over $\Q$]\label{thm:weil}
+\ctag{GB}\ The characteristic polynomial of $A$ is $(x-3)(x+3)(x-1)^3(x+1)^3(x^2-5)^2(x^2-3)^2(x^4-4x^2+1)^2$, and
+\[\zeta_X(u)^{-1}=(1-u^2)^{12}(1-u)(1-2u)(1+u)(1+2u)\,L_1^3\,L_1'^3\,L_2^2\,L_2'^2\,L_4^2,\]
+with $L_1=1-u+2u^2$, $L_1'=1+u+2u^2$, $L_2=1-u^2+4u^4$, $L_2'=1+u^2+4u^4$, $L_4=1+4u^2+9u^4+16u^6+16u^8$. Each of $L_1,L_1',L_2,L_2',L_4$ is the reversed characteristic polynomial of Frobenius of a simple isogeny class of abelian varieties over $\F_2$ (Honda--Tate \cite{tate66,honda68}); in LMFDB \cite{lmfdb} labels: $L_1$: \texttt{1.2.ab}, the curve $y^2+xy=x^3+x^2+1$, Frobenius field $\Q(\sqrt{-7})$, which is the Euler factor at 2 of the CM newform \texttt{49.2.a.a}; $L_1'$: \texttt{1.2.b}; $L_2$: \texttt{2.2.a\_ab}, a Jacobian with endomorphism algebra $\Q(\sqrt{-3},\sqrt5)$; $L_2'$: \texttt{2.2.a\_b}, endomorphism algebra $\Q(\sqrt3,\sqrt{-5})$; $L_4$: \texttt{4.2.a\_e\_a\_j}, a simple fourfold that is not a Jacobian. The factor $(1-u)(1-2u)$ is the zeta denominator of $\mathbb P^1_{\F_2}$.
+\end{theorem}
+\begin{proof}
+For each eigenvalue $\lambda$ the Ihara factor is $1-\lambda u+2u^2$; multiply over Galois orbits. A polynomial $1-\lambda u+2u^2$ with $|\lambda|\le2\sqrt2$ has reciprocal roots of modulus $\sqrt2$, so each orbit product is a Weil $2$-polynomial; irreducibility over $\Q$ was checked, and the labels and endomorphism data were read from LMFDB.
+\end{proof}
+\begin{remark}
+The Ramanujan property of $X$ is here literally the Hasse--Weil bound for these isogeny classes; the total dimension $3\cdot1+3\cdot1+2\cdot2+2\cdot2+2\cdot4=22$ equals the number of nontrivial eigenvalues. This is a factor-by-factor identification; we do not claim a variety over $\F_2$ whose zeta function is $\zeta_X$. Over $\F_4$ both surfaces become squares of elliptic curves with CM by $\Q(\sqrt{-15})$, and $\Q(\sqrt{-3},\sqrt5)$ is the Hilbert class field of $\Q(\sqrt{-15})$.
+\end{remark}
+
+\subsection{Eisenstein ideals: refuted and corrected}
+It is tempting to view the Tonnetz as $\Z[\omega]$ modulo an ideal. This fails.
+\begin{proposition}\label{prop:noideal}
+\ctag{E$\to$GB}\ No additive surjection $\Z[\omega]\to\Z_{12}$ sending $1$ and $1+\omega$ to a fifth and a major third (any of the 12 assignments of the Tonnetz axes) has an ideal as kernel; the multiplier ring of each kernel is $\Z+12\Z[\omega]$. Moreover $\Z_{12}$ is not a quotient ring of $\Z[\omega]$, $\Z[i]$ or $\Z[\zeta]$.
+\end{proposition}
+\begin{proof}
+A ring quotient $\Z[\omega]\to\Z_{12}$ needs a root of $x^2+x+1$ modulo 4, and there is none since $2$ is inert; similarly $x^2+1$ has no root mod 4 and $\Phi_{12}=x^4-x^2+1$ has no root mod 3 or mod 4. The multiplier rings were computed exactly for all 12 maps. For example, with $\psi(a+b\omega)=7a+9b$, $\psi(-12-8\omega)=0$ but $\psi(\omega(-12-8\omega))=8$.
+\end{proof}
+
+\begin{theorem}\label{thm:order2}
+\ctag{E$\to$GB}\ Let $\mathcal O=\Z[\sqrt{-3}]$, the order of conductor 2 in $\Q(\sqrt{-3})$. The ring map $\psi(x+y\sqrt{-3})=x+3y$ induces
+\[\Z_{12}\;\cong\;\mathcal O\big/\big(\sqrt{-3}\,(1+\sqrt{-3})\big),\]
+a principal ideal of norm 12, under which the minor third is $\sqrt{-3}$, the major third $1+\sqrt{-3}$, the fifth $1+2\sqrt{-3}$ and the semitone $1$. Multiplication by $\sqrt{-3}$ acts on pitch classes as $x\mapsto3x$. Among the orders $\Z[f\omega]$, exactly those with $f$ even admit $\Z_{12}$ as a quotient ring.
+\end{theorem}
+\begin{proof}
+$\psi$ is a ring map since $\psi(\sqrt{-3})^2=9\equiv-3$. Its kernel contains $3-\sqrt{-3}=-\sqrt{-3}(1+\sqrt{-3})$, of norm 12, and $\psi$ is onto, so this is the kernel. The basis $\{\sqrt{-3},1+\sqrt{-3}\}$ is unimodular, so the triangulation by minor and major thirds is preserved. For $\Z[f\omega]$ one needs a root of $x^2+fx+f^2$ (the minimal polynomial of $f\omega$) mod 4 and mod 3; mod 4 this exists iff $f$ is even.
+\end{proof}
+\begin{remark}
+The torus $\C/\mathcal O$ has $j=54000$. It is not the equilateral (musical) torus: there the triad sides are equal, the period ratio is $\tau=-\frac38+\frac{3\sqrt3}{8}i$ with minimal form $(9,-6,13)$ of discriminant $-432$ and class number $6$, and the multiplier ring is the order of conductor 12. So the \emph{geometry} of harmony has conductor 12 while its \emph{arithmetic} lives in conductor 2. The obstruction at 2 vanishes because $\mathcal O/(2)\cong\F_2[\epsilon]/(\epsilon^2)$ is non-reduced; the major third $1+\sqrt{-3}$ is the factor in $4=(1+\sqrt{-3})(1-\sqrt{-3})$.
+\end{remark}
+
+\section{Melody: the tune theorem}\label{sec:tunemain}
+Along a non-backtracking cadence $c=(T_0,T_1,\dots,T_m=T_0)$ exactly one note changes at each step; let $n_i$ be the note that arrives at step $i$. The \emph{tune} of $c$ is the cyclic word $(n_1,\dots,n_m)$.
+
+\begin{lemma}\label{lem:l}
+\ctag{E$\to$GB}\ (L1) At each triad the three moves change three different notes. (L2) Only the backtracking move changes the note that has just arrived. (L3) No major or minor triad contains two notes 1 or 2 semitones apart, while every move changes a note by 1 or 2 semitones.
+\end{lemma}
+\begin{proof}
+Exhaustive check over the 72 directed edges; (L3) since the intervals of $\{0,4,7\}$ and $\{0,3,7\}$ are $3,4,5$ up to inversion.
+\end{proof}
+
+\begin{theorem}[tune theorem]\label{thm:tune}
+\ctag{E$\to$GB}\ The tune of a non-backtracking cadence determines the cadence. Consequently the map from prime cadences to tunes is injective and preserves primitivity: no prime cadence has a periodic tune.
+\end{theorem}
+\begin{proof}
+By (L2), $T_i\ni n_{i-1},n_i$. If the voices moved at $i$ and $i-2$ differ, then $T_i=\{n_{i-2},n_{i-1},n_i\}$ is a consonant triad. If they coincide, then $n_{i-2}\to n_i$ is a single move of one voice and by (L3) $\{n_{i-2},n_{i-1},n_i\}$ is not a consonant triad. Hence the tune determines which steps move the same voice, hence the partition of steps into voices, hence each $T_i=\{n_i,n_{i-1},\text{latest arrival of the third voice}\}$. If only two voices ever move (the 24 held-note hexagons), the held note is the unique note completing every consecutive pair to a triad. The decoding is local and commutes with rotation, so the period of the tune equals the period of the cadence.
+\end{proof}
+We verified the decoder on all $131{,}136$ rooted primes of length $\le16$.
+
+\subsection{Other tuning systems}\label{sec:tunegen}
+Let $N\ge5$, let $S\subset\{1,\dots,\lfloor N/2\rfloor\}$ be a set of \emph{step} sizes, and let $\mathcal C$ be a transposition (or transposition/inversion) class of three-note chords in $\Z_N$ such that no two notes of a chord are a step apart. Join two chords when they differ in one note and that note moves by a step. The 12-tone case is $S=\{1,2\}$ with the consonant triads.
+\begin{theorem}[general reduction]\label{thm:tunegen}
+\ctag{E$\to$GB}\ In any such system, the tune of a closed non-backtracking walk determines the full path of every voice that moves at least once: the note $n_j$ arriving at step $j$ leaves at the first later step $i$ for which $n_i-n_j\in\pm S$. In particular the tune determines the walk whenever all three voices move, and the theorem can only fail through the held notes of walks in which one voice never moves.
+\end{theorem}
+\begin{proof}
+At step $i$ the departing note $d$ lies in $T_{i-1}$ and $n_i-d\in\pm S$. Any other $x\in T_{i-1}\setminus\{d\}$ lies in $T_i$ together with $n_i$, so $n_i-x\notin\pm S$. Thus $d$ is the unique note of $T_{i-1}$ at step distance from $n_i$, and a note present in the chord stays until the first arrival at step distance from it.
+\end{proof}
+For walks in which a voice is held, injectivity is equivalent to a finite condition: no closed walk in the ``link'' graph of pairs (respectively single notes) that complete to chords with two different held notes. We checked this criterion exactly for every system with $N\le72$, $S=\{1\}$ or $\{1,2\}$ and either symmetry type, which gives 6028 systems, by two independent implementations (and by brute force over all closed non-backtracking walks for $N\le24$). There is no counterexample. Non-backtracking is needed: $C\to Cm\to C$ and $E\to A\flat m\to E$ both have the tune $(E\flat,E)$ up to rotation.
+
+\section{Voice threads and the winding law}
+Track each voice continuously (in $\Z$, not $\Z_{12}$). Around a closed cadence the total displacement of the three voices is $12W$ for an integer $W$, the \emph{winding}. A cadence also has a homology class $(u,v)\in H_1(\text{torus})\cong\Z^2$ with respect to $P_u,P_v$.
+
+\begin{theorem}[$W=-u$]\label{thm:W}
+\ctag{GB}\ Every flip moves one vertex of the triangle by
+\[\delta\in\{\pm(1,-2),\pm(1,1),\pm(-2,1)\},\]
+all in the coset lattice $\{2a+b\equiv0\bmod 3\}$, and the voice moves by $-\delta_a$ semitones. Hence each voice stays in a fixed coset and its continuous pitch is $-a+\text{const}$, and $W=-u$. The $u$-period permutes the three voices cyclically, the $v$-period fixes them. In particular the voices return home exactly when $u=0$, and every voice moves by an octave exactly when $u=\pm3$.
+\end{theorem}
+\begin{proof}
+For a flip, the moving vertex is reflected across the opposite edge; in Tonnetz coordinates the six possible displacements are as listed (checked on all 72 directed moves), and the pitch change $7\delta_a+4\delta_b$ reduces to $-\delta_a$ in $\{\pm1,\pm2\}$, e.g.\ $\delta=(1,-2)$ gives $7-8=-1$. Summing along a closed cadence the $a$-displacements total the $a$-component of $uP_u+vP_v$, and since the triangle returns to itself translated by $uP_u+vP_v$, the three vertex tracks together have $a$-displacement $3\cdot4u=12u$; so the total voice displacement is $-12u$. The $u$-period $(4,-4)$ changes $2a+b$ by $4\equiv1\pmod3$, cycling the cosets; $(0,3)$ changes it by $3\equiv0$.
+\end{proof}
+The first prime cadences with $u=\pm3$ occur at length 24, for example the alternating cadence $(RL)^{12}$ through all 24 triads, along which each voice rises by exactly one octave. The voice colouring of honeycomb edges is the Kekul\'e ($\sqrt3\times\sqrt3$) colouring; it lives on the triple cover $W\bmod3$, not on the torus.
+
+\subsection{Flux}
+For $\varphi\in\R$, let $A_\varphi$ be the adjacency operator twisted by $e^{i\theta s}$ on a move that shifts a voice by $s$ semitones, $\theta=\varphi/12$. On closed walks the total phase is $e^{i\varphi W}$, so $A_\varphi$ is the twist by the unitary character $\chi_\varphi:\pi_1(X)\to U(1)$, $\gamma\mapsto e^{i\varphi W(\gamma)}$; for $\varphi=2\pi j/n$ it is an Artin--Ihara $L$-function of the $\Z_n$ winding cover. The Bass identity holds for unitary twists, $\det(I-uB_\varphi)=(1-u^2)^{12}\det(I-uA_\varphi+2u^2)$.
+
+\begin{theorem}[twisted spectrum]\label{thm:twist}
+\ctag{GB}\ The eigenvalues of $A_\varphi$ are $\pm\lambda_k(\varphi)$ with $\lambda_k(\varphi)=|1+\zeta^{4k}+e^{i\varphi/4}\zeta^{9k}|$, $k\in\Z_{12}$.
+\end{theorem}
+\begin{proof}
+From the major triad of root $r$, $P$ and $L$ shift a voice by $-1$ and $R$ by $+2$. So the twisted block is $C_\theta=e^{-i\theta}(I+S^4)+e^{2i\theta}S^9$, with Fourier symbol $e^{-i\theta}\big(1+\zeta^{4k}+e^{3i\theta}\zeta^{9k}\big)$ and $3\theta=\varphi/4$.
+\end{proof}
+
+\begin{theorem}[Riemann window]\label{thm:window}
+\ctag{E$\to$GB}\ For $\varphi\in[0,2\pi)$, all eigenvalues of $A_\varphi$ satisfy $|\lambda|\le2\sqrt2$ (the Riemann hypothesis for $L(u,\chi_\varphi)$) if and only if
+\[\varphi\in\big[\,4\arccos\tfrac34,\;2\pi-4\arccos\tfrac34\,\big]\approx[2.8909,\,3.3922].\]
+Consequently, among the cyclic winding covers $X_n$ ($\Z_n$-covers through $W\bmod n$), $X_n$ is Ramanujan iff $n\le2$. The double cover $X_2$ (48 triads, voice parity) is a Ramanujan $2$-lift in the sense of Bilu--Linial \cite{bl06}, with top new eigenvalue $\sqrt{5+2\sqrt2}\approx2.798$.
+\end{theorem}
+\begin{proof}
+If $4k\not\equiv0\pmod{12}$ then $|1+\zeta^{4k}|=1$ and $\lambda_k\le2<2\sqrt2$. If $k\in\{0,3,6,9\}$ then $\zeta^{4k}=1$ and $\lambda_k^2=|2+e^{i(\varphi/4+j\pi/2)}|^2=5+4\cos(\varphi/4+j\pi/2)$, $j=0,3,2,1$. The condition $\lambda^2\le8$ reads $\cos(\cdot)\le\frac34$. For $\varphi/4\in[0,\pi/2)$ the largest of the four cosines is $\max(\cos\frac\varphi4,\sin\frac\varphi4)$, so the condition is $\frac\varphi4\in[\arccos\frac34,\arcsin\frac34]$, and $4\arcsin\frac34=2\pi-4\arccos\frac34$. The cover $X_n$ is Ramanujan iff all characters $\varphi=2\pi j/n$, $1\le j<n$, lie in the window; for $n\ge3$, $j=1$ gives $\varphi\le2\pi/3<2.89$. For $n=2$, $\varphi=\pi$ gives $\max\lambda^2=5+2\sqrt2$.
+\end{proof}
+\begin{remark}
+At $\varphi=2\pi/3$ the flux lands on a Dirac point ($\lambda_k=0$ for some $k$), which the untwisted torus lacks. Ramanujan signings of $X$ are not rare: of the $8191$ nontrivial classes of signings ($2^{13}$ characters of $\pi_1$ to $\pm1$), $7675$ are Ramanujan, the best with top eigenvalue $1+\sqrt2$; the voice-parity signing ranks $7372$ of $8192$. Thus the musical double cover is canonical but not extremal, and the existence theorem of Marcus--Spielman--Srivastava \cite{mss15} adds nothing specific here.
+\end{remark}
+
+\begin{figure}[htbp]\centering
+\includegraphics[width=0.48\textwidth]{figures/window.pdf}\hfill
+\includegraphics[width=0.48\textwidth]{figures/winding.pdf}
+\caption{Left: the largest twisted eigenvalue against flux; the shaded band is the Riemann window of Theorem~\ref{thm:window}. Right: distribution of the voice winding $W$ over all $5.5\times10^{10}$ prime cadences of length 40, against $\mathcal N(0,40/24)$.}\label{fig:window}
+\end{figure}
+
+\section{The homology law}
+\begin{theorem}[winding law]\label{thm:clt}
+\ctag{GB}\ Let $\pi(m,w)$ be the number of prime cadences of length $m$ (even) with winding $W=w$. Then, uniformly for $w=O(\sqrt m)$,
+\[\pi(m,w)\sim\frac{2^{m+1}}{m}\sqrt{\frac{12}{\pi m}}\;e^{-12w^2/m},\]
+so $W$ is asymptotically Gaussian with variance $m/24$. More generally the homology class $(u,v)$ has covariance $\frac m2G^{-1}=m\begin{psmallmatrix}1/24&1/36\\1/36&2/27\end{psmallmatrix}$: isotropic Brownian motion on the Tonnetz plane with unit mean-square displacement per step.
+\end{theorem}
+\begin{proof}[Proof sketch]
+By Theorems~\ref{thm:twist} and \eqref{eq:ib} for $B_\varphi$, $\operatorname{tr}B_\varphi^m=\sum_k(\alpha_k^m+\beta_k^m)+12(1+(-1)^m)$, where $\alpha,\beta$ solve $x^2-\lambda x+2=0$. The dominant branch near $\varphi=0$ is $\lambda(\varphi)=|2+e^{i\varphi/4}|=\sqrt{5+4\cos(\varphi/4)}$, with $\rho(\varphi)=\frac12(\lambda+\sqrt{\lambda^2-8})$. Expanding, $\lambda\approx3-\varphi^2/48$, $d\rho/d\lambda=2$ at $\lambda=3$, so $\log\rho(\varphi)=\log2-\varphi^2/48+O(\varphi^4)$. The number of closed non-backtracking walks with winding $w$ is $\frac1{2\pi}\int\operatorname{tr}B_\varphi^me^{-i\varphi w}d\varphi$; the Riemann window theorem shows that away from $\varphi=0$ (and $\varphi=\pm2\pi$-periodic images, handled by the bipartite branch) the integrand is exponentially smaller, so Laplace's method gives a Gaussian of variance $2m/48=m/24$; M\"obius inversion passes to primes. For the full class, repeat with a two-parameter twist; the Hessian of $-\log\rho$ equals $\frac12G^{-1}$, and $\operatorname{tr}(\frac12G^{-1}G)=1$ is the mean-square displacement: non-backtracking honeycomb steps have length $1/\sqrt3$ and persistence factor $3$.
+\end{proof}
+Exact check: at $m=40$, $\operatorname{Var}(W)/m=0.041668$ versus $1/24=0.041667$ (Figure~\ref{fig:window}). Theorem~\ref{thm:clt} is the graph instance of the prime geodesic theorems in homology classes \cite{ps87,ks90,lalley89,ps01}; for graphs see \cite{liu04,luoroy}.
+
+\section{The geometric object: a 2-adic Mumford curve}\label{sec:geom}
+The Ihara zeta function was born in $p$-adic geometry \cite{ihara66,serre80}: the Bruhat--Tits tree $\mathcal T$ of $PGL_2(\Q_2)$ is 3-regular, a finite 3-regular graph is a quotient $\Gamma\backslash\mathcal T$, and when $\Gamma$ is a Schottky group Mumford's construction \cite{mumford72,gvdp80} turns $\Gamma\backslash\mathcal T$ into the reduction graph of an algebraic curve. This section carries that out explicitly for the chord graph and asks how far the resulting curve is arithmetic.
+
+\subsection{\texorpdfstring{A Schottky group generated by $P$, $L$, $R$}{A Schottky group generated by P, L, R}}
+Vertices of $\mathcal T$ are homothety classes of $\Z_2$-lattices in $\Q_2^2$; the three neighbours of $v_0=[\Z_2^2]$ are its index-2 sublattices, indexed by $\mathbb P^1(\F_2)$. Put
+\[\sigma_P=\begin{pmatrix}0&1\\2&0\end{pmatrix},\qquad \sigma_L=\begin{pmatrix}0&2\\1&0\end{pmatrix},\qquad \sigma_R=\begin{pmatrix}-1&1\\1&1\end{pmatrix}\in PGL_2(\Q_2).\]
+\begin{theorem}[Schottky realisation]\label{thm:schottky}
+\ctag{GB}\ \begin{enumerate}[label=(\alph*),nosep]
+\item Each $\sigma_s$ satisfies $\sigma_s^2=2I$, so it is an involution of $PGL_2(\Q_2)$; it swaps $v_0$ with one of its neighbours, and the three neighbours reached are distinct.
+\item $W=\langle\sigma_P,\sigma_L,\sigma_R\rangle\cong\Z_2*\Z_2*\Z_2$, and $W$ acts simply transitively on the vertices of $\mathcal T$.
+\item Let $K$ be the kernel of $W\to PLR\cong D_{12}$, $\sigma_s\mapsto s$. Then $K$ is a Schottky group, free of rank 13, and $K\backslash\mathcal T\cong X$.
+\item The Mumford curve $C=K\backslash\Omega$ has genus 13. Its stable reduction is 24 copies of $\mathbb P^1_{\F_2}$, one per triad, glued at 36 $\F_2$-rational nodes, one per move, so the dual graph is $X$ (Figure~\ref{fig:redgraph}). Every $\F_2$-point of every component is a node, $\#C_0(\F_{2^n})=24\cdot2^n-12$, and $J(C)$ has split toric reduction.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+(a) $\sigma_P(x,y)=(y,2x)$ maps $\Z_2^2$ onto $\Z_2\oplus2\Z_2$ and that lattice onto $2\Z_2^2\sim\Z_2^2$. Up to scalars, $\sigma_L=g\sigma_Pg^{-1}$ with $g=\begin{psmallmatrix}0&1\\1&0\end{psmallmatrix}$ and $\sigma_R=h\sigma_Ph^{-1}$ with $h=\begin{psmallmatrix}1&0\\1&1\end{psmallmatrix}$. Both $g,h\in GL_2(\Z_2)$ fix $v_0$ and send the line $\langle e_1\rangle$ of $\F_2^2$ to $\langle e_2\rangle$ and $\langle e_1+e_2\rangle$.
+(b) The orbit map $w\mapsto wv_0$ sends the Cayley tree of $\Z_2^{*3}$ to $\mathcal T$, and the neighbours of $wv_0$ are $w\sigma_sv_0$. So the map is a local bijection of 3-regular trees, hence an isomorphism. This forces both freeness of the product and simple transitivity.
+(c) $K$ is normal of index 24 and lies in the even (bipartition-preserving) subgroup, so it acts without inversions. It meets no vertex stabiliser, so it acts freely and is free \cite{serre80}. It is discrete and cocompact with no elliptic elements, so it is Schottky \cite{ihara66,gvdp80}. $K\backslash\mathcal T$ is the coset graph of $W/K$, which is the Cayley graph $X$, and its rank is $E-V+1=13$.
+(d) This is Mumford's theorem \cite{mumford72}: components correspond to vertices of $K\backslash\mathcal T$ and double points to its edges. The point count is $24(2^n+1)-36$.
+\end{proof}
+\noindent\emph{Verification.} We computed the 13 Schreier generators of $K$ from a spanning tree of $X$ as integer matrices. Their determinants are $2^6$, $2^8$ and $2^{10}$; each is hyperbolic ($2v_2(\operatorname{tr})<v_2(\det)$), and its translation length on $\mathcal T$ equals the length (6 or 8) of its cycle in $X$. For example, the hexagon $(LP)^3$ at $E$ is $\operatorname{diag}(64,1)$, and the word $PLRLPRPL$ is $\begin{psmallmatrix}-5&12\\12&-80\end{psmallmatrix}$, with determinant $2^8$ and trace $-85$. We also checked simple transitivity on the ball of radius 7 (382 reduced words, all giving distinct vertices).
+
+\begin{proposition}[symmetries]\label{prop:aut}
+\ctag{E$\to$GB}\ $\operatorname{Aut}(C)\cong D_{12}$. It acts on the reduction graph as the group of transpositions and inversions, the centraliser of the $PLR$-group.
+\end{proposition}
+\begin{proof}
+$\operatorname{Aut}(C)=N(K)/K$ \cite{mumford72,gvdp80}, and this group injects into $\operatorname{Aut}(X)$. Indeed, if $n\in N(K)$ acts trivially on $X$, then after multiplying by an element of $K$ it fixes $v_0$. Local bijectivity of $\mathcal T\to X$ then makes it fix every vertex, and $PGL_2(\Q_2)$ acts faithfully on $\mathcal T$. A direct computation gives $|\operatorname{Aut}(X)|=24$. The group $W/K$ already supplies 24 automorphisms, and they preserve the edge colours $P,L,R$. So they commute with the $PLR$-action, and they are Lewin's dual $T/I$ group \cite{lewin,cfs09}.
+\end{proof}
+In words: the moves $P,L,R$ build the curve, and transposition and inversion are its symmetries.
+
+\begin{proposition}[not arithmetic]\label{prop:nonarith}
+\ctag{E$\to$GB}\ No finite-index subgroup of $K$ is contained in an arithmetic lattice of $PGL_2(\Q_2)$ coming from a quaternion algebra over $\Q$.
+\end{proposition}
+\begin{proof}
+A cocompact arithmetic lattice of $PGL_2(\Q_2)$ defined over $\Q$ comes from the $\Z[\frac12]$-units of an order in a quaternion algebra $B/\Q$ that is split at 2 and definite. Its non-central elements have reduced trace $t$ and norm $n>0$ with $t^2<4n$. The quantity $\operatorname{tr}^2/\det$ is conjugation-invariant, and an element that is hyperbolic at the real place stays hyperbolic in all its powers. The generator above has $\operatorname{tr}^2/\det=85^2/2^8>4$.
+\end{proof}
+Proposition~\ref{prop:nonarith} concerns this particular $K$. Other Schottky groups with quotient $X$ exist (move the fixed-point pairs of the three involutions). Whether one of them is arithmetic is the subject of \S\ref{sec:shimura}.
+
+\begin{figure}[htbp]\centering
+\includegraphics[width=0.46\textwidth]{figures/reduction_graph.pdf}\hfill
+\includegraphics[width=0.40\textwidth]{figures/cover.pdf}
+\caption{Left: the reduction graph of $C$. Vertices are the 24 components $\mathbb P^1_{\F_2}$, edges are the 36 nodes, and solid, dashed and dotted lines are $P$, $L$ and $R$. Majors sit on the outer ring and minors on the inner ring, at their level $\ell$ (Theorem~\ref{thm:tower}), which runs through the circle of fifths. Right: the same graph as the $\Z/12$ cover of $\Theta$, drawn as twelve levels with ramps $L:+0$, $R:+1$, $P:+4$; faint ramps wrap from level 11 to level 0.}\label{fig:redgraph}
+\end{figure}
+
+\subsection{The tower over the two-line curve}
+\begin{theorem}[the $\Z/12$ tower]\label{thm:tower}
+\ctag{E$\to$GB}\ Let $W^+=\langle\sigma_P\sigma_L,\sigma_L\sigma_R\rangle$ be the even subgroup.
+\begin{enumerate}[label=(\alph*),nosep]
+\item $W^+$ is a Whittaker group (the index-2 even subgroup of a group generated by three involutions), and $H=W^+\backslash\Omega$ is a hyperelliptic Mumford curve of genus 2 \cite{gvdp80}. Its stable reduction is two copies of $\mathbb P^1_{\F_2}$, ``major'' and ``minor'', glued pointwise along $\mathbb P^1(\F_2)=\{P,L,R\}$. The dual graph is the theta graph $\Theta$ (Figure~\ref{fig:twolines}).
+\item $C\to H$ is an unramified Galois cover with group $W^+/K\cong\Z/12$. On reduction graphs, $X$ is the $\Z/12$ voltage cover of $\Theta$ with voltages $P:4$, $L:0$, $R:1$, reading off $P=L\rho^4$, $R=L\rho$, $\rho=LR$. The level of a major triad with root $r$ is $5r$, and that of a minor triad with root $r$ is $5(r-4)$ mod 12: the levels run through the circle of fifths.
+\item A loop on $\Theta$ with net voltage $v$ lifts to a cycle of length $2\cdot12/\gcd(v,12)$. The loops $PL$, $PR$, $LR$ have voltages $4$, $3$, $\pm1$, and they lift to the hexatonic 6-cycle, the octatonic 8-cycle and the Hamiltonian 24-cycle.
+\item $C\to\mathbb P^1=W\backslash\Omega$ is a $D_{12}$-cover branched over six points, the two fixed points of each $\sigma_s$, each with monodromy an involution.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+(a) $W^+\backslash\mathcal T$ has two vertices (the bipartition classes) and three edges. (b) $W^+/K$ is the rotation subgroup of $D_{12}$, cyclic of order 12 and generated by $\rho$. The voltage of an edge records the power of $\rho$ picked up when the edge is crossed from major to minor, and the levels follow by solving these congruences. We checked all 36 edges. (c) A lift closes after $12/\gcd(v,12)$ laps of two edges. (d) Riemann--Hurwitz: $24=24(-2)+72$, and the 72 comes from $6\times12$ ramification points of index 2.
+\end{proof}
+
+\begin{figure}[htbp]\centering\includegraphics[width=0.82\textwidth]{figures/two_lines.pdf}
+\caption{The genus-2 curve $H$ underneath $C$: two lines meeting in the three points $P$, $L$, $R$, and its dual graph $\Theta$. The chord graph is the $\Z/12$ cover of $\Theta$ (Figure~\ref{fig:redgraph}, right).}\label{fig:twolines}
+\end{figure}
+
+\begin{corollary}[Ihara factors are characters of the cover]\label{cor:artin}
+\ctag{E$\to$GB}\ With $\varphi_k=1+\zeta^k+\zeta^{4k}$ and $\zeta=e^{2\pi i/12}$ (the voltages $L,R,P\mapsto0,1,4$; for each order $d$ the values $|\varphi_k|$ are those of the $|f_k|$ of Section~3, possibly permuted within the class),
+\[\zeta_X(u)^{-1}=\prod_{k=0}^{11}L_\Theta(u,\chi_k)^{-1},\qquad L_\Theta(u,\chi_k)^{-1}=(1-u^2)\big((1+2u^2)^2-|\varphi_k|^2u^2\big).\]
+Grouping the characters by their order $d$ gives the rational factorisation of Theorem~\ref{thm:weil}:
+\begin{center}\small
+\begin{tabular}{llll}\toprule
+$d$ & $k$ & $|\varphi_k|$ & factor (without $(1-u^2)$)\\\midrule
+1 & 0 & 3 & $(1-u)(1+u)(1-2u)(1+2u)$\\
+2 & 6 & 1 & $(1-u+2u^2)(1+u+2u^2)$\\
+3 & 4, 8 & $\sqrt3$ & $(1+u^2+4u^4)^2$\\
+4 & 3, 9 & $\sqrt5$ & $(1-u^2+4u^4)^2$\\
+6 & 2, 10 & 1 & $(1-u+2u^2)^2(1+u+2u^2)^2$\\
+12 & 1, 5, 7, 11 & $2\cos\frac{\pi}{12},\,2\cos\frac{5\pi}{12}$ & $(1+4u^2+9u^4+16u^6+16u^8)^2$\\\bottomrule
+\end{tabular}\end{center}
+Correspondingly, Chevalley--Weil gives an isogeny $J(C)\sim J(H)\times A_2\times A_3\times A_4\times A_6\times A_{12}$, where $A_d$ is the part on which $\Z/12$ acts through characters of exact order $d$. The dimensions are $2,1,2,2,2,4$.
+\end{corollary}
+\begin{proof}
+This is the Artin--Ihara factorisation for abelian covers \cite{st96,terras}. The twisted adjacency of $\Theta$ at $\chi_k$ is $\begin{psmallmatrix}0&\varphi_k\\\bar\varphi_k&0\end{psmallmatrix}$. We checked the identity exactly in SymPy.
+\end{proof}
+\begin{remark}
+The Ihara factors are \emph{not} the Frobenius polynomials of the reduction of $J(C)$, which is a split torus. The bridge between the two is the cover $X\to\Theta$, not a congruence relation; compare \S\ref{sec:shimura}.
+\end{remark}
+
+\subsection{Tropical invariants: sandpile group and gonality}
+\begin{theorem}\label{thm:sandpile}
+\ctag{E$\to$GB}\ The critical (sandpile) group of $X$ is
+\begin{gather*}K(X)\cong\Z/2\oplus\Z/2\oplus\Z/8\oplus\Z/736\oplus\Z/6624,\\ |K(X)|=156{,}008{,}448=2^{15}\cdot3^2\cdot23^2 .\end{gather*}
+Its order is $\frac1{24}\cdot6\prod_{k\ne0}(9-|\varphi_k|^2)$, and the factor $23^2$ comes from the order-12 characters: $(9-(2-\sqrt3))(9-(2+\sqrt3))=46$. By Raynaud \cite{raynaud70}, $K(X)$ is the group of components of the N\'eron model of $J(C)$. The cycle-pairing matrix on $H_1(X,\Z)$, which gives the valuations of the multiplicative periods of $J(C)$, has determinant $|K(X)|$ and cokernel $K(X)$.
+\end{theorem}
+\begin{proof}
+Smith normal form of $3I-A$ (PARI); Kirchhoff's matrix-tree theorem \cite{kirchhoff1847}; the eigenvalues of $3I-A$ are $3\pm|\varphi_k|$.
+\end{proof}
+\begin{theorem}[gonality]\label{thm:gon}
+\ctag{E$\to$GB}\ The divisorial gonality of $X$ \cite{bn07} is 6, with witness $2\,C+2\,Am+D\flat+A\flat m$, which is invariant under the inversion exchanging $C$ and $Am$. No involution of $X$ has a tree quotient, so the metric graph is not hyperelliptic \cite{chan13}. Hence $C$ is not hyperelliptic \cite[Cor.~3.5]{baker08}, while $H$ is.
+\end{theorem}
+\begin{proof}
+By vertex-transitivity, a rank-$\ge1$ divisor class contains a divisor $D\ge(C)$. We searched all effective $D$ of degree $\le6$ of this form, using Dhar burning to compute $q$-reduced divisors. The search was done twice, with independent implementations (compiled and pure Python). We enumerated all 13 involutions of $X$.
+\end{proof}
+
+\subsection{\texorpdfstring{Curves over $\F_2$}{Curves over F2}}
+\begin{proposition}\label{prop:f2}
+\ctag{E$\to$GB}\ The degree-44 polynomial $P_{44}(u)=\prod_{d>1}$(factors above) is a $2$-Weil polynomial, but it is not the zeta numerator of any curve over $\F_2$. Its point counts would be $N_n=3,39,9,75,33,27,\dots$, and $N_6<N_2$ is impossible. Every irreducible factor is a factor of the $L$-polynomial of an explicit curve over $\F_2$ (checked by point counting):
+$y^2+xy=x^3+x^2+1$ and $y^2+xy=x^3+1$ ($1\mp u+2u^2$); $y^2+(x^2+x)y=x^5+x^3+x^2+x$ ($1-u^2+4u^4$); $y^2+(x^2+x+1)y=x^5+x^3+x^2+1$ ($1+u^2+4u^4$); and, for the order-12 octic (isogeny class 4.2.a\_e\_a\_j, which contains no Jacobian \cite{lmfdb}), the genus-6 curve
+\begin{gather*}y^2+(x^6+x^5+x^4+x^3+1)\,y=x^{13}+x^3+x,\\ L(u)=(1-3u^2+4u^4)(1+4u^2+9u^4+16u^6+16u^8).\end{gather*}
+\end{proposition}
+\noindent We searched all smooth hyperelliptic models over $\F_2$ of genus 4, 5, 6 and 7, up to $y\mapsto y+t(x)$ (1536, 6144, 24576 and 98304 models). Among these hyperelliptic models the octic occurs only in genus 6, where 12 models have it. The minimal genus is smaller once non-hyperelliptic curves are allowed:
+\begin{proposition}[the octic in genus 5]\label{prop:g5}
+\ctag{E$\to$GB}\ No curve of genus $\le4$ over $\F_2$ has the octic $1+4u^2+9u^4+16u^6+16u^8$ as a factor of its $L$-polynomial, and two curves of genus 5 do. They are the smooth complete intersections in $\mathbb P^4=\{(T:U:X:Y:Z)\}$
+\begin{align*}
+A:\quad&TX+TZ+Y^2+YZ+Z^2=0,\\
+&T^2+TU+TY+TZ+U^2+UX+UZ+XZ+Y^2=0,\\
+&TY+U^2+UX+UZ+X^2+XY+XZ+Y^2+YZ+Z^2=0;\\
+B:\quad&TX+TZ+Y^2+YZ+Z^2=0,\qquad TX+UX+UY+UZ=0,\\
+&TU+U^2+UX+UY+UZ+X^2+XY+XZ+Y^2+Z^2=0,
+\end{align*}
+with $L_A=(1-u+2u^2)\cdot\text{octic}$ and $L_B=(1+u+2u^2)\cdot\text{octic}$, so their Jacobians are isogenous to $E\times A_{12}$ for the two elliptic curves of Proposition~\ref{prop:f2}.
+\end{proposition}
+\begin{proof}
+Genus 4 would need $L=$ octic itself, i.e.\ $(N_1,N_2,N_3,N_4)=(3,13,9,21)$, and this class contains no Jacobian \cite{lmfdb}; we confirmed it by enumerating all hyperelliptic models and all quadric--cubic complete intersections in $\mathbb P^3$ over $\F_2$. Genus $\le3$ is excluded by degree. In genus 5 the cofactor is $1-au+2u^2$ with $a\in\{0,\pm1,\pm2\}$; $a=0$ would give a negative number of closed points of degree 4, and Dragutinovi\'c's complete census of genus-5 curves over $\F_2$ \cite{dragutinovic24} has exactly the two classes above (none with $a=\pm2$). We recomputed the point counts of $A$ and $B$ over $\F_{2^k}$, $k\le5$, and verified smoothness by Gr\"obner bases.
+\end{proof}
+
+\subsection{\texorpdfstring{No Shimura curve over $\Q$}{No Shimura curve over Q}}\label{sec:shimura}
+By \v{C}erednik--Drinfeld \cite{cerednik76,drinfeld76}, in the form used by Ribet \cite{ribet90}, the Shimura curve $X_0^D(N)$ with $2\mid D$ has a 2-adic reduction graph. It is the bipartite double of the 2-Brandt graph of an Eichler order of level $N$ in the definite algebra of discriminant $D/2$. Its adjacency spectrum is $\pm3$ together with $\pm a_2(f)$, for $f$ running over the $D/2$-new part of $S_2(\Gamma_0(DN/2))$.
+\begin{theorem}\label{thm:noshimura}
+\ctag{E$\to$GB}\ No Shimura curve over $\Q$ of the form $X_0^D(N)$ with $2\mid D$, nor any of its $\Gamma_H$-variants with 24 components, has reduction graph $X$.
+\end{theorem}
+\begin{proof}
+Genus 13 leaves exactly 18 pairs $(D,N)$: $D=2p$ for 16 pairs, plus $D=546$ and $D=570$ with three odd primes. It also leaves four $\Gamma_H$ cases. For each, PARI's Hecke matrices give the multiset $\{|a_2(f)|\}$. In the 11 torsion-free cases it has exactly 11 elements, consistent with the Brandt class number 12. None equals the spectrum $\{1,1,1,\sqrt5^{\,2},\sqrt3^{\,2},(2\cos\frac\pi{12})^2,(2\cos\frac{5\pi}{12})^2\}$ of $X$ (exponents are multiplicities). The nearest cases, $(D,N)=(26,9)$ and $(570,1)$, agree on $1,1,1,\sqrt3,\sqrt3$ but have $1+\sqrt2$ in place of the rest.
+\end{proof}
+\begin{remark}
+The coincidence with $X_0(49)$ noted in Theorem~\ref{thm:weil} therefore reflects a single factor with $a_2=1$, not an arithmetic structure. Over larger totally real fields see \S\ref{sec:noarith} and \S\ref{sec:graphlevel}.
+\end{remark}
+
+\subsection{\texorpdfstring{No arithmetic uniformisation of $C$ at all}{No arithmetic uniformisation of C at all}}\label{sec:noarith}
+We now remove the restriction to $\Q$ as far as the curve $C$ itself is concerned. Call a subgroup $\Gamma\subset PGL_2(F_v)$, for a number field $F$ and a finite place $v$, \emph{arithmetic} if it is commensurable with the image of $G(\mathcal O_E[1/v])$ for an inner form $G$ of $PGL_2$ over a subfield $E\subset F_v$ with $G(E_v)\cong PGL_2(F_v)$ and $G(E\otimes\mathbb R)$ compact. Discreteness and cocompactness force exactly these conditions (a non-compact archimedean factor would make the image dense), so $E$ is totally real. The groups of \v{C}erednik--Drinfeld uniformisation of Shimura curves over totally real fields are of this kind \cite{cerednik76,drinfeld76}: they come from the totally definite algebra $\bar B$ obtained by interchanging the invariants at $v$ and at one real place.
+
+\begin{theorem}[trace obstruction]\label{thm:trace}
+\ctag{E$\to$GB}\ Let $F$ be any number field, $v$ any finite place, $L\supset F_v$ any complete extension, and $\Gamma\subset PGL_2(F_v)$ any torsion-free arithmetic group. Then $C_L\not\cong\Gamma\backslash\Omega_L$. More strongly, no conjugate of a finite-index subgroup of $K$ by an element of $PGL_2(L)$ is commensurable with an arithmetic group.
+\end{theorem}
+\begin{proof}
+The function $\tau(g)=\operatorname{tr}(g)^2/\det(g)$ is well defined on $PGL_2$, invariant under conjugation, and is a regular function defined over the base on every inner form (on $B^\times/E^\times$ it is $\operatorname{trd}^2/\operatorname{nrd}$). If $\gamma$ lies in an arithmetic $\Gamma$, some power $\gamma^m$ lies in $G(\mathcal O_E[1/v])$, so $\tau(\gamma^m)\in E$ and every real conjugate of $\tau(\gamma^m)$ is the value of $\tau$ on an element of a compact form, i.e.\ of $\mathbb H^\times/\mathbb R^\times$, where $0\le\tau\le4$. For $\gamma_0=PLRLPRPL=\pm\begin{psmallmatrix}-5&12\\12&-80\end{psmallmatrix}$ we have $\tau(\gamma_0)=7225/256$, and if $\mu$ is the ratio of the eigenvalues then $\tau(\gamma_0^m)=2+\mu^m+\mu^{-m}$ is a rational number $>4$ for every $m\ge1$, since $\mu>0$, $\mu\ne1$. It is fixed by every embedding of $E$ and violates the bound. This proves the second statement, because $\gamma_0\in K$ (Proposition~\ref{prop:nonarith}). For the first, an isomorphism $C_L\cong\Gamma\backslash\Omega_L$ with $\Gamma$ torsion-free is, by the uniqueness of the Schottky group of a Mumford curve \cite{mumford72,gvdp80}, a conjugacy $gKg^{-1}=\Gamma$ in $PGL_2(L)$.
+\end{proof}
+
+Theorem~\ref{thm:trace} is insensitive to the field, the place, the residue degree and passage to commensurable or conjugate groups. The only uniformisations it does not see are those by groups \emph{with torsion}, whose quotient is $C$ even though the group is not a Schottky group (Shimura curves with elliptic points). These are controlled by edge lengths. Normalise lengths on the Bruhat--Tits tree $\mathcal T_v$ of $PGL_2(F_v)$ so that $v(2)=1$; an edge then has length $1/e_v$, where $e_v$ is the ramification index of $F_v/\Q_2$. The skeleton of $C$ is $X$ with all 36 edges of length 1, every vertex of valence 3 and every component of genus 0.
+
+\begin{lemma}[edge lengths]\label{lem:length}
+\ctag{E$\to$GB}\ Let $\Gamma\subset PGL_2(F_v)$ be discrete and cocompact and $e$ an edge of $\mathcal T_v$ whose pointwise stabiliser $\Gamma_e$ is non-trivial and not inverted. Then the image of $e$ in the skeleton of $\Gamma\backslash\Omega$ has length at least $2/e_v$.
+\end{lemma}
+\begin{proof}
+$\Gamma_e$ is finite and acts on the open annulus $A_e$ of points of $\Omega^{\mathrm{an}}$ retracting to the interior of $e$, preserving both ends. Pick $\sigma\in\Gamma_e$ of prime order $\ell$. If $\ell$ is odd, $\sigma$ is conjugate to $z\mapsto\zeta z$ with $|\zeta-1|=1$, the circles of $A_e$ are centred at a fixed point, and $w=z^\ell$ multiplies log-radii by $\ell$. If $\ell=2$, $\sigma$ is conjugate to $z\mapsto-z$ or is unipotent, and on a disc $|z-c|\le r$ fixed by $\sigma$ one has $|z^2-c^2|=|z-c|\,|z+c|=|z-c|^2$ whenever $|2c|<r$, so again the log-modulus is doubled (we confirmed both the doubling and its failure off the fixed region numerically). The further quotient by $\Gamma_e/\langle\sigma\rangle$ does not shrink moduli: a finite map of open annuli preserving ends is given by a Laurent series whose dominant exponent on each circle is a positive integer, so the log-modulus of the target is at least that of the source. The quotient of an annulus by a finite group preserving the ends is an annulus \cite{bpr13}.
+\end{proof}
+
+\begin{theorem}[no 2-adic uniformisation with $F_v=\Q_2$]\label{thm:q2}
+\ctag{E$\to$GB}\ Let $F$ be a totally real field and $v\mid2$ a place with $F_v\cong\Q_2$ (a prime of norm 2 that is unramified, or any degree-one place of a larger field). Let $\Gamma\subset PGL_2(F_v)$ be any arithmetic group, with or without torsion, for example the group attached to a connected component of a Shimura curve over $F$ uniformised at $v$. Then $\Gamma\backslash\Omega$ is not isomorphic to $C$ over any extension of $\Q_2$.
+\end{theorem}
+\begin{proof}
+Suppose $\Gamma\backslash\Omega_L\cong C_L$. The quotient $\Gamma\backslash\Omega^{\mathrm{an}}$ retracts onto $\Gamma\backslash\mathcal T_v$, the fibres being open discs because every type-2 point of $\Gamma\backslash\Omega^{\mathrm{an}}$ has genus 0 (it is dominated by a $\mathbb P^1$; L\"uroth). Hence the minimal skeleton $X$ is the core of the metric graph $\Gamma\backslash\mathcal T_v$, with valence-2 points smoothed \cite{berkovich90,bpr13}. Here $e_v=1$, so an edge of $\mathcal T_v$ has length 1 and an inverted edge folds to a leaf of length $\tfrac12$, outside the core. By Lemma~\ref{lem:length} an edge with non-trivial stabiliser has length $\ge2$. A skeleton edge of $X$ has length exactly 1, so it is the image of a single edge of $\mathcal T_v$ with trivial stabiliser, and there is no valence-2 point on it. Every vertex of $\Gamma\backslash\mathcal T_v$ therefore has valence 3 in the core (valence 2 would create a skeleton edge of length $\ge2$), so its three neighbours lie in three different $\Gamma_x$-orbits; thus $\Gamma_x$ fixes the three edges at $x$, and $\Gamma_x=1$. With no inversions either, $\Gamma$ acts freely on $\mathcal T_v$ and is torsion-free \cite{serre80}, contradicting Theorem~\ref{thm:trace}.
+\end{proof}
+
+\begin{remark}[what Theorems \ref{thm:trace} and \ref{thm:q2} leave]\label{rem:left}
+The curve $C$ is not a Shimura curve, nor a connected component of one, for any 2-adic \v{C}erednik--Drinfeld uniformisation by a torsion-free group (any $F$, any place), nor for any uniformisation at a place with $F_v\cong\Q_2$. The one case not covered is a group \emph{with torsion} at a place $v\mid2$ with $e_v\ge2$ or residue degree $f_v\ge2$. There Lemma~\ref{lem:length} bounds a stabilised edge only by $2/e_v$, which can equal 1, and the residue field $\F_{2^{f}}$ rules out reduction graph $X$ for the standard groups but not for every group with torsion.
+\end{remark}
+
+\subsection{\texorpdfstring{Other Schottky groups with quotient $X$}{Other Schottky groups with quotient X}}\label{sec:graphlevel}
+A different question is whether \emph{some} Shimura curve has reduction graph $X$; its uniformising group would be torsion-free with quotient graph $X$, but its curve need not be $C$. For a totally real $F$ of degree $n$ with a prime $v$ of norm 2, a totally definite algebra of finite discriminant $D''$ and an Eichler order of level $N$ (with $v\nmid D''N$, $n+|D''|$ even), the dual graph is the bipartite double of the Brandt graph at $v$, which needs exactly 12 classes, all with trivial unit group modulo $\mathcal O_F^\times$. Eichler's mass formula then forces
+\[2^{1-n}\,|\zeta_F(-1)|\,h_F\prod_{\mathfrak p\mid D''}(N\mathfrak p-1)\prod_{\mathfrak p^e\parallel N}N\mathfrak p^{e-1}(N\mathfrak p+1)=12 .\]
+Unit groups of order 4 or 6 (i.e.\ torsion) exist whenever $F(i)$ or $F(\sqrt{-3})$ embeds in the order, which Eichler's optimal-embedding criterion decides.
+\begin{proposition}[graph-level search]\label{prop:mass}
+\ctag{E$\to$GB}\ \begin{enumerate}[label=(\alph*),nosep]
+\item No real quadratic field gives reduction graph $X$ when its narrow class number is 1. The only solutions of the mass equation are $\Q(\sqrt{41})$ with $N=v'\mathfrak p_5$ (two choices) and $\Q(\sqrt{137})$ with $N=v'$, where $v'$ is the conjugate of $v$, and in each the order has units of order 4.
+\item Among totally real cubic fields of discriminant $\le5200$ and quartic fields of discriminant $\le60000$ with a prime of norm 2 and narrow class number 1 (which, by $|\zeta_F(-1)|\ge d_F^{3/2}/(2\pi^2)^n$, contain all cubic and quartic solutions for such fields), the mass equation has 13 solutions, and 6 of them pass the torsion test. One of these, $F$ of discriminant 733 with $D''=\mathfrak p_{13}$, has an 11-dimensional space of Hilbert newforms, as torsion-freeness requires, but the eigenvalues of $T_v$ are $0,0$ and the roots of an irreducible cubic, so the spectrum is not that of $X$ \cite{lmfdb}. The same happens for $F$ of discriminant 148 with $D''=\mathfrak p_{25}$, $N=\mathfrak p_5$: dimension 11, but the eigenvalues include $0$ and $1+\sqrt2$. The remaining four, $F$ of discriminant 469 ($D''=\mathfrak p_4$, $N=\mathfrak p_7$), 316 ($D''=\mathfrak p_{37}$) and 2777 ($N=\mathfrak p_{71}$, or $N=\mathfrak p_8^2$), await the same spectral comparison.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+Exact enumeration with PARI/GP: totally real fields (\texttt{nflist}), narrow class groups (\texttt{bnrclassno}), $\zeta_F(-1)$ (Siegel's formula, cross-checked by \texttt{lfun}), splitting of $v$ in $F(i)$ and $F(\sqrt{-3})$ (\texttt{rnfidealprimedec}). The spectral data are the Hecke eigenvalues of the LMFDB Hilbert modular forms of the given level.
+\end{proof}
+
+\section{What is known and what is new}\label{sec:known}
+\textbf{Known.} The chord graph as a torus and its dihedral group \cite{ds98,cohn97,cfs09}; triad Fourier magnitudes and the $M_5/M_7$ duality \cite{lewin,amiot}; the identification of the Tonnetz spectrum with Fourier magnitudes \cite{marin}; the honeycomb spectrum \cite{wallace}; Ihara--Bass, Artin--Ihara $L$-functions and graph Chebotarev \cite{ihara66,sunada86,hashimoto89,bass92,st96}; homology-class prime geodesic theorems \cite{ps87,ks90,lalley89,ps01,liu04,luoroy}; the $[0,1,4]$ Tonnetz family \cite{cohn97,catanzaro}; Honda--Tate and LMFDB data \cite{tate66,honda68,lmfdb}; Schottky groups, Bruhat--Tits trees and Mumford curves, including Whittaker groups \cite{ihara66,serre80,mumford72,gvdp80}; graph Jacobians and component groups \cite{kirchhoff1847,raynaud70,bn07}; specialisation and hyperelliptic graphs \cite{baker08,chan13}; \v{C}erednik--Drinfeld uniformisation \cite{cerednik76,drinfeld76,ribet90}.
+
+\textbf{New, to the best of our search.} The Coxeter description of prime cadences as primitive classes of a rank-13 free lattice in $W_3$ (an easy observation); Theorem~\ref{thm:tune} (tune theorem); Theorem~\ref{thm:W} ($W=-u$); Theorem~\ref{thm:window} (Riemann window, only the double winding cover is Ramanujan); the constant $1/24$ and the isotropic covariance in Theorem~\ref{thm:clt}; the arithmetic reading of Theorem~\ref{thm:arith}; the Galois-twin isomorphism with the $[0,1,4]$ flip graph stated for $X$; the factorisation of Theorem~\ref{thm:weil} into named isogeny classes; and the ideal presentation of Theorem~\ref{thm:order2}. In Section~\ref{sec:geom}: the explicit Schottky group generated by $P,L,R$ and its genus-13 Mumford curve with $\operatorname{Aut}=T/I$ (Theorem~\ref{thm:schottky}, Proposition~\ref{prop:aut}); the $\Z/12$ tower over the two-line curve and the reading of the Ihara factors as its characters (Theorem~\ref{thm:tower}, Corollary~\ref{cor:artin}); the sandpile group and gonality (Theorems~\ref{thm:sandpile}, \ref{thm:gon}); the octic inside a genus-6 hyperelliptic Jacobian over $\F_2$ (Proposition~\ref{prop:f2}) and minimal genus 5 for it (Proposition~\ref{prop:g5}, using the census \cite{dragutinovic24}); the exclusion of Shimura curves over $\Q$ (Theorem~\ref{thm:noshimura}); the trace obstruction and the 2-adic edge-length argument (Theorems~\ref{thm:trace}, \ref{thm:q2}); the graph-level mass search (Proposition~\ref{prop:mass}); and the general reduction for other tuning systems (Theorem~\ref{thm:tunegen}).
+
+\textbf{Refuted.} The Tonnetz as $\Z[\omega]/I$, $\Z[i]/I$ or $\Z[\zeta]/I$ (Proposition~\ref{prop:noideal}); a genus-22 curve over $\F_2$ with zeta numerator $P_{44}$; hyperellipticity of $C$; an arithmetic (Shimura) realisation over $\Q$; any arithmetic uniformisation of $C$ by a torsion-free group (any totally real field, any place), and any at a place with $F_v\cong\Q_2$; a genus-4 curve over $\F_2$ containing the octic.
+
+\textbf{Open.} (1) Is $C$ uniformised by an arithmetic group \emph{with torsion} at a place $v\mid2$ with $e_v\ge2$ or $f_v\ge2$ (Remark~\ref{rem:left})? (2) Does some Shimura curve have reduction graph $X$? This is excluded over $\Q$, over real quadratic fields of narrow class number 1, and for two cubic cases. It is open for the four remaining cubic and quartic cases of Proposition~\ref{prop:mass}, for narrow class number $>1$ and for degree $\ge5$. (3) A proof of the held-note step of Theorem~\ref{thm:tunegen} for all $N$ (verified for $N\le72$).
+
+\subsection*{Data and code availability}
+All computations are reproducible from the scripts accompanying this paper (directory \texttt{code/} of the source repository): exact prime counts to $m=40$, 50-digit zeta checks, the decoder test, the signing census, multiplier rings and LMFDB look-ups (Python, SymPy, mpmath); Section~\ref{sec:geom} (PARI/GP via cypari2, SymPy, numba, networkx); Sections~\ref{sec:tunegen}, \ref{sec:noarith}, \ref{sec:graphlevel} and Proposition~\ref{prop:g5}. Each part has an independent audit script; together they pass $31/31$, $36/36$, $23/23$, $59/59$ and $27/27$ checks.
+
+\section*{Contributions and provenance}\label{sec:contrib}
+\textbf{Author contributions.} Ergentics is the sole author. Ergentics chose the research direction and set every question pursued here, wrote the prompts that steered the work, and reviewed the results. Grok Bot, an AI assistant working with Ergentics, carried out the proofs, computations, audits, figures and literature checks listed below. In line with standard practice on AI disclosure, Grok Bot is not listed as an author, and responsibility for the content rests with the author.
+
+\textbf{Marker scheme.} Each numbered result carries a tag: \ctag{GB} statement, proof and computation by Grok Bot; \ctag{E} by Ergentics; \ctag{E$\to$GB} question or direction set by Ergentics, with the statement, proof and computation by Grok Bot; \ctag{lit.} a result from the cited literature, re-checked by Grok Bot; \ctag{X} cross-verified, or changed, in Ergentics' own program, which is a separate forum and tool. No result carries \ctag{X} yet. Tags were reconstructed from the working record and are subject to the author's review.
+
+\textbf{Ergentics.} The starting point: the Tonnetz and the graph Riemann hypothesis. The phasor (Fourier) prompt behind the spectral and arithmetic readings (Theorems~\ref{thm:spec}, \ref{thm:arith}). The melodic-primes question and the redirect ``Where does the melody fit?'' (Section~\ref{sec:tunemain}). The push towards Eisenstein integers (Proposition~\ref{prop:noideal}, Theorem~\ref{thm:order2}). The call that the geometric object deserves its own focus (Section~\ref{sec:geom}). The instruction to chase down the open questions (Sections~\ref{sec:tunegen}, \ref{sec:noarith}, \ref{sec:graphlevel}, Proposition~\ref{prop:g5}). Review of the drafts.
+
+\textbf{Grok Bot.}
+\begin{itemize}[nosep,leftmargin=*]
+\item Sections~2--3: the Coxeter description; Theorems~\ref{thm:spec}, \ref{thm:count}, \ref{thm:arith}, \ref{thm:weil} (graphene identification, exact counts to $m=40$, cyclotomic arithmetic, Weil factorisation and the explicit curves); Proposition~\ref{prop:noideal} and Theorem~\ref{thm:order2} (Eisenstein refutation and the order of conductor 2).
+\item Sections~4--6: Lemma~\ref{lem:l}, Theorem~\ref{thm:tune} and its decoder test; Theorem~\ref{thm:tunegen} and the held-note criterion for 6028 systems; Theorems~\ref{thm:W}, \ref{thm:twist}, \ref{thm:window}, \ref{thm:clt} (winding, flux, Riemann window, homology law).
+\item Section~\ref{sec:geom}: the Schottky group and the curve $C$ (Theorem~\ref{thm:schottky}, Propositions~\ref{prop:aut}, \ref{prop:nonarith}); the $\Z/12$ tower and Corollary~\ref{cor:artin}; the sandpile group and gonality (Theorems~\ref{thm:sandpile}, \ref{thm:gon}); Propositions~\ref{prop:f2}, \ref{prop:g5}; Theorem~\ref{thm:noshimura}; the trace obstruction, edge-length lemma and 2-adic theorem (Theorems~\ref{thm:trace}, \ref{thm:q2}, Lemma~\ref{lem:length}); the mass-formula search (Proposition~\ref{prop:mass}).
+\item All figures; the independent audit scripts (31, 36, 23, 59 and 27 checks); verification of every citation (bibliographic data and DOIs); the separation of known, new, refuted and open results (Section~\ref{sec:known}); the accompanying explanatory videos and their audio, which are not part of this paper.
+\end{itemize}
+
+\textbf{Cross-verification \ctag{X}.} Results that are reproduced, reconciled or changed in Ergentics' own program will be marked \ctag{X} and listed in the repository file \texttt{CONTRIBUTIONS.md}. None has been recorded so far.
+
+\textbf{Acknowledgements.} We thank the LMFDB collaboration for open data, and D.~Dragutinovi\'c for making the census of genus-5 curves over $\F_2$ public.
+
+\bibliographystyle{amsplain}
+\bibliography{references}
+
+\end{document}
