@@ -53,4 +53,13 @@ final class DeterministicTests: XCTestCase {
         XCTAssertEqual(rep.decodeFailures, 0)
         XCTAssertEqual(rep.periodicTuneFailures, 0)
     }
+
+    func testSection7AndEisensteinTripleCheck() {
+        let items = TripleCheckBridge.checkSection7AndArithmetic()
+        XCTAssertEqual(items.count, 5)
+        for item in items {
+            XCTAssertTrue(item.passed, "\(item.id): \(item.detail)")
+            XCTAssertLessThan(item.maxDelta, 1e-12, "\(item.id) cross-lane delta too large")
+        }
+    }
 }

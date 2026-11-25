@@ -154,6 +154,28 @@ int main() {
            !bad_tv.allowed && bad_tv.code == SEAM_REJECT_UNCALIBRATED_TV,
            "Seam (P -> R -> D): guarded handoff allows calibrated PD m=40 and blocks indefinite/OOD/kurtosis/TV violations");
 
+    // 9. ADPIE Cycle 2B: Section 7 & Eisenstein exact verifiers.
+    SandpileSNFReport snf = compute_sandpile_group_snf();
+    expect(snf.passed && snf.group_order == 156008448LL,
+           "Thm 7.7: exact 23x23 Smith Normal Form K(X) = Z/2+Z/2+Z/8+Z/736+Z/6624 (|K|=156,008,448)");
+
+    GonalityAutReport gon = verify_gonality_and_automorphisms();
+    expect(gon.passed && gon.aut_order == 24 && gon.involution_count == 13 &&
+           gon.tree_quotient_count == 0 && gon.computed_gonality == 6,
+           "Prop 7.2 & Thm 7.8 / NEG-M7: |Aut(X)|=24, 13 involutions (0 tree quotients), Dhar gon(X)=6");
+
+    F2CurvesReport f2 = verify_f2_curves_and_weil();
+    expect(f2.passed && f2.p44_point_counts[5] == 27 && f2.cofactor_a0_deg4_places == -1,
+           "Thm 3.5 & Props 7.9-7.10 / NEG-M5/M6: P_44 N_6=27<N_2=39, a=0 place=-1, & F_{2^k} counts on A,B (k<=5)");
+
+    Eisenstein12MapsReport eis = verify_eisenstein_12_maps();
+    expect(eis.passed,
+           "Prop 3.7 / NEG-M1: all 12 Tonnetz-axis maps Z[omega]->Z_12 have multiplier conductor 12 (0 ideals)");
+
+    SchottkyGroupReport sch = verify_schottky_group();
+    expect(sch.passed && sch.bt_ball_r7_distinct == 382 && sch.gamma0_tr == 85 && sch.gamma0_det == 256,
+           "Thms 7.1 & 7.13 / NEG-M8: 13 hyperbolic Schreier gens, 382 distinct BT r<=7 vertices, tau(g0)=7225/256>4");
+
     std::printf("=== Lane 1 C++20 Result: %s ===\n", g_failed == 0 ? "ALL PASS" : "FAILURES");
     return g_failed == 0 ? 0 : 1;
 }

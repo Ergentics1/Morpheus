@@ -437,7 +437,90 @@ public enum TripleCheckBridge {
         )
     }
 
-    /// Run the complete Swift++ Triple-Check SWE-sweep across D, R, P, Correspondence, RCT, and Seam.
+    // MARK: - ADPIE Cycle 2B: Section 7 & Eisenstein Arithmetic Triple-Check
+
+    public static func checkSection7AndArithmetic() -> [TripleCheckItem] {
+        // 1. Thm 7.7: Sandpile group exact Bareiss + Iliopoulos-Bezout modular SNF + F_p nullity guard.
+        let snfS = computeSandpileGroupSNF()
+        let snfC = ergentics.compute_sandpile_group_snf()
+        var snfMatch = snfS.passed && snfC.passed &&
+                       snfS.nontrivialCount == snfC.nontrivial_count &&
+                       snfS.groupOrder == snfC.group_order &&
+                       snfS.divisibilityChainOK && snfC.divisibility_chain_ok
+        for i: Int32 in 0..<snfS.nontrivialCount {
+            if snfS.invariantFactors[Int(i)] != ergentics.sandpile_factor(snfC, i) { snfMatch = false }
+        }
+        let itemSNF = TripleCheckItem(
+            id: "S7-1/Thm7.7", category: "D", passed: snfMatch, maxDelta: snfMatch ? 0.0 : 1.0,
+            detail: "K(X)=\(snfS.invariantFactors) |K|=\(snfS.groupOrder) F_p_ranks_ok=\(snfS.divisibilityChainOK)"
+        )
+
+        // 2. Prop 7.2 & Thm 7.8 (NEG-M7): Aut(X), 13 involutions, Dhar-burning gonality = 6.
+        let gonS = verifyGonalityAndAutomorphisms()
+        let gonC = ergentics.verify_gonality_and_automorphisms()
+        let gonMatch = gonS.passed && gonC.passed &&
+                       gonS.autOrder == gonC.aut_order &&
+                       gonS.involutionCount == gonC.involution_count &&
+                       gonS.treeQuotientCount == gonC.tree_quotient_count &&
+                       gonS.minQuotientBetti == gonC.min_quotient_betti &&
+                       gonS.divisorsDegLe5Tested == gonC.divisors_deg_le5_tested &&
+                       gonS.rank1DegLe5Found == gonC.rank1_deg_le5_found &&
+                       gonS.computedGonality == gonC.computed_gonality
+        let itemGon = TripleCheckItem(
+            id: "S7-2/NEG-M7", category: "D", passed: gonMatch, maxDelta: gonMatch ? 0.0 : 1.0,
+            detail: "|Aut|=\(gonS.autOrder) inv=\(gonS.involutionCount) trees=\(gonS.treeQuotientCount) min_b1=\(gonS.minQuotientBetti) deg<=5=\(gonS.divisorsDegLe5Tested) gon=\(gonS.computedGonality)"
+        )
+
+        // 3. Thm 3.5 & Props 7.9-7.10 (NEG-M5/M6): P_44(u) & F_{2^k} genus-5 complete intersections A, B.
+        let f2S = verifyF2CurvesAndWeil()
+        let f2C = ergentics.verify_f2_curves_and_weil()
+        var f2Match = f2S.passed && f2C.passed &&
+                      f2S.cofactorA0Deg4Places == f2C.cofactor_a0_deg4_places
+        for i: Int32 in 0..<6 {
+            if f2S.p44PointCounts[Int(i)] != ergentics.f2_p44_count(f2C, i) { f2Match = false }
+        }
+        for i: Int32 in 0..<5 {
+            if f2S.curveACounts[Int(i)] != ergentics.f2_curve_a_count(f2C, i) { f2Match = false }
+            if f2S.curveBCounts[Int(i)] != ergentics.f2_curve_b_count(f2C, i) { f2Match = false }
+        }
+        let f2Delta = abs(f2S.weilFactorMaxResidual - f2C.weil_factor_max_residual)
+        let itemF2 = TripleCheckItem(
+            id: "S7-3/NEG-M5/M6", category: "D", passed: f2Match && f2Delta < 1e-12, maxDelta: f2Delta,
+            detail: String(format: "P44=%@ a0_B4=%lld #A=%@ #B=%@ res=%.1e", "\(f2S.p44PointCounts)", f2S.cofactorA0Deg4Places, "\(f2S.curveACounts)", "\(f2S.curveBCounts)", f2S.weilFactorMaxResidual)
+        )
+
+        // 4. Prop 3.7 (NEG-M1): 12 Tonnetz-axis Eisenstein multiplier rings.
+        let eisS = verifyEisenstein12Maps()
+        let eisC = ergentics.verify_eisenstein_12_maps()
+        let eisMatch = eisS.passed && eisC.passed &&
+                       eisS.tonnetzMapCount == eisC.tonnetz_map_count &&
+                       eisS.minConductor == eisC.min_conductor &&
+                       eisS.maxConductor == eisC.max_conductor &&
+                       eisS.anyKernelIsIdeal == eisC.any_kernel_is_ideal
+        let itemEis = TripleCheckItem(
+            id: "S3-1/NEG-M1", category: "D", passed: eisMatch, maxDelta: eisMatch ? 0.0 : 1.0,
+            detail: "maps=\(eisS.tonnetzMapCount) conductor=[\(eisS.minConductor),\(eisS.maxConductor)] ideal=\(eisS.anyKernelIsIdeal)"
+        )
+
+        // 5. Thms 7.1 & 7.13 (NEG-M8): 13 Schreier generators, Bruhat-Tits ball r<=7, gamma_0 trace obstruction.
+        let schS = verifySchottkyGroup()
+        let schC = ergentics.verify_schottky_group()
+        let schMatch = schS.passed && schC.passed &&
+                       schS.schreierCount == schC.schreier_count &&
+                       schS.schreierHyperbolic == schC.schreier_hyperbolic &&
+                       schS.btBallR7Words == schC.bt_ball_r7_words &&
+                       schS.btBallR7Distinct == schC.bt_ball_r7_distinct &&
+                       schS.gamma0Tr == schC.gamma0_tr &&
+                       schS.gamma0Det == schC.gamma0_det
+        let itemSch = TripleCheckItem(
+            id: "S7-4/NEG-M8", category: "D", passed: schMatch, maxDelta: schMatch ? 0.0 : 1.0,
+            detail: "schreier=\(schS.schreierHyperbolic)/\(schS.schreierCount) BT_r7=\(schS.btBallR7Distinct)/\(schS.btBallR7Words) g0_tr=\(schS.gamma0Tr) g0_det=\(schS.gamma0Det)"
+        )
+
+        return [itemSNF, itemGon, itemF2, itemEis, itemSch]
+    }
+
+    /// Run the complete Swift++ Triple-Check SWE-sweep across D, R, P, Correspondence, RCT, Seam, and Section 7.
     public static func runFullSuite() -> TripleCheckSuiteReport {
         var items = [TripleCheckItem]()
         items.append(checkSummationAntiCancellation())
@@ -455,6 +538,7 @@ public enum TripleCheckBridge {
         let (rctItems, sc, rct2, rct3) = checkRCTs()
         items.append(contentsOf: rctItems)
         items.append(checkSeamReplayAndHandoff(cal12: cal12, cal40: cal40))
+        items.append(contentsOf: checkSection7AndArithmetic())
 
         return TripleCheckSuiteReport(
             items: items,

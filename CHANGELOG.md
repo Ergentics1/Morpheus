@@ -16,13 +16,20 @@ All notable changes to **Morpheus** are documented here. Manuscript updates cut 
   - `Morpheus/ConductorTwo.lean`: Kernel-checked proofs of Prop 3.7 (`NEG-M1` mod-3/mod-4 root obstructions & non-ideal witness) and Thm 3.8 (universal ring homomorphism $\psi: \mathbb{Z}[\sqrt{-3}] \to \mathbb{Z}_{12}$, universal principal ideal kernel `(3 - √-3)`, unimodularity, non-reduced $\mathcal{O}/(2)$, and even-conductor iff theorem).
   - `Morpheus/WindingAndSchottky.lean`: Kernel-checked coboundary proof of Thm 5.1 ($12 \mid \text{walkVoiceSum}$ for *every* closed cadence of *any* length), exact Tonnetz Gram ($\det G = 108$), Thm 7.1(a) ($\sigma_s^2 = 2I$), $\gamma_0 = PLRLPRPL \in K$, and universal Cayley–Hamilton/Chebyshev proof of Thm 7.13 ($\forall k \ge 1,\; \operatorname{tr}(\gamma_0^k)^2 > 4\det(\gamma_0^k)$).
   - Axiom audit in `Main.lean`: zero `sorryAx`, zero `Classical.choice`, zero `ofReduceBool` (only Lean core `[propext, Quot.sound]` or no axioms).
+- **ADPIE Cycle 2B — Section 7 & Eisenstein Arithmetic Swift++ Triple-Check (`swiftpp/` `section7.*`, `Section7.swift`):**
+  - **Thm 7.7 (Sandpile / Critical Group $K(X)$):** Exact Bareiss fraction-free determinant (max 55 bits) + Iliopoulos–Bézout modular SNF mod $\Delta$ + independent $\mathbb{F}_p$-nullity guard (`nullity_2 = 5`, `nullity_3 = 1`, `nullity_23 = 2`), verifying $K(X) \cong \mathbb{Z}/2 \oplus \mathbb{Z}/2 \oplus \mathbb{Z}/8 \oplus \mathbb{Z}/736 \oplus \mathbb{Z}/6624$ (`|K| = 156,008,448`). Caught and logged silent 283-bit `__int128` expression-swell trap in naive SNF as `NEG-E7`.
+  - **Prop 7.2 & Thm 7.8 (`NEG-M7`):** Exhaustive graph-automorphism backtracking (`|Aut(X)| = 24`), 13 involutions with `0` tree quotients (`min_b1 = 5`, Chan's criterion), and exhaustive Dhar burning across all `20,475` effective divisors $D \ge (C)$ of degree $\le 5$ (`0` of rank $\ge 1$) + degree-6 witness $2\mathrm{C}+2\mathrm{Am}+\mathrm{D}\flat+\mathrm{A}\flat\mathrm{m}$ confirming $\operatorname{gon}(X) = 6$.
+  - **Thm 3.5 & Props 7.9–7.10 (`NEG-M5`, `NEG-M6`):** Exact $\mathbb{Z}[u]$ Weil polynomial $P_{44}(u)$ Newton point counts `[3, 39, 9, 75, 33, 27]` ($N_6 < N_2$, residual `2.4e-14`), $a=0$ cofactor obstruction (`-1` degree-4 places), and direct $\mathbb{F}_{2^k}$ projective point counting ($k \le 5$, `1,082,401` points) on genus-5 complete intersections $A, B \subset \mathbb{P}^4$ matching $L_A, L_B$ identically (`#A = [2, 16, 14, 20, 22]`, `#B = [4, 16, 4, 20, 44]`).
+  - **Prop 3.7 (`NEG-M1`):** Exhaustive check of all 12 Tonnetz-axis homomorphisms $\mathbb{Z}[\omega] \to \mathbb{Z}_{12}$ confirming multiplier conductor `12` (`0` ideals).
+  - **Thms 7.1 & 7.13 (`NEG-M8`):** Exact 13 hyperbolic Schreier generators of $K$, canonical 2-adic Hermite normal form Bruhat–Tits ball $r \le 7$ (`382/382` distinct vertices), and $\gamma_0 = PLRLPRPL$ ($\operatorname{tr} = 85$, $\det = 256$, $\tau > 4$).
+  - All 3 lanes passing: 27/27 C++20 (`g++` & `clang++`, `-Wall -Wextra -Werror`), 14/14 XCTests, 16/16 CLI gates, `0.000e+00` max cross-lane delta.
 - **Data Model Plane (`data/`, CC BY 4.0):**
   - Initial schema-compliant (`1.0.0`) Rung-1 calibration record `data/calibrations/c2_winding_m40_swiftpp.json` generated from commit `1dc0123`, tracked via `data/MANIFEST.sha256` and documented in `data/README.md`.
 - Governance & execution docs: codified ADPIE execution cycle, anti-scaffolding/anti-hardcoding rules, and release-on-paper-update policy in `METHODOLOGY.md`, `AGENTS.md`, `POLICY.md`.
 
 ### Changed
 - Synced `ERGENTICS.md` directory tree with implemented `swiftpp/` target names.
-- Updated `NEGATIVES.md`: promoted `NEG-M1` (`Scoped / Resolved [Verified]`), `NEG-M2`, `NEG-M3`, `NEG-M4`, `NEG-M9`, `NEG-M10` (`Active [Verified]`) and logged exact measured finite-$m$ platykurtic excess kurtosis (`-0.8182 → -0.3931 → -0.2124`) in `NEG-E3`.
+- Updated `NEGATIVES.md`: promoted `NEG-M1` & `NEG-M6` (`Scoped / Resolved [Verified]`), `NEG-M2`, `NEG-M3`, `NEG-M4`, `NEG-M5`, `NEG-M7`, `NEG-M8` (core), `NEG-M9`, `NEG-M10` (`Active [Verified]`); logged exact finite-$m$ kurtosis in `NEG-E3` and added `NEG-E7` (283-bit SNF silent overflow trap).
 - Logged ADPIE Cycle 1 provenance in `PROVENANCE.md`.
 
 ## [0.1.0] - 2026-11-25

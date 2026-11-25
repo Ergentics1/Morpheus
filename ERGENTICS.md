@@ -50,9 +50,11 @@ swiftpp/
 │   │   │   ├── invariants.hpp
 │   │   │   ├── calibration.hpp
 │   │   │   ├── seam.hpp
-│   │   │   └── tonnetz.hpp
+│   │   │   ├── tonnetz.hpp
+│   │   │   └── section7.hpp
 │   │   └── src/
-│   │       └── ergentics_cxx.cpp
+│   │       ├── ergentics_cxx.cpp
+│   │       └── section7.cpp
 │   ├── ErgenticsSwift/          # Lane 2: Independent Pure Swift 6.4 (zero C++ imports)
 │   ├── ErgenticsInterop/        # Lane 3: Live Swift 6.4 ↔ C++20 interop bridge & Triple-Check
 │   └── ErgenticsCLI/            # 3-way SWE-sweep runner & explicit Data Model JSON exporter

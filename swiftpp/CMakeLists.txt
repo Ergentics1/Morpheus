@@ -7,6 +7,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 add_library(ErgenticsCXX STATIC
     Sources/ErgenticsCXX/src/ergentics_cxx.cpp
+    Sources/ErgenticsCXX/src/section7.cpp
 )
 target_include_directories(ErgenticsCXX PUBLIC
     Sources/ErgenticsCXX/include
