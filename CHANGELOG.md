@@ -23,13 +23,19 @@ All notable changes to **Morpheus** are documented here. Manuscript updates cut 
   - **Prop 3.7 (`NEG-M1`):** Exhaustive check of all 12 Tonnetz-axis homomorphisms $\mathbb{Z}[\omega] \to \mathbb{Z}_{12}$ confirming multiplier conductor `12` (`0` ideals).
   - **Thms 7.1 & 7.13 (`NEG-M8`):** Exact 13 hyperbolic Schreier generators of $K$, canonical 2-adic Hermite normal form Bruhat–Tits ball $r \le 7$ (`382/382` distinct vertices), and $\gamma_0 = PLRLPRPL$ ($\operatorname{tr} = 85$, $\det = 256$, $\tau > 4$).
   - All 3 lanes passing: 27/27 C++20 (`g++` & `clang++`, `-Wall -Wextra -Werror`), 14/14 XCTests, 16/16 CLI gates, `0.000e+00` max cross-lane delta.
+- **ADPIE Cycle 3 — Rust Fourth-Language Exact Verifier (`rust/`, `rustc 1.100.0`, MIT, zero crate deps):**
+  - **Thm 3.4 (`src/cyclotomic.rs`):** Exact $\mathbb{Z}[\zeta_{12}]$ ring arithmetic ($f_3 = 2-i$, $f_4^2 = -3$, minimal polynomial of $f_1$, $N(f_1)=1$, $|f_5|^2 = 2+\sqrt{3}$, Galois action, $M_{11}$ automorphism, and $M_7$ bijection onto the 24 `[0,1,4]` chords & 36 flip edges).
+  - **Thm 7.4 & Cor 7.5 (`src/tower.rs`):** Exact $\mathbb{Z}/12\mathbb{Z}$ voltage cover $X \to \Theta$ (36/36 edges, lifts `6, 8, 24`) and exact $\mathbb{Z}[\zeta_{12}][u]$ Artin–Ihara character factorization across all 6 character-order blocks.
+  - **Thm 4.2 & Thm 4.3 / `C-4` (`src/tune_general.rs`):** Verified local tune decoder across all `174,864` rooted primes $m \le 16$ (`131,136` at $m = 16$, `0` failures — caught baseline wording erratum `NEG-E8`), verified all `6,028` general $(N, S, \mathcal{C})$ systems for $N \le 72$, and pushed the open boundary to **$N \le 96$ (`11,452` systems, `0` failures)**.
+  - **Fourth-language SWE-sweep (`src/swe_sweep.rs`, `src/keyed_prng.rs`):** Independent confirmation of $\pi(40) = 54{,}975{,}717{,}792$, Rung-1 TV/excess-kurtosis, anti-cancellation, PD/Cholesky spike & `NaN` guards, and bit-exact 4-language `KeyedPRNG` parity (`0x3fd40fd5e0f2ddff` across C++20, Pure Swift 6.4, Swift ↔ C++20 Interop, and Rust).
+  - 5/5 integration tests PASS in 3.22s (`--release`).
 - **Data Model Plane (`data/`, CC BY 4.0):**
   - Initial schema-compliant (`1.0.0`) Rung-1 calibration record `data/calibrations/c2_winding_m40_swiftpp.json` generated from commit `1dc0123`, tracked via `data/MANIFEST.sha256` and documented in `data/README.md`.
 - Governance & execution docs: codified ADPIE execution cycle, anti-scaffolding/anti-hardcoding rules, and release-on-paper-update policy in `METHODOLOGY.md`, `AGENTS.md`, `POLICY.md`.
 
 ### Changed
 - Synced `ERGENTICS.md` directory tree with implemented `swiftpp/` target names.
-- Updated `NEGATIVES.md`: promoted `NEG-M1` & `NEG-M6` (`Scoped / Resolved [Verified]`), `NEG-M2`, `NEG-M3`, `NEG-M4`, `NEG-M5`, `NEG-M7`, `NEG-M8` (core), `NEG-M9`, `NEG-M10` (`Active [Verified]`); logged exact finite-$m$ kurtosis in `NEG-E3` and added `NEG-E7` (283-bit SNF silent overflow trap).
+- Updated `NEGATIVES.md`: promoted `NEG-M1` & `NEG-M6` (`Scoped / Resolved [Verified]`), `NEG-M2`, `NEG-M3`, `NEG-M4` (extended to $N \le 96$, 11,452 systems), `NEG-M5`, `NEG-M7`, `NEG-M8` (core), `NEG-M9`, `NEG-M10` (`Active [Verified]`); logged exact finite-$m$ kurtosis in `NEG-E3`, `NEG-E7` (283-bit SNF silent overflow trap), and `NEG-E8` (`131,136` vs `174,864` manuscript wording erratum).
 - Logged ADPIE Cycle 1 provenance in `PROVENANCE.md`.
 
 ## [0.1.0] - 2026-11-25

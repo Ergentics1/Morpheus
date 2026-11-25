@@ -1,0 +1,14 @@
+[package]
+name = "morpheus-rust"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+description = "Zero-dependency exact arithmetic, cyclotomic, N-EDO tune reduction, and SWE-sweep verifier for Morpheus."
+
+[lib]
+name = "morpheus_rust"
+path = "src/lib.rs"
+
+[[bin]]
+name = "morpheus-rust"
+path = "src/main.rs"
