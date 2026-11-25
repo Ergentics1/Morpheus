@@ -1,0 +1,44 @@
+{
+  "bound_check" : {
+    "bound_formula" : "10/m (Edgeworth excess kurtosis)",
+    "observed" : 0.21237935938201513,
+    "passed" : true,
+    "threshold" : 0.25
+  },
+  "code_commit" : "1dc0123",
+  "correspondence_id" : "C-2",
+  "implementation" : "swiftpp",
+  "metrics" : {
+    "cov_1sigma" : 0.7589661238051489,
+    "cov_2sigma" : 0.9553791262302179,
+    "cov_3sigma" : 0.9969958573960804,
+    "excess_kurtosis" : -0.21237935938201513,
+    "kl" : 0.001216616321156565,
+    "ks" : 0.004213942766134737,
+    "skewness" : -2.3455194767534625e-17,
+    "tv" : 0.01086473858410429,
+    "w1" : 0.021488245517825966
+  },
+  "prng_key" : {
+    "experiment" : "RCT-3-winding-null",
+    "seed" : 20261125,
+    "suite" : "prime-cadences"
+  },
+  "r_invariants" : {
+    "conservation_exact" : true,
+    "cov_pd_cholesky" : true,
+    "finite" : true,
+    "lambda_min" : 0.025711935209606934
+  },
+  "rct_control" : {
+    "closed_observed" : 4893,
+    "control_id" : "RCT-3",
+    "exact_closed_vs_prime_tv" : 0.0123873873873874,
+    "mc_vs_exact_closed_tv" : 0.008177705602598326,
+    "n_trials" : 100000
+  },
+  "regime_params" : {
+    "m" : 40
+  },
+  "schema_version" : "1.0.0"
+}
