@@ -6,24 +6,35 @@ Original audit-forward explanatory video, hero poster, and reproducible first-pr
 
 | File | Description | License |
 | :--- | :--- | :--- |
-| [`render_gemini4_neon_video.py`](render_gemini4_neon_video.py) | First-principles Python + PangoCairo + NumPy + FFmpeg generator (zero reads of cached data files; computes exact 12-EDO Tonnetz walks, 8-EDO `NEG-M11` cycles, and exact $m=40$ transfer-matrix counts live) | **MIT** (Code Model) |
-| [`gemini4_neon_prime_cadences.mp4`](gemini4_neon_prime_cadences.mp4) | 1920×1080 (30 fps, H.264 `yuv420p`, AAC 192k stereo, 84 s, metadata-stripped) explanatory video with frame-synchronized 12-EDO & 8-EDO musical sonification | **CC BY 4.0** |
-| [`gemini4_neon_poster.png`](gemini4_neon_poster.png) | 1920×1080 hero thumbnail / poster frame (zero PNG text metadata chunks) | **CC BY 4.0** |
+| [`render_gemini4_neon_video.py`](render_gemini4_neon_video.py) | First-principles Python + PangoCairo + NumPy + FFmpeg generator for the 1:24 social reel (zero reads of cached data files) | **MIT** (Code Model) |
+| [`render_gemini4_neon_masterclass.py`](render_gemini4_neon_masterclass.py) | First-principles Python + PangoCairo + SciPy + SVOX Pico TTS + FFmpeg generator for the 4:18 **Spoken-in-Harmony Educator Masterclass** (live 22-band stereo chord vocoder + exact 12/31/53-EDO spectra + 19-ply Traxler Chess match) | **MIT** (Code Model) |
+| [`gemini4_neon_prime_cadences.mp4`](gemini4_neon_prime_cadences.mp4) | **1:24 Social Highlight Reel** (`1920×1080`, 30 fps, H.264 `yuv420p`, AAC 192k stereo, `7.92 MB`, metadata-stripped) with live 12-EDO & 8-EDO musical sonification | **CC BY 4.0** |
+| [`gemini4_neon_masterclass_chess_rh.mp4`](gemini4_neon_masterclass_chess_rh.mp4) | **4:18 Educator Masterclass** (`1920×1080`, 24 fps, H.264 `yuv420p`, AAC 192k stereo, metadata-stripped): how the Tonnetz dual satisfies the Graph Riemann Hypothesis, why Ramanujan optimality enables endless adaptive music, a live Traxler Chess match shifting harmony/flux/winding between balanced, losing (`Bxf2+!!`), and winning phases, narration **spoken in live 3-part neo-Riemannian harmony**, plus `NEG-M11`/Cor B.1 & Theorem C | **CC BY 4.0** |
+| [`gemini4_neon_poster.png`](gemini4_neon_poster.png) | `1920×1080` hero thumbnail / poster frame (zero PNG text metadata chunks) | **CC BY 4.0** |
 
-## Musical Sonification Map (Driven Directly by the Mathematics)
+## Musical & "Spoken in Harmony" Architecture (Driven Directly by the Math)
 
-- **Act 1 (0:06 – 0:19) — 12-EDO Tonnetz Honeycomb:** Equal-tempered 12-EDO Rhodes voicings + moving-voice crystal bells playing two exact prime cadences: the C-held hexagon (`P–L–R–P–L–R`, length 6, $W = 0$) and the winding-$W = +1$ loop (`R–L–R–L–R–L–R–P`, length 8, $\Delta = +12$ semitones).
-- **Act 2 (0:25 – 0:37) — `NEG-M11` in Exact 8-EDO Stereo Duality:** Microtonal 8-EDO synthesis ($f(p) = C_4 \cdot 2^{p/8}$). Left channel holds tritone $\{0, 4\}$, right channel holds disjoint tritone $\{2, 6\}$, while the center crystal bell plays the **identical cyclic tune `(3, 5, 7, 1)`** in unison across both vertex-disjoint 4-cycles.
-- **Acts 3–4 (0:47 – 1:24) — Theorem C & 4-Language Scorecard:** Hexagonal $C_6$ chimes across the 6 petals of $(1470 + \cos 6\alpha)/(4m^2)$, three harmonic snaps across the $m=40$ Edgeworth Ladder (`1× → 10.9× → 75.3×`), and ascending verification chimes resolving on a `Cmaj9` cadence.
+- **1:24 Social Reel (`gemini4_neon_prime_cadences.mp4`):**
+  - **Act 1 (0:06 – 0:19):** 12-EDO Rhodes + crystal bells playing the C-held hexagon (`P–L–R–P–L–R`, $W = 0$) and winding-$W=+1$ loop (`R–L–R–L–R–L–R–P`).
+  - **Act 2 (0:25 – 0:37):** Exact 8-EDO `NEG-M11` stereo duality — left ear holds `{0, 4}`, right ear holds `{2, 6}`, center crystal bell rings the identical melody `(3, 5, 7, 1)` in unison.
+  - **Acts 3–4 (0:47 – 1:24):** Hexagonal $C_6$ chimes, Edgeworth Ladder snaps (`1× → 10.9× → 75.3×`), and 4-language verification `Cmaj9` finale.
+- **4:18 Educator Masterclass (`gemini4_neon_masterclass_chess_rh.mp4`):**
+  - **Spoken in Live 3-Part Harmony:** Every educator narration phrase (22 cues, SVOX Pico TTS) passes through a **22-band SciPy stereo channel vocoder** whose carrier tracks the active Tonnetz triad — morphing seamlessly across major, relative-minor, dark chromatic minor mediants (`A♭m` during Chess Crisis `5... Bxf2+!!`), microtonal 8-EDO (`NEG-M11`), and radiant `Cmaj9`.
+  - **Cross-Domain Educator Arc (7 Chapters):** Music Theory ↔ Graphene Honeycomb Physics → Number Theory (Ihara Zeta 44 nontrivial poles on $|u|=1/\sqrt{2}$ & 12/31/53-EDO Graph RH test) → Information Theory (Alon–Boppana Ramanujan mixing & Theorem 5.3's Magnetic Flux Riemann Window $|\varphi| < 2.8909$) → **Live 19-Ply Traxler Counterattack Chess Match** (balanced opening → rising middlegame tension → `-3.2` losing crisis at `5... Bxf2+!!` → `+8.4` winning turnaround) → Coding Theory (`NEG-M11` vs. Corollary B.1) → Statistical Mechanics (Theorem C 4th-order isotropy & 6th-order $C_6$ crystal) → 4-Language Verification Finale.
 
 ## Reproduce from Scratch
 
-Requires Ubuntu/Debian packages `ffmpeg`, `python3-cairo`, `python3-gi`, `python3-gi-cairo`, `gir1.2-pango-1.0`, `gir1.2-pangocairo-1.0`, and `python3-numpy`:
+Requires Ubuntu/Debian packages `ffmpeg`, `python3-cairo`, `python3-gi`, `python3-gi-cairo`, `gir1.2-pango-1.0`, `gir1.2-pangocairo-1.0`, `python3-numpy`, `python3-scipy`, and `libttspico-utils`:
 
 ```bash
+# 1:24 Social Highlight Reel + Poster
 /usr/bin/python3 media/render_gemini4_neon_video.py \
   --poster media/gemini4_neon_poster.png \
   --output media/gemini4_neon_prime_cadences.mp4
+
+# 4:18 Spoken-in-Harmony Educator Masterclass (Graph RH + Live Chess)
+/usr/bin/python3 media/render_gemini4_neon_masterclass.py \
+  --output media/gemini4_neon_masterclass_chess_rh.mp4
 ```
 
 ## Ready-to-Post Social Captions
