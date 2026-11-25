@@ -50,6 +50,22 @@ All notable changes to **Morpheus** are documented here. Manuscript updates cut 
 - Updated `CALIBRATIONS.md`: added Correspondence rows **`C-2'`** (4th-order Edgeworth $O(1/m^2)$ + 2D isotropy) and **`C-2''`** (6th-order Edgeworth $O(1/m^3)$ + $C_6$ anisotropy) and updated **`C-4`** with universal Theorems A, B, Corollary B.1, and `NEG-M11`.
 - Logged ADPIE Cycles 1–4 provenance in `PROVENANCE.md`.
 
+## [0.2.0] - unreleased (reconciliation candidate, pending author review)
+
+### Added
+- Manuscript round 3 (Grok Bot, before this reconciliation): held-note theorem (Thm 4.4) for every $N$ and step set, uniformisations with torsion at a place above 2 (Prop 7.17), direct Brandt-graph computations (Prop 7.18), any narrow class number with the Odlyzko degree bound (Thm 7.19); new scripts in `code/open_q/` (`brandt/`, `general/`, `odl/`, `tune_proof/`, `audit_round3.py`); open-questions audit 27 → 47 checks.
+- `[X]` results folded into the paper: Thm 6.2 (higher cumulants, "Theorem C"), Cor 4.5 ("Corollary B.1"), Remark 6.4 (Edgeworth ladder `C-2'`/`C-2''`, with `NEG-E9` JSD caution and explicit $|w| \le 24$ normalisation convention), independent derivation of Thm 4.4 ("Theorems A, B", `NEG-M11`), and the decoder-count correction (`NEG-E8`).
+- Prop 6.3 `[GB]`: closed-form cumulant generating function of $W$ (all orders; $\kappa_8/m = -887099/7962624$ — independently confirmed in exact rational arithmetic by Gemini 4 Neon).
+- `code/xcheck/` and `audits/xcheck_audit.md`: Grok Bot's from-scratch cross-check of every `[X]` claim (32/32; reproduces `[X]` $m = 40$ benchmarks to $< 10^{-11}$ relative error).
+- `reconciliation/GROKBOT_RECONCILIATION_RESPONSE.md`: verdict for each item of the Gemini 4 Neon packet.
+
+### Changed
+- `paper/prime-cadences.tex`, `.pdf`, `arxiv/`: v0.2.0 manuscript (30 pp); `prime_cadences_paper.md` regenerated from the LaTeX source (numbering matches the PDF).
+- `CONTRIBUTIONS.md`: `[X]` ledger filled (6 entries, 20 re-verified results); `CITATION.cff` abstract, version (`0.2.0`), and `date-released` updated to `2026-11-25`.
+- `code/open_q/open_audit.py`, `audit_round3.py`: keyed per-check random streams (`NEG-E2`); audit still 47/47.
+- `NOVELTY_GEMINI4_NEON.md`, `CALIBRATIONS.md`, `reconciliation/GEMINI4_NEON_RECONCILIATION.md`: added explicit Edgeworth normalisation convention note (`|w| <= 24` JSD `4.76e-6` vs support-only `|w| <= 8` JSD `3.04e-6`), $O(m^2 2^{-m/2})$ note, Prop 6.3 confirmation, and full 7-item v0.2.0 unchecked geometry/Shimura list (`7.3, 7.11, 7.14, 7.15, 7.17, 7.18, 7.19`).
+- `code/figures/figs.py` and `paper/figures/fourier.pdf`: the v0.1.0 label fix is kept.
+
 ## [0.1.0] - 2026-11-25
 
 ### Added

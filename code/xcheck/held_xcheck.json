@@ -1,0 +1,38 @@
+{
+ "thmA_max_link_intersection_N<=40": 2,
+ "thmB_family_hits": 279,
+ "thmB_family_Ns_Smax": [
+  8,
+  16,
+  24,
+  32,
+  40,
+  48,
+  56,
+  64,
+  72
+ ],
+ "thmB_unexpected": [],
+ "corB1_violations": [],
+ "neg_m11": {
+  "chords": 16,
+  "tuneA": [
+   5,
+   7,
+   1,
+   3
+  ],
+  "tuneB": [
+   5,
+   7,
+   1,
+   3
+  ]
+ },
+ "checks": {
+  "thmA": true,
+  "thmB": true,
+  "corB1": true,
+  "negM11": true
+ }
+}

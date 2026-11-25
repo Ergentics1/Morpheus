@@ -14,7 +14,7 @@
    "hplus1": 68,
    "integral_target": 6,
    "mass_cands": 6,
-   "survivors": 4
+   "survivors": 5
   },
   "4": {
    "total": 476,
@@ -184,6 +184,17 @@
     ]
    ],
    "survivors": [
+    [
+     [
+      4
+     ],
+     [
+      [
+       7,
+       1
+      ]
+     ]
+    ],
     [
      [
       4

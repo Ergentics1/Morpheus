@@ -3,7 +3,8 @@ message: "If you use or reference this paper, please cite it using the preferred
 title: "Prime cadences: Ihara zeta, graphene, and voice-leading homology on the Tonnetz"
 authors:
   - name: "Ergentics"
-date-released: "2026-11-01"
+version: "0.2.0"
+date-released: "2026-11-25"
 license: "CC-BY-4.0"
 keywords:
   - "neo-Riemannian theory"
@@ -24,17 +25,20 @@ abstract: >-
   band energies, equal to the moduli of the triad's discrete Fourier
   coefficients, and X is Ramanujan. Over Q, zeta_X^{-1} factors into Weil
   polynomials over F_2. The sequence of moving notes alone determines a cadence
-  (tune theorem), and for other equal-tempered systems the tune determines
-  every moving voice. The voices' net winding is a torus homology coordinate,
-  asymptotically Gaussian with variance m/24, and twisting by it preserves the
-  Riemann hypothesis on an explicit window. Three involutions of PGL_2(Q_2),
-  one per move, generate a Schottky group whose Mumford curve C has genus 13,
-  reduction graph X and automorphism group the transposition/inversion group.
-  We compute its component group and gonality, find its order-12 factor in an
-  explicit genus-5 curve over F_2 (genus 5 is minimal), and show via a trace
-  invariant and a 2-adic edge-length argument that C admits no
-  Cerednik-Drinfeld uniformisation except possibly by a group with torsion at a
-  ramified or inert place above 2.
+  (tune theorem), and in every equal-tempered system with any step set the tune
+  determines the cadence, apart from one explicit family. The voices' net
+  winding is a torus homology coordinate, asymptotically Gaussian with variance
+  m/24; its fourth cumulant is isotropic and hexagonal anisotropy first appears
+  at order six. Twisting by the winding preserves the Riemann hypothesis on an
+  explicit window. Three involutions of PGL_2(Q_2), one per move, generate a
+  Schottky group whose Mumford curve C has genus 13, reduction graph X and
+  automorphism group the transposition/inversion group. We compute its
+  component group and gonality, find its order-12 factor in an explicit genus-5
+  curve over F_2 (genus 5 is minimal), and show via a trace invariant and a
+  2-adic edge-length argument that C admits no Cerednik-Drinfeld uniformisation
+  except possibly by a group with torsion at a ramified or inert place above 2.
+  No Shimura curve with torsion-free uniformisation has reduction graph X over
+  a totally real field of degree at most 5, or of degree at least 15.
 preferred-citation:
   type: article
   title: "Prime cadences: Ihara zeta, graphene, and voice-leading homology on the Tonnetz"

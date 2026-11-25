@@ -25,6 +25,7 @@ audit:
 	cd code/eisenstein2 && $(PY) audit.py
 	cd code/geometry && $(PY) audit.py
 	cd code/open_q && $(PY) open_audit.py
+	cd code/xcheck && $(PY) audit_xcheck.py
 
 # Regenerate the vector figures in paper/figures/.
 figures:

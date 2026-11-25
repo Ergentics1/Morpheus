@@ -1,0 +1,172 @@
+[
+{
+"field": "y^3-2*y^2-6*y-1",
+"hplus": 1,
+"h": 1,
+"D": [
+13
+],
+"N": [],
+"v": "[2, [2, 1, 0]~]",
+"classes": 12,
+"units": [
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1
+],
+"mass": "12",
+"mass_formula": "12",
+"mass_ok": true,
+"theta_agrees": true,
+"components": [
+{
+"vertices": 24,
+"units": [
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1
+],
+"torsion_free": true,
+"simple": true,
+"charpoly": "t**2*(t - 3)*(t**3 - 5*t + 3)*(t**6 - t**5 - 8*t**4 + 5*t**3 + 18*t**2 - 4*t - 7)",
+"has_t4_4t2_1": false,
+"isomorphic_to_X": false
+}
+],
+"any_X": false
+},
+{
+"field": "y^2-y-34",
+"hplus": 1,
+"h": 1,
+"D": [],
+"N": [
+[
+2,
+1
+]
+],
+"v": "[2, [0, 1]~]",
+"classes": 13,
+"units": [
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+2,
+1,
+2
+],
+"mass": "12",
+"mass_formula": "12",
+"mass_ok": true,
+"theta_agrees": true,
+"components": [
+{
+"vertices": 26,
+"units": [
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+2,
+1,
+2
+],
+"torsion_free": false,
+"simple": false,
+"charpoly": "t*(t - 3)*(t - 2)*(t**5 + 2*t**4 - 5*t**3 - 8*t**2 + 5*t + 3)**2",
+"has_t4_4t2_1": false,
+"isomorphic_to_X": false
+}
+],
+"any_X": false
+},
+{
+"field": "y^4-26*y^2-8*y+1",
+"hplus": 1,
+"h": 1,
+"D": [],
+"N": [
+[
+71,
+1
+]
+],
+"v": "[2, [2, 1, 1, 0]~]",
+"classes": 12,
+"units": [
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1
+],
+"mass": "12",
+"mass_formula": "12",
+"mass_ok": true,
+"theta_agrees": true,
+"components": [
+{
+"vertices": 24,
+"units": [
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1,
+1
+],
+"torsion_free": true,
+"simple": false,
+"charpoly": "t*(t - 3)*(t + 1)*(t**2 - 5)*(t**3 - 2*t**2 - 3*t + 3)*(t**4 + 2*t**3 - 3*t**2 - 3*t + 2)",
+"has_t4_4t2_1": false,
+"isomorphic_to_X": false
+}
+],
+"any_X": false
+}
+]

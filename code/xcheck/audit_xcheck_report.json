@@ -1,0 +1,162 @@
+[
+ {
+  "name": "Thm A: common link edges of two notes <= 2 (all chord classes, N<=30)",
+  "passed": true,
+  "info": ""
+ },
+ {
+  "name": "Thm B: every one-voice collision lies in the family 8|N, {0,N/8,N/2}, N/4 in S (all S, N<=24)",
+  "passed": true,
+  "info": "273"
+ },
+ {
+  "name": "Thm B: with maximal step sets, collisions at exactly N=8,16,...,72 (N<=72)",
+  "passed": true,
+  "info": "9"
+ },
+ {
+  "name": "Cor B.1: no collision for halving-closed S",
+  "passed": true,
+  "info": ""
+ },
+ {
+  "name": "NEG-M11: N=8, S={2}, {0,1,4}: both 4-cycles valid and non-backtracking",
+  "passed": true,
+  "info": ""
+ },
+ {
+  "name": "NEG-M11: same cyclic tune (3,5,7,1)",
+  "passed": true,
+  "info": ""
+ },
+ {
+  "name": "Thm C: kappa4/kappa2^2 = -17/2 per step along W=-u",
+  "passed": true,
+  "info": ""
+ },
+ {
+  "name": "Thm C: kappa4/kappa2^2 = -17/2 per step along v",
+  "passed": true,
+  "info": ""
+ },
+ {
+  "name": "Thm C: kappa4/kappa2^2 = -17/2 per step along 4u+3v",
+  "passed": true,
+  "info": ""
+ },
+ {
+  "name": "Thm C: kappa4/kappa2^2 = -17/2 per step along u+v",
+  "passed": true,
+  "info": ""
+ },
+ {
+  "name": "Thm C: kappa4/kappa2^2 = -17/2 per step along 2u+v",
+  "passed": true,
+  "info": ""
+ },
+ {
+  "name": "Thm C: kappa4/kappa2^2 = -17/2 per step along u+2v",
+  "passed": true,
+  "info": ""
+ },
+ {
+  "name": "Thm C: kappa6/kappa2^3 = (1470+cos 6a)/4 along W=-u",
+  "passed": true,
+  "info": ""
+ },
+ {
+  "name": "Thm C: kappa6/kappa2^3 = (1470+cos 6a)/4 along v",
+  "passed": true,
+  "info": ""
+ },
+ {
+  "name": "Thm C: kappa6/kappa2^3 = (1470+cos 6a)/4 along 4u+3v",
+  "passed": true,
+  "info": ""
+ },
+ {
+  "name": "Thm C: kappa6/kappa2^3 = (1470+cos 6a)/4 along u+v",
+  "passed": true,
+  "info": ""
+ },
+ {
+  "name": "Thm C: kappa6/kappa2^3 = (1470+cos 6a)/4 along 2u+v",
+  "passed": true,
+  "info": ""
+ },
+ {
+  "name": "Thm C: kappa6/kappa2^3 = (1470+cos 6a)/4 along u+2v",
+  "passed": true,
+  "info": ""
+ },
+ {
+  "name": "Thm C: W rates 1/24, -17/1152, 1469/55296",
+  "passed": true,
+  "info": ""
+ },
+ {
+  "name": "odd cumulants vanish on all six axes",
+  "passed": true,
+  "info": ""
+ },
+ {
+  "name": "Prop (all cumulants of W): closed form reproduces the series; kappa8/m = -887099/7962624",
+  "passed": true,
+  "info": "[1/24, -17/1152, 1469/55296, -887099/7962624]"
+ },
+ {
+  "name": "m=40 W=-u: total primes = 54,975,717,792 = pi(40) from tr B^m",
+  "passed": true,
+  "info": ""
+ },
+ {
+  "name": "m=40 W=-u: m*kappa_ex matches the [X] record",
+  "passed": true,
+  "info": "-8.495174375280602"
+ },
+ {
+  "name": "m=40 v: total primes = 54,975,717,792 = pi(40) from tr B^m",
+  "passed": true,
+  "info": ""
+ },
+ {
+  "name": "m=40 v: m*kappa_ex matches the [X] record",
+  "passed": true,
+  "info": "-8.48978326883313"
+ },
+ {
+  "name": "m=40 4u+3v: total primes = 54,975,717,792 = pi(40) from tr B^m",
+  "passed": true,
+  "info": ""
+ },
+ {
+  "name": "m=40 4u+3v: m*kappa_ex matches the [X] record",
+  "passed": true,
+  "info": "-8.490888952147145"
+ },
+ {
+  "name": "NEG-E8: rooted primes of length <= 16 total 174,864 (131,136 of length 16)",
+  "passed": true,
+  "info": "174864"
+ },
+ {
+  "name": "C-2: TV and JSD reproduce the [X] record",
+  "passed": true,
+  "info": ""
+ },
+ {
+  "name": "C-2': TV and JSD reproduce the [X] record",
+  "passed": true,
+  "info": ""
+ },
+ {
+  "name": "C-2'': TV and JSD reproduce the [X] record",
+  "passed": true,
+  "info": ""
+ },
+ {
+  "name": "Edgeworth ladder decreases: TV(C-2) > TV(C-2') > TV(C-2'')",
+  "passed": true,
+  "info": ""
+ }
+]

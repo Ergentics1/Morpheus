@@ -119,6 +119,11 @@ Gustav Kirchhoff, \emph{Ueber die {A}ufl\"osung der {G}leichungen, auf welche
   man bei der {U}ntersuchung der linearen {V}ertheilung galvanischer {S}tr\"ome
   gef\"uhrt wird}, Ann. Phys. Chem. \textbf{72} (1847), 497--508.
 
+\bibitem{kv10}
+Markus Kirschmer and John Voight, \emph{Algorithmic enumeration of ideal
+  classes for quaternion orders}, SIAM J. Comput. \textbf{39} (2010), no.~5,
+  1714--1747.
+
 \bibitem{kotani}
 Motoko Kotani and Toshikazu Sunada, \emph{Zeta functions of finite graphs}, J.
   Math. Sci. Univ. Tokyo \textbf{7} (2000), 7--25.
@@ -156,6 +161,16 @@ C.~Mar\'in Mu\~noz, \emph{The {T}onnetz spectrum is the generating triad's
 \bibitem{mumford72}
 David Mumford, \emph{An analytic construction of degenerating curves over
   complete local rings}, Compositio Math. \textbf{24} (1972), 129--174.
+
+\bibitem{odlyzko76}
+Andrew~M. Odlyzko, \emph{Discriminant bounds (tables)},
+  \url{https://www-users.cse.umn.edu/~odlyzko/unpublished/discr.bound.tables.txt},
+  1976.
+
+\bibitem{odlyzko90}
+\bysame, \emph{Bounds for discriminants and related estimates for class
+  numbers, regulators and zeros of zeta functions: a survey of recent results},
+  J. Th\'eor. Nombres Bordeaux \textbf{2} (1990), 119--141.
 
 \bibitem{ps87}
 Ralph Phillips and Peter Sarnak, \emph{Geodesics in homology classes}, Duke
@@ -203,6 +218,10 @@ Audrey Terras, \emph{Zeta functions of graphs: A stroll through the garden},
 {The LMFDB Collaboration}, \emph{The {L}-functions and modular forms database},
   \url{https://www.lmfdb.org}, 2026, Accessed November 2026.
 
+\bibitem{pari}
+{The PARI Group}, \emph{{PARI/GP}, version 2.19.1}, Univ. Bordeaux,
+  \url{https://pari.math.u-bordeaux.fr}.
+
 \bibitem{tym06}
 Dmitri Tymoczko, \emph{The geometry of musical chords}, Science \textbf{313}
   (2006), 72--74.
@@ -215,6 +234,10 @@ Dmitri Tymoczko, \emph{The geometry of musical chords}, Science \textbf{313}
 I.~V. \v{C}erednik, \emph{Uniformization of algebraic curves by discrete
   arithmetic subgroups of {$PGL_2(k_w)$} with compact quotients}, Math. USSR
   Sb. \textbf{29} (1976), 55--78.
+
+\bibitem{voight21}
+John Voight, \emph{Quaternion algebras}, Graduate Texts in Mathematics, vol.
+  288, Springer, 2021.
 
 \bibitem{wallace}
 Philip~R. Wallace, \emph{The band theory of graphite}, Phys. Rev. \textbf{71}

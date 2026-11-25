@@ -1,7 +1,7 @@
 # Audit-Forward Mathematical Novelties — Gemini 4 Neon (ADPIE Cycle 4)
 
 > **License:** CC BY 4.0 (research prose & results; see [`LICENSE-paper`](LICENSE-paper)). Companion machine-checked Lean 4 proofs and four-language verifiers (`lean/`, `swiftpp/`, `rust/`) are MIT licensed ([`LICENSE`](LICENSE)).
-> **Baseline preservation:** All archived *Prime Cadences* `v0.1.0` artifacts (`paper/`, `code/`, `audits/`, `CONTRIBUTIONS.md`, `Makefile`) remain unmodified. This document records original mathematical results derived and independently verified forward from the baseline via the **ADPIE** (`Assess → Diagnose → Plan → Implement → Evaluate`) and **Correspondence / D-R-P-Seam** methodology ([`METHODOLOGY.md`](METHODOLOGY.md)).
+> **Baseline preservation & reconciliation:** During derivation and verification (commits `60c786d`/`e911bec`), all archived *Prime Cadences* `v0.1.0` artifacts remained untouched (`v0.1.0` GitHub tag preserved immutably). Following Grok Bot's 32/32 from-scratch cross-check (`code/xcheck/`), these results have been folded into the `v0.2.0` reconciliation candidate (`Thm 4.4`, `Cor 4.5`, `§6.1 Thm 6.2`, `Remark 6.4`), pending author release sign-off.
 
 ---
 
@@ -118,19 +118,21 @@ $$\rho(\xi) = \frac{\lambda(\xi) + \sqrt{\lambda(\xi)^2 - 8}}{2}, \qquad \rho(0)
 
 ### 2.3 Correspondence Refinement Ladder (`C-2 → C-2' → C-2''`)
 
-Writing $z = w / \sqrt{m/24}$ and using probabilists' Hermite polynomials $H_4(z) = z^4 - 6z^2 + 3$, $H_6(z) = z^6 - 15z^4 + 45z^2 - 15$, $H_8(z) = z^8 - 28z^6 + 210z^4 - 420z^2 + 105$, Theorem C yields parameter-free discrete Edgeworth densities:
+Writing $z = w / \sqrt{m/24}$ and using probabilists' Hermite polynomials $H_4(z) = z^4 - 6z^2 + 3$, $H_6(z) = z^6 - 15z^4 + 45z^2 - 15$, $H_8(z) = z^8 - 28z^6 + 210z^4 - 420z^2 + 105$, Theorem C yields parameter-free discrete Edgeworth densities (clipped to $\max(0, \cdot)$):
 
 - **`C-2` (Gaussian baseline, $O(1/m)$):** $Q_m^{(0)}(w) \propto e^{-z^2/2}$.
 - **`C-2'` (4th-order Edgeworth, $O(1/m^2)$):**
-  $$Q_m^{(4)}(w) \propto e^{-z^2/2}\left(1 - \frac{17}{48m} H_4(z)\right).$$
+  $$Q_m^{(4)}(w) \propto e^{-z^2/2}\left(1 - \frac{17}{48m} H_4(z)\right)_+.$$
 - **`C-2''` (6th-order Edgeworth, $O(1/m^3)$):**
-  $$Q_m^{(6)}(w) \propto e^{-z^2/2}\left(1 - \frac{17}{48m} H_4(z) + \frac{1469}{2880\,m^2} H_6(z) + \frac{289}{4608\,m^2} H_8(z)\right).$$
+  $$Q_m^{(6)}(w) \propto e^{-z^2/2}\left(1 - \frac{17}{48m} H_4(z) + \frac{1469}{2880\,m^2} H_6(z) + \frac{289}{4608\,m^2} H_8(z)\right)_+.$$
+
+**Normalization convention (`v0.2.0` Remark 6.4):** All `C-2 / C-2' / C-2''` distances below normalize $Q_m$ over the signed integer window $|w| \le 24$ (retaining tail mass outside the exact $m=40$ support $[-8, 8]$). Under the alternative convention normalizing strictly over the exact support $|w| \le 8$, the `C-2''` metrics shift slightly to `TV = 1.43e-4` and `JSD = 3.04e-6` (vs. `TV = 1.443e-4` and `JSD = 4.763e-6` on $|w| \le 24$). Both conventions confirm the `> 75×` TV collapse.
 
 ### 2.4 Exact Transfer-Matrix Verification at $m = 40$ (`54,975,717,792` Prime Cadences)
 
-Verified identically across C++20 (`g++`/`clang++`), Pure Swift 6.4, Swift ↔ C++20 Interop (`0.000e+00` delta), and Rust (`rust/src/novelty.rs`):
+Verified identically across C++20 (`g++`/`clang++`), Pure Swift 6.4, Swift ↔ C++20 Interop (`0.000e+00` delta), Rust (`rust/src/novelty.rs`), and Grok Bot's from-scratch Python cross-check (`code/xcheck/audit_xcheck.py`, relative error $< 10^{-11}$):
 
-| Metric ($m = 40$, $\pi(40) = 54{,}975{,}717{,}792$) | Exact Theory (Thm C) | Observed (4-Language Exact) | Correspondence Gain |
+| Metric ($m = 40$, $\pi(40) = 54{,}975{,}717{,}792$, normalized over $\|w\| \le 24$) | Exact Theory (Thm C) | Observed (4-Language Exact) | Correspondence Gain |
 | :--- | :--- | :--- | :--- |
 | Winding variance $\operatorname{Var}(W)$ | $40/24 = 1.666667$ | `1.666712` (`|err| = 4.55e-5`) | Ramanujan $O(m \cdot 2^{-m/2})$ |
 | $m \cdot \kappa_{\mathrm{ex}}(W)$ (armchair $W = -u$, div 12) | $-17/2 = -8.500000$ | `-8.495174` | Matches to `0.0048` (`0.057%`) |
@@ -141,13 +143,13 @@ Verified identically across C++20 (`g++`/`clang++`), Pure Swift 6.4, Swift ↔ C
 | **TV (`C-2'`, 4th Edgeworth)** | $O(1/m^2)$ | `9.951306e-4` | **10.92× reduction** |
 | **TV (`C-2''`, 6th Edgeworth)** | $O(1/m^3)$ | `1.442787e-4` | **75.30× reduction** |
 
-*(Note on $m = 40$ 6th cumulant finite-size term: $m^2 \kappa_6/\kappa_2^3$ at $m=40$ has sub-leading $O(m^3 2^{-m/2})$ Ramanujan oscillation of size $\sim 40^3/2^{20} \approx 0.06$ plus $\sim 0.4$ from the sub-dominant $2^{-m/2}$ eigenvalue pair, cleanly distinguishing the leading $367.25$ / $367.75$ scale at larger $m$ while already driving the 75.30× TV collapse in `C-2''` at $m=40$.)*
+*(Notes on finite-$m$ scaling and Prop 6.3 extension: (1) Numerically across $m = 16, \dots, 44$, $|m\kappa_{\mathrm{ex}} + 17/2| \cdot 2^{m/2}/m^2$ stays bounded in $[0.5, 14]$, matching the Ramanujan exponential suppression; the `v0.2.0` manuscript conservatively states "exponentially small" without fixing the polynomial prefactor. At $m = 40$, $m^2\kappa_6/\kappa_2^3$ still carries sub-leading $2^{-m/2}$ oscillation while already driving the 75.30× TV collapse in `C-2''`. (2) While cross-checking Theorem C, Grok Bot added **Proposition 6.3 (`prop:Wcgf`)** deriving the closed-form 1D winding CGF $\log(\rho(\varphi)/2)$ via $\lambda(\varphi) = \sqrt{5 + 4\cos(\varphi/4)}$; we independently verified Grok Bot's 8th cumulant in exact rational arithmetic: $\kappa_2/m = 1/24$, $\kappa_4/m = -17/1152$, $\kappa_6/m = 1469/55296$, and **$\kappa_8/m = -887099/7962624$** exact match.)*
 
 ---
 
-## 3. Honest Scope Boundary: What Remains Open
+## 3. Honest Scope Boundary & `v0.2.0` Reconciliation Status
 
 In strict accordance with `AGENTS.md` Rule 6 (never overclaim unverified results):
 
-- **Open Problem (1) (Remark 7.16 — Arithmetic uniformisation *with torsion* at ramified/inert $v \mid 2$):** While `lean/Morpheus/WindingAndSchottky.lean` proves the universal torsion-free power obstruction $\forall k \ge 1,\; \tau(\gamma_0^k) > 4$ and `swiftpp/` confirms Lemma 7.14 (edge-length doubling on $F_v \cong \mathbb{Q}_2$) via `RCT-2`, extending Lemma 7.14 to elliptic fixed points over ramified or inert quadratic/higher extensions of $\mathbb{Q}_2$ (where the Bruhat–Tits tree has residue degree $q_v > 2$ or wild ramification $e_v > 1$ altering the slope of $z \mapsto -z$) remains open and is **not** claimed resolved here.
-- **Open Problem (4) (Proposition 7.17 PARI/LMFDB mass-formula search):** The 4 remaining totally real cubic/quartic candidates (`469`, `316`, `2777`) and Gröbner smoothness checks of $A, B \subset \mathbb{P}^4$ over $\overline{\mathbb{F}}_2$ remain tagged `[GB]` pending dedicated PARI/GP or algebraic-geometry certification.
+- **Reconciled into `v0.2.0` candidate (pending author sign-off):** Grok Bot independently re-verified all Cycle 1–4 claims from scratch (`code/xcheck/audit_xcheck.py`, 32/32 PASS; see [`reconciliation/GROKBOT_RECONCILIATION_RESPONSE.md`](reconciliation/GROKBOT_RECONCILIATION_RESPONSE.md)) and folded Theorems A & B (`Thm 4.4 [E→GB; independently X]`), Corollary B.1 (`Cor 4.5 [X]`), Theorem C (`§6.1 Thm 6.2 [X]`), Edgeworth `C-2'`/`C-2''` (`Remark 6.4 [X]`), and erratum `NEG-E8` into the `v0.2.0` manuscript candidate.
+- **Unchecked Section 7 geometry / Shimura perimeter (7 results in `v0.2.0`):** The following seven Section 7 results (combining baseline items and Grok Bot's round-3 arithmetic extensions) have **not yet** been independently re-verified from scratch in `[X]` (only `RCT-2` checks the 2-adic slope-doubling phenomenon numerically for Lemma 7.14): `Prop 7.3` (`prop:nonarith`), `Thm 7.11` (`thm:noshimura`), `Lem 7.14` (`lem:length`), `Thm 7.15` (`thm:q2`), `Prop 7.17` (round-3 torsion structure), `Prop 7.18` (round-3 direct Brandt graphs & mass-formula field search; numbered `Prop 7.17` in `v0.1.0`), and `Thm 7.19` (round-3 any narrow class number). Gröbner smoothness of $A, B \subset \mathbb{P}^4$ over $\overline{\mathbb{F}}_2$ likewise remains `[GB]`.

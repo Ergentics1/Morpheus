@@ -52,11 +52,13 @@ Structured directly after the `[X]` reconciliation table in [`CONTRIBUTIONS.md`]
 | 7 | Props 7.9–7.10 (`prop:f2`, `prop:g5`) | `[E→GB]` | $a = 0$ degree-4 place obstruction (`-1`); direct $\mathbb{F}_{2^k}$ projective counts ($k \le 5$, `1,082,401` points) on genus-5 curves $A, B \subset \mathbb{P}^4$: `#A = [2,16,14,20,22]`, `#B = [4,16,4,20,44]` (`NEG-M6`) | C++20, Swift++ | **Agrees** | Eligible for `[X]` after review |
 | 7 | Thm 7.13 (`thm:trace`) | `[E→GB]` | Lean 4 universal Chebyshev/Cayley–Hamilton proof $\forall k \ge 1,\; \operatorname{tr}(\gamma_0^k)^2 > 4\det(\gamma_0^k)$ for $\gamma_0 = PLRLPRPL$ ($\operatorname{tr}=85, \det=256$); Swift++ cross-check (`NEG-M8`) | Lean 4, C++20, Swift++ | **Agrees** | Eligible for `[X]` after review |
 
-### Explicitly Out-of-Scope in Cycles 1–4 (Honest Perimeter Disclosure)
+### Explicitly Out-of-Scope in Cycles 1–4 (Honest Perimeter Disclosure, `v0.2.0` Numbering)
 
-Per [`AGENTS.md`](../AGENTS.md) Rule 6, the following Section 7 results have **not yet** been independently re-proved from scratch in `[X]` (only `RCT-2` tests the 2-adic slope-doubling phenomenon numerically for `lem:length`/`thm:q2`):
+Per [`AGENTS.md`](../AGENTS.md) Rule 6 and reconciled against [`GROKBOT_RECONCILIATION_RESPONSE.md`](GROKBOT_RECONCILIATION_RESPONSE.md) (which folds Grok Bot's round-3 results into `v0.2.0`), the following **7** Section 7 geometry/Shimura results have **not yet** been independently re-proved from scratch in `[X]` (only `RCT-2` tests the 2-adic slope-doubling phenomenon numerically for `lem:length`/`thm:q2`):
 
-- `Prop 7.3` (`prop:nonarith`), `Thm 7.11` (`thm:noshimura` — PARI Hecke computation), `Lem 7.14` (`lem:length`), `Thm 7.15` (`thm:q2`), and `Prop 7.17` (`prop:mass` — PARI/LMFDB mass-formula field scan).
+- `Prop 7.3` (`prop:nonarith`), `Thm 7.11` (`thm:noshimura` — PARI Hecke computation), `Lem 7.14` (`lem:length`), `Thm 7.15` (`thm:q2`), `Prop 7.17` (round-3 torsion structure), `Prop 7.18` (round-3 direct Brandt graphs & PARI/LMFDB mass-formula field scan; numbered `Prop 7.17` in `v0.1.0`), and `Thm 7.19` (round-3 any narrow class number).
+
+> **Post-reconciliation update (`v0.2.0` candidate):** Grok Bot independently re-checked every Cycle 1–4 claim from scratch (`code/xcheck/audit_xcheck.py`, **32/32 PASS**, zero cached data reads; see [`GROKBOT_RECONCILIATION_RESPONSE.md`](GROKBOT_RECONCILIATION_RESPONSE.md)) and folded `NEG-E8`, `Thm 4.4 [E→GB; independently X]`, `Cor 4.5 [X]`, `§6.1 Thm 6.2 [X]`, and `Remark 6.4 [X]` into the unreleased `v0.2.0` manuscript candidate. In turn, we independently verified Grok Bot's new closed-form **Proposition 6.3 (`prop:Wcgf`)** in exact rational arithmetic: $\kappa_2/m = 1/24$, $\kappa_4/m = -17/1152$, $\kappa_6/m = 1469/55296$, and **$\kappa_8/m = -887099/7962624$** exact match.
 
 ---
 
@@ -86,13 +88,13 @@ Grok Bot can independently check the exact power series and $m = 40$ transfer-ma
    - Order 4 (isotropic, every $\alpha \in [0, 2\pi)$): $m \cdot \kappa_{\mathrm{ex}} = -\frac{17}{2} = -8.5$.
    - Order 6 (bond-parallel **armchair**, $\cos 6\alpha = -1$, axes $W = -u$ and $v$): $m^2 \cdot \frac{\kappa_6}{\kappa_2^3} = \frac{1469}{4} = 367.25$.
    - Order 6 (bond-perpendicular **zigzag**, $\cos 6\alpha = +1$, axis $2a+b = 4u+3v$): $m^2 \cdot \frac{\kappa_6}{\kappa_2^3} = \frac{1471}{4} = 367.75$.
-   - 1D winding $W = -u$ cumulant rates: $\frac{\kappa_2}{m} = \frac{1}{24}$, $\frac{\kappa_4}{m} = -\frac{17}{1152}$, $\frac{\kappa_6}{m} = \frac{1469}{55296}$.
-3. **Exact $m = 40$ Benchmarks (`data/calibrations/c2_edgeworth_m40_swiftpp.json`, commit `60c786d`):**
+   - 1D winding $W = -u$ cumulant rates: $\frac{\kappa_2}{m} = \frac{1}{24}$, $\frac{\kappa_4}{m} = -\frac{17}{1152}$, $\frac{\kappa_6}{m} = \frac{1469}{55296}$ (and Grok Bot's `Prop 6.3` $\frac{\kappa_8}{m} = -\frac{887099}{7962624}$, independently verified in exact rational arithmetic).
+3. **Exact $m = 40$ Benchmarks (`data/calibrations/c2_edgeworth_m40_swiftpp.json`, commit `60c786d`, normalized over $|w| \le 24$):**
    - `total_primes`: `54,975,717,792` (`bad_divisibility_count = 0` on all 3 axes)
    - `m * kappa_ex`: `-8.495174` ($W=-u$), `-8.489783` ($v$), `-8.490889` ($4u+3v$)
    - `C-2` Gaussian: `TV = 1.086474e-2`, `KL = 1.216616e-3`, `JSD = 3.419013e-4`
    - `C-2'` 4th Edgeworth: `TV = 9.951306e-4` (**10.918×**), `JSD = 9.524113e-6` (**35.90×**)
-   - `C-2''` 6th Edgeworth: `TV = 1.442787e-4` (**75.304×**), `JSD = 4.763180e-6` (**71.78×**)
+   - `C-2''` 6th Edgeworth: `TV = 1.442787e-4` (**75.304×**), `JSD = 4.763180e-6` (**71.78×**) — *note convention (`v0.2.0` Remark 6.4): normalizing strictly over the support $|w| \le 8$ instead of $|w| \le 24$ gives `TV = 1.43e-4`, `JSD = 3.04e-6`*
    - Note `NEG-E9`: Clipped Edgeworth densities vanish at $w = \pm 5$ ($z = 3.87\sigma$, `poly4 = -0.222`, `poly6 = -0.122`) while $P_{40}(\pm 5) > 0$; use bounded $\mathrm{JSD}(P \| Q_+) \ge 0$ rather than unguarded partial-support KL.
 
 ---
@@ -129,6 +131,6 @@ sha256sum -c data/MANIFEST.sha256
 
 ---
 
-## Part IV — Companion Explanatory Video & Social Media Assets
+## Part IV — Companion Explanatory Videos & Social Media Assets
 
-See [`media/README.md`](../media/README.md) for the reproducible MIT generator script (`media/render_gemini4_neon_video.py`), the rendered 1080p stereo musical video (`media/gemini4_neon_prime_cadences.mp4`), the clean poster frame (`media/gemini4_neon_poster.png`), and ready-to-post social media summaries.
+See [`media/README.md`](../media/README.md) for the reproducible MIT generator scripts (`media/render_gemini4_neon_video.py`, `media/render_gemini4_neon_masterclass.py`), the 1:24 social reel (`media/gemini4_neon_prime_cadences.mp4`), the 4:18 **Spoken-in-Harmony Educator Masterclass** (`media/gemini4_neon_masterclass_chess_rh.mp4`), the clean poster frame (`media/gemini4_neon_poster.png`), and ready-to-post social media summaries.

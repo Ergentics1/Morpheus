@@ -59,7 +59,8 @@ for n in (2,3,4):
         def st_of(j,a):
             D=pari.rnfidealprimedec(RN[a],prsy[j])
             if len(D)==2: return 1
-            return 0 if int(D[0][2])==2 else -1
+            # relative ramification index = absolute e in K divided by e(P/p) in F
+            return 0 if int(D[0][2])//int(prsy[j][2])==2 else -1
         surv=[]
         for Ds,Ns in cands:
             killed=False

@@ -45,7 +45,7 @@ for lab,Dn,Nn in CASES:
     # torsion test (maximal orders of F(i), F(sqrt-3) embed => torsion)
     def st(Pi,a):
         R=pari(f'rnfinit(nfinit({pari.Pol(list(reversed(co)),"y")}),x^2+{a})'); pridL.setdefault(Pi,prid(primesL[Pi])); D=pari.rnfidealprimedec(R,pridL[Pi])
-        return 1 if len(D)==2 else (0 if int(D[0][2])==2 else -1)
+        return 1 if len(D)==2 else (0 if int(D[0][2])//int(pridL[Pi][2])==2 else -1)
     out=dict(field=lab,Dnorms=Dn,Nnorms=Nn,results=[])
     hecke={}
     for Dc,Nc,vi in choices:

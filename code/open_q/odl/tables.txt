@@ -1,0 +1,64 @@
+
+                                                         Andrew Odlyzko 
+                                                         November 29, 1976
+
+
+                        DISCRIMINANT BOUNDS
+                      (description of tables)
+
+(i) Tables 1 and 3 assume the Generalized Riemann Hypothesis (GRH),
+while Tables 2 and 4 are unconditional.  Tables 1 and 2 were derived 
+from Tables 3 and 4, respectively. 
+
+(ii) In Tables 1 and 2, an entry B in the totally complex D^{1/n} 
+column corresponding to n = n0 means that for all fields of degrees 
+n >= n0, the discriminant satisfies D^{1/n} > B.
+
+An entry A in the totally real D^{1/n} column implies that for all
+totally real fields of degrees n >= n0, we have D^{1/n} > A.
+
+The b entries specify which inequalities in the other tables were 
+used. 
+
+(iii) In Tables 3 and 4, the notation is as follows.  If K is an 
+algebraic number field with r1 real and 2*r2 complex conjugate 
+fields, and D denotes the absolute value of the discriminant of K, 
+then for any b we have
+
+            D > A^{r1} B^{2*r2} e^{f-E}
+
+where A, B, and E are given in the table, and
+
+ f = 2*sum( {log NP} * F(log NP^m) / (NP)^{m/2}, sum on P and m),
+
+where m runs over the positive integers, and P over all the prime
+ideals of K, N is the norm from K to Q, and
+
+                 F(x) = G(x/b)
+
+in the GRH case, and
+
+         F(x) = H(x/b) / cosh(x/2)
+
+in the unconditional case, where G(x), H(x) are even functions
+of x which vanish for x > 2, and for 0 <= x <= 2 are given by
+
+    G(x)  = ( 1- x/2 ) * cos(pi*x/2) + { sin(pi*x/2) } / pi,
+
+   H(x)  = (2-x) * {1 + (cos(pi(x))/2} / 3 + (sin(pi*x)) / (2*pi).
+
+The values of A and B are lower estimates; the values of E have 
+been rounded upwards from their true values, which are 8b/3 in the 
+unconditional case and
+
+   8*b*pi^2 * { (exp(b/2) + exp(-b/2)) / (pi^2 + b^2) }^2.
+
+in the GRH case. 
+
+iv) Great care was taken to ensure that these bounds should be
+true lower bounds, rather than approximations.  By selecting the 
+parameter b more carefully, utilizing more precise estimates of 
+integrals, and selecting better kernels, one can obtain improved 
+lower bounds.  For example, all fields of degrees >= 8 satisfy
+D^{1/n} >= 5.743 on the GRH, and D^{1/n} >= 5.656 unconditionally.
+
