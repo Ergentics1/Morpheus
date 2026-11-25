@@ -418,7 +418,7 @@ EdgeworthWindingReport evaluate_edgeworth_winding_calibration(int32_t m) {
     const double c6 = 1469.0 / (2880.0 * dm * dm);
     const double c8 = 289.0 / (4608.0 * dm * dm);
 
-    auto eval_order = [&](int order, double& out_tv, double& out_kl) {
+    auto eval_order = [&](int order, double& out_tv, double& out_jsd, double* out_kl) {
         auto weight = [&](int wi) {
             double z = static_cast<double>(wi) / sig;
             double z2 = z * z;
@@ -438,28 +438,44 @@ EdgeworthWindingReport evaluate_edgeworth_winding_calibration(int32_t m) {
         double q[17];
         for (int i = 0; i < 17; ++i) q[i] = weight(wd.w_min + i) / znorm;
         double q_in = sum_neumaier(q, 17);
-        double tv_sum = std::max(0.0, 1.0 - q_in);
+        double q_out = std::max(0.0, 1.0 - q_in);
+        double tv_sum = q_out;
         double kl = 0.0;
+        double jsd = 0.5 * std::log(2.0) * q_out;
         for (int i = 0; i < 17; ++i) {
             tv_sum += std::fabs(p[i] - q[i]);
-            if (p[i] > 0.0 && q[i] > 0.0) {
-                kl += p[i] * std::log(p[i] / q[i]);
+            double mid = 0.5 * (p[i] + q[i]);
+            if (p[i] > 0.0) {
+                jsd += 0.5 * p[i] * std::log(p[i] / mid);
+                if (out_kl != nullptr && q[i] > 0.0) {
+                    kl += p[i] * std::log(p[i] / q[i]);
+                }
+            }
+            if (q[i] > 0.0) {
+                jsd += 0.5 * q[i] * std::log(q[i] / mid);
             }
         }
         out_tv = 0.5 * tv_sum;
-        out_kl = kl;
+        out_jsd = jsd;
+        if (out_kl != nullptr) *out_kl = kl;
     };
 
-    eval_order(0, rep.tv_gaussian, rep.kl_gaussian);
-    eval_order(4, rep.tv_edgeworth4, rep.kl_edgeworth4);
-    eval_order(6, rep.tv_edgeworth6, rep.kl_edgeworth6);
+    eval_order(0, rep.tv_gaussian, rep.jsd_gaussian, &rep.kl_gaussian);
+    eval_order(4, rep.tv_edgeworth4, rep.jsd_edgeworth4, nullptr);
+    eval_order(6, rep.tv_edgeworth6, rep.jsd_edgeworth6, nullptr);
     rep.tv_gain_4 = (rep.tv_edgeworth4 > 0.0) ? (rep.tv_gaussian / rep.tv_edgeworth4) : 0.0;
     rep.tv_gain_6 = (rep.tv_edgeworth6 > 0.0) ? (rep.tv_gaussian / rep.tv_edgeworth6) : 0.0;
 
     bool ok = (wd.non_multiple_12_closed == 0) &&
-              (rep.tv_edgeworth4 < rep.tv_gaussian);
+              (rep.kl_gaussian >= 0.0) &&
+              (rep.jsd_gaussian >= 0.0) &&
+              (rep.jsd_edgeworth4 >= 0.0) &&
+              (rep.jsd_edgeworth6 >= 0.0) &&
+              (rep.tv_edgeworth4 < rep.tv_gaussian) &&
+              (rep.jsd_edgeworth4 < rep.jsd_gaussian);
     if (m >= 24) {
-        ok = ok && (rep.tv_edgeworth6 < rep.tv_edgeworth4);
+        ok = ok && (rep.tv_edgeworth6 < rep.tv_edgeworth4) &&
+                   (rep.jsd_edgeworth6 < rep.jsd_edgeworth4);
     }
     if (m == 40) {
         ok = ok && (std::fabs(rep.m_times_excess_kurtosis - (-8.5)) < 0.01) &&

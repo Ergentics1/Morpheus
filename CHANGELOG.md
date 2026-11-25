@@ -44,7 +44,7 @@ All notable changes to **Morpheus** are documented here. Manuscript updates cut 
 
 ### Changed
 - Synced `ERGENTICS.md` directory tree with implemented `swiftpp/` target names.
-- Updated `NEGATIVES.md`: promoted `NEG-M1` & `NEG-M6` (`Scoped / Resolved [Verified]`), `NEG-M2`, `NEG-M3`, `NEG-M4` (universally resolved for $S=\{1,\dots,k\}$ via Theorems A/B/Cor B.1 and checked to $N \le 96$), `NEG-M5`, `NEG-M7`, `NEG-M8` (core), `NEG-M9`, `NEG-M10` (`Active [Verified]`); added **`NEG-M11`** (octatonic diameter counterexample family, `Scoped / Resolved [Verified]`); promoted **`NEG-E3`** to `Scoped / Resolved [Verified]` via Theorem C & `C-2'`/`C-2''`; logged `NEG-E7` and `NEG-E8`.
+- Updated `NEGATIVES.md`: promoted `NEG-M1` & `NEG-M6` (`Scoped / Resolved [Verified]`), `NEG-M2`, `NEG-M3`, `NEG-M4` (universally resolved for $S=\{1,\dots,k\}$ via Theorems A/B/Cor B.1 and checked to $N \le 96$), `NEG-M5`, `NEG-M7`, `NEG-M8` (core), `NEG-M9`, `NEG-M10` (`Active [Verified]`); added **`NEG-M11`** (octatonic diameter counterexample family, `Scoped / Resolved [Verified]`); promoted **`NEG-E3`** to `Scoped / Resolved [Verified]` via Theorem C & `C-2'`/`C-2''`; logged `NEG-E7`, `NEG-E8`, and **`NEG-E9`** (Edgeworth clipped-tail KL Gibbs-inequality trap, resolved via exact bounded $\mathrm{JSD}(P \| Q_+) \ge 0$ + R-Type nonnegativity guard).
 - Updated `CALIBRATIONS.md`: added Correspondence rows **`C-2'`** (4th-order Edgeworth $O(1/m^2)$ + 2D isotropy) and **`C-2''`** (6th-order Edgeworth $O(1/m^3)$ + $C_6$ anisotropy) and updated **`C-4`** with universal Theorems A, B, Corollary B.1, and `NEG-M11`.
 - Logged ADPIE Cycles 1–4 provenance in `PROVENANCE.md`.
 

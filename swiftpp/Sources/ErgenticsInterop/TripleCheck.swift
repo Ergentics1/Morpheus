@@ -547,13 +547,17 @@ public enum TripleCheckBridge {
         let e40C = ergentics.evaluate_edgeworth_winding_calibration(40)
         let eDelta = max(
             max(abs(e40S.tvGaussian - e40C.tv_gaussian), abs(e40S.tvEdgeworth4 - e40C.tv_edgeworth4)),
-            max(abs(e40S.tvEdgeworth6 - e40C.tv_edgeworth6), abs(e40S.mTimesExcessKurtosis - e40C.m_times_excess_kurtosis))
+            max(
+                max(abs(e40S.tvEdgeworth6 - e40C.tv_edgeworth6), abs(e40S.mTimesExcessKurtosis - e40C.m_times_excess_kurtosis)),
+                max(abs(e40S.jsdEdgeworth4 - e40C.jsd_edgeworth4), abs(e40S.jsdEdgeworth6 - e40C.jsd_edgeworth6))
+            )
         )
         let eDelta24 = max(abs(e24S.tvEdgeworth4 - e24C.tv_edgeworth4), abs(e24S.tvEdgeworth6 - e24C.tv_edgeworth6))
         let maxEDelta = max(eDelta, eDelta24)
         let edgeOK = e24S.passed && e24C.passed && e40S.passed && e40C.passed &&
                      e40S.tvEdgeworth4 < e24S.tvEdgeworth4 &&
                      e40S.tvEdgeworth6 < e24S.tvEdgeworth6 &&
+                     e40S.jsdEdgeworth6 >= 0.0 && e40S.jsdEdgeworth6 < e40S.jsdEdgeworth4 &&
                      maxEDelta < 1e-13
         let itemEdge = TripleCheckItem(
             id: "NOV-2/C-2'/C-2''", category: "Correspondence", passed: edgeOK, maxDelta: maxEDelta,

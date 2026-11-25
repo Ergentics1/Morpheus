@@ -32,11 +32,12 @@ struct EdgeworthWindingReport {
     double excess_kurtosis;          // exact kappa_4 / kappa_2^2
     double m_times_excess_kurtosis;  // converges to -17/2 = -8.5 exponentially via Ramanujan gap
     double tv_gaussian;              // C-2  O(1/m)
-    double kl_gaussian;
+    double kl_gaussian;              // strictly positive Gaussian KL >= 0
+    double jsd_gaussian;             // bounded Jensen-Shannon divergence >= 0
     double tv_edgeworth4;            // C-2' O(1/m^2)
-    double kl_edgeworth4;
+    double jsd_edgeworth4;           // bounded JSD >= 0 (handles clipped tail zeros, NEG-E9)
     double tv_edgeworth6;            // C-2'' O(1/m^3)
-    double kl_edgeworth6;
+    double jsd_edgeworth6;           // bounded JSD >= 0 (handles clipped tail zeros, NEG-E9)
     double tv_gain_4;                // tv_gaussian / tv_edgeworth4
     double tv_gain_6;                // tv_gaussian / tv_edgeworth6
     bool passed;

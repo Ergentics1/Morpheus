@@ -25,10 +25,11 @@ public struct EdgeworthWindingReport: Sendable, Equatable {
     public let mTimesExcessKurtosis: Double
     public let tvGaussian: Double
     public let klGaussian: Double
+    public let jsdGaussian: Double
     public let tvEdgeworth4: Double
-    public let klEdgeworth4: Double
+    public let jsdEdgeworth4: Double
     public let tvEdgeworth6: Double
-    public let klEdgeworth6: Double
+    public let jsdEdgeworth6: Double
     public let tvGain4: Double
     public let tvGain6: Double
     public let passed: Bool
@@ -332,7 +333,7 @@ public func evaluateEdgeworthWindingCalibration(m: Int32) -> EdgeworthWindingRep
     let c6 = 1469.0 / (2880.0 * dm * dm)
     let c8 = 289.0 / (4608.0 * dm * dm)
 
-    func evalOrder(_ order: Int) -> (tv: Double, kl: Double) {
+    func evalOrder(_ order: Int) -> (tv: Double, jsd: Double, kl: Double) {
         func weight(_ wi: Int32) -> Double {
             let z = Double(wi) / sig
             let z2 = z * z
@@ -352,15 +353,24 @@ public func evaluateEdgeworthWindingCalibration(m: Int32) -> EdgeworthWindingRep
         var q = [Double](repeating: 0.0, count: 17)
         for i in 0..<17 { q[i] = weight(wd.wMin + Int32(i)) / znorm }
         let qIn = sumNeumaier(q)
-        var tvSum = max(0.0, 1.0 - qIn)
+        let qOut = max(0.0, 1.0 - qIn)
+        var tvSum = qOut
         var kl = 0.0
+        var jsd = 0.5 * log(2.0) * qOut
         for i in 0..<17 {
             tvSum += abs(p[i] - q[i])
-            if p[i] > 0.0 && q[i] > 0.0 {
-                kl += p[i] * log(p[i] / q[i])
+            let mid = 0.5 * (p[i] + q[i])
+            if p[i] > 0.0 {
+                jsd += 0.5 * p[i] * log(p[i] / mid)
+                if order == 0 && q[i] > 0.0 {
+                    kl += p[i] * log(p[i] / q[i])
+                }
+            }
+            if q[i] > 0.0 {
+                jsd += 0.5 * q[i] * log(q[i] / mid)
             }
         }
-        return (0.5 * tvSum, kl)
+        return (0.5 * tvSum, jsd, kl)
     }
 
     let g0 = evalOrder(0)
@@ -369,8 +379,10 @@ public func evaluateEdgeworthWindingCalibration(m: Int32) -> EdgeworthWindingRep
     let gain4 = g4.tv > 0.0 ? (g0.tv / g4.tv) : 0.0
     let gain6 = g6.tv > 0.0 ? (g0.tv / g6.tv) : 0.0
 
-    var ok = wd.nonMultiple12Closed == 0 && g4.tv < g0.tv
-    if m >= 24 { ok = ok && (g6.tv < g4.tv) }
+    var ok = wd.nonMultiple12Closed == 0 &&
+             g0.kl >= 0.0 && g0.jsd >= 0.0 && g4.jsd >= 0.0 && g6.jsd >= 0.0 &&
+             g4.tv < g0.tv && g4.jsd < g0.jsd
+    if m >= 24 { ok = ok && (g6.tv < g4.tv) && (g6.jsd < g4.jsd) }
     if m == 40 {
         ok = ok && abs(mExKurt - (-8.5)) < 0.01 && gain4 > 10.0 && gain6 > 70.0 && varAbsErr < 1e-4
     }
@@ -383,10 +395,11 @@ public func evaluateEdgeworthWindingCalibration(m: Int32) -> EdgeworthWindingRep
         mTimesExcessKurtosis: mExKurt,
         tvGaussian: g0.tv,
         klGaussian: g0.kl,
+        jsdGaussian: g0.jsd,
         tvEdgeworth4: g4.tv,
-        klEdgeworth4: g4.kl,
+        jsdEdgeworth4: g4.jsd,
         tvEdgeworth6: g6.tv,
-        klEdgeworth6: g6.kl,
+        jsdEdgeworth6: g6.jsd,
         tvGain4: gain4,
         tvGain6: gain6,
         passed: ok

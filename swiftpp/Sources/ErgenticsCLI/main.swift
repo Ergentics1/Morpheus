@@ -72,10 +72,11 @@ struct EdgeworthExportRecord: Encodable {
         let m_times_excess_kurtosis: Double
         let tv_gaussian_c2: Double
         let kl_gaussian_c2: Double
+        let jsd_gaussian_c2: Double
         let tv_edgeworth4_c2_prime: Double
-        let kl_edgeworth4_c2_prime: Double
+        let jsd_edgeworth4_c2_prime: Double
         let tv_edgeworth6_c2_double_prime: Double
-        let kl_edgeworth6_c2_double_prime: Double
+        let jsd_edgeworth6_c2_double_prime: Double
         let tv_gain_4th: Double
         let tv_gain_6th: Double
     }
@@ -214,10 +215,11 @@ if let ePath = exportEdgeworthPath {
             m_times_excess_kurtosis: e40.mTimesExcessKurtosis,
             tv_gaussian_c2: e40.tvGaussian,
             kl_gaussian_c2: e40.klGaussian,
+            jsd_gaussian_c2: e40.jsdGaussian,
             tv_edgeworth4_c2_prime: e40.tvEdgeworth4,
-            kl_edgeworth4_c2_prime: e40.klEdgeworth4,
+            jsd_edgeworth4_c2_prime: e40.jsdEdgeworth4,
             tv_edgeworth6_c2_double_prime: e40.tvEdgeworth6,
-            kl_edgeworth6_c2_double_prime: e40.klEdgeworth6,
+            jsd_edgeworth6_c2_double_prime: e40.jsdEdgeworth6,
             tv_gain_4th: e40.tvGain4,
             tv_gain_6th: e40.tvGain6
         ),
