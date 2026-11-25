@@ -1,0 +1,10 @@
+name = "morpheus"
+version = "0.1.0"
+defaultTargets = ["Morpheus", "morpheus-lean"]
+
+[[lean_lib]]
+name = "Morpheus"
+
+[[lean_exe]]
+name = "morpheus-lean"
+root = "Main"
