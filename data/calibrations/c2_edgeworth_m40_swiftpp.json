@@ -1,0 +1,50 @@
+{
+  "bound_check" : {
+    "bound_formula" : "|m * kappa_ex + 17/2| < 0.01 and TV_Edge4 < TV_Gauss / 10 and TV_Edge6 < TV_Gauss / 70",
+    "observed" : 0.00014427865711084327,
+    "passed" : true,
+    "threshold" : 0.0001552105512014893
+  },
+  "code_commit" : "60c786d",
+  "correspondence_id" : "C-2'/C-2''",
+  "exact_theory" : {
+    "kappa2_over_m_exact" : 0.041666666666666664,
+    "kappa4_std_coeff_exact" : -8.5,
+    "kappa6_std_armchair_exact" : 367.25,
+    "kappa6_std_zigzag_exact" : 367.75
+  },
+  "implementation" : "swiftpp",
+  "regime_params" : {
+    "m" : 40
+  },
+  "schema_version" : "1.0.0",
+  "tonnetz_2d_isotropy" : {
+    "bad_divisibility_count" : 0,
+    "k2_over_m_u" : 0.041667804572682494,
+    "k2_over_m_v" : 0.07407665637778381,
+    "k2_over_m_zigzag" : 2.0000746541521393,
+    "m2_std6_u" : 366.29580168224084,
+    "m2_std6_v" : 368.6285904500847,
+    "m2_std6_zigzag" : 368.19050750267644,
+    "m_ex_kurt_u" : -8.49517437528062,
+    "m_ex_kurt_v" : -8.489783268833136,
+    "m_ex_kurt_zigzag" : -8.490888952147122,
+    "max_isotropy_spread_4th" : 0.010216731166863724
+  },
+  "winding_metrics" : {
+    "excess_kurtosis" : -0.21237935938201513,
+    "jsd_edgeworth4_c2_prime" : 9.524112673283263e-06,
+    "jsd_edgeworth6_c2_double_prime" : 4.76318040404968e-06,
+    "jsd_gaussian_c2" : 0.0003419013498562255,
+    "kl_gaussian_c2" : 0.001216616321156442,
+    "m_times_excess_kurtosis" : -8.495174375280605,
+    "total_primes" : 54975717792,
+    "tv_edgeworth4_c2_prime" : 0.0009951305947214187,
+    "tv_edgeworth6_c2_double_prime" : 0.00014427865711084327,
+    "tv_gain_4th" : 10.917902275073528,
+    "tv_gain_6th" : 75.3038515998754,
+    "tv_gaussian_c2" : 0.01086473858410425,
+    "var_abs_error" : 4.551624063298121e-05,
+    "variance" : 1.6667121829072997
+  }
+}
