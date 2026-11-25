@@ -36,14 +36,15 @@ swift run --package-path swiftpp --build-system native ErgenticsCLI
 To emit a schema-compliant calibration JSON record (matching [`CALIBRATIONS.md`](../CALIBRATIONS.md)) to the Data Model plane:
 
 ```bash
-swift run --package-path swiftpp --build-system native ErgenticsCLI \
+swift run --package-path swiftpp --build-system native -c release ErgenticsCLI \
   --commit "$(git rev-parse --short HEAD)" \
-  --export-calibration data/calibrations/c2_winding_m40_swiftpp.json
+  --export-calibration data/calibrations/c2_winding_m40_swiftpp.json \
+  --export-edgeworth data/calibrations/c2_edgeworth_m40_swiftpp.json
 ```
 
 ## SWE-Sweep Coverage
 
-- **`DeterministicTests` (`D-Type`):** Catastrophic floating-point cancellation sweep (naive forward/reverse vs. Kahan vs. Neumaier), exact Möbius $\mu(n)$ and GCD, 72-edge bidirectional Swift ↔ C++20 PLR involution round-trip, Ihara–Bass determinant identity, first-principles 72-edge transfer matrix up to $m=40$ ($\pi(40) = 54{,}975{,}717{,}792$, Correspondence `C-1`), Lemma 4.1 / Theorem 4.2 tune decoder + `NEG-M4` backtracking counterexample (`C-4`).
+- **`DeterministicTests` (`D-Type`):** Catastrophic floating-point cancellation sweep (naive forward/reverse vs. Kahan vs. Neumaier), exact Möbius $\mu(n)$ and GCD, 72-edge bidirectional Swift ↔ C++20 PLR involution round-trip, Ihara–Bass determinant identity, first-principles 72-edge transfer matrix up to $m=40$ ($\pi(40) = 54{,}975{,}717{,}792$, Correspondence `C-1`), Lemma 4.1 / Theorem 4.2 tune decoder + `NEG-M4` backtracking counterexample (`C-4`), and Section 7 exact arithmetic (`section7.*` / `Section7.swift`: Thm 7.7 Bareiss + modular SNF `K(X)` & `NEG-E7`, Prop 7.2/Thm 7.8 `|Aut(X)| = 24` & Dhar gonality `gon(X) = 6`, Thm 3.5/Props 7.9–7.10 $P_{44}$ & direct $\mathbb{F}_{2^k}$ genus-5 curve point counts, Prop 3.7 Eisenstein conductor `12`, Thms 7.1/7.13 Schreier basis & Bruhat–Tits ball $r \le 7$).
 - **`RuntimeTests` (`R-Type`):** Global symmetric PD via Cholesky + cyclic Jacobi eigensolver on Tonnetz Gram $G$ and $\operatorname{Cov} = \frac{1}{2}G^{-1}$, off-diagonal spike rejection despite positive diagonals, `NaN`/`±Inf` poisoning guards, Laplacian $3I-A$ PSD nullity $= 1$, twisted $A_\varphi$ Hermiticity, exact integer conservation $\sum_w \pi(m,w) = \pi(m)$, and simplex conservation.
-- **`CalibrationTests` (`P-Type` & RCTs):** Full Rung-1 discrete Gaussian calibration (TV, KL, KS, $W_1$, skewness, $O(1/m)$ Edgeworth excess kurtosis, $1\sigma$–$3\sigma$ coverage across $m=12 \to 24 \to 40$, `C-2`), flux window & cyclic cover Ramanujan boundary (`C-3`, `NEG-M2`), 12/31/53-EDO graph RH threshold (`NEG-M3`), exhaustive 8,192 signing census (`RCT-1`, `NEG-M9`), keyed 2-adic slope doubling vs. non-fixed control discs (`RCT-2`, `NEG-M10`), and keyed Monte Carlo non-backtracking walk null isolating the Möbius primitivity correction (`RCT-3`).
+- **`CalibrationTests` (`P-Type`, RCTs & Cycle 4 Novelties):** Full Rung-1 discrete Gaussian calibration (`C-2`), Edgeworth Ladder `C-2'` (**10.92×**) / `C-2''` (**75.30×**) and 2D Tonnetz isotropy/anisotropy across $W=-u, v, 4u+3v$ at $m=40$ (Theorem C, `novelty.*` / `Novelty.swift`), exhaustive Theorems A & B + `NEG-M11` sweep across all 948 chords $5 \le N \le 32$, flux window & cyclic cover Ramanujan boundary (`C-3`, `NEG-M2`), 12/31/53-EDO graph RH threshold (`NEG-M3`), exhaustive 8,192 signing census (`RCT-1`, `NEG-M9`), keyed 2-adic slope doubling vs. non-fixed control discs (`RCT-2`, `NEG-M10`), and keyed Monte Carlo non-backtracking walk null isolating the Möbius primitivity correction (`RCT-3`).
 - **`SeamTests` (`D ↔ R ↔ P`):** Word-for-word bit-exact `KeyedPRNG` (FNV-1a + SplitMix64 + Xoshiro256**) lockstep between Pure Swift 6.4 and C++20, order-invariance across trials, and fail-closed `P → R → D` guarded handoffs rejecting indefinite covariance, `NaN`, out-of-domain flux, uncalibrated TV, and small-$m$ kurtosis violations.

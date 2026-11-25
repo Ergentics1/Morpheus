@@ -72,9 +72,38 @@ fn main() {
         x4.prng_first_word
     );
 
-    let all_ok = t34.passed && tow.passed && t16.passed && gen.passed && x4.passed;
+    let nov_ab = morpheus_rust::novelty::verify_novelty_theorems_a_and_b(n_max);
+    println!(
+        "  [{}] Novelty 1 (Thms A & B / NEG-M11, ALL S via S_max, N<={}): chords={} max|L0∩Lt|={} T_fail={} TI_oct={}({:?}) TI_unexp={} NEG-M11:{}",
+        if nov_ab.passed { "PASS" } else { "FAIL" },
+        nov_ab.n_max,
+        nov_ab.chords_tested,
+        nov_ab.max_link_intersection,
+        nov_ab.t_orbit_failures,
+        nov_ab.ti_octatonic_failures,
+        nov_ab.octatonic_witness_ns,
+        nov_ab.ti_unexpected_failures,
+        nov_ab.neg_m11_verified
+    );
+
+    let nov_c = morpheus_rust::novelty::verify_novelty_theorem_c(40);
+    println!(
+        "  [{}] Novelty 2 (Thm C Edgeworth C-2'/C-2'' & 2D Isotropy m=40): m*k4(u,v,4u+3v)=({:.4},{:.4},{:.4}) TV0={:.3e} TV4={:.3e}({:.1}x) TV6={:.3e}({:.1}x)",
+        if nov_c.passed { "PASS" } else { "FAIL" },
+        nov_c.m_times_ex_kurt,
+        nov_c.m_ex_kurt_v,
+        nov_c.m_ex_kurt_zigzag,
+        nov_c.tv_gaussian,
+        nov_c.tv_edgeworth4,
+        nov_c.tv_gain_4,
+        nov_c.tv_edgeworth6,
+        nov_c.tv_gain_6
+    );
+
+    let all_ok = t34.passed && tow.passed && t16.passed && gen.passed && x4.passed && nov_ab.passed && nov_c.passed;
     println!("Overall Rust Oracle Result: {}", if all_ok { "ALL PASS" } else { "FAILURES" });
     if !all_ok {
         std::process::exit(1);
     }
 }
+

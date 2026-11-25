@@ -176,6 +176,23 @@ int main() {
     expect(sch.passed && sch.bt_ball_r7_distinct == 382 && sch.gamma0_tr == 85 && sch.gamma0_det == 256,
            "Thms 7.1 & 7.13 / NEG-M8: 13 hyperbolic Schreier gens, 382 distinct BT r<=7 vertices, tau(g0)=7225/256>4");
 
+    // 10. ADPIE Cycle 4: Original Novelty Theorems (Theorems A, B, C & NEG-M11).
+    NoveltyTuneClassificationReport nov_tune = verify_novelty_tune_classification(32);
+    expect(nov_tune.passed && nov_tune.max_link_intersection == 2 &&
+           nov_tune.t_orbit_failures == 0 && nov_tune.ti_octatonic_failures == 4 &&
+           nov_tune.ti_unexpected_failures == 0 && nov_tune.neg_m11_verified,
+           "Novelty 1 (Thms A & B / NEG-M11): N<=32 max|L0∩Lt|=2, 0 T-fails, exact 4 octatonic T/I fails, NEG-M11 verified");
+
+    EdgeworthWindingReport edge40 = evaluate_edgeworth_winding_calibration(40);
+    expect(edge40.passed && edge40.tv_gain_4 > 10.0 && edge40.tv_gain_6 > 70.0 &&
+           std::fabs(edge40.m_times_excess_kurtosis - (-8.5)) < 0.01,
+           "Novelty 2 (Thm C / C-2' & C-2''): m=40 m*k4=-8.495 vs -17/2, Edgeworth TV gains >10x (4th) and >70x (6th)");
+
+    TonnetzAxisCumulantReport ax40 = verify_tonnetz_axis_cumulants(40);
+    expect(ax40.passed && ax40.bad_divisibility_count == 0 && ax40.max_isotropy_spread_4th < 0.02,
+           "Novelty 2 (Thm C 2D Isotropy): m=40 exact coboundaries & universal -17/(2m) kurtosis across W=-u, v, 4u+3v");
+
     std::printf("=== Lane 1 C++20 Result: %s ===\n", g_failed == 0 ? "ALL PASS" : "FAILURES");
     return g_failed == 0 ? 0 : 1;
 }
+

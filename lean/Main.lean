@@ -13,7 +13,16 @@ import Morpheus
 #print axioms Morpheus.thm7_1_schottky_involutions
 #print axioms Morpheus.thm7_13_gamma0_in_kernel
 #print axioms Morpheus.thm7_13_gamma0_all_powers_obstructed
+#print axioms Morpheus.thmA_link_intersection_le_two
+#print axioms Morpheus.thmB_one_voice_necessary
+#print axioms Morpheus.thmB_octatonic_sufficient
+#print axioms Morpheus.neg_M11_N8_S2_counterexample
+#print axioms Morpheus.corB1_half_closed_no_one_voice_collision
+#print axioms Morpheus.thmC_hexagonal_power_sums_exact
+#print axioms Morpheus.thmC_exact_cumulant_series
+#print axioms Morpheus.thmC_cumulant_ratios_exact
 
 def main : IO Unit := do
   IO.println "Morpheus Lean 4 Formal Verification Oracle: ALL THEOREMS KERNEL-CHECKED (0 sorry)."
   IO.println s!"  gamma0 = [[{Morpheus.gamma0Mat.a}, {Morpheus.gamma0Mat.b}], [{Morpheus.gamma0Mat.c}, {Morpheus.gamma0Mat.d}]], tr={Morpheus.gamma0Mat.tr}, det={Morpheus.gamma0Mat.det}"
+

@@ -520,7 +520,69 @@ public enum TripleCheckBridge {
         return [itemSNF, itemGon, itemF2, itemEis, itemSch]
     }
 
-    /// Run the complete Swift++ Triple-Check SWE-sweep across D, R, P, Correspondence, RCT, Seam, and Section 7.
+    // MARK: - ADPIE Cycle 4: Original Mathematical Novelties (Theorems A, B, C & NEG-M11)
+
+    public static func checkNoveltyTheorems() -> (items: [TripleCheckItem], edge40: EdgeworthWindingReport, axes40: TonnetzAxisCumulantReport) {
+        // 1. Novelty 1 (Theorem A, Theorem B, Corollary B.1, NEG-M11):
+        // Exhaustive check of ALL 3-note chord classes under maximal S_max(c_0) for 5 <= N <= 32.
+        let tunS = verifyNoveltyTuneClassification(nMax: 32)
+        let tunC = ergentics.verify_novelty_tune_classification(32)
+        let tunMatch = tunS.passed && tunC.passed &&
+                       tunS.chordsTested == tunC.chords_tested &&
+                       tunS.maxLinkIntersection == tunC.max_link_intersection &&
+                       tunS.tOrbitFailures == tunC.t_orbit_failures &&
+                       tunS.tiOctatonicFailures == tunC.ti_octatonic_failures &&
+                       tunS.tiUnexpectedFailures == tunC.ti_unexpected_failures &&
+                       tunS.negM11Verified && tunC.neg_m11_verified
+        let itemTun = TripleCheckItem(
+            id: "NOV-1/ThmA+B/NEG-M11", category: "D", passed: tunMatch, maxDelta: tunMatch ? 0.0 : 1.0,
+            detail: "N<=32 chords=\(tunS.chordsTested) max|L0∩Lt|=\(tunS.maxLinkIntersection)<=2 T_fail=\(tunS.tOrbitFailures) TI_oct=\(tunS.tiOctatonicFailures)/4 TI_unexp=\(tunS.tiUnexpectedFailures) NEG-M11=\(tunS.negM11Verified)"
+        )
+
+        // 2. Novelty 2 (Theorem C, Correspondence C-2' & C-2''):
+        // Exact 4th- and 6th-order Edgeworth winding calibration across m = 24 -> 40.
+        let e24S = evaluateEdgeworthWindingCalibration(m: 24)
+        let e24C = ergentics.evaluate_edgeworth_winding_calibration(24)
+        let e40S = evaluateEdgeworthWindingCalibration(m: 40)
+        let e40C = ergentics.evaluate_edgeworth_winding_calibration(40)
+        let eDelta = max(
+            max(abs(e40S.tvGaussian - e40C.tv_gaussian), abs(e40S.tvEdgeworth4 - e40C.tv_edgeworth4)),
+            max(abs(e40S.tvEdgeworth6 - e40C.tv_edgeworth6), abs(e40S.mTimesExcessKurtosis - e40C.m_times_excess_kurtosis))
+        )
+        let eDelta24 = max(abs(e24S.tvEdgeworth4 - e24C.tv_edgeworth4), abs(e24S.tvEdgeworth6 - e24C.tv_edgeworth6))
+        let maxEDelta = max(eDelta, eDelta24)
+        let edgeOK = e24S.passed && e24C.passed && e40S.passed && e40C.passed &&
+                     e40S.tvEdgeworth4 < e24S.tvEdgeworth4 &&
+                     e40S.tvEdgeworth6 < e24S.tvEdgeworth6 &&
+                     maxEDelta < 1e-13
+        let itemEdge = TripleCheckItem(
+            id: "NOV-2/C-2'/C-2''", category: "Correspondence", passed: edgeOK, maxDelta: maxEDelta,
+            detail: String(format: "m=40 m*k4=%.4f(-8.5) TV0=%.3e TV4=%.3e(%.1fx) TV6=%.3e(%.1fx) delta=%.2e",
+                           e40S.mTimesExcessKurtosis, e40S.tvGaussian, e40S.tvEdgeworth4, e40S.tvGain4,
+                           e40S.tvEdgeworth6, e40S.tvGain6, maxEDelta)
+        )
+
+        // 3. Novelty 2 (Theorem C, 2D Tonnetz Isotropy across armchair W=-u, v and zigzag 4u+3v at m=40).
+        let axS = verifyTonnetzAxisCumulants(m: 40)
+        let axC = ergentics.verify_tonnetz_axis_cumulants(40)
+        let axDelta = max(
+            max(abs(axS.mExKurtU - axC.m_ex_kurt_u), abs(axS.mExKurtV - axC.m_ex_kurt_v)),
+            max(abs(axS.mExKurtZigzag - axC.m_ex_kurt_zigzag), abs(axS.m2Std6Zigzag - axC.m2_std6_zigzag))
+        )
+        let axOK = axS.passed && axC.passed &&
+                   axS.totalPrimes == axC.total_primes &&
+                   axS.badDivisibilityCount == 0 && axC.bad_divisibility_count == 0 &&
+                   axDelta < 1e-12
+        let itemAx = TripleCheckItem(
+            id: "NOV-3/ThmC-2D", category: "P", passed: axOK, maxDelta: axDelta,
+            detail: String(format: "m=40 m*k4(u,v,4u+3v)=(%.3f,%.3f,%.3f) spread=%.4f delta=%.2e",
+                           axS.mExKurtU, axS.mExKurtV, axS.mExKurtZigzag, axS.maxIsotropySpread4th, axDelta)
+        )
+
+        return ([itemTun, itemEdge, itemAx], e40S, axS)
+    }
+
+    /// Run the complete Swift++ Triple-Check SWE-sweep across D, R, P, Correspondence, RCT, Seam, Section 7, and Novelty Theorems.
     public static func runFullSuite() -> TripleCheckSuiteReport {
         var items = [TripleCheckItem]()
         items.append(checkSummationAntiCancellation())
@@ -539,6 +601,8 @@ public enum TripleCheckBridge {
         items.append(contentsOf: rctItems)
         items.append(checkSeamReplayAndHandoff(cal12: cal12, cal40: cal40))
         items.append(contentsOf: checkSection7AndArithmetic())
+        let (novItems, _, _) = checkNoveltyTheorems()
+        items.append(contentsOf: novItems)
 
         return TripleCheckSuiteReport(
             items: items,
@@ -555,3 +619,4 @@ public enum TripleCheckBridge {
         )
     }
 }
+

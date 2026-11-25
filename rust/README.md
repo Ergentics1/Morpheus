@@ -9,6 +9,9 @@ Zero-dependency **Code Model** (MIT License) fourth-language verifier in Rust (`
 - **Theorem 4.2 (`src/tune_general.rs`):** Local tune decoder verified across all **174,864** rooted primes of length $m \le 16$ (of which **131,136** have length $m = 16$; `0` failures).
 - **Theorem 4.3 / Correspondence `C-4` (`src/tune_general.rs`):** Exact held-note link-graph cycle criterion verified across all **6,028** $(N, S, \mathcal{C})$ tuning systems for $5 \le N \le 72$ (`0` counterexamples) and extended to **11,452** systems for $5 \le N \le 96$ via `--n-max 96` (`0` counterexamples).
 - **Fourth-Language Cross-Oracle (`src/swe_sweep.rs`, `src/keyed_prng.rs`):** Independent cross-check of $\pi(40) = 54{,}975{,}717{,}792$, Rung-1 TV/excess-kurtosis, anti-cancellation summation, global PD/Cholesky spike & `NaN` guards, and bit-exact `KeyedPRNG` parity with C++20 and Pure Swift 6.4.
+- **ADPIE Cycle 4 Original Novelties (`src/novelty.rs`):**
+  - **Theorems A, B, Cor B.1 & `NEG-M11`:** Exhaustive maximal-$S_{\max}(c_0)$ sweep across all **10,576** 3-note chord classes for $5 \le N \le 72$ (covering all $2^{\lfloor N/2\rfloor}$ step sets by monotonicity): `max|L0∩Lt| = 2`, `T_fail = 0`, exact 9 octatonic $T/I$ diameter witnesses at $N = 8, 16, \dots, 72$, `TI_unexp = 0`, and explicit `NEG-M11` counterexample ($N=8, S=\{2\}, c_0=\{0,1,4\}$).
+  - **Theorem C (`C-2'` / `C-2''`):** Exact 72-edge transfer-matrix verification at $m = 40$ across bond-parallel armchair axes ($W = -u$, $v$) and bond-perpendicular zigzag axis ($4u + 3v$), confirming universal 4th-cumulant rotational isotropy ($m\kappa_{\mathrm{ex}} \to -8.5$) and **10.92×** (`C-2'`) / **75.30×** (`C-2''`) TV reduction.
 
 ## Build & Run
 

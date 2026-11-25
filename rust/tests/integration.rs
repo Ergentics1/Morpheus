@@ -56,3 +56,26 @@ fn test_fourth_language_swe_sweep_and_keyed_prng_replay() {
     let mut a_rep = KeyedPrng::from_key(k1);
     assert_eq!(a_rep.next_u64(), v1);
 }
+
+#[test]
+fn test_novelty_1_theorems_a_and_b_all_s_up_to_n72() {
+    let r = morpheus_rust::novelty::verify_novelty_theorems_a_and_b(72);
+    assert!(r.passed, "{r:?}");
+    assert_eq!(r.max_link_intersection, 2);
+    assert_eq!(r.t_orbit_failures, 0);
+    assert_eq!(r.ti_octatonic_failures, 9);
+    assert_eq!(r.ti_unexpected_failures, 0);
+    assert_eq!(r.octatonic_witness_ns, vec![8, 16, 24, 32, 40, 48, 56, 64, 72]);
+    assert!(r.neg_m11_verified);
+}
+
+#[test]
+fn test_novelty_2_theorem_c_edgeworth_and_2d_isotropy() {
+    let r = morpheus_rust::novelty::verify_novelty_theorem_c(40);
+    assert!(r.passed, "{r:?}");
+    assert_eq!(r.bad_divisibility, 0);
+    assert!(r.tv_gain_4 > 10.0);
+    assert!(r.tv_gain_6 > 70.0);
+    assert!(r.max_isotropy_spread_4th < 0.02);
+}
+

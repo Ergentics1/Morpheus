@@ -51,4 +51,19 @@ final class CalibrationTests: XCTestCase {
         XCTAssertEqual(rct3.nonMultiple12Observed, 0)
         XCTAssertGreaterThan(rct3.exactClosedVsPrimeTV, 0.0)
     }
+
+    func testNoveltyTheoremsTripleCheck() {
+        let (items, edge40, axes40) = TripleCheckBridge.checkNoveltyTheorems()
+        XCTAssertEqual(items.count, 3)
+        for item in items {
+            XCTAssertTrue(item.passed, "\(item.id): \(item.detail)")
+            XCTAssertLessThan(item.maxDelta, 1e-12, "\(item.id) cross-lane delta too large")
+        }
+        XCTAssertEqual(edge40.mTimesExcessKurtosis, -8.5, accuracy: 0.01)
+        XCTAssertGreaterThan(edge40.tvGain4, 10.0)
+        XCTAssertGreaterThan(edge40.tvGain6, 70.0)
+        XCTAssertEqual(axes40.badDivisibilityCount, 0)
+        XCTAssertLessThan(axes40.maxIsotropySpread4th, 0.02)
+    }
 }
+

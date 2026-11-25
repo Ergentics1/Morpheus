@@ -13,7 +13,7 @@ Open-sourced research repository by **Ergentics**.
 
 Studies the 3-regular neo-Riemannian triad graph $X$ and its Ihara zeta primes (*prime cadences*), linking the Tonnetz to the honeycomb/graphene tight-binding spectrum, Weil polynomials over $\mathbb{F}_2$, the tune theorem and its generalisation, voice-leading homology, a genus-13 2-adic Mumford curve, minimal genus-5 binary curves, and 2-adic arithmetic obstructions.
 
-> **Status:** Complete baseline package imported and reconciled across LaTeX, Markdown, figures, code, and upstream audit reports (176/176 checks recorded in [`audits/`](audits/README.md)). Independent cross-verification (`[X]`) and formal proofs (Lean 4 / Rust / C++ / Swift) have not yet been recorded; see [`CONTRIBUTIONS.md`](CONTRIBUTIONS.md) and [`PROVENANCE.md`](PROVENANCE.md).
+> **Status:** Baseline `v0.1.0` package (`paper/`, `code/`, `audits/`, `CONTRIBUTIONS.md`, `Makefile`) is archived unmodified. First-principles `[X]` verification and formal proofs are live across four independent languages (`lean/` Lean 4.36.0, `swiftpp/` C++20 × Pure Swift 6.4 × Interop, `rust/` Rust 1.100.0) with strict Code-vs-Data separation (`data/`), alongside audit-forward original mathematical novelties in [`NOVELTY_GEMINI4_NEON.md`](NOVELTY_GEMINI4_NEON.md). Manuscript `[X]` tags in `CONTRIBUTIONS.md` and `paper/` remain unchanged until author review.
 
 ## Repository Layout
 
@@ -23,16 +23,22 @@ Studies the 3-regular neo-Riemannian triad graph $X$ and its Ihara zeta primes (
 | [`prime_cadences_paper.md`](prime_cadences_paper.md) | GitHub Flavored Markdown mirror reconciled with `paper/prime-cadences.tex` |
 | [`figures/`](figures/README.md) | PNG figures 1–5 for `prime_cadences_paper.md` |
 | [`arxiv/`](arxiv/) | Ready-to-upload arXiv source tarball (`prime-cadences-arxiv.tar.gz`) |
-| [`code/`](code/) | Upstream baseline Python scripts and co-located JSON outputs (retained as baseline; new `[X]` work separates Code and Data models per [`METHODOLOGY.md`](METHODOLOGY.md)) |
+| [`NOVELTY_GEMINI4_NEON.md`](NOVELTY_GEMINI4_NEON.md) | Audit-forward original mathematical novelties (ADPIE Cycle 4): complete resolution of Open Problem (3) (Theorems A, B, Cor B.1, `NEG-M11`) & exact 2D Tonnetz 6th-order cumulant/Edgeworth theory (Theorem C, `C-2'`/`C-2''`) |
+| [`lean/`](lean/) | Machine-checked Lean 4.36.0 formal proofs (zero Mathlib, 0 `sorryAx`, 0 `ofReduceBool`; constructive `[propext, Quot.sound]` / axiom-free across Cycles 2A + Thm B suff/`NEG-M11`/Thm C, standard Lean core `[propext, Classical.choice, Quot.sound]` for Thm A/Thm B nec/Cor B.1): `TriadGraph`, `TuneTheorem`, `ConductorTwo`, `WindingAndSchottky`, `NoveltyTheorems` |
+| [`swiftpp/`](swiftpp/) | **Swift++** Triple-Check verification suite (`ErgenticsCXX` C++20 `g++`/`clang++` · `ErgenticsSwift` Pure Swift 6.4 · `ErgenticsInterop` live cross-check, `0.000e+00` delta) |
+| [`rust/`](rust/) | Fourth-language exact verifier (Rust 1.100.0, zero external crates): $\mathbb{Z}[\zeta_{12}]$, Artin–Ihara tower, general $N$-EDO sweeps ($N \le 96$ & maximal $S_{\max}$ to $N \le 72$), and Theorem C cross-check |
+| [`data/`](data/README.md) | Immutable, SHA-256-checksummed Data Model calibration records (`data/MANIFEST.sha256`, CC BY 4.0) |
+| [`code/`](code/) | Upstream baseline Python scripts and co-located JSON outputs (retained unmodified as baseline; new `[X]` work separates Code and Data models per [`METHODOLOGY.md`](METHODOLOGY.md)) |
 | [`audits/`](audits/README.md) | Recorded reports from the five audit suites (31, 36, 23, 59, and 27 checks) |
 | [`Makefile`](Makefile) & [`requirements.txt`](requirements.txt) | Build targets (`pdf`, `arxiv`, `audit`, `figures`) and pinned Python dependencies |
 | [`CONTRIBUTIONS.md`](CONTRIBUTIONS.md) | Author/AI contribution tags (`[GB]`, `[E]`, `[E→GB]`, `[lit.]`, `[X]`) and cross-verification ledger |
-| [`METHODOLOGY.md`](METHODOLOGY.md) | Core Thesis (Correspondence Principle), Code-vs-Data non-conflation, and D/R/P/Seam SWE-sweep standard |
+| [`METHODOLOGY.md`](METHODOLOGY.md) | Core Thesis (Correspondence Principle), Code-vs-Data non-conflation, ADPIE, and D/R/P/Seam SWE-sweep standard |
 | [`ARCHITECTURE.md`](ARCHITECTURE.md) | Four-plane Code-vs-Data architecture, `D ↔ R ↔ P` seams, and multi-language layout blueprint |
-| [`CALIBRATIONS.md`](CALIBRATIONS.md) | Correspondence error-bound ledger (`C-1`–`C-4`), Rung-1 calibration metrics, RCT protocol, and output schema |
+| [`CALIBRATIONS.md`](CALIBRATIONS.md) | Correspondence error-bound ledger (`C-1`–`C-4`, `C-2'`, `C-2''`), Rung-1 calibration metrics, RCT protocol, and output schema |
 | [`ERGENTICS.md`](ERGENTICS.md) | Ergentics core library (`ergentics/`) and **Swift++** Triple-Check spec (`swiftpp/`: Pure C++20 · Pure Swift · Swift↔C++ interop) |
-| [`NEGATIVES.md`](NEGATIVES.md) | Permanent ledger of refuted claims, obstructions, negative controls, and engineering traps for rechecking |
-| [`PROVENANCE.md`](PROVENANCE.md) | Origin, AI-assistance disclosure, SHA-256 checksums, and reconciliation log |
+| [`NEGATIVES.md`](NEGATIVES.md) | Permanent ledger of refuted claims (`NEG-M1`–`NEG-M11`, `NEG-E1`–`NEG-E8`), obstructions, negative controls, and engineering traps |
+| [`PROVENANCE.md`](PROVENANCE.md) | Origin, AI-assistance disclosure, SHA-256 checksums, and revision log |
+| [`CHANGELOG.md`](CHANGELOG.md) | Versioned release and `[Unreleased]` verification/novelty changelog |
 | [`CITATION.cff`](CITATION.cff) | Machine-readable citation metadata (CFF 1.2.0) |
 | [`POLICY.md`](POLICY.md) | Research integrity, AI provenance, licensing, and hygiene policy |
 | [`SECURITY.md`](SECURITY.md) | Vulnerability reporting and secret/path-leak security policy |
