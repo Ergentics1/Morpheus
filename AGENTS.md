@@ -13,6 +13,8 @@ Instructions for AI coding/research agents and automated tools operating on **Mo
 7. **Check licenses before adding dependencies:** All code dependencies must be compatible with the repository's [MIT License](LICENSE).
 8. **Verify by Correspondence & D/R/P/Seam SWE-sweeps:** Follow [`METHODOLOGY.md`](METHODOLOGY.md) — quantify error bounds in dimensionless regimes, test Deterministic (`D`), Runtime global-invariant (`R`), Probabilistic calibration/RCT (`P`), and `D ↔ R ↔ P` boundary seams (including keyed PRNGs for bit-exact replay).
 9. **Keep negatives:** Never discard refuted hypotheses, negative controls, or failed assumptions; log and recheck them in [`NEGATIVES.md`](NEGATIVES.md) with their exact scope boundaries.
+10. **Follow ADPIE & eliminate superseded scaffolding:** Execute every work unit via **Assess → Diagnose → Plan → Implement → Evaluate** ([`METHODOLOGY.md`](METHODOLOGY.md)). Build real foundations directly; audit for and remove hardcoded shortcuts, superseded scaffolding, or temporary fixtures rather than letting them linger.
+11. **Release on paper updates:** Cut a new versioned GitHub release whenever the paper manuscript is updated.
 
 ## Pre-Commit Security Checklist
 
@@ -20,6 +22,7 @@ Before committing or opening a pull request, verify:
 
 - `git status` and `git diff` contain no secrets, tokens, personal info, or local filesystem paths.
 - Code and Data models remain cleanly separated (no stray data blobs dropped into new source directories).
+- No superseded scaffolding, hardcoded placeholder fixtures, or dead stubs are left behind.
 - Build artifacts (`.lake/`, `target/`, `.build/`, `build/`, `__pycache__/`) are untracked and ignored via [`.gitignore`](.gitignore).
 - Any newly added PNG/PDF assets contain no local path metadata.
 - Automated hygiene checks in [`.github/workflows/security.yml`](.github/workflows/security.yml) pass.

@@ -57,7 +57,22 @@ Every `[X]` cross-verification (tracked in [`CONTRIBUTIONS.md`](CONTRIBUTIONS.md
   - **Bit-exact replay (`D ↔ P`):** Never call unkeyed global PRNG state in deterministic tests or simulations; pass explicit, scoped keyed PRNG streams so outcomes are invariant to execution order.
   - **Guarded handoffs (`P → R → D`):** Validate calibration, finiteness, and global structural invariants (`R`) at every boundary before probabilistic outputs drive deterministic logic (`D`).
 
-## 4. Baseline Audit Findings & `[X]` SWE-Sweep Targets
+## 4. Execution Loop (ADPIE) & Anti-Scaffolding Discipline
+
+All engineering, verification, and paper-update work follows the **ADPIE** cycle:
+
+1. **Assess:** Inspect current code, proofs, data models, baseline artifacts, and [`NEGATIVES.md`](NEGATIVES.md).
+2. **Diagnose:** Pinpoint root causes, `D`/`R`/`P`/Seam blind spots, Code-vs-Data conflation, hardcoded shortcuts, or correspondence gaps.
+3. **Plan:** Specify the real foundation, dimensionless regimes, error bounds, and pre-registered acceptance/RCT criteria before editing code.
+4. **Implement:** Lay out deep, first-principles open-source code with tight comments across the target lanes (including Swift++ Triple-Check).
+5. **Evaluate:** Execute full `D` / `R` / `P` / Seam SWE-sweeps, verify 3-way agreement and calibration bounds, update [`CONTRIBUTIONS.md`](CONTRIBUTIONS.md) (`[X]`), [`PROVENANCE.md`](PROVENANCE.md), and [`NEGATIVES.md`](NEGATIVES.md), and publish a versioned GitHub release on every paper update.
+
+### No Lingering Scaffolding or Hardcoded Fixtures
+
+- Build the **real foundation** whenever possible instead of placeholder stubs or hardcoded lookup tables.
+- Audit continuously for **superseded scaffolding, hardcoded constants, and temporary fixtures**; never allow temporary fixtures to outlive the step that needed them, and never let hardcoded outputs masquerade as live first-principles computation.
+
+## 5. Baseline Audit Findings & `[X]` SWE-Sweep Targets
 
 Concrete gaps identified in the imported baseline `code/` to address in independent `[X]` verification:
 

@@ -20,6 +20,7 @@ All verification follows Ergentics' **Correspondence Principle**, **Code-vs-Data
 ## 3. Code Depth, Comments & Non-Conflation
 
 - Lay out open-source code deeply and thoroughly so mathematical steps and verification logic are directly inspectable; keep comments tight and to the point.
+- **No lingering scaffolding or hardcoded shortcuts:** Prefer real foundations over temporary fixtures; actively monitor for and remove superseded scaffolding before committing.
 - **Do not conflate data with code:** Code (executable logic, proofs, verifiers) and Data (cached tables, empirical measurements, external lookups, audit logs) are two distinct models and must stay structurally separated. Assertions over cached data files do not constitute independent code execution.
 - Never commit credentials, API keys, tokens, `.env` files, private keys, or personal data.
 - Never commit absolute local filesystem paths, workstation usernames, or embedded file-path metadata in assets. Use repository-relative paths only.
@@ -30,8 +31,10 @@ All verification follows Ergentics' **Correspondence Principle**, **Code-vs-Data
 - **Paper & Data Model (`paper/`, `figures/`, `audits/`, future `data/`, and documentation):** [CC BY 4.0](LICENSE-paper) ([`LICENSES/CC-BY-4.0.txt`](LICENSES/CC-BY-4.0.txt)).
 - Third-party code dependencies must use MIT-compatible permissive licenses (e.g., MIT, Apache-2.0, BSD) unless explicitly approved by the maintainer.
 
-## 5. Contributions
+## 5. Contributions & Releases
 
+- Follow the **ADPIE** loop (**Assess → Diagnose → Plan → Implement → Evaluate**; see [`METHODOLOGY.md`](METHODOLOGY.md)) for every work unit.
 - Keep pull requests focused, well-structured, and clean.
-- Update [`PROVENANCE.md`](PROVENANCE.md) and [`CONTRIBUTIONS.md`](CONTRIBUTIONS.md) whenever adding or revising research artifacts or verification results.
+- Update [`PROVENANCE.md`](PROVENANCE.md), [`CONTRIBUTIONS.md`](CONTRIBUTIONS.md), and [`NEGATIVES.md`](NEGATIVES.md) whenever adding or revising research artifacts or verification results.
+- Cut a new versioned GitHub release whenever the paper manuscript is updated.
 - Engage constructively and focus critiques on mathematical correctness, clarity, and reproducibility.
