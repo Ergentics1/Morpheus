@@ -1,0 +1,4 @@
+module ErgenticsCXX {
+    header "ergentics_cxx.hpp"
+    export *
+}

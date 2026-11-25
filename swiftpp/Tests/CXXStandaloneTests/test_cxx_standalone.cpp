@@ -1,0 +1,159 @@
+#include "ergentics_cxx.hpp"
+
+#include <cmath>
+#include <cstdio>
+#include <cstdlib>
+#include <vector>
+
+using namespace ergentics;
+
+namespace {
+
+int g_failed = 0;
+
+void expect(bool cond, const char* msg) {
+    if (cond) {
+        std::printf("  [PASS] %s\n", msg);
+    } else {
+        std::printf("  [FAIL] %s\n", msg);
+        ++g_failed;
+    }
+}
+
+} // namespace
+
+int main() {
+    std::printf("=== Lane 1: Standalone Pure C++20 SWE-Sweep ===\n");
+
+    // 1. D-Type: Anti-cancellation summation & exact Mobius arithmetic.
+    std::vector<double> cancel_seq = {1e16, 1.0, -1e16, 1.0, 1e16, 1.0, -1e16, 1.0};
+    SummationSweepResult sw = run_summation_sweep(cancel_seq.data(), cancel_seq.size());
+    expect(sw.all_finite && std::abs(sw.naive_forward - 4.0) > 1.0 && std::abs(sw.neumaier - 4.0) < 1e-12,
+           "D-Type: catastrophic cancellation trapped in naive_forward and recovered by Neumaier");
+    expect(mobius_mu(1) == 1 && mobius_mu(6) == 1 && mobius_mu(4) == 0 && mobius_mu(30) == -1,
+           "D-Type: exact Mobius function values");
+
+    // 2. D-Type: First-principles exact prime counts & winding up to m = 40 (no cached JSONs).
+    WindingDistribution w6  = compute_exact_winding_distribution(6);
+    WindingDistribution w8  = compute_exact_winding_distribution(8);
+    WindingDistribution w16 = compute_exact_winding_distribution(16);
+    WindingDistribution w40 = compute_exact_winding_distribution(40);
+    expect(w6.total_primes == 32 && w8.total_primes == 78 && w16.total_primes == 8196,
+           "D-Type: exact pi(6)=32, pi(8)=78, pi(16)=8196 from 72-edge transfer matrix");
+    expect(w40.total_primes == 54975717792LL && w40.non_multiple_12_closed == 0,
+           "D-Type: exact pi(40)=54,975,717,792 and 0 non-multiple-of-12 closed walks");
+    expect(ihara_bass_residual(0.137) < 1e-10 && ihara_bass_residual(0.29) < 1e-10,
+           "D-Type: Ihara-Bass determinant identity at multiple u values");
+
+    // 3. D-Type: Tune theorem (Lemma 4.1, Theorem 4.2, negative control NEG-M4) up to m=12.
+    TuneCheckReport tune = verify_tune_theorem(12);
+    expect(tune.lemma_l1 && tune.lemma_l2 && tune.lemma_l3 && tune.backtrack_counterexample_confirmed,
+           "D-Type: Lemmas L1/L2/L3 and NEG-M4 backtracking counterexample confirmed");
+    expect(tune.rooted_primes_checked > 0 && tune.decode_failures == 0 && tune.periodic_tune_failures == 0,
+           "D-Type: local tune decoder 0 failures across all rooted primes up to m=12");
+
+    // 4. R-Type: Global matrix invariants, off-diagonal spike rejection, NaN poisoning, conservation.
+    double gram[4], cov[4];
+    build_tonnetz_gram(gram);
+    build_tonnetz_covariance_per_step(cov);
+    MatrixInvariantReport g_rep = check_symmetric_pd(gram, 2, 1e-12, 1e-12);
+    MatrixInvariantReport c_rep = check_symmetric_pd(cov, 2, 1e-12, 1e-12);
+    expect(g_rep.code == INV_OK && c_rep.code == INV_OK && c_rep.lambda_min > 0.02,
+           "R-Type: Tonnetz Gram G and Cov=(1/2)G^-1 globally PD (Cholesky + Jacobi)");
+
+    double spiked[4] = {1.0, 2.5, 2.5, 1.0}; // positive diagonals, indefinite global matrix!
+    MatrixInvariantReport sp_rep = check_symmetric_pd(spiked, 2, 1e-12, 1e-12);
+    expect(sp_rep.diagonal_positive && !sp_rep.cholesky_ok && sp_rep.lambda_min < 0.0 &&
+           sp_rep.code == INV_NOT_POSITIVE_DEFINITE,
+           "R-Type: off-diagonal spike rejected globally despite diag(P) > 0");
+
+    double poisoned[4] = {1.0, std::nan(""), 0.0, 1.0};
+    expect(check_symmetric_pd(poisoned, 2, 1e-12, 1e-12).code == INV_NON_FINITE,
+           "R-Type: NaN poisoning rejected immediately");
+
+    double lap[576];
+    build_laplacian_matrix(lap);
+    MatrixInvariantReport l_rep = check_symmetric_psd_nullity(lap, 24, 1, 1e-12, 1e-9);
+    expect(l_rep.code == INV_OK && l_rep.zero_eigenvalue_count == 1,
+           "R-Type: Laplacian 3I - A is globally PSD with exact nullity 1");
+
+    double twisted[2 * 576];
+    build_twisted_adjacency_complex(1.2345, twisted);
+    double herm_err = 0.0;
+    expect(check_hermitian_complex(twisted, 24, 1e-12, &herm_err),
+           "R-Type: twisted adjacency A_phi is globally Hermitian");
+
+    ExactConservationReport cons40 = check_exact_integer_conservation(w40.prime_counts, 17, w40.total_primes);
+    expect(cons40.code == INV_OK, "R-Type: exact integer conservation sum_w pi(40,w) == pi(40)");
+
+    // 5. P-Type: Rung-1 distributional calibration & Correspondence error decay (m=12 -> m=40).
+    auto cal_for_dist = [](const WindingDistribution& wd) {
+        double p[17];
+        for (int i = 0; i < 17; ++i) p[i] = static_cast<double>(wd.prime_counts[i]) / static_cast<double>(wd.total_primes);
+        return evaluate_discrete_gaussian_calibration(p, 17, wd.w_min, static_cast<double>(wd.length_m) / 24.0);
+    };
+    Rung1CalibrationReport cal12 = cal_for_dist(compute_exact_winding_distribution(12));
+    Rung1CalibrationReport cal24 = cal_for_dist(compute_exact_winding_distribution(24));
+    Rung1CalibrationReport cal40 = cal_for_dist(w40);
+    expect(cal40.code == INV_OK && cal40.total_variation < cal24.total_variation &&
+           cal24.total_variation < cal12.total_variation && cal40.total_variation < 0.02,
+           "P-Type: Rung-1 TV distance decays monotonically m=12 -> 24 -> 40");
+    expect(std::abs(cal12.skewness) < 1e-12 && std::abs(cal24.skewness) < 1e-12 && std::abs(cal40.skewness) < 1e-12 &&
+           std::abs(cal40.excess_kurtosis) < std::abs(cal24.excess_kurtosis) &&
+           std::abs(cal24.excess_kurtosis) < std::abs(cal12.excess_kurtosis) &&
+           40.0 * std::abs(cal40.excess_kurtosis) < 10.0 &&
+           std::abs(cal40.variance - 40.0 / 24.0) < 1e-3,
+           "P-Type: Rung-1 Edgeworth O(1/m) excess-kurtosis decay, zero skewness, & variance correspondence C-2");
+
+    // 6. Correspondence C-1/C-3 & EDO threshold (NEG-M2, NEG-M3).
+    FluxWindowReport fw = evaluate_flux_window();
+    expect(fw.cyclic_ramanujan[1] && fw.cyclic_ramanujan[2] && !fw.cyclic_ramanujan[3] && !fw.cyclic_ramanujan[12] &&
+           fw.min_eig_at_2pi_3 < 1e-12,
+           "Correspondence C-3 / NEG-M2: cyclic winding covers Ramanujan iff n<=2 & Dirac point at 2pi/3");
+
+    EDOComparisonReport edo = evaluate_edo_ramanujan_comparison();
+    expect(edo.ramanujan_12 && edo.ramanujan_31 && !edo.ramanujan_53,
+           "Correspondence / NEG-M3: 12-EDO & 31-EDO Ramanujan; 53-EDO fails graph RH");
+
+    // 7. RCT-1 (signing census), RCT-2 (keyed 2-adic slope), & RCT-3 (keyed MC non-backtracking walk null).
+    SigningCensusReport sc = run_signing_census_exact();
+    expect(sc.passed && sc.voice_parity_rank == 7372,
+           "RCT-1 / NEG-M9: exact 8192 signing census (7675 Ramanujan, voice-parity rank 7372)");
+
+    PRNGKey k_treat{fnv1a_64_cstr("prime-cadences"), fnv1a_64_cstr("RCT-2-treat"), 0, 20261125ULL};
+    PRNGKey k_ctrl{fnv1a_64_cstr("prime-cadences"), fnv1a_64_cstr("RCT-2-ctrl"), 0, 20261125ULL};
+    TwoAdicRCTReport rct2 = run_two_adic_slope_rct(k_treat, k_ctrl, 2000);
+    expect(rct2.passed, "RCT-2 / NEG-M10: 2-adic slope 2 on fixed discs vs slope 1 on non-fixed controls");
+
+    PRNGKey k_rct3{fnv1a_64_cstr("prime-cadences"), fnv1a_64_cstr("RCT-3-winding-null"), 0, 20261125ULL};
+    WindingNullRCTReport rct3 = run_winding_null_rct(12, k_rct3, 100000);
+    expect(rct3.passed && rct3.non_multiple_12_observed == 0 && rct3.exact_closed_vs_prime_tv > 0.0,
+           "RCT-3: keyed MC closed walks match exact N_12(w)/N_12 null & isolate Mobius primitivity correction");
+
+    // 8. Seam (D <-> R <-> P): bit-exact keyed PRNG & guarded P->R->D boundary.
+    KeyedPRNG r1 = KeyedPRNG::from_key(k_treat);
+    KeyedPRNG r2 = KeyedPRNG::from_key(k_treat);
+    bool replay_ok = true;
+    for (int i = 0; i < 64; ++i) {
+        if (r1.next_u64() != r2.next_u64()) replay_ok = false;
+    }
+    expect(replay_ok, "Seam (D <-> P): keyed PRNG bit-exact replay");
+
+    SeamPolicy pol{0.05, 0.25, 1e-6, 0.0, 6.283185307179586};
+    SeamDecision ok_dec = guarded_flux_kernel_handoff(cal40, cov, 3.141592653589793, pol);
+    SeamDecision bad_cov = guarded_flux_kernel_handoff(cal40, spiked, 3.141592653589793, pol);
+    SeamDecision bad_ood = guarded_flux_kernel_handoff(cal40, cov, -1.0, pol);
+    SeamDecision bad_kurt = guarded_flux_kernel_handoff(cal12, cov, 3.141592653589793, pol);
+    Rung1CalibrationReport bad_cal = cal40;
+    bad_cal.total_variation = 0.40;
+    SeamDecision bad_tv = guarded_flux_kernel_handoff(bad_cal, cov, 3.141592653589793, pol);
+    expect(ok_dec.allowed && ok_dec.code == SEAM_OK &&
+           !bad_cov.allowed && bad_cov.code == SEAM_REJECT_INDEFINITE_COV &&
+           !bad_ood.allowed && bad_ood.code == SEAM_REJECT_OOD_FLUX &&
+           !bad_kurt.allowed && bad_kurt.code == SEAM_REJECT_UNCALIBRATED_KURTOSIS &&
+           !bad_tv.allowed && bad_tv.code == SEAM_REJECT_UNCALIBRATED_TV,
+           "Seam (P -> R -> D): guarded handoff allows calibrated PD m=40 and blocks indefinite/OOD/kurtosis/TV violations");
+
+    std::printf("=== Lane 1 C++20 Result: %s ===\n", g_failed == 0 ? "ALL PASS" : "FAILURES");
+    return g_failed == 0 ? 0 : 1;
+}

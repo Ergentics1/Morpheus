@@ -41,15 +41,23 @@ swiftpp/
 ├── Package.swift                # Swift 6.4 SwiftPM manifest (.interoperabilityMode(.Cxx))
 ├── CMakeLists.txt               # Standalone Pure C++20 build & test target (g++ / clang++)
 ├── Sources/
-│   ├── ErgenticsCoreCXX/        # Lane 1: Pure C++20 headers & kernels (+ module.modulemap)
+│   ├── ErgenticsCXX/            # Lane 1: Pure C++20 headers & kernels (+ module.modulemap)
 │   │   ├── include/
 │   │   │   ├── module.modulemap
-│   │   │   └── ergentics_cxx.hpp
+│   │   │   ├── ergentics_cxx.hpp
+│   │   │   ├── keyed_prng.hpp
+│   │   │   ├── deterministic.hpp
+│   │   │   ├── invariants.hpp
+│   │   │   ├── calibration.hpp
+│   │   │   ├── seam.hpp
+│   │   │   └── tonnetz.hpp
 │   │   └── src/
-│   ├── ErgenticsCoreSwift/      # Lane 2: Independent Pure Swift 6.4 implementation
-│   ├── ErgenticsInterop/        # Lane 3: Live Swift 6.4 ↔ C++20 interop bridge at every turn
-│   └── PrimeCadencesTriple/     # 3-way runner comparing C++ vs Swift vs Swift↔C++ interop
+│   │       └── ergentics_cxx.cpp
+│   ├── ErgenticsSwift/          # Lane 2: Independent Pure Swift 6.4 (zero C++ imports)
+│   ├── ErgenticsInterop/        # Lane 3: Live Swift 6.4 ↔ C++20 interop bridge & Triple-Check
+│   └── ErgenticsCLI/            # 3-way SWE-sweep runner & explicit Data Model JSON exporter
 └── Tests/
+    ├── CXXStandaloneTests/      # Lane 1 standalone C++20 SWE-sweep test binary (g++ / clang++)
     ├── DeterministicTests/      # D-Type: 3-way exact & adversarial float-cancellation sweeps
     ├── RuntimeTests/            # R-Type: 3-way global PD/PSD/conservation & fault injection
     ├── CalibrationTests/        # P-Type: 3-way Rung-1 distributional calibration & keyed RCTs
