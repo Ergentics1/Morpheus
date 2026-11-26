@@ -1,0 +1,2 @@
+# Compiled PDFs are binary: keep them byte-exact in diffs and format-patch series.
+*.pdf binary
