@@ -50,4 +50,4 @@ Every research or paper-update cycle follows a single consistent pattern:
    - Sync `prime_cadences_paper.md`, `CONTRIBUTIONS.md`, `CITATION.cff` (`version` & `date-released`), `NEGATIVES.md`, `README.md`, and `CHANGELOG.md` (moving released items from `[Unreleased]` into `## [X.Y.Z] - YYYY-MM-DD`).
    - Recompute and verify every SHA-256 in `PROVENANCE.md` and `data/MANIFEST.sha256`.
 4. **Pre-commit & CI gate:** Run all `Makefile` audits + security hygiene scan (text, PNG chunks, PDF/MP4/tarball path check), commit cleanly, push to `main`, and verify GitHub Actions `Security Hygiene` CI succeeds.
-5. **Versioned GitHub release on paper update:** Tag `vX.Y.Z` and publish the GitHub release attaching `paper/prime-cadences.pdf` and `arxiv/prime-cadences-arxiv.tar.gz`.
+5. **Versioned GitHub release on paper update:** Tag `vX.Y.Z` and publish the GitHub release; [`.github/workflows/release-assets.yml`](.github/workflows/release-assets.yml) automatically checks out the exact tag, verifies PDF hygiene, generates `SHA256SUMS.txt`, and attaches `prime-cadences.pdf`, `prime-cadences-arxiv.tar.gz`, and `SHA256SUMS.txt` as release assets.
