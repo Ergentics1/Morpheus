@@ -1,0 +1,117 @@
+{
+  "gates": {
+    "D1_bennu_triaxial_corrected": true,
+    "D2_theorem_G2_fdir": true,
+    "D3_L4_routh_and_figure8": true,
+    "D4_theorem_G3_didymos_L2": true,
+    "P1_bennu_tag_fluidized_mc200": true,
+    "R1_42ode_halo_elevated_Wu_and_SK": true
+  },
+  "piece": "Horizon Synthesis Piece II (WP032 + WP033)",
+  "results": {
+    "D1": {
+      "beta_eq_at_600m": 0.004362194999999998,
+      "da_exact_collinear_600m_mps2": 7.912985638699924e-07,
+      "minus_J2_over_2": -0.00875,
+      "net_equatorial_coeff": 0.008649999999999998,
+      "ratio_to_srp_600m": 7.857979780238257,
+      "srp_crossover_radius_m": 997.0170794589137,
+      "three_C22": 0.0174
+    },
+    "D2": {
+      "closed_form_poly_err": 2.220446049250313e-16,
+      "extend_10pct_I_ratio": 1.1391666666666667,
+      "extend_10pct_T_healthy": 0.8380206658250784,
+      "extend_10pct_T_jammed": 0.7898585585937522,
+      "retract_10pct_I_ratio": 0.8725,
+      "retract_10pct_T_healthy": 1.198676529749345,
+      "retract_10pct_T_jammed": 1.280777661923958
+    },
+    "D3": {
+      "active_scale_min_eps": 0.04195235392680606,
+      "fig8_2period_kick_amplification": 54.008877094516095,
+      "fig8_yoshida4_2period_closure": 3.988156640826999e-08,
+      "fig8_yoshida4_max_dE": 4.012612464521226e-11,
+      "gascheau_lyapunov_exact": 0.5372849659117709,
+      "mu_R_ks_002": 0.051545865097543,
+      "mu_R_pct_gain": 33.81273483978413,
+      "mu_R_point_mass": 0.03852089650455137,
+      "paper_lyapunov_relerr_pct": 0.42528007607532314,
+      "passive_L4_hessian_ratio_yy_xx": 11.0
+    },
+    "D4": {
+      "didymos_L2_dist_m": 180.50446613317422,
+      "didymos_L_y_star_m": 40.43649584425472,
+      "didymos_gamma2": 0.15168442532199514,
+      "didymos_mu": 0.0091,
+      "didymos_x_50m_altitude_m": 52.50446613317422,
+      "didymos_y_star_altitude_m": 106.97830275517362,
+      "em_c2": 3.1904252136222078,
+      "em_gamma2": 0.1678327510078692,
+      "em_gap_sensitivities": {
+        "eq": {
+          "dgap": -1.147313673399708,
+          "dwxy2": 0.3526863268099589,
+          "dwz2": 1.500000000209667
+        },
+        "x": {
+          "dgap": 0.08016733721305513,
+          "dwxy2": 4.080167337328078,
+          "dwz2": 4.000000000115023
+        },
+        "y": {
+          "dgap": -2.3747952280217532,
+          "dwxy2": -3.374795228161531,
+          "dwz2": -1.000000000139778
+        },
+        "z": {
+          "dgap": 2.2946276012625333,
+          "dwxy2": -0.7053723987127114,
+          "dwz2": -2.9999999999752447
+        }
+      }
+    },
+    "P1": {
+      "A_contact_m2_explicit": 28.27433388,
+      "C_D_explicit": 1.6,
+      "a_centrifugal_mps2": 1.2696614042348029e-05,
+      "centrifugal_relief_pct": 15.706220265468792,
+      "chi_1190": 21.58756701471552,
+      "chi_600": 10.884487570444803,
+      "const_g_coriolis_drift_m": 15.993252122441426,
+      "eta_flight": 1.617,
+      "full_1r2_cent_drift_m": 18.81120846252236,
+      "g_surf_mps2": 8.083812545442528e-05,
+      "mc200_digest": "0xaa33ca849e87e22b",
+      "mc200_lat_p95_m": 0.9047631760010484,
+      "mc200_safe_count": 200,
+      "mc200_seed": "0x484f52495a5f5032",
+      "mc200_sink_median_cm": 18.21411917091339,
+      "mc200_sink_p95_cm": 21.856352795581387,
+      "sink_1190_cm": 11.581455639663353,
+      "sink_500_cm": 20.421356911095828,
+      "sink_600_cm": 18.238227959772974,
+      "sink_700_cm": 16.529954678542246
+    },
+    "R1": {
+      "closure_nd": 1.6259757503814138e-08,
+      "elevated_safe_wu_alt_km": 327.2427298487105,
+      "elevated_safe_wu_days": 18.097281232500002,
+      "elevated_safe_wu_rp_km": 2064.6427298487106,
+      "elevated_safe_wu_tau_frac": 0.75,
+      "floquet_sk_6orb_dv_mps": 2.9487479354181962,
+      "floquet_sk_6orb_max_pos_err_km": 169.93135675072318,
+      "floquet_sk_free_3orb_err_km": 1497816.182836414,
+      "floquet_sk_suppression_ratio": 8814.242476940854,
+      "lambda_u": 746.7212839299176,
+      "nu1": 373.3613115588364,
+      "nu2": 0.8409300086889289,
+      "symplectic_res": 6.511982064694166e-10,
+      "tau0_direct_impact_rp_km": 993.7830632440794,
+      "tau0_impact_days": 17.587039949999998,
+      "tau0_impacts_moon": true,
+      "winding_deg_per_orbit": 32.76154307158474
+    }
+  },
+  "schema_version": "1.0.0"
+}

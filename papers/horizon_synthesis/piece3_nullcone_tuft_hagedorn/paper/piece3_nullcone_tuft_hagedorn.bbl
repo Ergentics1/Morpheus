@@ -1,0 +1,104 @@
+\providecommand{\bysame}{\leavevmode\hbox to3em{\hrulefill}\thinspace}
+\providecommand{\MR}{\relax\ifhmode\unskip\space\fi MR }
+% \MRhref is called by the amsart/book/proc definition of \MR.
+\providecommand{\MRhref}[2]{%
+  \href{http://www.ams.org/mathscinet-getitem?mr=#1}{#2}
+}
+\providecommand{\href}[2]{#2}
+\begin{thebibliography}{10}
+
+\bibitem{atick1988}
+Joseph~J. Atick and Edward Witten, \emph{The {H}agedorn transition and the
+  number of degrees of freedom of string theory}, Nuclear Physics B
+  \textbf{310} (1988), 291--334.
+
+\bibitem{bastianelli2022}
+Fiorenzo Bastianelli, Roberto Bonezzi, and Marco Melis, \emph{Gauge-invariant
+  coefficients in perturbative quantum gravity}, European Physical Journal C
+  \textbf{82} (2022), 1139.
+
+\bibitem{buchholz1986}
+Detlev Buchholz and Eyvind~H. Wichmann, \emph{Causal independence and the
+  energy-level density of states in local quantum field theory}, Communications
+  in Mathematical Physics \textbf{106} (1986), 321--344.
+
+\bibitem{chandrasekaran2026}
+Venkatesa Chandrasekaran, \emph{An algebraic quantization of gravity from the
+  null cone}, arXiv:2611.34924v1 [hep-th], November 2026, Submitted 25 November
+  2026 (date reconciled from 23 November 2026 in \texttt{NEG-W28}).
+
+\bibitem{christensen1980}
+Steven~M. Christensen and Michael~J. Duff, \emph{Quantizing gravity with a
+  cosmological constant}, Nuclear Physics B \textbf{170} (1980), 480--506.
+
+\bibitem{ckn1999}
+Andrew~G. Cohen, David~B. Kaplan, and Ann~E. Nelson, \emph{Effective field
+  theory, black holes, and the cosmological constant}, Physical Review Letters
+  \textbf{82} (1999), 4971--4974.
+
+\bibitem{dekker1971}
+Theodorus~J. Dekker, \emph{A floating-point technique for extending the
+  available precision}, Numerische Mathematik \textbf{18} (1971), 224--242.
+
+\bibitem{ergentics2026wp034}
+Ergentics, \emph{Horizon monograph {IE} ({WP}~034) and {IF} ({WP}~035): Frozen
+  clean-room manuscripts and {R}ound-1 reconciliation archive}, Morpheus
+  repository (\texttt{papers/wp034\_null\_cone\_gravity/},
+  \texttt{papers/wp035\_tuft\_hagedorn\_repair/}), 2026, Internal
+  \texttt{Swift++} Library of Alexandria Epochs XL--XLI corpus logs preserved
+  as provenance.
+
+\bibitem{fan2023}
+Xing Fan, Thomas~G. Myers, Benedict A.~D. Sukra, and Gerald Gabrielse,
+  \emph{Measurement of the electron magnetic moment}, Physical Review Letters
+  \textbf{130} (2023), 071801.
+
+\bibitem{fursaev2013}
+Dmitri~V. Fursaev, Alexander Patrushev, and Sergey~N. Solodukhin,
+  \emph{Distributional geometry of squashed cones}, Physical Review D
+  \textbf{88} (2013), 044054.
+
+\bibitem{goroff1986}
+Marc~H. Goroff and Augusto Sagnotti, \emph{The ultraviolet behavior of
+  {E}instein gravity}, Nuclear Physics B \textbf{266} (1986), 709--736.
+
+\bibitem{hagedorn1965}
+Rolf Hagedorn, \emph{Statistical thermodynamics of strong interactions at high
+  energies}, Nuovo Cimento Supplemento \textbf{3} (1965), 147--186.
+
+\bibitem{laporta2017}
+Stefano Laporta, \emph{High-precision calculation of the 4-loop contribution to
+  the electron $g-2$ in {QED}}, Physics Letters B \textbf{772} (2017),
+  232--238.
+
+\bibitem{laporta1996}
+Stefano Laporta and Ettore Remiddi, \emph{The analytical value of the electron
+  $(g-2)$ at order $\alpha^3$ in {QED}}, Physics Letters B \textbf{379} (1996),
+  283--291.
+
+\bibitem{nash1995}
+Charles Nash and Denjoe O'Connor, \emph{Determinants of {L}aplacians, the
+  {R}ay--{S}inger torsion on lens spaces and the {R}iemann zeta function},
+  Journal of Mathematical Physics \textbf{36} (1995), 1462--1505.
+
+\bibitem{nielsen2026}
+J.~L. Nielsen, \emph{A complete topological unified field theory on the complex
+  {H}opf fibration}, Unpublished manuscript (250 pp., Aug.\ 14, 2026), 2026,
+  Non-public source manuscript audited in \texttt{WP~035}; not archived in this
+  repository (\texttt{[E; non-public]}).
+
+\bibitem{robertson1971}
+Baldwin Robertson, \emph{Wyler's expression for the fine-structure constant
+  $\alpha$}, Physical Review Letters \textbf{27} (1971), 1545--1547.
+
+\bibitem{sen2013}
+Ashoke Sen, \emph{Logarithmic corrections to {S}chwarzschild and other
+  non-extremal black hole entropy in different dimensions}, Journal of High
+  Energy Physics \textbf{2013} (2013), no.~04, 156, arXiv:1205.0971 [hep-th].
+
+\bibitem{wyler1969}
+Armand Wyler, \emph{L'espace sym{\'e}trique du groupe des {\'e}quations de
+  {M}axwell}, Comptes Rendus de l'Acad{\'e}mie des Sciences, S{\'e}rie A
+  \textbf{269} (1969), 743--745.
+
+\end{thebibliography}
