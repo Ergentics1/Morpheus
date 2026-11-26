@@ -61,7 +61,7 @@ This document tracks the origin, baseline integrity, AI-assistance disclosures, 
 - **Title:** Shape-Controlled Gravitational Propulsion Resolved: Iso-Inertial Hopf-Fibration Three-Mass Quadrupole Switching, Noether Constant-$p$ Bounds, Shapere–Wilczek Holonomy, and Coupled Eq. (5) Mission Utility
 - **Series:** Ergentics Working Paper 030 · Horizon Series Monograph I (continuation of Working Paper 028)
 - **Author:** Ergentics, LLC & Swift++ Library of Alexandria Verification Program (`[E]`)
-- **Intake archived:** 2026-11-25 (`cleanroom/` verbatim archive preserved unmodified per Rule 5); **ADPIE Cycle 1 (`[G4N]`) audited 2026-11-26** across 3 independent planes (Python `9/9`, Lean 4.36.0 `15/15` zero-Mathlib `0 sorryAx`, Rust `7/7` bit-exact `SplitMix64` parity) — awaiting independent **Grok Bot** (`[GB]`) pass.
+- **Intake & Reconciliation:** Archived 2026-11-25 (`cleanroom/` frozen unmodified per Rule 5); **ADPIE Cycle 1 (`[G4N]`)** audited 2026-11-26 (Python `9/9`, Lean 4.36.0 `15/15` integer/rational cores `0 sorryAx`, Rust `7/7`); **Round 1 Reconciled (`[GB]` + `[G4N]`, 2026-11-26)** (`paper/paper.{typ,pdf}`, `GROKBOT_WP030_ROUND1.md`, `GEMINI4_NEON_ROUND1_RESPONSE.md`).
 
 ### Key File Inventory (SHA-256)
 
@@ -89,7 +89,7 @@ This document tracks the origin, baseline integrity, AI-assistance disclosures, 
 - **Title:** Bennu-Class Triaxial Asteroid Proximity Operations, 3D Multi-Tether Coupled Flexible-Body FEM & Fault-Tolerant Winch FDIR, and the Extended-Body Three-Body Problem
 - **Series:** Ergentics Working Paper 032 · Horizon Series Monograph IC (extension of Working Papers 030 & 031)
 - **Author:** Ergentics, LLC & Swift++ Library of Alexandria Verification Program (`[E]`)
-- **Intake & Audit:** Verbatim clean-room archive frozen 2026-11-26; **ADPIE Cycle 1 (`[G4N]`) audited 2026-11-26** across 3 planes (Python `6/6`, Lean 4.36.0 `9/9`, Rust `5/5`) — awaiting `[GB]` pass.
+- **Intake & Reconciliation:** Verbatim clean-room archive frozen 2026-11-26; **ADPIE Cycle 1 (`[G4N]`)** audited 2026-11-26 (Python `6/6`, Lean 4.36.0 `9/9` integer/rational cores, Rust `5/5`); **Round 1 Reconciled (`[GB]` + `[G4N]`, 2026-11-26)**.
 
 ### Key File Inventory (SHA-256)
 
@@ -117,7 +117,7 @@ This document tracks the origin, baseline integrity, AI-assistance disclosures, 
 - **Title:** Full 3D Non-Planar Extended-Body CRTBP Halo and Lissajous Invariant Manifolds, Rotating-Symplectic Floquet Station-Keeping, and Bennu Touch-and-Go Regolith Sampling Guidance
 - **Series:** Ergentics Working Paper 033 · Horizon Series Monograph ID (extension of Working Papers 030–032)
 - **Author:** Ergentics, LLC & Swift++ Library of Alexandria Verification Program (`[E]`)
-- **Intake & Audit:** Verbatim clean-room archive frozen 2026-11-26; **ADPIE Cycle 1 (`[G4N]`) audited 2026-11-26** across 3 planes (Python `4/4`, Lean 4.36.0 `7/7`, Rust `4/4`) — awaiting `[GB]` pass.
+- **Intake & Reconciliation:** Verbatim clean-room archive frozen 2026-11-26; **ADPIE Cycle 1 (`[G4N]`)** audited 2026-11-26 (Python `4/4`, Lean 4.36.0 `7/7` integer/rational cores, Rust `4/4`); **Round 1 Reconciled (`[GB]` + `[G4N]`, 2026-11-26)**.
 
 ### Key File Inventory (SHA-256)
 
@@ -145,7 +145,7 @@ This document tracks the origin, baseline integrity, AI-assistance disclosures, 
 - **Title:** 3D Non-Planar $J_2$ Symmetry Breaking, Collinear-Bridge $\mathrm{SO}(3)$ Holonomy, Safe-Perigee Optimal Eccentricity, and Hardware-in-the-Loop Actuator Sizing for Shape-Controlled Gravitational Propulsion
 - **Series:** Ergentics Working Paper 031 · Horizon Series Monograph IB (extension of Working Paper 030; bridges to Working Papers 032 & 033)
 - **Author:** Ergentics, LLC & Swift++ Library of Alexandria Verification Program (`[E]`)
-- **Intake & Audit:** Verbatim clean-room archive frozen 2026-11-26; **ADPIE Cycle 1 (`[G4N]`) audited 2026-11-26** across 3 planes (Python `5/5`, Lean 4.36.0 `9/9`, Rust `5/5`) — awaiting `[GB]` pass.
+- **Intake & Reconciliation:** Verbatim clean-room archive frozen 2026-11-26; **ADPIE Cycle 1 (`[G4N]`)** audited 2026-11-26 (Python `5/5`, Lean 4.36.0 `9/9` integer/rational cores, Rust `5/5`); **Round 1 Reconciled (`[GB]` + `[G4N]`, 2026-11-26)**.
 
 ### Key File Inventory (SHA-256)
 
@@ -171,9 +171,9 @@ This document tracks the origin, baseline integrity, AI-assistance disclosures, 
 ## Paper Package 6: *Working Paper 034 — Independent Precision Audit of Algebraic Null-Cone Quantum Gravity (`arXiv:2611.34924v1`)*
 
 - **Title:** Independent Precision Audit and Structural Pressure Test of Algebraic Null-Cone Quantum Gravity (`arXiv:2611.34924v1`)
-- **Series:** Ergentics Working Paper 034 · Horizon Series Monograph IE (external audit of V. Chandrasekaran, `arXiv:2611.34924v1`, Nov. 23, 2026)
+- **Series:** Ergentics Working Paper 034 · Horizon Series Monograph IE (external audit of V. Chandrasekaran, `arXiv:2611.34924v1`, Nov. 25, 2026; cleanroom cites Nov. 23, see `NEG-W28`)
 - **Author:** Ergentics, LLC & Swift++ Library of Alexandria Verification Program (`[E]`)
-- **Intake & Audit:** Verbatim clean-room archive frozen 2026-11-26; **ADPIE Cycle 1 (`[G4N]`) meta-audited 2026-11-26** across 3 planes (Python `5/5`, Lean 4.36.0 `9/9`, Rust `5/5`) — awaiting `[GB]` pass.
+- **Intake & Reconciliation:** Verbatim clean-room archive frozen 2026-11-26; **ADPIE Cycle 1 (`[G4N]`)** meta-audited 2026-11-26 (Python `5/5`, Lean 4.36.0 `9/9` integer/rational cores, Rust `5/5`); **Round 1 Reconciled (`[GB]` + `[G4N]`, 2026-11-26)**.
 
 ### Key File Inventory (SHA-256)
 
@@ -201,7 +201,7 @@ This document tracks the origin, baseline integrity, AI-assistance disclosures, 
 - **Title:** Independent Precision Audit of Hopf-Fibration Unified Field Theory (Nielsen 2026) and Non-Circular Hagedorn Nuclearity Repair of Algebraic Null-Cone Gravity
 - **Series:** Ergentics Working Paper 035 · Horizon Series Monograph IF (closes the Horizon I–IF series `WP 030`–`WP 035`)
 - **Author:** Ergentics, LLC & Swift++ Library of Alexandria Verification Program (`[E]`)
-- **Intake & Audit:** Verbatim clean-room archive frozen 2026-11-26; **ADPIE Cycle 1 (`[G4N]`) audited 2026-11-26** across 3 planes (Python `5/5`, Lean 4.36.0 `9/9`, Rust `5/5`) — ready for independent `[GB]` pass across the entire Horizon I–IF suite.
+- **Intake & Reconciliation:** Verbatim clean-room archive frozen 2026-11-26; **ADPIE Cycle 1 (`[G4N]`)** audited 2026-11-26 (Python `5/5`, Lean 4.36.0 `9/9` integer/rational cores, Rust `5/5`); **Round 1 Reconciled (`[GB]` + `[G4N]`, 2026-11-26)**.
 
 ### Key File Inventory (SHA-256)
 
@@ -224,18 +224,20 @@ This document tracks the origin, baseline integrity, AI-assistance disclosures, 
 | `papers/wp035_tuft_hagedorn_repair/paper/paper.pdf` | Compiled reconciled edition (Typst 0.15.1) | `a7b5f85f8638cff72cf4039fa3cf5078f10d0ba410d05bce0ac0fc2ef1287530` | *(new `[GB]` Round 1, 2026-11-26)* |
 | `papers/wp035_tuft_hagedorn_repair/reconciliation/GROKBOT_WP035_ROUND1.md` | `[GB]` Round-1 dossier (verdicts, evidence, run spec) | `0a2cf443eb6b5615d4386f8ee3f6bfb4296d62e6f9f8d92045b55d4be506d6ed` | *(new `[GB]` Round 1, 2026-11-26)* |
 
-## Horizon Round-1 `[GB]` Reconciliation Tooling (`reconciliation/horizon_round1/`)
+## Horizon Round-1 Reconciliation Tooling (`reconciliation/horizon_round1/`)
 
 | File | Role | Current SHA-256 | Original Upload SHA-256 |
 | :--- | :--- | :--- | :--- |
 | `reconciliation/horizon_round1/README.md` | Round-1 index | `32a072888a1824e55393c90020047c1f63d1ff511e72027fdf5b6d7e2a47efc1` | *(new `[GB]` Round 1, 2026-11-26)* |
 | `reconciliation/horizon_round1/RECONCILIATION_CHANGELOG.md` | Round-1 changelog and per-item verdict table | `34241a2fd51a7c588a80a384cafd46ff9fc45b3594ed3d5525d704da86797dc7` | *(new `[GB]` Round 1, 2026-11-26)* |
+| `reconciliation/horizon_round1/GEMINI4_NEON_ROUND1_RESPONSE.md` | `[G4N]` Round-1 response (`[X]` recheck of `NEG-W25`–`W30`, NTRS retraction, Theorem G4 consistent-$I_0$ refinement) | `73f6c398b8b4b846cbb219e08bdbfecb9fd0b882a6c9e653dccc585928bc598e` | *(new `[G4N]` Round 1, 2026-11-26)* |
 | `reconciliation/horizon_round1/build_r1.py` | Edition/dossier builder (Code, MIT) | `3b08cbd32f2b983fd1f192c87de0f0bc8ea5ba930e2e1ef3b9ba0b40341d8599` | *(new `[GB]` Round 1, 2026-11-26)* |
 | `reconciliation/horizon_round1/r1_items.py` | Verdict ledger (single source) | `5e7dd5a266982f441eaa0b201160d133b8132f22a15009a20b6f8f09a769c16c` | *(new `[GB]` Round 1, 2026-11-26)* |
 | `reconciliation/horizon_round1/r1_specs.py` | Run specs requested from the author | `a759969ea15e94289595223e44edd449d52017df61997e4e46c360fdc70c2ec6` | *(new `[GB]` Round 1, 2026-11-26)* |
 | `reconciliation/horizon_round1/code/gb_r1_wp030.py` | Independent check (Code, MIT) | `fd506179b63986a346749b906c7d1dc99ed4c366843dd6fb6b2994a088a7c61b` | *(new `[GB]` Round 1, 2026-11-26)* |
 | `reconciliation/horizon_round1/code/gb_r1_wp031_035.py` | Independent check (Code, MIT) | `c63067bbcce697dd2a24556f5848d699f4d8214f8067e7ca296a0c4117e33723` | *(new `[GB]` Round 1, 2026-11-26)* |
 | `reconciliation/horizon_round1/code/gb_r1_wp033_halo.py` | Independent check (Code, MIT) | `fff1d903811b7c57c7dee53afc225b2b721bfe56ad38cb816017a1281f897649` | *(new `[GB]` Round 1, 2026-11-26)* |
+| `reconciliation/horizon_round1/code/g4n_r1_xcheck.py` | Zero-dep `[G4N]` `[X]` verifier for `NEG-W25`–`W30` (`4/4` PASS, Code, MIT) | `a8ea0897789dfd40f0a001a94ea09611c3061c9f8f75404d4c7bf22d6754918b` | *(new `[G4N]` Round 1, 2026-11-26)* |
 | `reconciliation/horizon_round1/logs/gb_r1_wp030.log` | Check output (Data, CC BY 4.0) | `5d34172ce3673ba4cfa3de4f043e75bd1ef854e0c5d18277ae12813bd77fd482` | *(new `[GB]` Round 1, 2026-11-26)* |
 | `reconciliation/horizon_round1/logs/gb_r1_wp031_035.log` | Check output (Data, CC BY 4.0) | `a5ce1cc5986d6081f27b71bee1ed03c69647a3b4aea8c92552468dd89bb1a722` | *(new `[GB]` Round 1, 2026-11-26)* |
 | `reconciliation/horizon_round1/logs/gb_r1_wp033_halo.log` | Check output (Data, CC BY 4.0) | `e7ac07d8c6fb2a2dc913458d8bef2554897e5bc8c6263f18a34ec127a5df7738` | *(new `[GB]` Round 1, 2026-11-26)* |
@@ -265,3 +267,4 @@ This document tracks the origin, baseline integrity, AI-assistance disclosures, 
 | 2026-11-26 | Working Paper 034 (Horizon IE) verbatim clean-room intake & ADPIE Cycle 1 `[G4N]` 3-plane meta-audit (`papers/wp034_null_cone_gravity/`, `NEGATIVES.md`, `papers/README.md`, `README.md`, `CHANGELOG.md`, `PROVENANCE.md`) | Archived WP 034 clean-room `.typ` + 4 SVGs byte-for-byte unmodified per Rule 5 (`0` leaks) and executed a full 3-plane `[G4N]` meta-audit (including primary-source cross-checks against `arXiv:2611.34924v1` and Sen 2013 `arXiv:1205.0971v2`) — Python `5/5`, Lean 4.36.0 `9/9` (`0 sorryAx`, `0 ofReduceBool`, zero Mathlib), Rust `5/5` (`SplitMix64` `0xb4005f8bfe2e1bca`, `1600/1600` vs. `0/1600`). Verified every headline analytical pillar and logged `NEG-W19`–`NEG-W21` plus original **Theorem G5** (Non-Hilbert–Schmidt Closed-Cut Riemann Rearrangement Universality closing the finite-positive-$Z[X]$ loophole on WP 034's exact $\mathcal{H} = \ell^2(\mathbb{N})\oplus\ell^2(\mathbb{N})$, with from-scratch Lean 4 irrationality of $\sqrt{2}$; plus authentic 106-bit DD EFT `96.2%`/`100%` wipeout at $s=10^{33}/10^{77}$ vs. `0.0` cancellation-free `f64`, Table 1 vs. Table 2 witness mismatch, and `C156` domain exclusion of $R=e$). All 93 SHA-256 inventory rows verified live. |
 | 2026-11-26 | Working Paper 035 (Horizon IF — Series Finale) verbatim clean-room intake & ADPIE Cycle 1 `[G4N]` 3-plane audit (`papers/wp035_tuft_hagedorn_repair/`, `NEGATIVES.md`, `papers/README.md`, `README.md`, `CHANGELOG.md`, `PROVENANCE.md`) | Closed the six-monograph Horizon I–IF (`WP 030`–`WP 035`) `[G4N]` pass by archiving WP 035 clean-room `.typ` + 4 SVGs byte-for-byte unmodified per Rule 5 (`0` leaks) and executing a full 3-plane `[G4N]` audit — Python `5/5`, Lean 4.36.0 `9/9` (`0 sorryAx`, `0 ofReduceBool`, zero Mathlib), Rust `5/5` (from-scratch Stirling–Bernoulli `lgamma`/`digamma`, `SplitMix64` `0xcc617ec51b6fb1e0`, `1600/1600` vs. `0/1600`). Confirmed Track A (12/12 digits on $S^3$–$S^9$ spectral zetas incl. $S^9$ $\Delta_2 = -0.413644658190$, Eq. 65 & `L(3,1)`, $a_5$, Wyler/CODATA/`F40`, `C157`, Beltrami ODE + $k=4$, dark sector, Künneth, Bayes) and Track B (**Theorems R1–R3**, `C159`–`C160`, `K13`); logged `NEG-W22`–`NEG-W24` plus original **Theorem G6** (Hagedorn Canonical Equivalence-Breaking: exact $\operatorname{Gamma}(\alpha,\alpha)$ dispersion $1/\sqrt{\alpha}$ = `54.59%`/`59.18%`/`73.41%`, `40.2%–42.7%` causal-diamond tail leakage, and exact $1/\sqrt{\alpha+2}$ truncation bridge unifying WP 035 with WP 034's `26.86%` permanent dispersion). All 106 SHA-256 inventory rows verified live; full Horizon I–IF suite ready for **Grok Bot (`[GB]`)**. |
 | 2026-11-26 | Horizon WP030–WP035 `[GB]` Round-1 reconciliation (`papers/<slug>/paper/`, `GROKBOT_WP0xx_ROUND1.md`, `reconciliation/horizon_round1/`, `NEGATIVES.md`, `papers/README.md`, `CHANGELOG.md`) | Reconciled editions with boxed verdicts (clean-room untouched), 60-item verdict ledger, NEG-W25–W30, WP032 dossier addendum; `[G4N]` planes re-run incl. Lean 58/58 |
+| 2026-11-26 | Horizon WP030–WP035 `[G4N]` Round-1 response & registry sync (`reconciliation/horizon_round1/GEMINI4_NEON_ROUND1_RESPONSE.md`, `code/g4n_r1_xcheck.py`, `NEGATIVES.md`, `README.md`, `papers/README.md`, `reconciliation/README.md`, per-paper READMEs, `CHANGELOG.md`, `PROVENANCE.md`) | Independently `[X]` verified `[GB]` Round-1 bundle (`0` frozen-baseline diffs, `9/9` manifests, `137/137` SHA-256 rows, `0` leaks in text & all 6 PDFs, `4/4` `g4n_r1_xcheck.py` PASS): retracted `[G4N]` NTRS changes on WP 030 Ref `[1]` & WP 031 Ref `[3]` (`19910012850` / `91N22163` confirmed correct as printed), `[X]` confirmed `NEG-W25`–`NEG-W30` (Berry/Montgomery `+90°` vs. `-90°` proof, live `arXiv:2611.34924v1` `25 Nov 2026` check, `NEG-W29` Lean integer/rational scope wording), self-corrected Theorem G4's consistent-$I_0$ floor (`9.85×`, `15.16×` at `q=0.50`), and synced all stale pre-`[GB]` registry notes. |

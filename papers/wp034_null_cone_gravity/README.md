@@ -1,7 +1,7 @@
 # Paper #06 — Ergentics Working Paper 034 (Horizon Monograph IE)
 
 **Title:** *Independent Precision Audit and Structural Pressure Test of Algebraic Null-Cone Quantum Gravity (`arXiv:2611.34924v1`)*  
-**Author:** Ergentics (`[E]`) · **External Target:** V. Chandrasekaran (Stanford University), *An algebraic quantization of gravity from the null cone*, `arXiv:2611.34924v1` (Nov. 23, 2026)
+**Author:** Ergentics (`[E]`) · **External Target:** V. Chandrasekaran (Stanford University), *An algebraic quantization of gravity from the null cone*, `arXiv:2611.34924v1` (Nov. 25, 2026; cleanroom text cites Nov. 23 — see `NEG-W28`)
 
 ## Directory Layout (Code vs. Data Strictly Separated)
 

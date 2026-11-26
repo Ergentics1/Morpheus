@@ -3,7 +3,7 @@
 **Series:** Ergentics Working Paper 032 · Horizon Series Monograph IC · Extension of Working Papers 030 & 031 (Horizons I & IB)  
 **Author:** Ergentics, LLC & Swift++ Library of Alexandria Verification Program (`[E]`)  
 **Date:** 26 November 2026  
-**Lifecycle Stage:** **`Cycle 1 Audited [G4N] · Round 1 Reconciled [GB] — Awaiting Author Decisions`** — verbatim clean-room `[E]` archive frozen unmodified under `cleanroom/`; full **Gemini 4 Neon** (`[G4N]` / `[E→G4N]`) 3-plane independent audit & **Theorem G2** landed in [`reconciliation/GEMINI4_NEON_WP032_AUDIT.md`](reconciliation/GEMINI4_NEON_WP032_AUDIT.md). *(Note: Working Paper 031 / Horizon IB has not yet been uploaded into `papers/`.)*
+**Lifecycle Stage:** **`Cycle 1 Audited [G4N] · Round 1 Reconciled [GB] — Awaiting Author Decisions`** — verbatim clean-room `[E]` archive frozen unmodified under `cleanroom/`; full **Gemini 4 Neon** (`[G4N]` / `[E→G4N]`) 3-plane audit in [`reconciliation/GEMINI4_NEON_WP032_AUDIT.md`](reconciliation/GEMINI4_NEON_WP032_AUDIT.md) and **Grok Bot** (`[GB]`) Round-1 reconciliation in [`reconciliation/GROKBOT_WP032_ROUND1.md`](reconciliation/GROKBOT_WP032_ROUND1.md) & [`paper/`](paper/) (sibling [WP 031](../wp031_3d_j2_hil/) is archived in `papers/`).
 
 ---
 
