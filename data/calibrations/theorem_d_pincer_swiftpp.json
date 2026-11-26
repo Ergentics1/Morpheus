@@ -1,0 +1,51 @@
+{
+  "bound_check" : {
+    "bound_formula" : "0 survivors for n in [9, 14] & n >= 15 tail & sextic u in {16, 32} dead (margin > 0.01)",
+    "observed" : 0.013629809159393602,
+    "passed" : true,
+    "threshold" : 0.01
+  },
+  "code_commit" : "932d3bb",
+  "correspondence_id" : "C-5/ThmD",
+  "implementation" : "swiftpp",
+  "quadrature_check" : {
+    "gl64_weights_and_moments_ok" : true,
+    "q_explicit_formula_lb_b2" : -4.829566977448962e-07
+  },
+  "schema_version" : "1.0.0",
+  "shimura_genus13_census" : {
+    "gamma_h_24comp_count" : 4,
+    "neg_e10_d690_detected" : true,
+    "neg_e10_e2" : 0,
+    "neg_e10_e3" : 8,
+    "neg_e10_phi" : 176,
+    "torsion_free_pairs" : 11,
+    "total_genus13_pairs" : 19
+  },
+  "three_pincer_results" : {
+    "deg6_max_surviving_u" : 8,
+    "deg6_new_disc_ceiling" : 26483412.641323525,
+    "deg6_old_disc_ceiling" : 66734018.11971091,
+    "deg6_reduction_factor" : 2.5198420997897433,
+    "deg6_u16_h1_dead" : true,
+    "deg6_u16_h1_margin" : 0.013629809159393602,
+    "deg6_u16_hge2_dead" : true,
+    "deg6_u16_hge2_margin" : 0.3733658762469645,
+    "deg7_hge2_survivors" : 0,
+    "deg7_max_root_disc" : 14.855615818402722,
+    "deg7_max_surviving_u" : 4,
+    "deg8_hge2_survivors" : 0,
+    "deg8_max_root_disc" : 14.75182890074984,
+    "deg8_max_surviving_u" : 4,
+    "deg9_to_14_survivors" : 0,
+    "worst_deg10_margin" : 0.9887765431066526,
+    "worst_deg9_margin" : 0.33916055410201373
+  },
+  "universal_tail_n_ge_15" : {
+    "e_minus_f2" : 9.534967159153343,
+    "lb_n15" : 19.93657822334364,
+    "margin_n15" : 0.8565486014572379,
+    "ub_n15" : 19.080029621886403,
+    "witness_b" : 4.2
+  }
+}
