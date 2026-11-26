@@ -7,7 +7,7 @@ Open-sourced research repository by **Ergentics** (*Open Sourced Living*), struc
 | # | Paper | Location | Stage |
 | :---: | :--- | :--- | :--- |
 | **01** | **[Prime Cadences](prime_cadences_paper.md)** — *Ihara zeta, graphene, and voice-leading homology on the Tonnetz* | Root layout ([`paper/`](paper/), [`arxiv/`](arxiv/)) | **`v0.3.1` Released** (Immutable GitHub Release · 3-way verified) |
-| **02** | **[Working Paper 030 (Horizon Monograph I)](papers/wp030_shape_propulsion/README.md)** — *Shape-Controlled Gravitational Propulsion Resolved* | [`papers/wp030_shape_propulsion/`](papers/wp030_shape_propulsion/) | **`Intake (Pre-Assessment)`** — verbatim clean-room `paper.typ` + 4 SVGs archived as-is before `[G4N]` & `[GB]` assessment |
+| **02** | **[Working Paper 030 (Horizon Monograph I)](papers/wp030_shape_propulsion/README.md)** — *Shape-Controlled Gravitational Propulsion Resolved* | [`papers/wp030_shape_propulsion/`](papers/wp030_shape_propulsion/) | **`Cycle 1 Audited [G4N]`** — frozen clean-room `[E]` archive + 3-plane `[G4N]` audit (`Python 9/9`, `Lean 4 15/15`, `Rust 7/7`, 8 catches + Theorem G1); awaiting `[GB]` pass |
 
 ## Paper #01: *Prime Cadences*
 
@@ -48,7 +48,7 @@ Studies the 3-regular neo-Riemannian triad graph $X$ and its Ihara zeta primes (
 | [`ARCHITECTURE.md`](ARCHITECTURE.md) | Four-plane Code-vs-Data architecture, `D ↔ R ↔ P` seams, and multi-language layout blueprint |
 | [`CALIBRATIONS.md`](CALIBRATIONS.md) | Correspondence error-bound ledger (`C-1`–`C-5`, `C-2'`, `C-2''`), Rung-1 calibration metrics, RCT protocol, and output schema |
 | [`ERGENTICS.md`](ERGENTICS.md) | Ergentics core library (`ergentics/`) and **Swift++** Triple-Check spec (`swiftpp/`: Pure C++20 · Pure Swift · Swift↔C++ interop) |
-| [`NEGATIVES.md`](NEGATIVES.md) | Permanent ledger of refuted claims (`NEG-M1`–`NEG-M14`, `NEG-E1`–`NEG-E11`), obstructions, negative controls, and engineering traps |
+| [`NEGATIVES.md`](NEGATIVES.md) | Permanent ledger of refuted claims (`NEG-M1`–`NEG-M14`, `NEG-E1`–`NEG-E11`, `NEG-W1`–`NEG-W6`), obstructions, negative controls, and engineering traps |
 | [`PROVENANCE.md`](PROVENANCE.md) | Origin, AI-assistance disclosure, SHA-256 checksums, and revision log |
 | [`CHANGELOG.md`](CHANGELOG.md) | Versioned release history (`v0.1.0`, `v0.2.0`, `v0.3.0`, `v0.3.1`) and `[Unreleased]` tracking |
 | [`CITATION.cff`](CITATION.cff) | Machine-readable citation metadata (CFF 1.2.0, `v0.3.1`, `2026-11-25`) |

@@ -1,0 +1,10 @@
+name = "wp030"
+version = "0.1.0"
+defaultTargets = ["WP030", "wp030-lean"]
+
+[[lean_lib]]
+name = "WP030"
+
+[[lean_exe]]
+name = "wp030-lean"
+root = "Main"
