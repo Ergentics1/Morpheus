@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="390" viewBox="0 0 940 390" font-family="Helvetica, Arial, sans-serif">
+  <rect width="940" height="390" fill="#ffffff"/>
+  <text x="470.0" y="24.0" font-size="14" fill="#1b365d" text-anchor="middle" font-weight="bold">Figure 1: Spectral Zeta Determinants on L(p,1) (Eq. 65) and Odd Spheres S3, S5, S7, S9</text>
+  <rect x="72" y="62" width="373" height="270" fill="#fafbfc" stroke="#2e3440" stroke-width="1.2"/>
+  <text x="258.5" y="48.0" font-size="12" fill="#1b365d" text-anchor="middle" font-weight="bold">(a) Nielsen Eq. (65) on L(p,1): Sign Flip &amp; 19.74x Error</text>
+  <line x1="72" y1="315.4" x2="445" y2="315.4" stroke="#e5e9f0" stroke-width="0.7"/>
+  <text x="64.0" y="319.4" font-size="9.5" fill="#5c6675" text-anchor="end" font-weight="normal">-2.5</text>
+  <line x1="72" y1="273.8" x2="445" y2="273.8" stroke="#e5e9f0" stroke-width="0.7"/>
+  <text x="64.0" y="277.8" font-size="9.5" fill="#5c6675" text-anchor="end" font-weight="normal">-2.0</text>
+  <line x1="72" y1="232.3" x2="445" y2="232.3" stroke="#e5e9f0" stroke-width="0.7"/>
+  <text x="64.0" y="236.3" font-size="9.5" fill="#5c6675" text-anchor="end" font-weight="normal">-1.5</text>
+  <line x1="72" y1="190.8" x2="445" y2="190.8" stroke="#e5e9f0" stroke-width="0.7"/>
+  <text x="64.0" y="194.8" font-size="9.5" fill="#5c6675" text-anchor="end" font-weight="normal">-1.0</text>
+  <line x1="72" y1="149.2" x2="445" y2="149.2" stroke="#e5e9f0" stroke-width="0.7"/>
+  <text x="64.0" y="153.2" font-size="9.5" fill="#5c6675" text-anchor="end" font-weight="normal">-0.5</text>
+  <line x1="72" y1="107.7" x2="445" y2="107.7" stroke="#2e3440" stroke-width="1.2"/>
+  <text x="64.0" y="111.7" font-size="9.5" fill="#5c6675" text-anchor="end" font-weight="normal">+0.0</text>
+  <line x1="72" y1="66.2" x2="445" y2="66.2" stroke="#e5e9f0" stroke-width="0.7"/>
+  <text x="64.0" y="70.2" font-size="9.5" fill="#5c6675" text-anchor="end" font-weight="normal">+0.5</text>
+  <line x1="72.0" y1="62" x2="72.0" y2="332" stroke="#e5e9f0" stroke-width="0.7"/>
+  <text x="72.0" y="348.0" font-size="9.5" fill="#5c6675" text-anchor="middle" font-weight="normal">2</text>
+  <line x1="134.2" y1="62" x2="134.2" y2="332" stroke="#e5e9f0" stroke-width="0.7"/>
+  <text x="134.2" y="348.0" font-size="9.5" fill="#5c6675" text-anchor="middle" font-weight="normal">10</text>
+  <line x1="211.9" y1="62" x2="211.9" y2="332" stroke="#e5e9f0" stroke-width="0.7"/>
+  <text x="211.9" y="348.0" font-size="9.5" fill="#5c6675" text-anchor="middle" font-weight="normal">20</text>
+  <line x1="289.6" y1="62" x2="289.6" y2="332" stroke="#e5e9f0" stroke-width="0.7"/>
+  <text x="289.6" y="348.0" font-size="9.5" fill="#5c6675" text-anchor="middle" font-weight="normal">30</text>
+  <line x1="367.3" y1="62" x2="367.3" y2="332" stroke="#e5e9f0" stroke-width="0.7"/>
+  <text x="367.3" y="348.0" font-size="9.5" fill="#5c6675" text-anchor="middle" font-weight="normal">40</text>
+  <line x1="445.0" y1="62" x2="445.0" y2="332" stroke="#e5e9f0" stroke-width="0.7"/>
+  <text x="445.0" y="348.0" font-size="9.5" fill="#5c6675" text-anchor="middle" font-weight="normal">50</text>
+  <line x1="72" y1="97.6" x2="445" y2="97.6" stroke="#0f766e" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <line x1="72" y1="307.4" x2="445" y2="307.4" stroke="#b91c1c" stroke-width="2.2"/>
+  <polyline fill="none" stroke="#0f766e" stroke-width="2.4" points="72.00,144.07 79.77,117.60 87.54,117.18 95.31,108.09 103.08,112.73 110.85,111.38 118.62,110.31 126.40,109.43 134.17,104.36 141.94,108.07 149.71,107.52 157.48,107.04 165.25,106.61 173.02,106.22 180.79,105.87 188.56,105.56 196.33,105.27 204.10,105.00 211.88,104.76 219.65,104.53 227.42,104.32 235.19,104.12 242.96,103.94 250.73,103.77 258.50,103.60 266.27,103.45 274.04,103.31 281.81,103.17 289.58,103.04 297.35,102.92 305.12,102.81 312.90,102.70 320.67,102.59 328.44,102.49 336.21,102.39 343.98,102.30 351.75,102.22 359.52,102.13 367.29,102.05 375.06,101.97 382.83,101.90 390.60,101.83 398.38,101.76 406.15,101.69 413.92,101.63 421.69,101.56 429.46,101.50 437.23,101.45 445.00,100.36"/>
+  <circle cx="72.0" cy="144.1" r="3.6" fill="#0f766e" stroke="#fff" stroke-width="1"/>
+  <circle cx="79.8" cy="117.6" r="3.6" fill="#0f766e" stroke="#fff" stroke-width="1"/>
+  <circle cx="95.3" cy="108.1" r="3.6" fill="#0f766e" stroke="#fff" stroke-width="1"/>
+  <circle cx="134.2" cy="104.4" r="3.6" fill="#0f766e" stroke="#fff" stroke-width="1"/>
+  <circle cx="445.0" cy="100.4" r="3.6" fill="#0f766e" stroke="#fff" stroke-width="1"/>
+  <line x1="211.9" y1="103.6" x2="211.9" y2="289.4" stroke="#b45309" stroke-width="1.6" stroke-dasharray="3,2"/>
+  <rect x="171.9" y="180.5" width="194" height="36" rx="4" fill="#fef3c7" stroke="#b45309" stroke-width="1"/>
+  <text x="268.9" y="195.5" font-size="9.4" fill="#b45309" text-anchor="middle" font-weight="bold">OPPOSITE SIGN &amp; 2*pi^2 = 19.74x</text>
+  <text x="268.9" y="209.5" font-size="9" fill="#1f2937" text-anchor="middle" font-weight="normal">Exact: +0.1218 vs. Claim: -2.4041</text>
+  <text x="439.0" y="90.6" font-size="9.3" fill="#0f766e" text-anchor="end" font-weight="bold">Exact limit: +zeta(3)/pi^2 = +0.1218</text>
+  <text x="439.0" y="300.4" font-size="9.3" fill="#b91c1c" text-anchor="end" font-weight="bold">Nielsen Lemma 6 claim: -2*zeta(3) = -2.4041</text>
+  <text x="258.5" y="368.0" font-size="10.5" fill="#1f2937" text-anchor="middle" font-weight="bold">Lens Space Order p in L(p, 1) = S3 / Z_p</text>
+  <text x="20.0" y="197.0" font-size="10.5" fill="#1f2937" text-anchor="middle" font-weight="bold" transform="rotate(-90 20.0 197.0)">Normalized  -zeta'_Eq65(0) / p^2</text>
+  <rect x="525" y="62" width="385" height="270" fill="#fafbfc" stroke="#2e3440" stroke-width="1.2"/>
+  <text x="717.5" y="48.0" font-size="12" fill="#1b365d" text-anchor="middle" font-weight="bold">(b) Odd-Sphere Spectral Zeta: Selective Dropping of zeta'(0)</text>
+  <line x1="525" y1="319.7" x2="910" y2="319.7" stroke="#e5e9f0" stroke-width="0.7"/>
+  <text x="517.0" y="323.7" font-size="9.5" fill="#5c6675" text-anchor="end" font-weight="normal">-2.0</text>
+  <line x1="525" y1="258.4" x2="910" y2="258.4" stroke="#e5e9f0" stroke-width="0.7"/>
+  <text x="517.0" y="262.4" font-size="9.5" fill="#5c6675" text-anchor="end" font-weight="normal">-1.0</text>
+  <line x1="525" y1="197.0" x2="910" y2="197.0" stroke="#2e3440" stroke-width="1.2"/>
+  <text x="517.0" y="201.0" font-size="9.5" fill="#5c6675" text-anchor="end" font-weight="normal">+0.0</text>
+  <line x1="525" y1="135.6" x2="910" y2="135.6" stroke="#e5e9f0" stroke-width="0.7"/>
+  <text x="517.0" y="139.6" font-size="9.5" fill="#5c6675" text-anchor="end" font-weight="normal">+1.0</text>
+  <line x1="525" y1="74.3" x2="910" y2="74.3" stroke="#e5e9f0" stroke-width="0.7"/>
+  <text x="517.0" y="78.3" font-size="9.5" fill="#5c6675" text-anchor="end" font-weight="normal">+2.0</text>
+  <rect x="543.1" y="142.5" width="28" height="54.5" fill="#0f766e" opacity="0.88"/>
+  <rect x="575.1" y="195.1" width="28" height="2.0" fill="#b91c1c" opacity="0.88"/>
+  <text x="573.1" y="348.0" font-size="10" fill="#1f2937" text-anchor="middle" font-weight="bold">S3 (B3)</text>
+  <text x="573.1" y="362.0" font-size="8.2" fill="#b91c1c" text-anchor="middle" font-weight="bold">DROPPED (-0.919)</text>
+  <rect x="639.4" y="197.0" width="28" height="107.9" fill="#0f766e" opacity="0.88"/>
+  <rect x="671.4" y="192.1" width="28" height="4.9" fill="#b91c1c" opacity="0.88"/>
+  <text x="669.4" y="348.0" font-size="10" fill="#1f2937" text-anchor="middle" font-weight="bold">S5 (B5)</text>
+  <text x="669.4" y="362.0" font-size="8.2" fill="#b91c1c" text-anchor="middle" font-weight="bold">DROPPED (+1.838!)</text>
+  <rect x="735.6" y="89.7" width="28" height="107.3" fill="#0f766e" opacity="0.88"/>
+  <rect x="767.6" y="89.7" width="28" height="107.3" fill="#1b365d" opacity="0.88"/>
+  <text x="765.6" y="348.0" font-size="10" fill="#1f2937" text-anchor="middle" font-weight="bold">S7 (B7)</text>
+  <text x="765.6" y="362.0" font-size="8.2" fill="#1b365d" text-anchor="middle" font-weight="bold">KEPT (7/7 EXACT)</text>
+  <rect x="831.9" y="197.0" width="28" height="25.4" fill="#0f766e" opacity="0.88"/>
+  <rect x="863.9" y="197.0" width="28" height="25.4" fill="#1b365d" opacity="0.88"/>
+  <text x="861.9" y="348.0" font-size="10" fill="#1f2937" text-anchor="middle" font-weight="bold">S9 (D2)</text>
+  <text x="861.9" y="362.0" font-size="8.2" fill="#1b365d" text-anchor="middle" font-weight="bold">KEPT (5/5 EXACT)</text>
+  <rect x="535" y="70" width="188" height="44" rx="4" fill="#fff" stroke="#e5e9f0"/>
+  <rect x="543" y="78" width="11" height="10" fill="#0f766e"/>
+  <text x="559.0" y="87.0" font-size="9.2" fill="#1f2937" text-anchor="start" font-weight="normal">Exact 75-digit zeta'(0)</text>
+  <rect x="543" y="95" width="11" height="10" fill="#b91c1c"/>
+  <text x="559.0" y="104.0" font-size="9.2" fill="#1f2937" text-anchor="start" font-weight="normal">TUFT-used (navy = exact match)</text>
+  <text x="485.0" y="197.0" font-size="10.5" fill="#1f2937" text-anchor="middle" font-weight="bold" transform="rotate(-90 485.0 197.0)">Spectral Zeta Derivative  zeta'(0)</text>
+</svg>
