@@ -79,3 +79,45 @@ fn test_novelty_2_theorem_c_edgeworth_and_2d_isotropy() {
     assert!(r.max_isotropy_spread_4th < 0.02);
 }
 
+#[test]
+fn test_novelty_3_theorem_d_three_pincer_obstruction() {
+    let r = morpheus_rust::section7_cycle5::verify_theorem_d_pincer();
+    assert!(r.passed, "{r:?}");
+    assert_eq!(r.deg9_to_14_survivors, 0);
+    assert_eq!(r.deg7_max_surviving_u, 4);
+    assert_eq!(r.deg7_hge2_survivors, 0);
+    assert_eq!(r.deg8_max_surviving_u, 4);
+    assert_eq!(r.deg8_hge2_survivors, 0);
+    assert_eq!(r.deg6_max_surviving_u, 8);
+    assert!(r.deg6_u16_h1_dead && r.deg6_u16_hge2_dead);
+    assert!(r.deg6_u16_h1_margin > 0.013);
+}
+
+#[test]
+fn test_thm_7_11_and_neg_e10_pure_rust_manin_t2() {
+    let r = morpheus_rust::section7_cycle5::verify_shimura_manin_t2();
+    assert!(r.passed, "{r:?}");
+    assert_eq!(r.total_pairs, 19);
+    assert_eq!(r.torsion_free_pairs, 11);
+    assert!(r.neg_e10_detected);
+    assert_eq!(r.neg_e10_phi, 176);
+    assert_eq!(r.neg_e10_e3, 8);
+    assert_eq!(r.gamma_h_count, 4);
+    assert_eq!(r.full_rank_levels, r.distinct_levels_checked);
+    assert_eq!(r.m345_manin_dim, 45);
+    assert_eq!(r.m345_px_rank, 45);
+}
+
+#[test]
+fn test_props_7_3_7_17_7_18a_siegel_and_pgl2_f8() {
+    let r = morpheus_rust::section7_cycle5::verify_section7_arithmetic_cycle5();
+    assert!(r.passed, "{r:?}");
+    assert_eq!(r.quad_hplus1_solutions, 3);
+    assert_eq!(r.quad_d41_solutions, 2);
+    assert_eq!(r.quad_d137_solutions, 1);
+    assert_eq!(r.pgl2_f8_order, 504);
+    assert_eq!(r.pgl2_f8_order3_count, 56);
+    assert_eq!(r.pgl2_f8_order3_free_count, 56);
+    assert_eq!(r.gamma0_powers_obstructed, 12);
+}
+

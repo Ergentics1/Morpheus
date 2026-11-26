@@ -62,4 +62,21 @@ final class DeterministicTests: XCTestCase {
             XCTAssertLessThan(item.maxDelta, 1e-12, "\(item.id) cross-lane delta too large")
         }
     }
+
+    func testSection7Cycle5AndTheoremD() {
+        let (items, dS, shS, arS) = TripleCheckBridge.checkSection7Cycle5()
+        XCTAssertEqual(items.count, 3)
+        for item in items {
+            XCTAssertTrue(item.passed, "\(item.id): \(item.detail)")
+            XCTAssertLessThan(item.maxDelta, 1e-12, "\(item.id) cross-lane delta too large")
+        }
+        XCTAssertEqual(dS.deg9To14Survivors, 0)
+        XCTAssertEqual(dS.deg7MaxSurvivingU, 4)
+        XCTAssertEqual(dS.deg8MaxSurvivingU, 4)
+        XCTAssertEqual(dS.deg6MaxSurvivingU, 8)
+        XCTAssertEqual(shS.totalPairs, 19)
+        XCTAssertEqual(shS.negE10Detected, 1)
+        XCTAssertEqual(arS.pgl2F8Order, 504)
+        XCTAssertEqual(arS.pgl2F8Order3FreeCount, 56)
+    }
 }

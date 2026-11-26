@@ -100,7 +100,59 @@ fn main() {
         nov_c.tv_gain_6
     );
 
-    let all_ok = t34.passed && tow.passed && t16.passed && gen.passed && x4.passed && nov_ab.passed && nov_c.passed;
+    let thm_d = morpheus_rust::section7_cycle5::verify_theorem_d_pincer();
+    println!(
+        "  [{}] Novelty 3 (Thm D Three-Pincer): n=9..14_surv={} m9=+{:.4} n7/8_u<={}(h=1) n6_u<={}(u16:+{:.5}) tail15={:.3}>{:.3}",
+        if thm_d.passed { "PASS" } else { "FAIL" },
+        thm_d.deg9_to_14_survivors,
+        thm_d.worst_deg9_margin,
+        thm_d.deg7_max_surviving_u,
+        thm_d.deg6_max_surviving_u,
+        thm_d.deg6_u16_h1_margin,
+        thm_d.tail15_lb_b42,
+        thm_d.tail15_ub
+    );
+
+    let shim = morpheus_rust::section7_cycle5::verify_shimura_manin_t2();
+    println!(
+        "  [{}] Thm 7.11 / NEG-E10 (Pure-Rust Manin T_2, ZERO PARI): pairs={}(tf={}) NEG-E10(D=690,phi={},e3={}):{} GammaH={} full_rank={}/{} M345_dim={}(tr={})",
+        if shim.passed { "PASS" } else { "FAIL" },
+        shim.total_pairs,
+        shim.torsion_free_pairs,
+        shim.neg_e10_phi,
+        shim.neg_e10_e3,
+        shim.neg_e10_detected,
+        shim.gamma_h_count,
+        shim.full_rank_levels,
+        shim.distinct_levels_checked,
+        shim.m345_manin_dim,
+        shim.m345_tr_t2_mod_q
+    );
+
+    let ar5 = morpheus_rust::section7_cycle5::verify_section7_arithmetic_cycle5();
+    println!(
+        "  [{}] Props 7.3, 7.17(b), 7.18(a): quad_D<=1200={} h+=1_sols={}(41x{},137x{}) |PGL2(F8)|={} ord3_free={}/{} g0_pow={}/12",
+        if ar5.passed { "PASS" } else { "FAIL" },
+        ar5.quad_split2_scanned,
+        ar5.quad_hplus1_solutions,
+        ar5.quad_d41_solutions,
+        ar5.quad_d137_solutions,
+        ar5.pgl2_f8_order,
+        ar5.pgl2_f8_order3_free_count,
+        ar5.pgl2_f8_order3_count,
+        ar5.gamma0_powers_obstructed
+    );
+
+    let all_ok = t34.passed
+        && tow.passed
+        && t16.passed
+        && gen.passed
+        && x4.passed
+        && nov_ab.passed
+        && nov_c.passed
+        && thm_d.passed
+        && shim.passed
+        && ar5.passed;
     println!("Overall Rust Oracle Result: {}", if all_ok { "ALL PASS" } else { "FAILURES" });
     if !all_ok {
         std::process::exit(1);

@@ -192,6 +192,22 @@ int main() {
     expect(ax40.passed && ax40.bad_divisibility_count == 0 && ax40.max_isotropy_spread_4th < 0.02,
            "Novelty 2 (Thm C 2D Isotropy): m=40 exact coboundaries & universal -17/(2m) kurtosis across W=-u, v, 4u+3v");
 
+    // 11. ADPIE Cycle 5: Theorem D (Three-Pincer Hilbert Class Field Obstruction), NEG-E10 & Section 7 completion.
+    TheoremDPincerReport thm_d = verify_theorem_d_pincer();
+    expect(thm_d.passed && thm_d.deg9_to_14_survivors == 0 && thm_d.deg7_max_surviving_u == 4 &&
+           thm_d.deg8_max_surviving_u == 4 && thm_d.deg6_max_surviving_u == 8 && thm_d.deg6_u16_h1_dead == 1,
+           "Novelty 3 (Thm D): n=9..14 & n>=15 killed unconditionally (n<=8), n=7,8 h_F=1 u<=4, n=6 u<=8 (d_F<=2.65e7)");
+
+    ShimuraGenus13Report shim13 = verify_shimura_genus13_census();
+    expect(shim13.passed && shim13.total_pairs == 19 && shim13.torsion_free_pairs == 11 &&
+           shim13.neg_e10_detected == 1 && shim13.gamma_h_count == 4,
+           "Thm 7.11 / NEG-E10: exact 19 genus-13 pairs (11 torsion-free), caught omitted X_0^690(1) (phi=176, e3=8), 4 Gamma_H");
+
+    Section7ArithmeticCycle5Report ar5 = verify_section7_arithmetic_cycle5();
+    expect(ar5.passed && ar5.quad_hplus1_solutions == 3 && ar5.pgl2_f8_order == 504 &&
+           ar5.pgl2_f8_order3_free_count == 56 && ar5.gamma0_powers_obstructed == 12,
+           "Props 7.3, 7.17(b), 7.18(a): Siegel D<=1200 h+=1 -> {41x2, 137x1}, |PGL2(F8)|=504 (56/56 ord3 free), g0^k obstructed");
+
     std::printf("=== Lane 1 C++20 Result: %s ===\n", g_failed == 0 ? "ALL PASS" : "FAILURES");
     return g_failed == 0 ? 0 : 1;
 }
