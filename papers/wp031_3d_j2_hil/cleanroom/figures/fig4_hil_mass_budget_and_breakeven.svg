@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="295" viewBox="0 0 760 295">
+<style>
+  .bg { fill: #ffffff; }
+  .panel { fill: #f8fafc; stroke: #cbd5e1; stroke-width: 1; }
+  .title { font-family: "Helvetica Neue", Arial, sans-serif; font-size: 12.5px; font-weight: 700; fill: #0f172a; }
+  .sub { font-family: "Helvetica Neue", Arial, sans-serif; font-size: 9.8px; fill: #475569; }
+  .ax { stroke: #334155; stroke-width: 1.1; }
+  .grid { stroke: #e2e8f0; stroke-width: 0.7; stroke-dasharray: 3,3; }
+  .tick { font-family: "Helvetica Neue", Arial, sans-serif; font-size: 9px; fill: #475569; }
+  .lbl { font-family: "Helvetica Neue", Arial, sans-serif; font-size: 9.8px; font-weight: 600; fill: #1e293b; }
+  .mono { font-family: Menlo, Consolas, monospace; font-size: 7.9px; fill: #0f172a; }
+  .badge { font-family: "Helvetica Neue", Arial, sans-serif; font-size: 8.6px; font-weight: 700; }
+</style>
+<rect class="bg" x="0" y="0" width="760" height="295"/>
+<rect class="panel" x="12" y="12" width="364" height="271" rx="6"/>
+<text class="title" x="26" y="34">A. Complete Dry Propulsion Hardware Budget</text>
+<text class="sub" x="26" y="49">L = 20 km spin-tensioned Hopf triad on M = 1,000 kg craft (3.77% mass)</text>
+<text class="lbl" x="26" y="83">3x Regenerative SiC Winches</text>
+<rect x="26" y="87" width="211.5" height="14" rx="3" fill="#2563eb"/>
+<text class="mono" x="243.5" y="98" fill="#0f172a">18.00 kg (47.7%)</text>
+<text class="lbl" x="26" y="117">SiC Inverters &amp; Energy Buffer</text>
+<rect x="26" y="121" width="141.0" height="14" rx="3" fill="#7c3aed"/>
+<text class="mono" x="173.0" y="132" fill="#0f172a">12.00 kg (31.8%)</text>
+<text class="lbl" x="26" y="151">Tapered Zylon PBO Tether (SF=5)</text>
+<rect x="26" y="155" width="79.2" height="14" rx="3" fill="#059669"/>
+<text class="mono" x="111.2" y="166" fill="#0f172a">6.74 kg (17.9%)</text>
+<text class="lbl" x="26" y="185">Waste-Heat Radiator (5.33 W avg)</text>
+<rect x="26" y="189" width="11.8" height="14" rx="3" fill="#d97706"/>
+<text class="mono" x="43.8" y="200" fill="#0f172a">1.00 kg (2.6%)</text>
+<rect x="26" y="212" width="336" height="58" rx="5" fill="#ffffff" stroke="#94a3b8"/>
+<text class="lbl" x="34" y="229" fill="#0f172a">Total Dry Propulsion Hardware: M_HW = 37.74 kg (3.77% of 1,000 kg)</text>
+<text class="mono" x="34" y="244">Resonance: f_1/f_orb = 192.55x | Peak Stretch: 0.527%</text>
+<text class="mono" x="34" y="259">HIL Eq. (5) Residual: &lt; 1e-6 | Taper C144: 1 Jet2 box</text>
+<rect class="panel" x="388" y="12" width="360" height="271" rx="6"/>
+<text class="title" x="402" y="34">B. Multi-Year Mass Break-Even vs. Hall Thruster</text>
+<text class="sub" x="402" y="49">Constant-p safe-perigee pumping (198.6 m/s/yr, Hall Isp = 1,600 s)</text>
+<rect x="442" y="72" width="290" height="158" fill="#ffffff" stroke="#cbd5e1"/>
+<line class="grid" x1="442" y1="230.0" x2="732" y2="230.0"/>
+<text class="tick" x="436" y="233.0" text-anchor="end">0 kg</text>
+<line class="grid" x1="442" y1="198.4" x2="732" y2="198.4"/>
+<text class="tick" x="436" y="201.4" text-anchor="end">40 kg</text>
+<line class="grid" x1="442" y1="166.8" x2="732" y2="166.8"/>
+<text class="tick" x="436" y="169.8" text-anchor="end">80 kg</text>
+<line class="grid" x1="442" y1="135.2" x2="732" y2="135.2"/>
+<text class="tick" x="436" y="138.2" text-anchor="end">120 kg</text>
+<line class="grid" x1="442" y1="103.6" x2="732" y2="103.6"/>
+<text class="tick" x="436" y="106.6" text-anchor="end">160 kg</text>
+<line class="grid" x1="442" y1="72.0" x2="732" y2="72.0"/>
+<text class="tick" x="436" y="75.0" text-anchor="end">200 kg</text>
+<line class="grid" x1="442.0" y1="72" x2="442.0" y2="230"/>
+<text class="tick" x="442.0" y="243" text-anchor="middle">0 yr</text>
+<line class="grid" x1="500.0" y1="72" x2="500.0" y2="230"/>
+<text class="tick" x="500.0" y="243" text-anchor="middle">2 yr</text>
+<line class="grid" x1="558.0" y1="72" x2="558.0" y2="230"/>
+<text class="tick" x="558.0" y="243" text-anchor="middle">4 yr</text>
+<line class="grid" x1="616.0" y1="72" x2="616.0" y2="230"/>
+<text class="tick" x="616.0" y="243" text-anchor="middle">6 yr</text>
+<line class="grid" x1="674.0" y1="72" x2="674.0" y2="230"/>
+<text class="tick" x="674.0" y="243" text-anchor="middle">8 yr</text>
+<line class="grid" x1="732.0" y1="72" x2="732.0" y2="230"/>
+<text class="tick" x="732.0" y="243" text-anchor="middle">10 yr</text>
+<line class="ax" x1="442" y1="230" x2="732" y2="230"/>
+<line class="ax" x1="442" y1="72" x2="442" y2="230"/>
+<polyline fill="none" stroke="#dc2626" stroke-width="2.3" points="442.0,206.3 444.9,205.2 447.8,204.0 450.7,202.9 453.6,201.7 456.5,200.6 459.4,199.4 462.3,198.3 465.2,197.1 468.1,196.0 471.0,194.9 473.9,193.7 476.8,192.6 479.7,191.5 482.6,190.3 485.5,189.2 488.4,188.1 491.3,187.0 494.2,185.8 497.1,184.7 500.0,183.6 502.9,182.5 505.8,181.4 508.7,180.2 511.6,179.1 514.5,178.0 517.4,176.9 520.3,175.8 523.2,174.7 526.1,173.6 529.0,172.5 531.9,171.3 534.8,170.2 537.7,169.1 540.6,168.0 543.5,166.9 546.4,165.8 549.3,164.7 552.2,163.6 555.1,162.5 558.0,161.5 560.9,160.4 563.8,159.3 566.7,158.2 569.6,157.1 572.5,156.0 575.4,154.9 578.3,153.8 581.2,152.8 584.1,151.7 587.0,150.6 589.9,149.5 592.8,148.4 595.7,147.4 598.6,146.3 601.5,145.2 604.4,144.1 607.3,143.1 610.2,142.0 613.1,140.9 616.0,139.9 618.9,138.8 621.8,137.7 624.7,136.7 627.6,135.6 630.5,134.6 633.4,133.5 636.3,132.4 639.2,131.4 642.1,130.3 645.0,129.3 647.9,128.2 650.8,127.2 653.7,126.1 656.6,125.1 659.5,124.0 662.4,123.0 665.3,121.9 668.2,120.9 671.1,119.9 674.0,118.8 676.9,117.8 679.8,116.7 682.7,115.7 685.6,114.7 688.5,113.6 691.4,112.6 694.3,111.6 697.2,110.5 700.1,109.5 703.0,108.5 705.9,107.5 708.8,106.4 711.7,105.4 714.6,104.4 717.5,103.4 720.4,102.4 723.3,101.3 726.2,100.3 729.1,99.3 732.0,98.3"/>
+<polyline fill="none" stroke="#059669" stroke-width="2.3" points="442.0,200.2 444.9,200.2 447.8,200.2 450.7,200.2 453.6,200.2 456.5,200.2 459.4,200.2 462.3,200.2 465.2,200.2 468.1,200.2 471.0,200.2 473.9,200.2 476.8,200.2 479.7,200.2 482.6,200.2 485.5,200.2 488.4,200.2 491.3,200.2 494.2,200.2 497.1,200.2 500.0,200.2 502.9,200.2 505.8,200.2 508.7,200.2 511.6,200.2 514.5,200.2 517.4,200.2 520.3,200.2 523.2,200.2 526.1,200.2 529.0,200.2 531.9,200.2 534.8,200.2 537.7,200.2 540.6,200.2 543.5,200.2 546.4,200.2 549.3,200.2 552.2,200.2 555.1,200.2 558.0,200.2 560.9,200.2 563.8,200.2 566.7,200.2 569.6,200.2 572.5,200.2 575.4,200.2 578.3,200.2 581.2,200.2 584.1,200.2 587.0,200.2 589.9,200.2 592.8,200.2 595.7,200.2 598.6,200.2 601.5,200.2 604.4,200.2 607.3,200.2 610.2,200.2 613.1,200.2 616.0,200.2 618.9,200.2 621.8,200.2 624.7,200.2 627.6,200.2 630.5,200.2 633.4,200.2 636.3,200.2 639.2,200.2 642.1,200.2 645.0,200.2 647.9,200.2 650.8,200.2 653.7,200.2 656.6,200.2 659.5,200.2 662.4,200.2 665.3,200.2 668.2,200.2 671.1,200.2 674.0,200.2 676.9,200.2 679.8,200.2 682.7,200.2 685.6,200.2 688.5,200.2 691.4,200.2 694.3,200.2 697.2,200.2 700.1,200.2 703.0,200.2 705.9,200.2 708.8,200.2 711.7,200.2 714.6,200.2 717.5,200.2 720.4,200.2 723.3,200.2 726.2,200.2 729.1,200.2 732.0,200.2"/>
+<line x1="587.0" y1="150.6" x2="587.0" y2="200.2" stroke="#475569" stroke-width="1.2" stroke-dasharray="3,2"/>
+<circle cx="587.0" cy="150.6" r="4" fill="#dc2626"/>
+<circle cx="587.0" cy="200.2" r="4" fill="#059669"/>
+<text class="badge" x="581.0" y="143.6" text-anchor="end" fill="#b91c1c">5 yr Hall: 100.5 kg</text>
+<text class="badge" x="593.0" y="178.4" fill="#0f172a">2.66x mass save</text>
+<rect x="450" y="78" width="214" height="36" rx="4" fill="#fffbeb" stroke="#f59e0b"/>
+<text class="tick" x="456" y="92" fill="#92400e">Caveat: Break-even holds strictly on</text>
+<text class="tick" x="456" y="105" fill="#92400e">constant-p; Hall retains arbitrary 3D dv!</text>
+<text class="lbl" x="587.0" y="260" text-anchor="middle">Mission Duration (Years at 198.6 m/s/yr)</text>
+<text class="lbl" x="404" y="151.0" text-anchor="middle" transform="rotate(-90 404 151.0)">Total Propulsion Mass (kg)</text>
+</svg>
