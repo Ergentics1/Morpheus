@@ -1,0 +1,10 @@
+[package]
+name = "wp030-rust"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+description = "Zero-crate independent cross-verifier for Ergentics Working Paper 030 (Shape-Controlled Gravitational Propulsion Resolved)."
+
+[lib]
+name = "wp030_rust"
+path = "src/lib.rs"

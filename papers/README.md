@@ -7,7 +7,7 @@
 | # | Paper / Program | Location | Stage | Verification Status |
 | :---: | :--- | :--- | :--- | :--- |
 | **01** | ***Prime Cadences:*** *Ihara zeta, graphene, and voice-leading homology on the Tonnetz* | Root layout ([`paper/`](../paper/), [`prime_cadences_paper.md`](../prime_cadences_paper.md), [`cleanroom/prime_cadences_resolution/`](../cleanroom/prime_cadences_resolution/)) | **`v0.3.1` Released** (Immutable GitHub Release) | **3-Way Reconciled & Verified (`[E]` · `[GB]` · `[G4N]`):** 35 pp PDF, 56 refs, `228/228` + `20/20` audits, `33/33` Lean 4 theorems, Swift++ (`0.000e+00` delta), Rust (zero-PARI Manin $T_2$), PARI/GP |
-| **02** | ***Working Paper 030 (Horizon Monograph I):*** *Shape-Controlled Gravitational Propulsion Resolved* (continuation of Working Paper 028) | [`wp030_shape_propulsion/`](wp030_shape_propulsion/) | **Intake (`Pre-Assessment`)** | **Verbatim clean-room archive (`[E]`):** `cleanroom/paper.typ` + 4 SVG figures archived unmodified (`0` paths/URLs/credentials); awaiting independent assessment by **Gemini 4 Neon** (`[G4N]`) & **Grok Bot** (`[GB]`) |
+| **02** | ***Working Paper 030 (Horizon Monograph I):*** *Shape-Controlled Gravitational Propulsion Resolved* (continuation of Working Paper 028) | [`wp030_shape_propulsion/`](wp030_shape_propulsion/) | **Cycle 1 Audited (`[G4N]`, Awaiting `[GB]`)** | **Frozen `[E]` baseline + 3-plane `[G4N]` audit:** Python `9/9`, Lean 4.36.0 `15/15` (`0 sorryAx`), Rust `7/7` (bit-exact `SplitMix64` parity), [`GEMINI4_NEON_WP030_AUDIT.md`](wp030_shape_propulsion/reconciliation/GEMINI4_NEON_WP030_AUDIT.md) (core `H1–H4` confirmed; 8 catches `NEG-W1`–`NEG-W6` + Theorem G1); awaiting independent **Grok Bot** (`[GB]`) pass |
 
 ## Standard Per-Paper Directory Layout (`papers/<slug>/`)
 

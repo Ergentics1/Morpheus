@@ -3,11 +3,11 @@
 **Series:** Ergentics Working Paper 030 · Horizon Series Monograph I · Continuation of Working Paper 028 (23 September 2026)  
 **Author:** Ergentics, LLC & Swift++ Library of Alexandria Verification Program (`[E]`)  
 **Date:** November 2026  
-**Lifecycle Stage:** **`Intake (Pre-Assessment)`** — archived verbatim as-is prior to independent mathematical, physical, and computational assessment by **Gemini 4 Neon** (`[G4N]` / `[E→G4N]`) and **Grok Bot** (`[GB]` / `[E→GB]`).
+**Lifecycle Stage:** **`Cycle 1 Audited [G4N] — Awaiting [GB] Independent Pass`** — frozen clean-room `[E]` baseline preserved byte-for-byte unmodified under `cleanroom/`; full **Gemini 4 Neon** (`[G4N]` / `[E→G4N]`) 3-plane independent audit & mathematical sharpening landed in [`reconciliation/GEMINI4_NEON_WP030_AUDIT.md`](reconciliation/GEMINI4_NEON_WP030_AUDIT.md). Ready for **Grok Bot** (`[GB]`) independent cross-check prior to canonical `paper/` reconciliation.
 
 ---
 
-## Verbatim Clean-Room Archive (`cleanroom/`)
+## Verbatim Clean-Room Archive (`cleanroom/` — Frozen per Rule 5)
 
 Per Rule 5 ([`../../AGENTS.md`](../../AGENTS.md)), the uploaded clean-room manuscript is archived byte-for-byte unmodified as the frozen `[E]` baseline for independent assessment:
 
@@ -19,25 +19,31 @@ Per Rule 5 ([`../../AGENTS.md`](../../AGENTS.md)), the uploaded clean-room manus
 | [`cleanroom/figures/fig3_shapere_wilczek_holonomy.svg`](cleanroom/figures/fig3_shapere_wilczek_holonomy.svg) | Figure 3: Shapere–Wilczek `-90°` zero-spin holonomy (`C140`) | `7,374 B` | `92bd1292a54b2b331e41a0f07a13a4495b7bef98efd12bdf3244a87138ab490a` | `0` local paths · `0` non-W3C URLs · `0` credentials | MIT |
 | [`cleanroom/figures/fig4_h5_mission_dominance_map.svg`](cleanroom/figures/fig4_h5_mission_dominance_map.svg) | Figure 4: `H5` mission dominance map & Eq. (5) regeneration efficiency | `12,692 B` | `840ce4dbbb21b25bfd596bb1ff6efaf859d160d8ea7fad0657001875f73f4053` | `0` local paths · `0` non-W3C URLs · `0` credentials | MIT |
 
-All four relative SVG paths in `cleanroom/paper.typ` (`figures/fig1..fig4.svg`) resolve directly inside `cleanroom/` (`typst compile paper.typ paper.pdf`). *Ergentics Working Paper 028 / Web Edition 029* (23 September 2026) sits on the author's website and can be mirrored here later if desired.
+---
+
+## Independent Verification Planes (`[G4N]` ADPIE Cycle 1)
+
+All verifiers compute directly from first principles with zero cached data reads (`Code Model` = MIT; `Data Model` = CC BY 4.0):
+
+| Plane | Path | Status | Verification Command (from repo root) |
+| :--- | :--- | :--- | :--- |
+| **1 — Zero-Dep Python 3.12** | [`code/wp030_audit.py`](code/wp030_audit.py) | **`9/9` PASS** (D1–D6, R1–R2 4-body & Landis RK4, P1 `N=1,600` SplitMix64 RCT) | `python3 papers/wp030_shape_propulsion/code/wp030_audit.py` |
+| **2 — Zero-Mathlib Lean 4.36.0** | [`lean/WP030/Theorems.lean`](lean/WP030/Theorems.lean) | **`15/15` PASS** (`0 sorryAx`, `0 ofReduceBool`, `0` warnings; 8 axiom-free) | `lake -d papers/wp030_shape_propulsion/lean build && papers/wp030_shape_propulsion/lean/.lake/build/bin/wp030-lean` |
+| **3 — Zero-Crate Rust 1.100.0** | [`rust/src/lib.rs`](rust/src/lib.rs) · [`rust/tests/wp030_xcheck.rs`](rust/tests/wp030_xcheck.rs) | **`7/7` PASS** (`0.16 s`, bit-exact SplitMix64 seam `0xe9de083b69c67979` & 4-body RK4 parity) | `cargo test --manifest-path papers/wp030_shape_propulsion/rust/Cargo.toml` |
+| **Data Model (CC BY 4.0)** | [`data/wp030_g4n_cycle1_calibration.json`](data/wp030_g4n_cycle1_calibration.json) · [`data/MANIFEST.sha256`](data/MANIFEST.sha256) | **`1/1` SHA-256 OK** | `sha256sum -c papers/wp030_shape_propulsion/data/MANIFEST.sha256` |
+| **Audit & Novelty Dossier** | [`reconciliation/GEMINI4_NEON_WP030_AUDIT.md`](reconciliation/GEMINI4_NEON_WP030_AUDIT.md) | **Complete (`[G4N]`)** — 8 catches (`NEG-W1`–`NEG-W6`), original **Theorem G1**, & `[GB]` handoff checklist | — |
 
 ---
 
-## Pre-Assessment Scope for Independent Audit (`[G4N]` & `[GB]`)
+## Audit Summary (`[G4N]` Cycle 1)
 
-Nothing below is marked `[X]` verified yet; all claims live in `cleanroom/paper.typ` as submitted `[E]` statements pending independent first-principles verification:
-
-1. **`H1–H3` Exact Algebraic Factorizations & IEEE-754 Cancellation Audit (§1):**
-   - Exact collinear ($\Delta a_\parallel$) and transverse ($\Delta a_\perp$) 3-mass Newtonian acceleration contrast factorizations; Paper 028 Earth benchmark (`-3.3203` / `+1.6601` μN, `13.1268` μJ); IEEE-754 subtraction loss (`9` digits at $L = 100\text{ m}$, `8.20e-3` at $L/R = 10^{-7}$).
-2. **Theorem 1 — Exact Noether Constant-$p$ Orbital Manifold Barrier (§2):**
-   - Exact $SO(3)$ conservation $\mathbf{J}_{\mathrm{tot}} = \mathbf{L}_{\mathrm{orb}} + \mathbf{S}_{\mathrm{craft}}$ forcing $\Delta \mathbf{L}_{\mathrm{orb}} = \mathbf{0}$ and $p = a(1 - e^2) = \text{const}$ for any spin-closed cycle of any $N$-mass craft in a spherical $1/r$ potential.
-3. **Theorem 2 — Iso-Inertial Hopf-Fibration Three-Mass Triad & Dirac-Monopole Connection (§2):**
-   - Normalized Jacobi complex coordinates $(z_1, z_2) \in \mathbb{C}^2$ on $|z_1|^2 + |z_2|^2 = 2L^2$: strictly constant $I_{zz} \equiv (2/3) M L^2$, full-disk complex quadrupole $Q_{\mathbb{C}} = I_0 e^{2i\theta_0}(\cos\Phi + i\cos\Theta\sin\Phi)$ controllability with zero leading quadrupole gravity-gradient torque, and zero-spin connection $\dot\theta_0 = -\tfrac12 \cos\Theta\,\dot\Phi$ yielding holonomy $\Delta\theta_{\mathrm{geom}} = -\tfrac12 \Omega_{\mathrm{solid}}(\Sigma)$.
-4. **Proposition 3 — Exact Eccentric Pumping Law & `2/3` Penalty Recovery (§2):**
-   - Per-orbit energy gain $\Delta E_{\mathrm{orb}} = \frac{3}{2}\mu I_0 (r_p^{-3} - r_a^{-3}) = \frac{2\mu M L^2}{p^3}(3e + e^3)$ matching a full-retraction 2-mass Landis dumbbell without radial $\dot I_{zz}$ Coriolis torque.
-5. **Coupled 4-Body Dynamical-Primary Integration & `H4` Head-to-Head Benchmark (§3):**
-   - Independent first-principles re-integration (dynamical primary $M_p = 1000 M$, 5 orbits, $e_0 = 0.2$ and $e_0 = 0.0$ control): Eq. (5) residual, $|\Delta J_{\mathrm{tot}}|$, octupole spin exchange, unassisted 2-mass Landis tether Coriolis tumble vs. Hopf triad (`0` tumbles, `1.78×–1.83×` $\Delta E_{\mathrm{orb}}$), and live `-90.0000°` Shapere–Wilczek reorientation at $\Theta = \pi/3$.
-6. **Honest `H5` Thermodynamic Efficiency & Mission Dominance Regimes (§4):**
-   - Regeneration efficiency $\eta_{\mathrm{prop}}(e; \eta_{\mathrm{act}}, \eta_{\mathrm{regen}})$, exact 50%-efficiency threshold $e_{50}^* = (2^{1/3} - 1)/(2^{1/3} + 1) \approx 0.1150133319511158$, internal kinetic energy barrier $T_{\mathrm{shape}}$, and quantitative mission budgets (Regime A: `100 m` LEO dominated; Regime B: `20 km` eccentric pumping `619.8 m/s/yr`, `55.1 N` tension; Regime C: `2.5 km` asteroid proximity `7.84e6×` coupling boost).
-7. **Literature & Reference Verification (§References):**
-   - Bibliographic verification of references `[1]`–`[12]` (Landis, Guéron–Maia–Matsas, Wisdom, Guichardet, Shapere–Wilczek, Montgomery/Iwai, Martinez-Sanchez–Gavit, Beletsky–Levin, Moore/Krawczyk).
+- **Confirmed rock-solid:** `H1–H3` exact factorizations & Earth benchmark (`C137`), **Theorem 1** exact Noether constant-$p$ barrier, **Proposition 3** pumping identity, **`K8`** $e_{50}^* = 0.1150133319511158$, coupled 4-body `Eq. (5)` closure (`0.0011 ppm`, `|ΔJ| <= 2.86e-12`, `0` tumbles vs. `2,382°–12,957°` on unassisted 2-mass Landis tethers, `e_0 = 0` circular barrier), and honest `H5` refutation of `100 m` LEO.
+- **8 Concrete Catches Logged (`NEG-W1`–`NEG-W6` in [`../../NEGATIVES.md`](../../NEGATIVES.md)):**
+  1. **Critical (`NEG-W1`):** Table 1 Regimes A & B have underground Earth perigees (`r_p = 6,300 km` and `5,250 km < 6,371 km`); valid above-atmosphere $r_p = 6{,}800\text{ km}$ reduces Regime B from `619.8` to **`220.2 m/s/yr`** (`25.4 N` / `27.5 N` tension — still propellantless & niche-viable).
+  2. **Major (`NEG-W2`):** Paper's $\Theta = \pi/3$ holonomy loop hits **two exact binary collisions** ($\rho_2 = \rho_3$ at $\Phi = 0$, $\rho_1 = \rho_3$ at $\Phi = \pi$) and `fig3` mislabels collinear $\Theta = 0$ as `"North Pole (Equilateral)"`. Fixed by unitary equilateral-pole basis $w_\pm = (z_1 \pm i z_2)/\sqrt{2}$ (`-90.0000°` collision-free at $\beta = \pi/3$, $\min d_{ij} = 0.5176\,L$).
+  3. **Major — Original `[G4N]` Theorem G1 (`NEG-W3`):** Exact zero-spin kinetic energy is $T_{\mathrm{shape}}(q) = \frac{1}{8}I_0\dot\beta^2 + \frac{q^2}{1-q^2}(\frac12 I_0 \dot\theta_{\mathrm{orb}}^2)$ — **`9.2564×` (`361/39`) larger at `q = 0.95`** than §4.1's $\frac12 I_0 \Omega^2$ estimate and diverging as $(1 - q^2)^{-1}$. Peak mass radius is $\sqrt{\frac{2(1+q)}{3}}\,L$ (`1.1402 L` at `q = 0.95`; $\le L$ iff $q \le 1/2$).
+  4. **Moderate (`NEG-W4`):** Theorem 2 line 200 inertia-vs-mass-quadrupole sign convention (`Q_mass = -Q_inertia`).
+  5. **Moderate (`NEG-W5`):** Table 1 Regime A tension `0.0012 N` is `~100×` too low (exact `0.159 N` at $r_p = 6{,}300\text{ km}$; `0.127 N` / `0.131 N` on valid $r_p = 6{,}800\text{ km}$).
+  6. **Moderate (`NEG-W6`):** Regime C `7.84e6×` is $(L/R)^2$ (not $L^2/R^4$), Bennu tension is `3.13e-5 N` (not `< 10^-6 N`), and 1 AU SRP exceeds raw Bennu $|\Delta a_\parallel|$.
+  7. **Minor (`NEG-W6`):** `C138 <= 1e-6` requires zero-octupole symmetry (`1.29e-5` over general $\chi$); `F35` loss at $e^* = 0.0275$ is `84.8%` (`0.8479`), not `84.6%`; Ref `[1]` NTRS ID should be `19910012826` (CP-10059) / `19910029285` (Landis tether paper).
+  8. **Diagnostic note:** Specify $\mu_{\mathrm{tot}} = G(M_p + M)$ in Theorem 1 and osculating vs. total energy convention for §3.1 `a_f / e_f`.
