@@ -1,0 +1,161 @@
+{
+  "gates_passed": 5,
+  "gates_total": 5,
+  "generator": "papers/wp035_tuft_hagedorn_repair/code/wp035_audit.py",
+  "license": "CC-BY-4.0",
+  "results": {
+    "D1_trackA_spectral_zeta_eq65_and_neg_w22": {
+      "metrics": {
+        "c158_max_defect": 0.005372109785436563,
+        "eq65_exact_p2_coeff": 0.12179382823357308,
+        "eq65_nielsen_p2_coeff": -2.4041138063191885,
+        "eq65_ratio_nielsen_over_exact": -19.739208802178716,
+        "l31_eq65_mults_1_to_6": [
+          0,
+          0,
+          30,
+          0,
+          0,
+          96
+        ],
+        "l31_true_mults_1_to_6": [
+          4,
+          4,
+          8,
+          20,
+          22,
+          28
+        ],
+        "neg_w22_s3_dropped_ratio": 30.180134626932194,
+        "neg_w22_s3_true_ratio": 29.180134626932194,
+        "neg_w22_s5_dropped_ratio": 22.941045232675737,
+        "neg_w22_s5_true_ratio": 21.941045232675734,
+        "zeta_p_S3_drop_z0_signed": -0.03044845705839327,
+        "zeta_p_S3_exact": 0.8884900761462795,
+        "zeta_p_S5_exact": -1.757764018038228,
+        "zeta_p_S5_spec5": 0.08011304837111749,
+        "zeta_p_S7_exact": 1.7484522044477595,
+        "zeta_p_S9_Delta2_exact": -0.4136446581896795
+      },
+      "pass": true
+    },
+    "D2_trackA_a5_wyler_g2_beltrami_and_dark": {
+      "metrics": {
+        "a5_derived": 10.53199522538842,
+        "a5_non_sequitur_ratio": 2.9550122186763037,
+        "a5_used": 3.564112242522713,
+        "app_c_log10_bayes_upper": -3414301.331572813,
+        "beltrami_jacobi_nonzero_residuals": 0,
+        "beltrami_k4_u1_dim_neg": 4,
+        "beltrami_k4_u1_dim_pos": 4,
+        "c157_normalized_defect_002": 1.8836021687951288e-06,
+        "c2_qed": -0.3284789655791933,
+        "c2_tuft": -0.3255570779390568,
+        "c3_qed": 1.1812414565872,
+        "c3_tuft": -0.023628558396704136,
+        "f40_defect_r21": 0.9705246921292418,
+        "mt_blowup_factor": 1197676118.9137857,
+        "neg_w24_vol_ratio_over_wyler": 1.7782794100389223,
+        "pull_1loop_wyler_sigma": -5428.774607784745,
+        "pull_2loop_c2_sigma": 121269.35625116542,
+        "pull_3loop_c3_sigma": -116156.41878566348,
+        "pull_4loop_qed_c4_sigma": 428.215301275867,
+        "r_ew_meters": 8.014266137507565e-19,
+        "rho_ew_kg_m3": 2.096564179462644e+63,
+        "rho_ew_over_obs": 3.0384988108154253e+89,
+        "vp_tau_exact_2loop": 1.0918057722472474e-05,
+        "wyler_alpha_inv": 137.0360824481643,
+        "wyler_pull_sigma": 3965.293538093257
+      },
+      "pass": true
+    },
+    "D3_trackB_theorems_r1_r2_r3_and_neg_w23": {
+      "metrics": {
+        "c159_max_defect": 0.0036429925505710725,
+        "c160_max_defect": 0.0007414345036380332,
+        "k13_digamma_root": 1.4616321449683611,
+        "neg_w23_boundary_Z_at_beta_H": 1.0,
+        "neg_w23_chandra_micro_alpha": "167/90",
+        "neg_w23_sen_minus_chandra_micro": "1/2",
+        "r1_sharp_equality_dim": 17.0,
+        "r3_physical_exponents": {
+          "chandrasekaran_clock": {
+            "alpha_exact": "257/90",
+            "alpha_micro_resulting": "167/90",
+            "delta_stirling": 0.02906743207824869,
+            "exact_gap_residual_s1000": 1.3296496401873645e-07,
+            "o_s2_leading_pred": 1.3401234567901235e-07,
+            "signed_gap_residual_s1000": 1.3296496401873645e-07
+          },
+          "sen_j0_singlet": {
+            "alpha_exact": "167/90",
+            "alpha_micro_resulting": "77/90",
+            "delta_stirling": 0.04450567391641058,
+            "exact_gap_residual_s1000": 4.900244680968441e-07,
+            "o_s2_leading_pred": 4.89567901234568e-07,
+            "signed_gap_residual_s1000": 4.900244680968441e-07
+          },
+          "sen_j_summed": {
+            "alpha_exact": "151/45",
+            "alpha_micro_resulting": "106/45",
+            "delta_stirling": 0.02476267172519142,
+            "exact_gap_residual_s1000": 4.207964076402117e-07,
+            "o_s2_leading_pred": -4.1876543209876545e-07,
+            "signed_gap_residual_s1000": -4.207964076402117e-07
+          }
+        },
+        "r3_qft_gamma3_prefactor": 1.7547653506033234
+      },
+      "pass": true
+    },
+    "D4_theorem_g6_hagedorn_equivalence_breaking": {
+      "metrics": {
+        "hagedorn_regimes": {
+          "chandrasekaran_clock": {
+            "alpha": 2.8555555555555556,
+            "bridge_identity_err": 0.0,
+            "canonical_gamma_rms_disp": 0.5917723823643537,
+            "pr_inside_causal_diamond": 0.5787244134181172,
+            "pr_tail_leakage_outside": 0.4212755865818828,
+            "trunc_over_can_ratio": 0.45381676561203865,
+            "truncated_beta_rms_disp": 0.2685562285431216
+          },
+          "sen_j0_singlet": {
+            "alpha": 1.8555555555555556,
+            "bridge_identity_err": 1.1102230246251565e-16,
+            "canonical_gamma_rms_disp": 0.7341131763485945,
+            "pr_inside_causal_diamond": 0.597555776377648,
+            "pr_tail_leakage_outside": 0.402444223622352,
+            "trunc_over_can_ratio": 0.5092798780987831,
+            "truncated_beta_rms_disp": 0.3738690689615226
+          },
+          "sen_j_summed": {
+            "alpha": 3.3555555555555556,
+            "bridge_identity_err": 5.551115123125783e-17,
+            "canonical_gamma_rms_disp": 0.5459058939351292,
+            "pr_inside_causal_diamond": 0.572633041996317,
+            "pr_tail_leakage_outside": 0.42736695800368296,
+            "trunc_over_can_ratio": 0.4321134014367581,
+            "truncated_beta_rms_disp": 0.23589325269268277
+          }
+        },
+        "qft_decay_ratio_1e4_over_1e8": 31.622776601683793,
+        "qft_gamma3_disp_1e4": 0.05513023437830072,
+        "qft_gamma3_disp_1e8": 0.0017433710857434714,
+        "wp034_26p86_bridge_err": 5.551115123125783e-17
+      },
+      "pass": true
+    },
+    "P1_keyed_rct_1600": {
+      "metrics": {
+        "arm_a_pass": 0,
+        "arm_b_pass": 1600,
+        "first_u64_hex": "0xcc617ec51b6fb1e0",
+        "n_trials": 1600,
+        "seed_hex": "0x57503033355f4734"
+      },
+      "pass": true
+    }
+  },
+  "schema": "morpheus.wp035.g4n.cycle1.v1"
+}
