@@ -13,13 +13,13 @@ Open-sourced research repository by **Ergentics**.
 
 Studies the 3-regular neo-Riemannian triad graph $X$ and its Ihara zeta primes (*prime cadences*), linking the Tonnetz to the honeycomb/graphene tight-binding spectrum, Weil polynomials over $\mathbb{F}_2$, the tune theorem and its generalisation, voice-leading homology, a genus-13 2-adic Mumford curve, minimal genus-5 binary curves, and 2-adic arithmetic obstructions.
 
-> **Status:** `v0.1.0` baseline is preserved in git history (`v0.1.0` tag). First-principles `[X]` verification and formal proofs are live across four independent languages (`lean/` Lean 4.36.0, `swiftpp/` C++20 × Pure Swift 6.4 × Interop, `rust/` Rust 1.100.0) with strict Code-vs-Data separation (`data/`), alongside audit-forward original mathematical novelties in [`NOVELTY_GEMINI4_NEON.md`](NOVELTY_GEMINI4_NEON.md). **Reconciliation candidate `v0.2.0` (unreleased, pending author sign-off to tag):** Grok Bot's round-3 results and the `[X]` results are folded into `paper/` and `CONTRIBUTIONS.md` after an independent from-scratch re-check (`code/xcheck/`, 32/32). See [`reconciliation/GROKBOT_RECONCILIATION_RESPONSE.md`](reconciliation/GROKBOT_RECONCILIATION_RESPONSE.md).
+> **Status:** **`v0.2.0` released (`2026-11-25`)** — `v0.1.0` baseline preserved at tag `v0.1.0`. Bidirectional reconciliation complete between Grok Bot's Python/PARI/LMFDB toolchain (`code/`, 228/228 across 6 audit suites including from-scratch `code/xcheck/` 32/32) and Gemini 4 Neon's independent formal/multi-language verification toolchain (`lean/` Lean 4.36.0, `swiftpp/` C++20 × Pure Swift 6.4 × Interop, `rust/` Rust 1.100.0, `data/`), with uniform attribution bounds (`[E]`, `[GB]`, `[E→GB]`, `[G4N]`, `[E→G4N]`, `[lit.]`, `[X]`). See [`CONTRIBUTIONS.md`](CONTRIBUTIONS.md) and [`reconciliation/`](reconciliation/README.md).
 
 ## Repository Layout
 
 | Path | Description |
 | :--- | :--- |
-| [`paper/`](paper/) | Canonical LaTeX source (`prime-cadences.tex`), `.bbl`, compiled PDF (v0.2.0 candidate, 30 pp), `references.bib`, and 8 vector PDF figures |
+| [`paper/`](paper/) | Canonical LaTeX source (`prime-cadences.tex`), `.bbl`, compiled PDF (`v0.2.0`, 30 pp), `references.bib` (55 refs), and 8 vector PDF figures |
 | [`prime_cadences_paper.md`](prime_cadences_paper.md) | GitHub Flavored Markdown mirror reconciled with `paper/prime-cadences.tex` |
 | [`figures/`](figures/README.md) | PNG figures 1–5 for `prime_cadences_paper.md` |
 | [`arxiv/`](arxiv/) | Ready-to-upload arXiv source tarball (`prime-cadences-arxiv.tar.gz`) |
@@ -33,16 +33,16 @@ Studies the 3-regular neo-Riemannian triad graph $X$ and its Ihara zeta primes (
 | [`code/`](code/) | Grok Bot Python scripts (`math_audit.py`, `deep/`, `eisenstein2/`, `geometry/`, `open_q/` round 3, and from-scratch `xcheck/` 32/32) |
 | [`audits/`](audits/README.md) | Recorded reports from the six audit suites (31, 36, 23, 59, 47, and 32 checks = 228/228) |
 | [`Makefile`](Makefile) & [`requirements.txt`](requirements.txt) | Build targets (`pdf`, `arxiv`, `audit`, `figures`) and pinned Python dependencies |
-| [`CONTRIBUTIONS.md`](CONTRIBUTIONS.md) | Author/AI contribution tags (`[GB]`, `[E]`, `[E→GB]`, `[lit.]`, `[X]`, `[independently X]`) and filled cross-verification ledger |
+| [`CONTRIBUTIONS.md`](CONTRIBUTIONS.md) | Uniform symmetric contribution tags (`[E]`, `[GB]`, `[E→GB]`, `[G4N]`, `[E→G4N]`, `[lit.]`, `[X]`) and filled cross-verification ledger |
 | [`METHODOLOGY.md`](METHODOLOGY.md) | Core Thesis (Correspondence Principle), Code-vs-Data non-conflation, ADPIE, and D/R/P/Seam SWE-sweep standard |
 | [`ARCHITECTURE.md`](ARCHITECTURE.md) | Four-plane Code-vs-Data architecture, `D ↔ R ↔ P` seams, and multi-language layout blueprint |
 | [`CALIBRATIONS.md`](CALIBRATIONS.md) | Correspondence error-bound ledger (`C-1`–`C-4`, `C-2'`, `C-2''`), Rung-1 calibration metrics, RCT protocol, and output schema |
 | [`ERGENTICS.md`](ERGENTICS.md) | Ergentics core library (`ergentics/`) and **Swift++** Triple-Check spec (`swiftpp/`: Pure C++20 · Pure Swift · Swift↔C++ interop) |
 | [`NEGATIVES.md`](NEGATIVES.md) | Permanent ledger of refuted claims (`NEG-M1`–`NEG-M11`, `NEG-E1`–`NEG-E9`), obstructions, negative controls, and engineering traps |
 | [`PROVENANCE.md`](PROVENANCE.md) | Origin, AI-assistance disclosure, SHA-256 checksums, and revision log |
-| [`CHANGELOG.md`](CHANGELOG.md) | Versioned release and `[Unreleased]` / `v0.2.0` candidate changelog |
-| [`CITATION.cff`](CITATION.cff) | Machine-readable citation metadata (CFF 1.2.0, v0.2.0) |
-| [`POLICY.md`](POLICY.md) | Research integrity, AI provenance, licensing, and hygiene policy |
+| [`CHANGELOG.md`](CHANGELOG.md) | Versioned release history (`v0.1.0`, `v0.2.0`) and `[Unreleased]` tracking |
+| [`CITATION.cff`](CITATION.cff) | Machine-readable citation metadata (CFF 1.2.0, `v0.2.0`, `2026-11-25`) |
+| [`POLICY.md`](POLICY.md) | Research integrity, symmetric AI attribution, licensing, and repeatable release workflow |
 | [`SECURITY.md`](SECURITY.md) | Vulnerability reporting and secret/path-leak security policy |
 | [`AGENTS.md`](AGENTS.md) | Rules for automated and AI agents working in this repository |
 | [`LICENSE`](LICENSE), [`LICENSE-paper`](LICENSE-paper), [`LICENSES/`](LICENSES/) | Dual license: MIT (Code Model) and CC BY 4.0 (Paper & Data Model) |

@@ -1,7 +1,7 @@
 # Audit-Forward Mathematical Novelties — Gemini 4 Neon (ADPIE Cycle 4)
 
 > **License:** CC BY 4.0 (research prose & results; see [`LICENSE-paper`](LICENSE-paper)). Companion machine-checked Lean 4 proofs and four-language verifiers (`lean/`, `swiftpp/`, `rust/`) are MIT licensed ([`LICENSE`](LICENSE)).
-> **Baseline preservation & reconciliation:** During derivation and verification (commits `60c786d`/`e911bec`), all archived *Prime Cadences* `v0.1.0` artifacts remained untouched (`v0.1.0` GitHub tag preserved immutably). Following Grok Bot's 32/32 from-scratch cross-check (`code/xcheck/`), these results have been folded into the `v0.2.0` reconciliation candidate (`Thm 4.4`, `Cor 4.5`, `§6.1 Thm 6.2`, `Remark 6.4`), pending author release sign-off.
+> **Baseline preservation & reconciliation:** During derivation and verification (commits `60c786d`/`e911bec`), all archived *Prime Cadences* `v0.1.0` artifacts remained untouched (`v0.1.0` GitHub tag preserved immutably). Following Grok Bot's 32/32 from-scratch cross-check (`code/xcheck/`), these results are released in **`v0.2.0`** under uniform symmetric attribution bounds (`Thm 4.4 [E→GB; independently E→G4N]`, `Cor 4.5 [G4N; X]`, `§6.1 Thm 6.2 [E→G4N; X]`, `Remark 6.4 [E→G4N; X]`).
 
 ---
 
