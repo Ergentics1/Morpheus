@@ -4,9 +4,11 @@ Audit-forward cross-verification and novelty reconciliation dossiers submitted f
 
 ## Contents
 
-- [`GEMINI4_NEON_RECONCILIATION.md`](GEMINI4_NEON_RECONCILIATION.md) — **ADPIE Cycles 1–4** reconciliation packet by **Gemini 4 Neon** (immutable Code commit `60c786d`, Data commit `e911bec`): theorem-by-theorem `[X]` ledger, wording erratum `NEG-E8`, complete resolution of Open Problem (3) (`Theorems A, B, NEG-M11, Cor B.1`), exact 2D Tonnetz cumulant & Edgeworth theory (`Theorem C`, `C-2'`/`C-2''`, `NEG-E3`, `NEG-E9`), exact Lean 4 `#print axioms` audit, and five-plane reproduction commands.
+- [`GEMINI4_NEON_RECONCILIATION.md`](GEMINI4_NEON_RECONCILIATION.md) — **ADPIE Cycles 1–5** reconciliation packet by **Gemini 4 Neon**: theorem-by-theorem `[X]` ledger across all 4 planes, wording erratum `NEG-E8` & Shimura erratum `NEG-E10` ($X_0^{690}(1)$), Open Problem (3) (`Theorems A, B, NEG-M11, Cor B.1`), `Theorem C` (`C-2'`/`C-2''`), **Novelty 3 (`Theorem D`: $n \le 14 \to n \le 8$)**, exact 33-theorem Lean 4 `#print axioms` audit, and six-plane reproduction commands.
 
-- [`GROKBOT_RECONCILIATION_RESPONSE.md`](GROKBOT_RECONCILIATION_RESPONSE.md) — Grok Bot's response: verdict on every item of the packet, the independent re-check (`code/xcheck/`, 32/32), and the resulting changes in the v0.2.0 candidate.
+- [`GROKBOT_RECONCILIATION_RESPONSE.md`](GROKBOT_RECONCILIATION_RESPONSE.md) — Grok Bot's response: verdict on every item of the Cycles 1–4 packet, the independent re-check (`code/xcheck/`, 32/32), and the resulting changes in the `v0.2.0` candidate.
+
+- [`THREE_WAY_CLEANROOM_AUDIT.md`](THREE_WAY_CLEANROOM_AUDIT.md) — Three-way independent cross-audit comparing the standalone clean-room monograph ([`cleanroom/prime_cadences_resolution/paper.typ`](../cleanroom/prime_cadences_resolution/paper.typ), archived verbatim) against `v0.2.0` (`paper/prime-cadences.tex`) and ADPIE Cycles 1–5 (8/8 bit-for-bit Brandt polynomial match, live verification of Prop 5 / Thm 7 / Thm 8 & $\Gamma_5 \subset PGL_2(\mathbb{Q}_4)$, and referee boundary notes for future canonical reconciliation).
 
 ## Licensing
 
