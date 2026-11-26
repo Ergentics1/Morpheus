@@ -28,7 +28,7 @@ This document tracks the origin, baseline integrity, AI-assistance disclosures, 
 | `arxiv/prime-cadences-arxiv.tar.gz` | arXiv bundle (`v0.3.1`, neutral `0/0` headers) | `406da9dab04ae99cecd9b97a119db08a7c2eaed5cf034ac0d4eb4ac915f991a8` | `749ff2a62c5453277270d82f6d84e4d8d415d1d98adfea0f9063da592be2a4bf` |
 | `prime_cadences_paper.md` | Reconciled GFM mirror of `prime-cadences.tex` (`v0.3.1`, 56 refs) | `b2ebff43ec971b187dfddaf666b4e75af16345e30e2254ab13c242ded25f1ed4` | `3049266c44fc6e77a6e4e255bd8c1536ea368c535cfdb5169fbf9b991b8a75b2` |
 | `CITATION.cff` | Reconciled CFF 1.2.0 metadata (`v0.3.1`, `2026-11-25`) | `1952b2d145f9000ec01ffa57612467adffea0bad789b0a9455462b9f9376391e` | `0765b64b3f4f57334552c94776c0331c7774e88e4cb7278484beb48e1e9916e0` |
-| `CONTRIBUTIONS.md` | Uniform symmetric contribution tags & complete 3-way `[X]` ledger (`v0.3.1`) | `b0c2d6a028d7f582828e356f2544ce556f012cface7f5b66dd8a2da0481ec419` | `5c220ff5adc7c95d280584d1d42c2e1127df84a5c15346cc701a20d5ebaad240` (v0.1.0) |
+| `CONTRIBUTIONS.md` | Uniform symmetric contribution tags & complete 3-way `[X]` ledger (`v0.3.1`) | `faa564ad92d5dda82a262604d0d924f2804fc98cd8789a106c18f0e243a9da5b` | `5c220ff5adc7c95d280584d1d42c2e1127df84a5c15346cc701a20d5ebaad240` (v0.1.0) |
 | `LICENSE-paper` | CC BY 4.0 summary for paper & docs | `9f98b93e50200f10f04087b6001a882b08ce98fa641bfafe89f19fc272b1e8b6` | *(unchanged)* |
 | `Makefile` | Paper, neutral-header arXiv, figure, and 6-suite audit build rules | `8fc9ffba8ec1af2ff6430466f4454eb45b007668d647dc6a7b7b3aa9a1826a70` | `1d2f9ce5d5882c5c84bd9f6f8e82f1e3bba9e80722ca0ae012bfe07f966bb8cd` (v0.1.0) |
 | `requirements.txt` | Pinned Python dependencies | `65cefed607187da37d350bf55b67f185ea2d51476b9b4c7ad4858b9dd0719bc4` | *(unchanged)* |
