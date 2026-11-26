@@ -1,0 +1,10 @@
+name = "wp033"
+version = "0.1.0"
+defaultTargets = ["WP033", "wp033-lean"]
+
+[[lean_lib]]
+name = "WP033"
+
+[[lean_exe]]
+name = "wp033-lean"
+root = "Main"

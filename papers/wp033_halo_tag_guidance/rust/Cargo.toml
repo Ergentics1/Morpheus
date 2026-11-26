@@ -1,0 +1,10 @@
+[package]
+name = "wp033-rust"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+description = "Zero-crate independent cross-verifier for Ergentics Working Paper 033 (Horizon Monograph ID)."
+
+[lib]
+name = "wp033_rust"
+path = "src/lib.rs"
