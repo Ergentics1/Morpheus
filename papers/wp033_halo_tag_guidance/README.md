@@ -3,7 +3,7 @@
 **Series:** Ergentics Working Paper 033 · Horizon Series Monograph ID · Extension of Working Papers 030–032 (Horizons I–IC)  
 **Author:** Ergentics, LLC & Swift++ Library of Alexandria Verification Program (`[E]`)  
 **Date:** 26 November 2026  
-**Lifecycle Stage:** **`Cycle 1 Audited [G4N] — Awaiting [GB] Independent Pass`** — verbatim clean-room `[E]` archive frozen unmodified under `cleanroom/`; full **Gemini 4 Neon** (`[G4N]` / `[E→G4N]`) 3-plane independent audit & **Theorem G3** landed in [`reconciliation/GEMINI4_NEON_WP033_AUDIT.md`](reconciliation/GEMINI4_NEON_WP033_AUDIT.md).
+**Lifecycle Stage:** **`Cycle 1 Audited [G4N] · Round 1 Reconciled [GB] — Awaiting Author Decisions`** — verbatim clean-room `[E]` archive frozen unmodified under `cleanroom/`; full **Gemini 4 Neon** (`[G4N]` / `[E→G4N]`) 3-plane independent audit & **Theorem G3** landed in [`reconciliation/GEMINI4_NEON_WP033_AUDIT.md`](reconciliation/GEMINI4_NEON_WP033_AUDIT.md).
 
 ---
 
@@ -28,3 +28,14 @@
 | **3 — Zero-Crate Rust 1.100.0** | [`rust/src/lib.rs`](rust/src/lib.rs) · [`rust/tests/wp033_xcheck.rs`](rust/tests/wp033_xcheck.rs) | **`4/4` PASS** (`0.04 s`, bit-exact `SplitMix64` seam `0xda9392ed940a41ee`, `520/1600` parity) | `cargo test --manifest-path papers/wp033_halo_tag_guidance/rust/Cargo.toml` |
 | **Data Model (CC BY 4.0)** | [`data/wp033_g4n_cycle1_calibration.json`](data/wp033_g4n_cycle1_calibration.json) · [`data/MANIFEST.sha256`](data/MANIFEST.sha256) | **`1/1` SHA-256 OK** | `sha256sum -c papers/wp033_halo_tag_guidance/data/MANIFEST.sha256` |
 | **Audit & Novelty Dossier** | [`reconciliation/GEMINI4_NEON_WP033_AUDIT.md`](reconciliation/GEMINI4_NEON_WP033_AUDIT.md) | **Complete (`[G4N]`)** — 4 catches (`NEG-W11`–`NEG-W14`) + **Theorem G3** | — |
+
+---
+
+## Grok Bot (`[GB]`) Round-1 Reconciliation (2026-11-26)
+
+- **Reconciled edition:** [`paper/paper.typ`](paper/paper.typ) → [`paper/paper.pdf`](paper/paper.pdf). Every `[E]` line of `cleanroom/paper.typ` is kept verbatim and in order; `[GB]` verdicts are inserted as boxed notes, with a ledger before the references. Corrections are proposed, not applied.
+- **Dossier:** [`reconciliation/GROKBOT_WP033_ROUND1.md`](reconciliation/GROKBOT_WP033_ROUND1.md) — per-item verdicts, evidence and reproduction commands.
+- **Verdicts:** CONFIRMED 5 · UNVERIFIABLE 2 · SPEC-NEEDED 1.
+- **Independent checks:** [`../../reconciliation/horizon_round1/`](../../reconciliation/horizon_round1/) (written from scratch; `[G4N]` code and data not read). `[G4N]`'s three planes were re-run and pass, including Lean 4.36.0 with 0 `sorry`.
+- Claims resting on the internal Swift++ corpus are unchanged and marked **UNVERIFIABLE**.
+
