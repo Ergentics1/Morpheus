@@ -1,0 +1,194 @@
+{
+  "gates_passed": 5,
+  "gates_total": 5,
+  "generator": "papers/wp031_3d_j2_hil/code/wp031_audit.py",
+  "license": "CC-BY-4.0",
+  "results": {
+    "D1_so3_holonomy_axis_and_c141": {
+      "metrics": {
+        "c141_max_defect_on_box": 0.0013344541018027734,
+        "c141_max_identity_err": 5.6107462426124854e-18,
+        "det_equilateral": 2.598076211353316,
+        "e1_image": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "euler_deg": 120.00000000000001,
+        "fig1_axis_mismatch_linf": 2.0,
+        "recoil_bound_urad": 25.0,
+        "tr_R_tot": 0.0,
+        "true_axis_fixed_err": 0.0,
+        "true_rodrigues_axis": [
+          0.5773502691896258,
+          0.5773502691896258,
+          -0.5773502691896258
+        ]
+      },
+      "pass": true
+    },
+    "D2_safe_perigee_k9_and_dim_catch": {
+      "metrics": {
+        "dv_yr_L100m_mmps": 4.997205481273415,
+        "dv_yr_e0p25_mps": 198.58261507901938,
+        "dv_yr_e0p40_mps": 186.68443614258985,
+        "dv_yr_e_opt_mps": 199.8882192509366,
+        "exact_prefactor_mps": 675.4510716973449,
+        "fixed_a_7000km_impact_e": 0.0888375714285714,
+        "k9_e_opt": 0.28170155790877405,
+        "k9_g_residual": -4.0332320816460765e-16,
+        "max_g_prime_on_0_1": -9.372583775999999,
+        "missing_factor_v_cp_mps": 7557.865206532812,
+        "printed_prefactor_dimensionless": 0.08937061633667448
+      },
+      "pass": true
+    },
+    "D3_f36_sizing_and_theorem_g4": {
+      "metrics": {
+        "E_spin_MJ": 1.1730575011331437,
+        "M_HW_kg": 37.73623505172809,
+        "P_orb_full_W": 41.18765176353595,
+        "S_craft_Nms": 968734226.1459099,
+        "T_pk_paper_N": 62.563066727101,
+        "T_rigid_spin_max_N": 54.74268338621337,
+        "T_rigid_spin_min_N": 31.28153336355049,
+        "c144_lambda": 0.0015775600877307794,
+        "c144_taper_ratio": 1.0007891949902084,
+        "dE_orb_full_kJ": 367.8708323553539,
+        "f1_over_f_orb": 192.54623320061282,
+        "f36_slack_deficit": 1.3703703703703698,
+        "k_eff_N_per_m": 0.7281046558757445,
+        "m_hall_5yr_dry_kg": 105.12458386686855,
+        "m_hall_5yr_wet_kg": 100.5179477945134,
+        "m_zylon_kg": 6.736235051728083,
+        "om_spin_rad_s": 0.0024218355653647747,
+        "theorem_g4_max_F_tan_N": 1.2027416100105862e-13,
+        "theorem_g4_max_quad_rel_err": 3.655409341169097e-07,
+        "theorem_g4_small_q_heat_floor_ratio": 14.770190044287201,
+        "theorem_g4_sweep": [
+          {
+            "F_tan_max_N": 1.3877787807814457e-14,
+            "P_circ_W": 183.60786670792518,
+            "P_heat_elec_W": 61.75900971084757,
+            "P_orb_W": 4.1187651763535955,
+            "T_max_N": 41.424683050532266,
+            "T_min_N": 37.47003565582104,
+            "heat_to_orb_ratio": 14.9945449829028,
+            "heat_to_paper_5p33W_ratio": 11.577498821019717,
+            "ke_over_e_spin": 1.0101010101010102,
+            "q": 0.1
+          },
+          {
+            "F_tan_max_N": 1.6190752442450197e-14,
+            "P_circ_W": 498.1121906398905,
+            "P_heat_elec_W": 167.54682776069046,
+            "P_orb_W": 10.296912940883988,
+            "T_max_N": 46.631756694217685,
+            "T_min_N": 36.12080341622028,
+            "heat_to_orb_ratio": 16.271559128701984,
+            "heat_to_paper_5p33W_ratio": 31.408748455438378,
+            "ke_over_e_spin": 1.0666666666666667,
+            "q": 0.25
+          },
+          {
+            "F_tan_max_N": 1.850371707708594e-14,
+            "P_circ_W": 1392.265898365162,
+            "P_heat_elec_W": 468.30762035919093,
+            "P_orb_W": 20.593825881767977,
+            "T_max_N": 63.85316259378893,
+            "T_min_N": 36.865640612132985,
+            "heat_to_orb_ratio": 22.740195194803054,
+            "heat_to_paper_5p33W_ratio": 87.79012079318967,
+            "ke_over_e_spin": 1.3333333333333333,
+            "q": 0.5
+          },
+          {
+            "F_tan_max_N": 2.7755575615628914e-14,
+            "P_circ_W": 3476.0567046137694,
+            "P_heat_elec_W": 1169.2190733700863,
+            "P_orb_W": 28.831356234475166,
+            "T_max_N": 99.96600369710066,
+            "T_min_N": 41.99412121707613,
+            "heat_to_orb_ratio": 40.55373128691011,
+            "heat_to_paper_5p33W_ratio": 219.1847393090294,
+            "ke_over_e_spin": 1.9607843137254901,
+            "q": 0.7
+          },
+          {
+            "F_tan_max_N": 3.2959746043559335e-14,
+            "P_circ_W": 6698.542426705525,
+            "P_heat_elec_W": 2253.146088982768,
+            "P_orb_W": 32.950121410828764,
+            "T_max_N": 145.72423966943037,
+            "T_min_N": 48.57474655647678,
+            "heat_to_orb_ratio": 68.38050946429264,
+            "heat_to_paper_5p33W_ratio": 422.3804156011488,
+            "ke_over_e_spin": 2.7777777777777786,
+            "q": 0.8
+          },
+          {
+            "F_tan_max_N": 6.476300976980079e-14,
+            "P_circ_W": 19654.2368149808,
+            "P_heat_elec_W": 6610.970565038997,
+            "P_orb_W": 37.06888658718236,
+            "T_max_N": 283.675119028498,
+            "T_min_N": 65.07953561274181,
+            "heat_to_orb_ratio": 178.34284149567446,
+            "heat_to_paper_5p33W_ratio": 1239.3091191209878,
+            "ke_over_e_spin": 5.263157894736843,
+            "q": 0.9
+          },
+          {
+            "F_tan_max_N": 1.2027416100105862e-13,
+            "P_circ_W": 56436.5891284467,
+            "P_heat_elec_W": 18983.216343204804,
+            "P_orb_W": 39.12826917535915,
+            "T_max_N": 560.0292831099819,
+            "T_min_N": 89.67645518118788,
+            "heat_to_orb_ratio": 485.15348987527915,
+            "heat_to_paper_5p33W_ratio": 3558.641336083684,
+            "ke_over_e_spin": 10.256410256410254,
+            "q": 0.95
+          }
+        ]
+      },
+      "pass": true
+    },
+    "P1_keyed_rct_1600": {
+      "metrics": {
+        "arm_a_pass": 592,
+        "arm_b_pass": 1600,
+        "first_u64_hex": "0xc844f9d684ec259c",
+        "n_trials": 1600,
+        "seed_hex": "0x57503033315f4734"
+      },
+      "pass": true
+    },
+    "R1_3d_j2_5orbit_and_c142": {
+      "metrics": {
+        "c142_max_identity_err": 4.926614671774132e-16,
+        "earth_J2_R_ratio_9304km": 0.0005087564826631919,
+        "oblate_J2_0p05_point_mass_L0": {
+          "delta_L_norm": -0.03223591217913935,
+          "i_end_deg": 44.39679954443175,
+          "i_max_deg": 44.99997879431934,
+          "i_min_deg": 42.98737571627297,
+          "max_dJperp": 3.085947771140679,
+          "max_dJz": 2.5002222514558525e-13
+        },
+        "point_mass_share_of_paper_dJperp": 0.9996591419308969,
+        "point_mass_share_of_paper_dL": 0.8807626278453373,
+        "spherical_J2_0": {
+          "delta_L_norm": -4.0101255649460654e-13,
+          "i_end_deg": 45.0,
+          "i_max_deg": 45.000000000000014,
+          "i_min_deg": 44.999999999999986,
+          "max_dJperp": 2.8332891588433995e-13,
+          "max_dJz": 2.8377300509419e-13
+        }
+      },
+      "pass": true
+    }
+  },
+  "schema": "morpheus.wp031.g4n.cycle1.v1"
+}
