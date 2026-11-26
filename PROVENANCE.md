@@ -80,6 +80,9 @@ This document tracks the origin, baseline integrity, AI-assistance disclosures, 
 | `papers/wp030_shape_propulsion/rust/src/lib.rs` | Zero-crate Rust 1.100.0 cross-verifier library | `46bb28d08204fa532a8c055f0fee62732c543e62317bc7b5d16a66845e7e277a` | *(new `[G4N]` Cycle 1, 2026-11-26)* |
 | `papers/wp030_shape_propulsion/rust/tests/wp030_xcheck.rs` | Rust 7-suite cross-check (`7/7` PASS, bit-exact `SplitMix64`) | `345635c31c4140562843d862c5963dfc8ca48cc6ffb0652654575decc9010f30` | *(new `[G4N]` Cycle 1, 2026-11-26)* |
 | `papers/wp030_shape_propulsion/reconciliation/GEMINI4_NEON_WP030_AUDIT.md` | `[G4N]` ADPIE Cycle 1 audit & Theorem G1 dossier | `2cc6d8e24dc1a483f04914bae7156ab8459345b8ec00b855e0ad44bca3b695af` | *(new `[G4N]` Cycle 1, 2026-11-26)* |
+| `papers/wp030_shape_propulsion/paper/paper.typ` | `[GB]` Round-1 reconciled edition (clean-room text unchanged + boxed verdicts) | `9071c5f59e6eb589445f03546c04148dd972e53de511862b0e4553100af98e15` | *(new `[GB]` Round 1, 2026-11-26)* |
+| `papers/wp030_shape_propulsion/paper/paper.pdf` | Compiled reconciled edition (Typst 0.15.1) | `6c9debeee7bd0ea426d0abd6809ee525e7a3390c7acab095d515e59c09e26760` | *(new `[GB]` Round 1, 2026-11-26)* |
+| `papers/wp030_shape_propulsion/reconciliation/GROKBOT_WP030_ROUND1.md` | `[GB]` Round-1 dossier (verdicts, evidence, run spec) | `78343bced48d8c19e5e3833c5a5ec8032b1da17b21f51217cf90c8431aa93121` | *(new `[GB]` Round 1, 2026-11-26)* |
 
 ## Paper Package 3: *Working Paper 032 — Bennu Triaxial Proximity, 3D FEM/FDIR & Extended-Body Three-Body Problem*
 
@@ -104,7 +107,10 @@ This document tracks the origin, baseline integrity, AI-assistance disclosures, 
 | `papers/wp032_bennu_3body/lean/Main.lean` | Lean 4 `#print axioms` verification driver | `d87aea6a4c057431cdcf25f48c52345386e67b5818c3c7db6861838569d79bea` | *(new `[G4N]` Cycle 1, 2026-11-26)* |
 | `papers/wp032_bennu_3body/rust/src/lib.rs` | Zero-crate Rust 1.100.0 cross-verifier library | `768afcfd3e40b1b4168730ac1f6e872d24bfe55d72dce2f39eefee700fdb987a` | *(new `[G4N]` Cycle 1, 2026-11-26)* |
 | `papers/wp032_bennu_3body/rust/tests/wp032_xcheck.rs` | Rust 5-suite cross-check (`5/5` PASS, `SplitMix64` `0x55a32a121430eb49`) | `61a7470358bc4fe27c5d6c2a29861ede6368ae247b79a209ae6c5f35037af2e1` | *(new `[G4N]` Cycle 1, 2026-11-26)* |
-| `papers/wp032_bennu_3body/reconciliation/GEMINI4_NEON_WP032_AUDIT.md` | `[G4N]` ADPIE Cycle 1 audit & Theorem G2 dossier | `55ff55ecf5abb78dda39ad9efadeb1bea091a8f752e0a6f1e7d4359185019dff` | *(new `[G4N]` Cycle 1, 2026-11-26)* |
+| `papers/wp032_bennu_3body/reconciliation/GEMINI4_NEON_WP032_AUDIT.md` | `[G4N]` ADPIE Cycle 1 audit & Theorem G2 dossier | `9499338a596d88796e5677f1cddd0bf9c6175ab77cabf7576fb180dddbf8872e` | `55ff55ecf5abb78dda39ad9efadeb1bea091a8f752e0a6f1e7d4359185019dff` *(`[G4N]` original; `[GB]` R1 added a dated addendum line, 2026-11-26)* |
+| `papers/wp032_bennu_3body/paper/paper.typ` | `[GB]` Round-1 reconciled edition (clean-room text unchanged + boxed verdicts) | `0c4b7c393659dc784a138e9e060bacbab0a0a51127807c8684abe0ee2c197302` | *(new `[GB]` Round 1, 2026-11-26)* |
+| `papers/wp032_bennu_3body/paper/paper.pdf` | Compiled reconciled edition (Typst 0.15.1) | `3ec892ab308da83a966876f206a75db6674907732b5d84b5c6c91c3d9353c927` | *(new `[GB]` Round 1, 2026-11-26)* |
+| `papers/wp032_bennu_3body/reconciliation/GROKBOT_WP032_ROUND1.md` | `[GB]` Round-1 dossier (verdicts, evidence, run spec) | `c4e27cd8b5e123005ef8d8cc661fc802e58ac40d375cf0f3cc69d96f5a4266d0` | *(new `[GB]` Round 1, 2026-11-26)* |
 
 ## Paper Package 4: *Working Paper 033 — 3D CRTBP Halo/Lissajous Manifolds, Floquet Control & Bennu TAG Guidance*
 
@@ -130,6 +136,9 @@ This document tracks the origin, baseline integrity, AI-assistance disclosures, 
 | `papers/wp033_halo_tag_guidance/rust/src/lib.rs` | Zero-crate Rust 1.100.0 cross-verifier library | `8473edfa7b8c646c3af143604b3d9d28ce1309b2dd7ebbd178287ca9b5774d54` | *(new `[G4N]` Cycle 1, 2026-11-26)* |
 | `papers/wp033_halo_tag_guidance/rust/tests/wp033_xcheck.rs` | Rust 4-suite cross-check (`4/4` PASS, bit-exact `SplitMix64` `0xda9392ed940a41ee`) | `e54e2d14830b7c2b5e9d5de1db80b64b729138b74b3f9033f6349b1af16d0fb9` | *(new `[G4N]` Cycle 1, 2026-11-26)* |
 | `papers/wp033_halo_tag_guidance/reconciliation/GEMINI4_NEON_WP033_AUDIT.md` | `[G4N]` ADPIE Cycle 1 audit & Theorem G3 dossier | `0bfea723acbff9dfbb90a49969b36cb5c3ddcd2548b15d2f8c0564a709254c77` | *(new `[G4N]` Cycle 1, 2026-11-26)* |
+| `papers/wp033_halo_tag_guidance/paper/paper.typ` | `[GB]` Round-1 reconciled edition (clean-room text unchanged + boxed verdicts) | `b5d0976369241dcbfa63d6152d13f1d11f76cfde660cf999cd0fc10d663cc1e2` | *(new `[GB]` Round 1, 2026-11-26)* |
+| `papers/wp033_halo_tag_guidance/paper/paper.pdf` | Compiled reconciled edition (Typst 0.15.1) | `76b37a4698ff3d9ddd106cc5ae5beb3508bf02b340909b79c767123b8ed3cfda` | *(new `[GB]` Round 1, 2026-11-26)* |
+| `papers/wp033_halo_tag_guidance/reconciliation/GROKBOT_WP033_ROUND1.md` | `[GB]` Round-1 dossier (verdicts, evidence, run spec) | `d493f446b25c81021c3d034c4271a33ee6401e2588486fed40fd9540bbe513bb` | *(new `[GB]` Round 1, 2026-11-26)* |
 
 ## Paper Package 5: *Working Paper 031 — 3D Non-Planar $J_2$ Breaking, Collinear-Bridge $\mathrm{SO}(3)$ Holonomy, Safe-Perigee `K9` & HIL Sizing*
 
@@ -155,6 +164,9 @@ This document tracks the origin, baseline integrity, AI-assistance disclosures, 
 | `papers/wp031_3d_j2_hil/rust/src/lib.rs` | Zero-crate Rust 1.100.0 cross-verifier library | `109d15f5d924e90969a38fe089844fba14238716818ea3d5157a62c670e76f9f` | *(new `[G4N]` Cycle 1, 2026-11-26)* |
 | `papers/wp031_3d_j2_hil/rust/tests/wp031_xcheck.rs` | Rust 5-suite cross-check (`5/5` PASS, bit-exact `SplitMix64` `0xc844f9d684ec259c`) | `1c0c3eeb9a7288bcb334b323e7321df2a6470aa3bd697ff3c36118d4cec7cdae` | *(new `[G4N]` Cycle 1, 2026-11-26)* |
 | `papers/wp031_3d_j2_hil/reconciliation/GEMINI4_NEON_WP031_AUDIT.md` | `[G4N]` ADPIE Cycle 1 audit & Theorem G4 dossier | `af37e5ef9ce3df4ea81135381402576de5d017a5cbb13ac345b6b6ac92a91f3f` | *(new `[G4N]` Cycle 1, 2026-11-26)* |
+| `papers/wp031_3d_j2_hil/paper/paper.typ` | `[GB]` Round-1 reconciled edition (clean-room text unchanged + boxed verdicts) | `772cb82a4e3d66ca8b4b5d10945d819a5f414570fa0faec7438adea1de5781fc` | *(new `[GB]` Round 1, 2026-11-26)* |
+| `papers/wp031_3d_j2_hil/paper/paper.pdf` | Compiled reconciled edition (Typst 0.15.1) | `a49ce2ace96f2e27990307e72b744e73873ef453bcb40a3a4e5678b082ed91cb` | *(new `[GB]` Round 1, 2026-11-26)* |
+| `papers/wp031_3d_j2_hil/reconciliation/GROKBOT_WP031_ROUND1.md` | `[GB]` Round-1 dossier (verdicts, evidence, run spec) | `94e87e8e5c0d53934e155c19a5fb0d35064562fdfd4072bf7fe95110839360cb` | *(new `[GB]` Round 1, 2026-11-26)* |
 
 ## Paper Package 6: *Working Paper 034 — Independent Precision Audit of Algebraic Null-Cone Quantum Gravity (`arXiv:2611.34924v1`)*
 
@@ -180,6 +192,9 @@ This document tracks the origin, baseline integrity, AI-assistance disclosures, 
 | `papers/wp034_null_cone_gravity/rust/src/lib.rs` | Zero-crate Rust 1.100.0 cross-verifier library | `fcb396513df57dc25dcbf129d34792f39c48f18f9d4fa33b09dc88f7bc7fad6b` | *(new `[G4N]` Cycle 1, 2026-11-26)* |
 | `papers/wp034_null_cone_gravity/rust/tests/wp034_xcheck.rs` | Rust 5-suite cross-check (`5/5` PASS, bit-exact `SplitMix64` `0xb4005f8bfe2e1bca`) | `c4cf457dfa206dfe961c151b04fc6febcd8bf3ee63f92f18b5b82501325653ad` | *(new `[G4N]` Cycle 1, 2026-11-26)* |
 | `papers/wp034_null_cone_gravity/reconciliation/GEMINI4_NEON_WP034_AUDIT.md` | `[G4N]` ADPIE Cycle 1 meta-audit & Theorem G5 dossier | `795886b85fe7c1fb277ec46de5d4cc269dd717e3970b1685912f073e99f5bfbe` | *(new `[G4N]` Cycle 1, 2026-11-26)* |
+| `papers/wp034_null_cone_gravity/paper/paper.typ` | `[GB]` Round-1 reconciled edition (clean-room text unchanged + boxed verdicts) | `14a2efd201dfc6675d94b4fe0cb5c5dfa33d219f3ec894b14df9045b74384946` | *(new `[GB]` Round 1, 2026-11-26)* |
+| `papers/wp034_null_cone_gravity/paper/paper.pdf` | Compiled reconciled edition (Typst 0.15.1) | `a2286028cd2801ec41f6c6e82cb284cc903596072e7635f41c644bcfe536aa4b` | *(new `[GB]` Round 1, 2026-11-26)* |
+| `papers/wp034_null_cone_gravity/reconciliation/GROKBOT_WP034_ROUND1.md` | `[GB]` Round-1 dossier (verdicts, evidence, run spec) | `708c64c17bdbb1026a5869c5d4fcca333795b8b0fa572ba49e8cb662f1a9de3b` | *(new `[GB]` Round 1, 2026-11-26)* |
 
 ## Paper Package 7: *Working Paper 035 — Audit of Nielsen (2026) TUFT & Hagedorn Nuclearity Repair of Null-Cone Gravity*
 
@@ -205,6 +220,25 @@ This document tracks the origin, baseline integrity, AI-assistance disclosures, 
 | `papers/wp035_tuft_hagedorn_repair/rust/src/lib.rs` | Zero-crate Rust 1.100.0 cross-verifier library | `4988a0c949f340b22f75d2268e3168c27eb0f80a6a6445710b5b61a102ca0576` | *(new `[G4N]` Cycle 1, 2026-11-26)* |
 | `papers/wp035_tuft_hagedorn_repair/rust/tests/wp035_xcheck.rs` | Rust 5-suite cross-check (`5/5` PASS, bit-exact `SplitMix64` `0xcc617ec51b6fb1e0`) | `d6ebaf56cf18f20782317a37d335eb9280a5dde28702beb82cca7b20a0d99e56` | *(new `[G4N]` Cycle 1, 2026-11-26)* |
 | `papers/wp035_tuft_hagedorn_repair/reconciliation/GEMINI4_NEON_WP035_AUDIT.md` | `[G4N]` ADPIE Cycle 1 audit & Theorem G6 dossier | `4ddae790ec5c579490c43edc23fd1fa7efa2d1fbe9f958500d30667da40360df` | *(new `[G4N]` Cycle 1, 2026-11-26)* |
+| `papers/wp035_tuft_hagedorn_repair/paper/paper.typ` | `[GB]` Round-1 reconciled edition (clean-room text unchanged + boxed verdicts) | `5049ee9cb47e0ac1b26f42f302b08f3f373d964af59ce0d78460731da3f465c0` | *(new `[GB]` Round 1, 2026-11-26)* |
+| `papers/wp035_tuft_hagedorn_repair/paper/paper.pdf` | Compiled reconciled edition (Typst 0.15.1) | `a7b5f85f8638cff72cf4039fa3cf5078f10d0ba410d05bce0ac0fc2ef1287530` | *(new `[GB]` Round 1, 2026-11-26)* |
+| `papers/wp035_tuft_hagedorn_repair/reconciliation/GROKBOT_WP035_ROUND1.md` | `[GB]` Round-1 dossier (verdicts, evidence, run spec) | `0a2cf443eb6b5615d4386f8ee3f6bfb4296d62e6f9f8d92045b55d4be506d6ed` | *(new `[GB]` Round 1, 2026-11-26)* |
+
+## Horizon Round-1 `[GB]` Reconciliation Tooling (`reconciliation/horizon_round1/`)
+
+| File | Role | Current SHA-256 | Original Upload SHA-256 |
+| :--- | :--- | :--- | :--- |
+| `reconciliation/horizon_round1/README.md` | Round-1 index | `32a072888a1824e55393c90020047c1f63d1ff511e72027fdf5b6d7e2a47efc1` | *(new `[GB]` Round 1, 2026-11-26)* |
+| `reconciliation/horizon_round1/RECONCILIATION_CHANGELOG.md` | Round-1 changelog and per-item verdict table | `34241a2fd51a7c588a80a384cafd46ff9fc45b3594ed3d5525d704da86797dc7` | *(new `[GB]` Round 1, 2026-11-26)* |
+| `reconciliation/horizon_round1/build_r1.py` | Edition/dossier builder (Code, MIT) | `3b08cbd32f2b983fd1f192c87de0f0bc8ea5ba930e2e1ef3b9ba0b40341d8599` | *(new `[GB]` Round 1, 2026-11-26)* |
+| `reconciliation/horizon_round1/r1_items.py` | Verdict ledger (single source) | `5e7dd5a266982f441eaa0b201160d133b8132f22a15009a20b6f8f09a769c16c` | *(new `[GB]` Round 1, 2026-11-26)* |
+| `reconciliation/horizon_round1/r1_specs.py` | Run specs requested from the author | `a759969ea15e94289595223e44edd449d52017df61997e4e46c360fdc70c2ec6` | *(new `[GB]` Round 1, 2026-11-26)* |
+| `reconciliation/horizon_round1/code/gb_r1_wp030.py` | Independent check (Code, MIT) | `fd506179b63986a346749b906c7d1dc99ed4c366843dd6fb6b2994a088a7c61b` | *(new `[GB]` Round 1, 2026-11-26)* |
+| `reconciliation/horizon_round1/code/gb_r1_wp031_035.py` | Independent check (Code, MIT) | `c63067bbcce697dd2a24556f5848d699f4d8214f8067e7ca296a0c4117e33723` | *(new `[GB]` Round 1, 2026-11-26)* |
+| `reconciliation/horizon_round1/code/gb_r1_wp033_halo.py` | Independent check (Code, MIT) | `fff1d903811b7c57c7dee53afc225b2b721bfe56ad38cb816017a1281f897649` | *(new `[GB]` Round 1, 2026-11-26)* |
+| `reconciliation/horizon_round1/logs/gb_r1_wp030.log` | Check output (Data, CC BY 4.0) | `5d34172ce3673ba4cfa3de4f043e75bd1ef854e0c5d18277ae12813bd77fd482` | *(new `[GB]` Round 1, 2026-11-26)* |
+| `reconciliation/horizon_round1/logs/gb_r1_wp031_035.log` | Check output (Data, CC BY 4.0) | `a5ce1cc5986d6081f27b71bee1ed03c69647a3b4aea8c92552468dd89bb1a722` | *(new `[GB]` Round 1, 2026-11-26)* |
+| `reconciliation/horizon_round1/logs/gb_r1_wp033_halo.log` | Check output (Data, CC BY 4.0) | `e7ac07d8c6fb2a2dc913458d8bef2554897e5bc8c6263f18a34ec127a5df7738` | *(new `[GB]` Round 1, 2026-11-26)* |
 
 ## Revision Log
 
@@ -230,3 +264,4 @@ This document tracks the origin, baseline integrity, AI-assistance disclosures, 
 | 2026-11-26 | Working Paper 031 (Horizon IB) verbatim clean-room intake & ADPIE Cycle 1 `[G4N]` 3-plane audit (`papers/wp031_3d_j2_hil/`, `NEGATIVES.md`, `papers/README.md`, `README.md`, `CHANGELOG.md`, `PROVENANCE.md`) | Completed the Horizon I–ID quartet by archiving WP 031 clean-room `.typ` + 4 SVGs byte-for-byte unmodified per Rule 5 (`0` leaks) and executing a full 3-plane `[G4N]` audit — Python `5/5`, Lean 4.36.0 `9/9` (`0 sorryAx`, `0 ofReduceBool`), Rust `5/5` (`SplitMix64` `0xc844f9d684ec259c`, `592/1600`). Logged `NEG-W15`–`NEG-W18` & original **Theorem G4** (stationary-quadrupole spin-tensioned Hopf wave yields exact zero-Coriolis radial tension $\ddot\rho_k = -\omega_w^2 \rho_k$ yet forces electrical waste heat $\ge 14.77\times P_{\mathrm{orb}}(q)$ on independent motor-winches, solvable via a coupled mechanical differential/spring-drum hub; plus dimensionless printed Theorem 3 prefactor catch, uncontrolled $L=0$ point-mass $J_2$ baseline catch, and `fig1` Euler axis sign fix). All 80 SHA-256 inventory rows verified live. |
 | 2026-11-26 | Working Paper 034 (Horizon IE) verbatim clean-room intake & ADPIE Cycle 1 `[G4N]` 3-plane meta-audit (`papers/wp034_null_cone_gravity/`, `NEGATIVES.md`, `papers/README.md`, `README.md`, `CHANGELOG.md`, `PROVENANCE.md`) | Archived WP 034 clean-room `.typ` + 4 SVGs byte-for-byte unmodified per Rule 5 (`0` leaks) and executed a full 3-plane `[G4N]` meta-audit (including primary-source cross-checks against `arXiv:2611.34924v1` and Sen 2013 `arXiv:1205.0971v2`) — Python `5/5`, Lean 4.36.0 `9/9` (`0 sorryAx`, `0 ofReduceBool`, zero Mathlib), Rust `5/5` (`SplitMix64` `0xb4005f8bfe2e1bca`, `1600/1600` vs. `0/1600`). Verified every headline analytical pillar and logged `NEG-W19`–`NEG-W21` plus original **Theorem G5** (Non-Hilbert–Schmidt Closed-Cut Riemann Rearrangement Universality closing the finite-positive-$Z[X]$ loophole on WP 034's exact $\mathcal{H} = \ell^2(\mathbb{N})\oplus\ell^2(\mathbb{N})$, with from-scratch Lean 4 irrationality of $\sqrt{2}$; plus authentic 106-bit DD EFT `96.2%`/`100%` wipeout at $s=10^{33}/10^{77}$ vs. `0.0` cancellation-free `f64`, Table 1 vs. Table 2 witness mismatch, and `C156` domain exclusion of $R=e$). All 93 SHA-256 inventory rows verified live. |
 | 2026-11-26 | Working Paper 035 (Horizon IF — Series Finale) verbatim clean-room intake & ADPIE Cycle 1 `[G4N]` 3-plane audit (`papers/wp035_tuft_hagedorn_repair/`, `NEGATIVES.md`, `papers/README.md`, `README.md`, `CHANGELOG.md`, `PROVENANCE.md`) | Closed the six-monograph Horizon I–IF (`WP 030`–`WP 035`) `[G4N]` pass by archiving WP 035 clean-room `.typ` + 4 SVGs byte-for-byte unmodified per Rule 5 (`0` leaks) and executing a full 3-plane `[G4N]` audit — Python `5/5`, Lean 4.36.0 `9/9` (`0 sorryAx`, `0 ofReduceBool`, zero Mathlib), Rust `5/5` (from-scratch Stirling–Bernoulli `lgamma`/`digamma`, `SplitMix64` `0xcc617ec51b6fb1e0`, `1600/1600` vs. `0/1600`). Confirmed Track A (12/12 digits on $S^3$–$S^9$ spectral zetas incl. $S^9$ $\Delta_2 = -0.413644658190$, Eq. 65 & `L(3,1)`, $a_5$, Wyler/CODATA/`F40`, `C157`, Beltrami ODE + $k=4$, dark sector, Künneth, Bayes) and Track B (**Theorems R1–R3**, `C159`–`C160`, `K13`); logged `NEG-W22`–`NEG-W24` plus original **Theorem G6** (Hagedorn Canonical Equivalence-Breaking: exact $\operatorname{Gamma}(\alpha,\alpha)$ dispersion $1/\sqrt{\alpha}$ = `54.59%`/`59.18%`/`73.41%`, `40.2%–42.7%` causal-diamond tail leakage, and exact $1/\sqrt{\alpha+2}$ truncation bridge unifying WP 035 with WP 034's `26.86%` permanent dispersion). All 106 SHA-256 inventory rows verified live; full Horizon I–IF suite ready for **Grok Bot (`[GB]`)**. |
+| 2026-11-26 | Horizon WP030–WP035 `[GB]` Round-1 reconciliation (`papers/<slug>/paper/`, `GROKBOT_WP0xx_ROUND1.md`, `reconciliation/horizon_round1/`, `NEGATIVES.md`, `papers/README.md`, `CHANGELOG.md`) | Reconciled editions with boxed verdicts (clean-room untouched), 60-item verdict ledger, NEG-W25–W30, WP032 dossier addendum; `[G4N]` planes re-run incl. Lean 58/58 |
