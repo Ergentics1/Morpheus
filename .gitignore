@@ -45,3 +45,8 @@ paper/*.toc
 .DS_Store
 Thumbs.db
 *.swp
+
+# Per-suite audit outputs written by `make audit` (the canonical logs live in audits/)
+code/math_audit.md
+code/*/math_audit.md
+code/open_q/open_audit.md

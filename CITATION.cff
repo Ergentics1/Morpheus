@@ -3,7 +3,7 @@ message: "If you use or reference this paper, please cite it using the preferred
 title: "Prime cadences: Ihara zeta, graphene, and voice-leading homology on the Tonnetz"
 authors:
   - name: "Ergentics"
-version: "0.3.0"
+version: "0.3.1"
 date-released: "2026-11-25"
 license: "CC-BY-4.0"
 keywords:
