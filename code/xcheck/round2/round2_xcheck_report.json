@@ -1,0 +1,106 @@
+{
+ "rows": [
+  {
+   "check": "Thm 7.11: exactly 19 genus-13 pairs X_0^D(N) with 2|D",
+   "passed": true,
+   "detail": "[(6, 55, 0, 0), (6, 65, 8, 0), (6, 71, 0, 0), (6, 79, 0, 4), (10, 27, 0, 0), (10, 43, 0, 8), (14, 15, 0, 0), (14, 23, 0, 0), (26, 9, 0, 0), (26, 11, 0, 0), (38, 7, 0, 0), (46, 7, 0, 8), (74, 3, 0, 0), (82, 3, 0, 4), (302, 1, 2, 0), (334, 1, 2, 4), (546, 1, 0, 0), (570, 1, 0, 0), (690, 1, 0, 8)]"
+  },
+  {
+   "check": "Thm 7.11: 11 of them torsion-free",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "check": "NEG-E10: (690,1) is in the census with e2=0, e3=8",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "check": "NEG-E10: dim S_2^new(345)=15 and charpoly(T_2) mod (t^4-4t^2+1) = 3t^3+t^2+21t+7",
+   "passed": true,
+   "detail": "dim=15, rem=3*x^3 + x^2 + 21*x + 7"
+  },
+  {
+   "check": "Kernel H_1 is positive definite: FT = 4 pi^4 sin^2 t / (3 t^2 (t^2-pi^2)^2) >= 0",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "check": "Explicit formula normalisation: limit constants 22.3816 / 60.8395",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "check": "Explicit formula is below every minimal totally real discriminant, n=2..8",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "check": "Pincer 1 witness n=9, u=4, mode B: exp(LB)=13.8641 > UB=13.5249",
+   "passed": true,
+   "detail": "13.8641 vs 13.52494"
+  },
+  {
+   "check": "Tail n>=15 at b=4.2: E-f_2 = 9.5350 (paper v0.3.0 prints 9.5370), LB(15)=19.9366 > UB(15)=19.0800",
+   "passed": true,
+   "detail": "9.534967"
+  },
+  {
+   "check": "Pincer 3 sextic witness (6,16,1,2): L_v at b=6 gives 18.660678 > 18.647049",
+   "passed": true,
+   "detail": "18.6606784"
+  },
+  {
+   "check": "Thm 7.21(a): no survivors for 9 <= n <= 14",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "check": "Thm 7.21(b): n in {7,8} forces h_F = 1 and u in {1,2,4}",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "check": "Thm 7.21(c): sextic u in {16,32} excluded",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "check": "Survivor set equals the paper's open cases",
+   "passed": true,
+   "detail": "[(6, 1), (6, 2), (6, 4), (6, 8), (7, 1), (7, 2), (7, 4), (8, 1), (8, 2), (8, 4)]"
+  },
+  {
+   "check": "Ceilings 1.597e8 (n=7), 2.243e9 (n=8), 2.648e7 (n=6, u=8)",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "check": "Without the mode-A second prime, (n,u)=(7,8) mode A f_v=2 is NOT excluded (proof text needs it)",
+   "passed": true,
+   "detail": "15.74763 <= 15.86939"
+  },
+  {
+   "check": "Prop 7.18(b): g_1..g_5 send 0 to 0, oo, 1, w, w^2",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "check": "Prop 7.18(b): s_i^2 = 2I for all i",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "check": "Prop 7.18(b): tau(s4 s5) = 49/4 > 4, s4 s5 in ker(phi): Gamma_5 is non-arithmetic",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "check": "Held-note clean-room count: 13,382 valid systems for 5 <= N <= 18",
+   "passed": true,
+   "detail": "13382"
+  }
+ ],
+ "passed": 20,
+ "total": 20
+}

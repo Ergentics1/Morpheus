@@ -4,18 +4,19 @@ Morpheus — Standalone First-Principles Open Problem (1) & Lemma 7.14 Verifier
 License: MIT (Code Model). Zero reads of cached data or external tables.
 
 Independently verifies the three Open Problem (1) / Lemma 7.14 results integrated
-from Ergentics' clean-room Research Monograph I into Prime Cadences v0.3.0:
+from Ergentics' clean-room Research Monograph I into Prime Cadences v0.3.1:
   1. Wild involution sigma(z) = 3/z in PGL_2(Q_2): fixes oriented edge e = (L_0, L_1)
      of the 2-adic Bruhat-Tits tree, has both fixed points +-sqrt(3) strictly inside
      A_e = {1/2 < |x|_2 < 1}, and satisfies exact identity u(1+x)-4 = x(x-2)/(1+x).
-  2. Ramified e_v = 2, f_v = 1 obstruction & M = 36 sharpness witness: verifies the
+  2. Ramified e_v = 2, f_v = 1 obstruction & M = 36 combinatorial witness: verifies the
      subdivided Tonnetz bipartition (36 midpoints in Class A, 24 Tonnetz vertices in
      Class B), exact mass floor M >= 36, and explicit balanced M = 36 graph-of-groups
-     with 36 C_3-leaves attached to the midpoints (confirming M = 36 is sharp).
+     with 36 C_3-leaves attached to the midpoints (confirming M = 36 is combinatorially sharp).
   3. Unramified cyclotomic obstruction (e_v = 1, f_v >= 2) & explicit sharpness
      counterexample Gamma_5 = ker((Z/2)*5 -> D_12) subset PGL_2(Q_4): exact Z_2[omega]
-     verification of s_i^2 = 2I, v_2(det s_i) = 1, Klein Ping-Pong on P^1(F_4), and
-     D_12 quotient core isomorphism with the 24-vertex, 36-edge Tonnetz X.
+     verification of s_i^2 = 2I, v_2(det s_i) = 1, Klein Ping-Pong on P^1(F_4),
+     D_12 quotient core isomorphism with the 24-vertex, 36-edge Tonnetz X, and exact
+     non-arithmeticity witness s_4*s_5 in Gamma_5 with tau(s_4*s_5) = 49/4 > 4.
 """
 
 from __future__ import annotations
@@ -221,7 +222,17 @@ def verify_unramified_cyclotomic_and_gamma5() -> None:
                 q.append(w)
     assert len(seen) == 24 and len(core_edges) == 36
     assert 24 * 2 == 48  # 48 inverted edges from s4, s5
-    print("[PASS] Prop 7.18 (unramified cyclotomic & Gamma_5 subset PGL_2(Q_4)): 5 involutions s_i^2=2I, v2(det)=1, exact Ping-Pong & 24v/36e+48inv")
+
+    # Verify non-arithmeticity of Gamma_5 (Prop 7.18(b)): s4, s5 in ker(phi) => s4*s5 in Gamma_5.
+    # Exact Z[omega] product M = s4*s5 has rational trace 7 and det 4, so tau(s4*s5) = 49/4 > 4.
+    s4s5 = matmul(ss[3], ss[4])
+    tr_s4s5 = add4(s4s5[0][0], s4s5[1][1])
+    det_s4s5 = det4(s4s5)
+    assert tr_s4s5[1] == 0 and det_s4s5[1] == 0, f"Expected rational tr/det, got {tr_s4s5}, {det_s4s5}"
+    tau_s4s5 = Fraction(tr_s4s5[0] ** 2, det_s4s5[0])
+    assert tr_s4s5 == (7, 0) and det_s4s5 == (4, 0) and tau_s4s5 == Fraction(49, 4)
+    assert tau_s4s5 > 4
+    print(f"[PASS] Prop 7.18 (unramified cyclotomic & Gamma_5 subset PGL_2(Q_4)): 5 involutions s_i^2=2I, v2(det)=1, exact Ping-Pong, 24v/36e+48inv, tau(s4*s5)={tau_s4s5}>4 (non-arithmetic)")
 
 
 def main() -> None:

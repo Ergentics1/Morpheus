@@ -4,6 +4,28 @@ All notable changes to **Morpheus** are documented here. Manuscript updates cut 
 
 ## [Unreleased]
 
+## [0.3.1] - 2026-11-25
+
+### Fixed (round-2 referee review of `v0.3.0`)
+- **Theorem 7.21, Pincer 3:** the proof now states that in mode A the second norm-2 prime also contributes $c_4/N \ge 1/(2n)$ in every intermediate subfield. Without it $(n,u)=(7,8)$ is not excluded ($15.7476 \le 15.8694$); the Rust and C++ checks already included it. Witness typo $E(4.2)-f_2(4.2) = 9.5370 \to 9.5350$ (the data gives $9.534967$).
+- **Proposition 7.18(b):** the $g_i$ are now explicit, and non-arithmeticity of $\Gamma_5$ is proved ($s_4 s_5 \in \Gamma_5$, $\tau = 49/4 > 4$, Theorem 7.13). **7.18(a):** the conclusions about $E$ are stated for arithmetic $\Gamma$.
+- **Proposition 7.17(c):** $M(\mathcal O)$ is defined, "sharp Eichler mass bound" reads "combinatorially sharp floor", and the bipartition step no longer relies on $X$ being bipartite.
+- **Theorem 7.20(b):** points to the sharpening $n \le 8$ in Theorem 7.21.
+- **Minor wording polish:** clarified `Proposition 7.19` (printing explicit $12\times 12$ matrices for the six cases over $F_{469}, F_{316}, F_{2777}$ and verifying all eight $\mathbb{Q}[x]$-irreducible factorisations), tightened the `Theorem 4.4` Independent confirmation description of the Euclidean chord-length defect $D(a) = 2 - 2\cos(\pi a) = 4\sin^2(\pi a/2) > 0$, and separated curve-level vs. graph-level scope in `NEG-M8` (`NEGATIVES.md`).
+- **Tags:** Thm 7.11 `[E→GB; corrected G4N; X]`, Lemma 7.14 `[E→GB; sharpened E; X]` (paper, mirror, `CONTRIBUTIONS.md`).
+- **Contributions section:** the GB list says "degrees $\le 5$ and part of degree 6"; "Formal proofs" says the Lean files cover arithmetic or combinatorial cores; the G4N item no longer claims "zero unchecked" (Thm 7.20(c) scans were spot-checked); "all three tracks agree on every theorem" now reads "no disagreement remains on any result checked by more than one track"; Ergentics' specific credits are restored.
+- Stale cross-reference labels in `ergentics/README.md` and `ergentics/shimura_brandt_xcheck.py` (Prop 7.18 → 7.19, Thm 7.19(c) → 7.20(c)).
+- `.gitignore`: the per-suite `math_audit.md` / `open_audit.md` files written by `make audit`.
+
+### Added
+- **Poitou (1976/77) explicit-formula citation (`poitou77`, 55 → 56 references):** added Georges Poitou, *Sur les petits discriminants*, Sém. Delange–Pisot–Poitou (Théor. Nombres) **18** (1976/77), no. 1, Exp. 6, 18 pp. (verified on Numdam) to `paper/references.bib`, cited alongside Odlyzko in `Theorem 7.20(b)`, `Theorem 7.21`, and Section 8 `Known.`, and renumbered `prime_cadences_paper.md` references `[40]`–`[56]` 1-to-1 against `paper/prime-cadences.bbl`.
+- `code/xcheck/round2/` (`20/20`, from scratch): genus-13 census (19 pairs), three-pincer sweep for $6 \le n \le 14$, Poitou kernel positivity and normalisation, $\Gamma_5$ trace check, 13,382 count.
+- Exact $\tau(s_4 s_5) = 49/4 > 4$ non-arithmeticity check in `ergentics/open1_torsion_xcheck.py`.
+
+### Changed
+- Rebuilt `paper/prime-cadences.pdf` (`v0.3.1`, 35 pp, `0` LaTeX warnings/errors, `0` overfull/underfull hboxes), `paper/prime-cadences.bbl` (56 references), and neutral `0/0` `arxiv/prime-cadences-arxiv.tar.gz`; archived upstream `code/geometry/shimura_multi.py` and `cleanroom/` remain frozen per Rule 5.
+- First release published via automated immutable release pipeline (`.github/workflows/release-assets.yml`), attaching `prime-cadences.pdf`, `prime-cadences-arxiv.tar.gz`, and `SHA256SUMS.txt` atomically on tag push.
+
 ## [0.3.0] - 2026-11-25
 
 ### Added (Three-Way Canonical Reconciliation, ADPIE Cycle 5 Completion, & Standalone Clean-Room Monograph I)

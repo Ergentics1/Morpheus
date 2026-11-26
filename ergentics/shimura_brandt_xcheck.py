@@ -10,12 +10,12 @@ and characteristic polynomial is built directly from axioms via PARI/GP (`cypari
 Covers:
   1. Theorem 7.11 & NEG-E10: All 19 genus-13 Shimura curves X_0^D(N) (catching omitted
      D = 690, N = 1, M = 345, phi = 176 > 168, e_3 = 8) + all 4 Gamma_H 24-component cases.
-  2. Proposition 7.18(a)-(c): Exhaustive nflist enumeration of totally real fields of degree
+  2. Proposition 7.19(a)-(c): Exhaustive nflist enumeration of totally real fields of degree
      n = 2 (D <= 1200, cross-checked vs exact Siegel), n = 3 (d <= 5200), n = 4 (d <= 60000),
      exact h^+ = 1 mass-12 solutions, and direct from-scratch Brandt graphs for all 22+
      configurations (verifying exact mass = 12, class counts, unit indices, symmetry, and
      (t^4 - 4t^2 + 1) nmid charpoly(B(v))).
-  3. Theorem 7.19(c): Independent verification of the degree-5 near-miss field d_F = 106069
+  3. Theorem 7.20(c): Independent verification of the degree-5 near-miss field d_F = 106069
      (x^5 - 2x^4 - 4x^3 + 7x^2 + 3x - 4, D'' = p_13) and its exact 12x12 Brandt polynomial.
 """
 
@@ -523,7 +523,7 @@ def exact_zeta_minus1(pari: Pari, nf, n: int) -> Fraction:
 
 
 def verify_prop_7_18(pari: Pari) -> bool:
-    print("\n=== Part 2: Proposition 7.18(a)-(c) (nflist + lfun + Direct Brandt Graphs, n = 2, 3, 4) ===")
+    print("\n=== Part 2: Proposition 7.19(a)-(c) (nflist + lfun + Direct Brandt Graphs, n = 2, 3, 4) ===")
     t0 = time.time()
     px = pari("t^4 - 4*t^2 + 1")
 
@@ -552,14 +552,14 @@ def verify_prop_7_18(pari: Pari) -> bool:
         if sols:
             quad_sols.append((D, pol, sols))
     assert [d for d, _, _ in quad_sols] == [41, 137], f"Unexpected quadratic solutions: {[d for d, _, _ in quad_sols]}"
-    print(f"  [PASS] Prop 7.18(a) Siegel vs lfun exact match on all {quad_checked} split-2 quadratics D<=1200; h^+=1 hits: D=41 (2), D=137 (1)")
+    print(f"  [PASS] Prop 7.19(a) Siegel vs lfun exact match on all {quad_checked} split-2 quadratics D<=1200; h^+=1 hits: D=41 (2), D=137 (1)")
     for D, pol, sols in quad_sols:
         D_spec, N_spec = sols[0]
         h_cls, units, mass, _ = compute_brandt_graph(pari, pol, D_spec, N_spec, v_idx=0)
         assert mass == Fraction(12, 1)
         expected_h = 14 if D == 41 else 13
         assert h_cls == expected_h, f"D={D} expected class number {expected_h}, got {h_cls}"
-        print(f"  [PASS] Prop 7.18(a) Brandt D={D}: classes={h_cls} (torsion, max_unit={max(units)}), exact mass={mass}")
+        print(f"  [PASS] Prop 7.19(a) Brandt D={D}: classes={h_cls} (torsion, max_unit={max(units)}), exact mass={mass}")
 
     # 2b & 2c. Cubic (d <= 5200) and Quartic (d <= 60000) exhaustive enumeration + direct Brandt graphs!
     deg_specs = [
@@ -604,11 +604,11 @@ def verify_prop_7_18(pari: Pari) -> bool:
             rem = cp % px
             assert rem != 0, f"Unexpected P_X factor on torsion-free d={d_val}!"
             tf_configs_checked += 1
-            print(f"  [PASS] Prop 7.18(c) TF deg={n} d={d_val:5d} D''={D_spec} N={N_spec}: h=12, units=all 1, mass=12, P_X nmid cp (rem={rem})")
+            print(f"  [PASS] Prop 7.19(c) TF deg={n} d={d_val:5d} D''={D_spec} N={N_spec}: h=12, units=all 1, mass=12, P_X nmid cp (rem={rem})")
         else:
             torsion_discs.append(d_val)
             assert 13 <= h_cls <= 18, f"Torsion d={d_val} unexpected h={h_cls}"
-            print(f"  [PASS] Prop 7.18(b) TOR deg={n} d={d_val:5d} D''={D_spec} N={N_spec}: h={h_cls}, max_w={max(units)}, mass=12")
+            print(f"  [PASS] Prop 7.19(b) TOR deg={n} d={d_val:5d} D''={D_spec} N={N_spec}: h={h_cls}, max_w={max(units)}, mass=12")
 
     # Also check alternate norm-2 prime choices on d=316 (which has two norm-2 primes, so paper says "For every choice of v"):
     for n, d_val, pol, n_v2, D_spec, N_spec in all_sols:
@@ -624,7 +624,7 @@ def verify_prop_7_18(pari: Pari) -> bool:
                     continue
                 h_cls, units, mass, cp = compute_brandt_graph(pari, pol, D_spec, N_spec, v_idx=v_idx)
                 assert h_cls == 12 and all(w == 1 for w in units) and mass == Fraction(12, 1) and (cp % px) != 0
-                print(f"  [PASS] Prop 7.18(c) alt v_idx={v_idx} on d={d_val}: h=12, units=all 1, mass=12, P_X nmid cp")
+                print(f"  [PASS] Prop 7.19(c) alt v_idx={v_idx} on d={d_val}: h=12, units=all 1, mass=12, P_X nmid cp")
 
     assert sorted(tf_discs) == sorted([733, 148, 469, 469, 316, 2777, 2777]), f"Unexpected TF set: {tf_discs}"
     assert sorted(torsion_discs) == sorted([564, 13448, 13448, 13676, 6809, 10273]), f"Unexpected torsion set: {torsion_discs}"
@@ -633,11 +633,11 @@ def verify_prop_7_18(pari: Pari) -> bool:
 
 
 # ============================================================================
-# Part 3: Theorem 7.19(c) — Quintic Near-Miss d_F = 106069 (D'' = p_13)
+# Part 3: Theorem 7.20(c) — Quintic Near-Miss d_F = 106069 (D'' = p_13)
 # ============================================================================
 
 def verify_thm_7_19_quintic_nearmiss(pari: Pari) -> bool:
-    print("\n=== Part 3: Theorem 7.19(c) (Quintic Near-Miss d_F = 106069, D'' = p_13) ===")
+    print("\n=== Part 3: Theorem 7.20(c) (Quintic Near-Miss d_F = 106069, D'' = p_13) ===")
     t0 = time.time()
     pol = pari("x^5 - 2*x^4 - 4*x^3 + 7*x^2 + 3*x - 4")
     assert int(pari.nfdisc(pol)) == 106069
