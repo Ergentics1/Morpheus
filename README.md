@@ -1,8 +1,15 @@
 # Morpheus
 
-Open-sourced research repository by **Ergentics**.
+Open-sourced research repository by **Ergentics** (*Open Sourced Living*), structured to host multiple open-source research papers under a uniform ADPIE, Code-vs-Data, and multi-model verification standard.
 
-## Paper: *Prime Cadences*
+## Research Portfolio ([`papers/`](papers/README.md))
+
+| # | Paper | Location | Stage |
+| :---: | :--- | :--- | :--- |
+| **01** | **[Prime Cadences](prime_cadences_paper.md)** — *Ihara zeta, graphene, and voice-leading homology on the Tonnetz* | Root layout ([`paper/`](paper/), [`arxiv/`](arxiv/)) | **`v0.3.1` Released** (Immutable GitHub Release · 3-way verified) |
+| **02** | **[Working Paper 030 (Horizon Monograph I)](papers/wp030_shape_propulsion/README.md)** — *Shape-Controlled Gravitational Propulsion Resolved* | [`papers/wp030_shape_propulsion/`](papers/wp030_shape_propulsion/) | **`Intake (Pre-Assessment)`** — verbatim clean-room `paper.typ` + 4 SVGs archived as-is before `[G4N]` & `[GB]` assessment |
+
+## Paper #01: *Prime Cadences*
 
 **[Prime cadences: Ihara zeta, graphene, and voice-leading homology on the Tonnetz](prime_cadences_paper.md)** *(Preprint, November 2026)*
 
@@ -19,7 +26,8 @@ Studies the 3-regular neo-Riemannian triad graph $X$ and its Ihara zeta primes (
 
 | Path | Description |
 | :--- | :--- |
-| [`paper/`](paper/) | Canonical LaTeX source (`prime-cadences.tex`), `.bbl`, compiled PDF (`v0.3.1`, 35 pp, 0 LaTeX warnings), `references.bib` (56 refs), and 8 vector PDF figures |
+| [`papers/`](papers/README.md) | Multi-paper research registry and self-contained per-paper workspaces starting with Paper #02 ([`papers/wp030_shape_propulsion/`](papers/wp030_shape_propulsion/)) |
+| [`paper/`](paper/) | Paper #01 (*Prime Cadences*) canonical LaTeX source (`prime-cadences.tex`), `.bbl`, compiled PDF (`v0.3.1`, 35 pp, 0 LaTeX warnings), `references.bib` (56 refs), and 8 vector PDF figures |
 | [`prime_cadences_paper.md`](prime_cadences_paper.md) | GitHub Flavored Markdown mirror reconciled 1-to-1 with `paper/prime-cadences.tex` (`v0.3.1`, 56 refs) |
 | [`figures/`](figures/README.md) | PNG figures 1–5 for `prime_cadences_paper.md` |
 | [`arxiv/`](arxiv/) | Ready-to-upload arXiv source tarball (`prime-cadences-arxiv.tar.gz`, neutral `0/0` headers) |

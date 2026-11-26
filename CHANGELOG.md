@@ -4,6 +4,9 @@ All notable changes to **Morpheus** are documented here. Manuscript updates cut 
 
 ## [Unreleased]
 
+### Added
+- **Multi-paper research registry (`papers/README.md`) & Paper #02 verbatim clean-room intake (`papers/wp030_shape_propulsion/`):** established a self-contained `papers/<slug>/` layout for subsequent papers (leaving Paper #01 *Prime Cadences* `v0.3.1` root paths untouched) and archived Ergentics Working Paper 030 (*Shape-Controlled Gravitational Propulsion Resolved*, Horizon Series Monograph I) `cleanroom/paper.typ` and all four SVG figures (`fig1`–`fig4.svg`) byte-for-byte unmodified in `Pre-Assessment` status ahead of independent `[G4N]` and `[GB]` evaluation.
+
 ### Fixed (round-3 referee review of `v0.3.1`)
 - `CONTRIBUTIONS.md`: the cross-verification preamble no longer says "All 27 … results below are independently verified". The table has 30 rows, and Thm 7.20(c) was only spot-checked (as the paper and the closing note already say). It now reads "Each … result below has at least one independent check", matching the paper.
 
