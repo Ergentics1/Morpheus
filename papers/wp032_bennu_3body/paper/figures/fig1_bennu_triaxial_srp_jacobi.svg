@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="295" viewBox="0 0 760 295">
+<style>
+  .bg { fill: #ffffff; }
+  .panel { fill: #f8fafc; stroke: #cbd5e1; stroke-width: 1; }
+  .title { font-family: "Helvetica Neue", Arial, sans-serif; font-size: 12.2px; font-weight: 700; fill: #0f172a; }
+  .sub { font-family: "Helvetica Neue", Arial, sans-serif; font-size: 9.5px; fill: #475569; }
+  .ax { stroke: #334155; stroke-width: 1.1; }
+  .grid { stroke: #e2e8f0; stroke-width: 0.7; stroke-dasharray: 3,3; }
+  .tick { font-family: "Helvetica Neue", Arial, sans-serif; font-size: 8.8px; fill: #475569; }
+  .lbl { font-family: "Helvetica Neue", Arial, sans-serif; font-size: 9.5px; font-weight: 600; fill: #1e293b; }
+  .mono { font-family: Menlo, Consolas, monospace; font-size: 7.9px; fill: #0f172a; }
+  .badge { font-family: "Helvetica Neue", Arial, sans-serif; font-size: 8.5px; font-weight: 700; }
+</style>
+<rect class="bg" x="0" y="0" width="760" height="295"/>
+<rect class="panel" x="12" y="12" width="364" height="271" rx="6"/>
+<text class="title" x="26" y="34">A. Real Bennu (101955): 100 m Triad vs. SRP</text>
+<text class="sub" x="26" y="49">OSIRIS-REx mu = 4.892 m^3/s^2, a_SRP = 1.01e-7 m/s^2 [Seam C145]</text>
+<rect x="64" y="72" width="296" height="158" fill="#ffffff" stroke="#cbd5e1"/>
+<line class="grid" x1="64" y1="230.0" x2="360" y2="230.0"/>
+<text class="tick" x="58" y="233.0" text-anchor="end">0.1x</text>
+<line class="grid" x1="64" y1="158.2" x2="360" y2="158.2"/>
+<text class="tick" x="58" y="161.2" text-anchor="end">1.0x</text>
+<line class="grid" x1="64" y1="122.3" x2="360" y2="122.3"/>
+<text class="tick" x="58" y="125.3" text-anchor="end">3.2x</text>
+<line class="grid" x1="64" y1="86.4" x2="360" y2="86.4"/>
+<text class="tick" x="58" y="89.4" text-anchor="end">10x</text>
+<line x1="64" y1="158.2" x2="360" y2="158.2" stroke="#dc2626" stroke-width="1.3" stroke-dasharray="5,3"/>
+<text class="badge" x="354" y="154.2" text-anchor="end" fill="#b91c1c">SRP Equality (1.0x)</text>
+<line class="grid" x1="64.0" y1="72" x2="64.0" y2="230"/>
+<text class="tick" x="64.0" y="243" text-anchor="middle">500 m</text>
+<line class="grid" x1="138.0" y1="72" x2="138.0" y2="230"/>
+<text class="tick" x="138.0" y="243" text-anchor="middle">750 m</text>
+<line class="grid" x1="212.0" y1="72" x2="212.0" y2="230"/>
+<text class="tick" x="212.0" y="243" text-anchor="middle">1000 m</text>
+<line class="grid" x1="286.0" y1="72" x2="286.0" y2="230"/>
+<text class="tick" x="286.0" y="243" text-anchor="middle">1250 m</text>
+<line class="grid" x1="360.0" y1="72" x2="360.0" y2="230"/>
+<text class="tick" x="360.0" y="243" text-anchor="middle">1500 m</text>
+<line class="ax" x1="64" y1="230" x2="360" y2="230"/>
+<line class="ax" x1="64" y1="72" x2="64" y2="230"/>
+<polyline fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="3,2" points="64.0,72.6 67.0,75.1 69.9,77.5 72.9,79.9 75.8,82.2 78.8,84.5 81.8,86.7 84.7,89.0 87.7,91.1 90.6,93.3 93.6,95.4 96.6,97.4 99.5,99.4 102.5,101.4 105.4,103.4 108.4,105.3 111.4,107.2 114.3,109.1 117.3,111.0 120.2,112.8 123.2,114.6 126.2,116.4 129.1,118.1 132.1,119.8 135.0,121.5 138.0,123.2 141.0,124.8 143.9,126.5 146.9,128.1 149.8,129.7 152.8,131.2 155.8,132.8 158.7,134.3 161.7,135.8 164.6,137.3 167.6,138.8 170.6,140.3 173.5,141.7 176.5,143.1 179.4,144.5 182.4,145.9 185.4,147.3 188.3,148.7 191.3,150.0 194.2,151.4 197.2,152.7 200.2,154.0 203.1,155.3 206.1,156.6 209.0,157.8 212.0,159.1 215.0,160.3 217.9,161.6 220.9,162.8 223.8,164.0 226.8,165.2 229.8,166.4 232.7,167.5 235.7,168.7 238.6,169.8 241.6,171.0 244.6,172.1 247.5,173.2 250.5,174.3 253.4,175.4 256.4,176.5 259.4,177.6 262.3,178.7 265.3,179.7 268.2,180.8 271.2,181.8 274.2,182.9 277.1,183.9 280.1,184.9 283.0,185.9 286.0,186.9 289.0,187.9 291.9,188.9 294.9,189.9 297.8,190.9 300.8,191.8 303.8,192.8 306.7,193.7 309.7,194.7 312.6,195.6 315.6,196.5 318.6,197.4 321.5,198.4 324.5,199.3 327.4,200.2 330.4,201.1 333.4,201.9 336.3,202.8 339.3,203.7 342.2,204.6 345.2,205.4 348.2,206.3 351.1,207.1 354.1,208.0 357.0,208.8 360.0,209.7"/>
+<polyline fill="none" stroke="#1d4ed8" stroke-width="2.3" points="64.0,72.0 67.0,73.0 69.9,75.5 72.9,78.0 75.8,80.4 78.8,82.7 81.8,85.1 84.7,87.3 87.7,89.5 90.6,91.7 93.6,93.9 96.6,96.0 99.5,98.1 102.5,100.1 105.4,102.1 108.4,104.1 111.4,106.0 114.3,107.9 117.3,109.8 120.2,111.7 123.2,113.5 126.2,115.3 129.1,117.1 132.1,118.8 135.0,120.6 138.0,122.3 141.0,123.9 143.9,125.6 146.9,127.2 149.8,128.8 152.8,130.4 155.8,132.0 158.7,133.5 161.7,135.1 164.6,136.6 167.6,138.1 170.6,139.6 173.5,141.0 176.5,142.5 179.4,143.9 182.4,145.3 185.4,146.7 188.3,148.1 191.3,149.4 194.2,150.8 197.2,152.1 200.2,153.4 203.1,154.7 206.1,156.0 209.0,157.3 212.0,158.6 215.0,159.8 217.9,161.0 220.9,162.3 223.8,163.5 226.8,164.7 229.8,165.9 232.7,167.1 235.7,168.2 238.6,169.4 241.6,170.5 244.6,171.7 247.5,172.8 250.5,173.9 253.4,175.0 256.4,176.1 259.4,177.2 262.3,178.3 265.3,179.4 268.2,180.4 271.2,181.5 274.2,182.5 277.1,183.5 280.1,184.6 283.0,185.6 286.0,186.6 289.0,187.6 291.9,188.6 294.9,189.6 297.8,190.5 300.8,191.5 303.8,192.5 306.7,193.4 309.7,194.4 312.6,195.3 315.6,196.2 318.6,197.2 321.5,198.1 324.5,199.0 327.4,199.9 330.4,200.8 333.4,201.7 336.3,202.6 339.3,203.5 342.2,204.3 345.2,205.2 348.2,206.1 351.1,206.9 354.1,207.8 357.0,208.6 360.0,209.4"/>
+<circle cx="93.6" cy="93.9" r="4.2" fill="#059669" stroke="#ffffff" stroke-width="1.2"/>
+<rect x="103.6" y="78" width="184" height="44" rx="4" fill="#ecfdf5" stroke="#059669"/>
+<text class="badge" x="109.6" y="91" fill="#065f46">R = 600 m (Zero-Plume Ops):</text>
+<text class="mono" x="109.6" y="104">da_rad = 7.86x SRP (+4.82% finite)</text>
+<text class="mono" x="109.6" y="116">SRP crossover: R_eq = 997 m</text>
+<circle cx="211.1" cy="158.2" r="3.8" fill="#dc2626"/>
+<text class="lbl" x="212.0" y="260" text-anchor="middle">Orbital Radius R Around Bennu (m)</text>
+<text class="lbl" x="24" y="151.0" text-anchor="middle" transform="rotate(-90 24 151.0)">Triad Control / SRP Ratio</text>
+<rect class="panel" x="388" y="12" width="360" height="271" rx="6"/>
+<text class="title" x="402" y="34">B. Triaxial C22 &amp; Active Jacobi Breaking (50 ks)</text>
+<text class="sub" x="402" y="49">Complete Noether hierarchy: SO(2)_z -&gt; Jacobi C_J -&gt; Active Triad</text>
+<rect x="448" y="72" width="284" height="158" fill="#ffffff" stroke="#cbd5e1"/>
+<line class="grid" x1="448" y1="221.2" x2="732" y2="221.2"/>
+<text class="tick" x="442" y="224.2" text-anchor="end">10^-15</text>
+<line class="grid" x1="448" y1="194.9" x2="732" y2="194.9"/>
+<text class="tick" x="442" y="197.9" text-anchor="end">10^-12</text>
+<line class="grid" x1="448" y1="168.6" x2="732" y2="168.6"/>
+<text class="tick" x="442" y="171.6" text-anchor="end">10^-9</text>
+<line class="grid" x1="448" y1="142.2" x2="732" y2="142.2"/>
+<text class="tick" x="442" y="145.2" text-anchor="end">10^-6</text>
+<line class="grid" x1="448" y1="115.9" x2="732" y2="115.9"/>
+<text class="tick" x="442" y="118.9" text-anchor="end">10^-3</text>
+<line class="grid" x1="448" y1="89.6" x2="732" y2="89.6"/>
+<text class="tick" x="442" y="92.6" text-anchor="end">10^0</text>
+<line class="ax" x1="448" y1="230" x2="732" y2="230"/>
+<line class="ax" x1="448" y1="72" x2="448" y2="230"/>
+<rect x="478" y="199.2" width="18" height="30.8" rx="2" fill="#2563eb"/>
+<rect x="500" y="223.4" width="18" height="6.6" rx="2" fill="#d97706"/>
+<text class="tick" x="496" y="243" text-anchor="middle">Axisym C22=0</text>
+<rect x="572" y="97.1" width="18" height="132.9" rx="2" fill="#2563eb"/>
+<rect x="594" y="222.4" width="18" height="7.6" rx="2" fill="#d97706"/>
+<text class="tick" x="590" y="243" text-anchor="middle">Triax Pt-Mass</text>
+<rect x="666" y="89.8" width="18" height="140.2" rx="2" fill="#2563eb"/>
+<rect x="688" y="121.4" width="18" height="108.6" rx="2" fill="#d97706"/>
+<text class="tick" x="684" y="243" text-anchor="middle">Active 100m</text>
+<text class="mono" x="487.0" y="195.2" text-anchor="middle" fill="#1d4ed8">3e-13</text>
+<text class="mono" x="581.0" y="93.1" text-anchor="middle" fill="#1d4ed8">0.139</text>
+<text class="mono" x="675.0" y="85.8" text-anchor="middle" fill="#1d4ed8">0.941</text>
+<text class="mono" x="703.0" y="117.4" text-anchor="middle" fill="#b45309">2.3e-4</text>
+<rect x="454" y="80" width="106" height="44" rx="4" fill="#f8fafc" stroke="#cbd5e1"/>
+<rect x="460" y="88" width="10" height="9" fill="#2563eb"/>
+<text class="tick" x="474" y="96">Max |dL_z|</text>
+<rect x="460" y="105" width="10" height="9" fill="#d97706"/>
+<text class="tick" x="474" y="113">Max |dC_J|</text>
+<text class="lbl" x="590.0" y="260" text-anchor="middle">Bennu Gravity &amp; Triad Configuration</text>
+<text class="lbl" x="404" y="151.0" text-anchor="middle" transform="rotate(-90 404 151.0)">Invariant Drift (Log Scale)</text>
+</svg>
