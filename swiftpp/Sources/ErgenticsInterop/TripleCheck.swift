@@ -586,6 +586,68 @@ public enum TripleCheckBridge {
         return ([itemTun, itemEdge, itemAx], e40S, axS)
     }
 
+    // MARK: - ADPIE Cycle 5: Theorem D (Three-Pincer Hilbert Class Field Obstruction), NEG-E10 & Section 7 Completion
+
+    public static func checkSection7Cycle5() -> (items: [TripleCheckItem], thmD: TheoremDPincerReport, shim: ShimuraGenus13Report, arith: Section7ArithmeticCycle5Report) {
+        // 1. Novelty 3 (Theorem D) & Thm 7.19(b): From-scratch 64-pt Gauss-Legendre Poitou-Odlyzko Three-Pincer Obstruction.
+        let dS = verifyTheoremDPincer()
+        let dC = ergentics.verify_theorem_d_pincer()
+        let dDelta = max(
+            max(abs(dS.qExplicitFormulaLB - dC.q_explicit_formula_lb), abs(dS.tail15LBb42 - dC.tail15_lb_b42)),
+            max(
+                max(abs(dS.worstDeg9Margin - dC.worst_deg9_margin), abs(dS.worstDeg10Margin - dC.worst_deg10_margin)),
+                max(abs(dS.deg6U16H1Margin - dC.deg6_u16_h1_margin), abs(dS.deg6U16Hge2Margin - dC.deg6_u16_hge2_margin))
+            )
+        )
+        let dMatch = dS.passed && dC.passed &&
+                     dS.deg9To14Survivors == 0 && dC.deg9_to_14_survivors == 0 &&
+                     dS.deg7MaxSurvivingU == dC.deg7_max_surviving_u && dS.deg7Hge2Survivors == 0 && dC.deg7_hge2_survivors == 0 &&
+                     dS.deg8MaxSurvivingU == dC.deg8_max_surviving_u && dS.deg8Hge2Survivors == 0 && dC.deg8_hge2_survivors == 0 &&
+                     dS.deg6MaxSurvivingU == dC.deg6_max_surviving_u &&
+                     dS.deg6U16H1Dead == 1 && dC.deg6_u16_h1_dead == 1 &&
+                     dS.deg6U16Hge2Dead == 1 && dC.deg6_u16_hge2_dead == 1 &&
+                     dDelta < 1e-12
+        let itemD = TripleCheckItem(
+            id: "NOV-4/ThmD", category: "Correspondence", passed: dMatch, maxDelta: dDelta,
+            detail: String(format: "n=9..14_surv=%d m9=+%.4f n7/8_u<=%d(h=1) n6_u<=%d(u16:+%.5f) tail15=%.3f>%.3f delta=%.2e",
+                           dS.deg9To14Survivors, dS.worstDeg9Margin, dS.deg7MaxSurvivingU, dS.deg6MaxSurvivingU,
+                           dS.deg6U16H1Margin, dS.tail15LBb42, dS.tail15UB, dDelta)
+        )
+
+        // 2. Thm 7.11 & NEG-E10: Exhaustive genus-13 Shimura curve census (19 pairs incl. X_0^690(1), 11 torsion-free, 4 Gamma_H).
+        let shS = verifyShimuraGenus13Census()
+        let shC = ergentics.verify_shimura_genus13_census()
+        let shMatch = shS.passed && shC.passed &&
+                      shS.totalPairs == shC.total_pairs && shS.totalPairs == 19 &&
+                      shS.torsionFreePairs == shC.torsion_free_pairs && shS.torsionFreePairs == 11 &&
+                      shS.negE10Detected == 1 && shC.neg_e10_detected == 1 &&
+                      shS.negE10Phi == 176 && shC.neg_e10_phi == 176 &&
+                      shS.negE10E3 == 8 && shC.neg_e10_e3 == 8 &&
+                      shS.gammaHCount == shC.gamma_h_count && shS.gammaHCount == 4
+        let itemSh = TripleCheckItem(
+            id: "S7-5/Thm7.11/NEG-E10", category: "D", passed: shMatch, maxDelta: shMatch ? 0.0 : 1.0,
+            detail: "pairs=\(shS.totalPairs)(tf=\(shS.torsionFreePairs)) NEG-E10(D=690,phi=\(shS.negE10Phi),e3=\(shS.negE10E3))=\(shS.negE10Detected) GammaH=\(shS.gammaHCount)"
+        )
+
+        // 3. Props 7.3, 7.17(b), 7.18(a): Siegel quadratic scan D<=1200, PGL_2(F_8) 504-element census, gamma_0^k obstruction.
+        let arS = verifySection7ArithmeticCycle5()
+        let arC = ergentics.verify_section7_arithmetic_cycle5()
+        let arMatch = arS.passed && arC.passed &&
+                      arS.quadSplit2Scanned == arC.quad_split2_scanned &&
+                      arS.quadHplus1Solutions == arC.quad_hplus1_solutions && arS.quadHplus1Solutions == 3 &&
+                      arS.quadD41Solutions == 2 && arS.quadD137Solutions == 1 &&
+                      arS.pgl2F8Order == arC.pgl2_f8_order && arS.pgl2F8Order == 504 &&
+                      arS.pgl2F8Order3Count == arC.pgl2_f8_order3_count && arS.pgl2F8Order3Count == 56 &&
+                      arS.pgl2F8Order3FreeCount == arC.pgl2_f8_order3_free_count && arS.pgl2F8Order3FreeCount == 56 &&
+                      arS.gamma0PowersObstructed == arC.gamma0_powers_obstructed && arS.gamma0PowersObstructed == 12
+        let itemAr = TripleCheckItem(
+            id: "S7-6/Props7.3+7.17+7.18a", category: "D", passed: arMatch, maxDelta: arMatch ? 0.0 : 1.0,
+            detail: "quad_D<=1200=\(arS.quadSplit2Scanned) h+=1_sols=\(arS.quadHplus1Solutions)(41x\(arS.quadD41Solutions),137x\(arS.quadD137Solutions)) |PGL2(F8)|=\(arS.pgl2F8Order) ord3_free=\(arS.pgl2F8Order3FreeCount)/\(arS.pgl2F8Order3Count) g0_pow=\(arS.gamma0PowersObstructed)/12"
+        )
+
+        return ([itemD, itemSh, itemAr], dS, shS, arS)
+    }
+
     /// Run the complete Swift++ Triple-Check SWE-sweep across D, R, P, Correspondence, RCT, Seam, Section 7, and Novelty Theorems.
     public static func runFullSuite() -> TripleCheckSuiteReport {
         var items = [TripleCheckItem]()
@@ -607,6 +669,8 @@ public enum TripleCheckBridge {
         items.append(contentsOf: checkSection7AndArithmetic())
         let (novItems, _, _) = checkNoveltyTheorems()
         items.append(contentsOf: novItems)
+        let (c5Items, _, _, _) = checkSection7Cycle5()
+        items.append(contentsOf: c5Items)
 
         return TripleCheckSuiteReport(
             items: items,

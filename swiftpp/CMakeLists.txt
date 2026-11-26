@@ -9,6 +9,7 @@ add_library(ErgenticsCXX STATIC
     Sources/ErgenticsCXX/src/ergentics_cxx.cpp
     Sources/ErgenticsCXX/src/section7.cpp
     Sources/ErgenticsCXX/src/novelty.cpp
+    Sources/ErgenticsCXX/src/section7_cycle5.cpp
 )
 target_include_directories(ErgenticsCXX PUBLIC
     Sources/ErgenticsCXX/include

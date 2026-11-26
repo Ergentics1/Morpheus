@@ -111,8 +111,67 @@ struct EdgeworthExportRecord: Encodable {
     let bound_check: BoundCheck
 }
 
+struct TheoremDExportRecord: Encodable {
+    struct QuadratureCheck: Encodable {
+        let gl64_weights_and_moments_ok: Bool
+        let q_explicit_formula_lb_b2: Double
+    }
+    struct TailCheck: Encodable {
+        let witness_b: Double
+        let e_minus_f2: Double
+        let lb_n15: Double
+        let ub_n15: Double
+        let margin_n15: Double
+    }
+    struct PincerResults: Encodable {
+        let deg9_to_14_survivors: Int32
+        let worst_deg9_margin: Double
+        let worst_deg10_margin: Double
+        let deg7_max_surviving_u: Int32
+        let deg7_hge2_survivors: Int32
+        let deg7_max_root_disc: Double
+        let deg8_max_surviving_u: Int32
+        let deg8_hge2_survivors: Int32
+        let deg8_max_root_disc: Double
+        let deg6_max_surviving_u: Int32
+        let deg6_u16_h1_dead: Bool
+        let deg6_u16_hge2_dead: Bool
+        let deg6_u16_h1_margin: Double
+        let deg6_u16_hge2_margin: Double
+        let deg6_old_disc_ceiling: Double
+        let deg6_new_disc_ceiling: Double
+        let deg6_reduction_factor: Double
+    }
+    struct ShimuraCensus: Encodable {
+        let total_genus13_pairs: Int32
+        let torsion_free_pairs: Int32
+        let neg_e10_d690_detected: Bool
+        let neg_e10_phi: Int32
+        let neg_e10_e2: Int32
+        let neg_e10_e3: Int32
+        let gamma_h_24comp_count: Int32
+    }
+    struct BoundCheck: Encodable {
+        let bound_formula: String
+        let observed: Double
+        let threshold: Double
+        let passed: Bool
+    }
+
+    let schema_version: String
+    let correspondence_id: String
+    let code_commit: String
+    let implementation: String
+    let quadrature_check: QuadratureCheck
+    let universal_tail_n_ge_15: TailCheck
+    let three_pincer_results: PincerResults
+    let shimura_genus13_census: ShimuraCensus
+    let bound_check: BoundCheck
+}
+
 var exportPath: String?
 var exportEdgeworthPath: String?
+var exportTheoremDPath: String?
 var codeCommit = "working-tree"
 let args = CommandLine.arguments
 var idx = 1
@@ -122,6 +181,9 @@ while idx < args.count {
         idx += 2
     } else if args[idx] == "--export-edgeworth", idx + 1 < args.count {
         exportEdgeworthPath = args[idx + 1]
+        idx += 2
+    } else if args[idx] == "--export-theorem-d", idx + 1 < args.count {
+        exportTheoremDPath = args[idx + 1]
         idx += 2
     } else if args[idx] == "--commit", idx + 1 < args.count {
         codeCommit = args[idx + 1]
@@ -253,6 +315,73 @@ if let ePath = exportEdgeworthPath {
         print("Exported Edgeworth calibration JSON record to \(ePath)")
     } catch {
         FileHandle.standardError.write(Data("Failed to export Edgeworth JSON: \(error)\n".utf8))
+        exit(2)
+    }
+}
+
+if let tdPath = exportTheoremDPath {
+    let (_, dS, shS, _) = TripleCheckBridge.checkSection7Cycle5()
+    let rec = TheoremDExportRecord(
+        schema_version: "1.0.0",
+        correspondence_id: "C-5/ThmD",
+        code_commit: codeCommit,
+        implementation: "swiftpp",
+        quadrature_check: .init(
+            gl64_weights_and_moments_ok: dS.quadratureSelfCheckOK,
+            q_explicit_formula_lb_b2: dS.qExplicitFormulaLB
+        ),
+        universal_tail_n_ge_15: .init(
+            witness_b: 4.2,
+            e_minus_f2: dS.tail15EMinusF2,
+            lb_n15: dS.tail15LBb42,
+            ub_n15: dS.tail15UB,
+            margin_n15: dS.tail15LBb42 - dS.tail15UB
+        ),
+        three_pincer_results: .init(
+            deg9_to_14_survivors: dS.deg9To14Survivors,
+            worst_deg9_margin: dS.worstDeg9Margin,
+            worst_deg10_margin: dS.worstDeg10Margin,
+            deg7_max_surviving_u: dS.deg7MaxSurvivingU,
+            deg7_hge2_survivors: dS.deg7Hge2Survivors,
+            deg7_max_root_disc: dS.deg7MaxRootDisc,
+            deg8_max_surviving_u: dS.deg8MaxSurvivingU,
+            deg8_hge2_survivors: dS.deg8Hge2Survivors,
+            deg8_max_root_disc: dS.deg8MaxRootDisc,
+            deg6_max_surviving_u: dS.deg6MaxSurvivingU,
+            deg6_u16_h1_dead: dS.deg6U16H1Dead == 1,
+            deg6_u16_hge2_dead: dS.deg6U16Hge2Dead == 1,
+            deg6_u16_h1_margin: dS.deg6U16H1Margin,
+            deg6_u16_hge2_margin: dS.deg6U16Hge2Margin,
+            deg6_old_disc_ceiling: dS.deg6OldDiscCeiling,
+            deg6_new_disc_ceiling: dS.deg6NewDiscCeiling,
+            deg6_reduction_factor: dS.deg6OldDiscCeiling / dS.deg6NewDiscCeiling
+        ),
+        shimura_genus13_census: .init(
+            total_genus13_pairs: shS.totalPairs,
+            torsion_free_pairs: shS.torsionFreePairs,
+            neg_e10_d690_detected: shS.negE10Detected == 1,
+            neg_e10_phi: shS.negE10Phi,
+            neg_e10_e2: shS.negE10E2,
+            neg_e10_e3: shS.negE10E3,
+            gamma_h_24comp_count: shS.gammaHCount
+        ),
+        bound_check: .init(
+            bound_formula: "0 survivors for n in [9, 14] & n >= 15 tail & sextic u in {16, 32} dead (margin > 0.01)",
+            observed: dS.deg6U16H1Margin,
+            threshold: 0.01,
+            passed: dS.passed && shS.passed
+        )
+    )
+    let encoder = JSONEncoder()
+    encoder.outputFormatting = [.prettyPrinted, .sortedKeys, .withoutEscapingSlashes]
+    do {
+        let data = try encoder.encode(rec)
+        let url = URL(fileURLWithPath: tdPath)
+        try FileManager.default.createDirectory(at: url.deletingLastPathComponent(), withIntermediateDirectories: true)
+        try data.write(to: url)
+        print("Exported Theorem D calibration JSON record to \(tdPath)")
+    } catch {
+        FileHandle.standardError.write(Data("Failed to export Theorem D JSON: \(error)\n".utf8))
         exit(2)
     }
 }

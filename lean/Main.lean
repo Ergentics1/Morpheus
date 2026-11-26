@@ -21,8 +21,21 @@ import Morpheus
 #print axioms Morpheus.thmC_hexagonal_power_sums_exact
 #print axioms Morpheus.thmC_exact_cumulant_series
 #print axioms Morpheus.thmC_cumulant_ratios_exact
+#print axioms Morpheus.prop7_3_hamilton_trace_bound
+#print axioms Morpheus.prop7_3_gamma0_never_compact
+#print axioms Morpheus.lem7_14_ultrametric_doubling
+#print axioms Morpheus.lem7_14_control_slope_one
+#print axioms Morpheus.lem7_14_odd_prime_scaling
+#print axioms Morpheus.thm7_15_q2_free_action
+#print axioms Morpheus.prop7_17_f4_off_core
+#print axioms Morpheus.prop7_17_e2_edge_decomp
+#print axioms Morpheus.prop7_17_f8_order3_free
+#print axioms Morpheus.thmD_odd_parity_factor_ge_three
+#print axioms Morpheus.thmD_subspace_averaging_bound
+#print axioms Morpheus.thmD_f4_term_matches_even_f2_term
+#print axioms Morpheus.neg_E10_genus13_D690_witness
 
 def main : IO Unit := do
-  IO.println "Morpheus Lean 4 Formal Verification Oracle: ALL THEOREMS KERNEL-CHECKED (0 sorry)."
+  IO.println "Morpheus Lean 4 Formal Verification Oracle: ALL 33 THEOREMS KERNEL-CHECKED (0 sorry)."
   IO.println s!"  gamma0 = [[{Morpheus.gamma0Mat.a}, {Morpheus.gamma0Mat.b}], [{Morpheus.gamma0Mat.c}, {Morpheus.gamma0Mat.d}]], tr={Morpheus.gamma0Mat.tr}, det={Morpheus.gamma0Mat.det}"
 
