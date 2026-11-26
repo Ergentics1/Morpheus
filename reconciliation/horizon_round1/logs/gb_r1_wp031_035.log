@@ -1,0 +1,39 @@
+WP034 NEG-W19 s=1e+16: 53-bit closed-form -1.3685 | 106-bit closed-form -1.570796 relerr 1.17e-17 | cancel-free f64 relerr 0.0e+00
+WP034 NEG-W19 s=1e+17: 53-bit closed-form +0.0000 | 106-bit closed-form -1.570796 relerr 4.67e-16 | cancel-free f64 relerr 0.0e+00
+WP034 NEG-W19 s=1e+20: 53-bit closed-form +0.0000 | 106-bit closed-form -1.570796 relerr 6.37e-13 | cancel-free f64 relerr 0.0e+00
+WP034 NEG-W19 s=1e+33: 53-bit closed-form -131777474290381520.0000 | 106-bit closed-form -14.630239 relerr 8.31e+00 | cancel-free f64 relerr 0.0e+00
+WP034 NEG-W19 s=1e+77: 53-bit closed-form +0.0000 | 106-bit closed-form +0.000000 relerr 1.00e+00 | cancel-free f64 relerr 0.0e+00
+WP034 G5 Z_P - G5 formula: 0
+WP034 Counterex2 pair M=1e4: 143.8377 (paper +143.8377); cycle r=5: -287.6530 (paper -287.6530)
+WP034 Eq5.24 RHS/LHS: 1.570796 (pi/2=1.570796)
+WP034 witness 2-2/(r-1): r=5: 1.500, r=12: 1.818; dilution (1+c)/(r-1+c) r=4: 0.3333
+WP034 C156 domain: u<=0.35 <=> R>=e^(13/7)=6.4054; at R=e u=0.5: e^-u/(1-u)=1.2131, minus (1+u^2/2)=0.0881
+WP034 beta* ratio: C=1: 2.6752; C=5/pi^4: 1.000000; argmin C=1/(3a)=0.05133 (5/pi^4=0.05133)
+WP034 C153 domain: theta in [0.01,0.40] <=> s=2/theta in [5,200]
+WP034 Sen 2013 (fetched arXiv:1205.0971v2, Eqs.1.4-1.5 + text): C_local=212/45 per ln a (a ~ length): mixed 212/45 ln a = 106/45 ln A; singlet (212/45-3) ln a = 77/90 ln A
+X-PAPER 106/45 vs 167/90: WP034: Tr(C_b^dag C_b)|_{s_b} ~ s_b^(106/45); measure (4 pi s_b)^(-1/2) ds_b => density rho(s) ~ e^s s^(106/45-1/2) => N(s*) ~ e^{s*} s*^(167/90): Z_{D,1}~s*^(257/90)=alpha; WP035 R3: ln N = s + (alpha-1) ln s = s + 167/90 ln s. Both arithmetic correct; they identify different quantities with Sen's mixed-ensemble entropy.
+WP035 NEG-W22 S^3: zeta1'(0)=0.888490076146; remainder zeta_R'(-2)=-0.030448457; exact/|rem|=29.18, dropped/|rem|=30.18
+WP035 NEG-W22 S^5 ratios: 1.757764/0.080113=21.941; 1.837877/0.080113=22.941
+WP035 NEG-W24 Lemma8 ratio: 0.0129767; 10^(1/4)*alpha_W=0.0129767; Vol(D^5)=pi^5/1920 vs Vol(S^9)/160=0.159385 (0.159385)
+WP035 NEG-W24 a_e waterfall: -5428.8+121269.4-116156.4 = -315.8 sigma
+WP035 NEG-W23 boundary example: rho(E)=(1+E)^-2 e^{bH E}: Z(bH)=int_0^inf (1+E)^-2 dE = 1 (finite at the abscissa)
+WP035 G6 alpha=3.3556: sigma/mean=1/sqrt(a)=0.54591, tail=0.4274, Beta(a,1) RMS=0.23589
+WP035 G6 alpha=2.8556: sigma/mean=1/sqrt(a)=0.59177, tail=0.4213, Beta(a,1) RMS=0.26856
+WP035 G6 alpha=1.8556: sigma/mean=1/sqrt(a)=0.73411, tail=0.4024, Beta(a,1) RMS=0.37387
+WP031 G4 P_circ q=0.5: numeric 1392.5 W vs formula 1392.5 W (G4N 1,392.3); heat x37/110 = 468.4 W (G4N 468.3)
+WP031 P_orb,full: 41.19 W (G4N 41.19) using WP030 I0=(2/3)ML^2 law; with I0=ML^2 (3 arms of length L) it would be 61.78 W
+WP031 Omega_max, 2Omega_max: 1.2109e-03, 2.4218e-03 (paper 2.422e-3)
+WP031 NEG-W18 T_pk: paper mu M L/rp^3 + m L w^2 = 62.56 N; 2 m L mu/rp^3 + m L w^2 = 54.74 N
+WP031 NEG-W18 strain: 0.5271% vs sigma_allow/E = 0.4296%
+WP031 NEG-W18 Hall: wet-1000: 100.52 kg; dry-1000 payload: 105.12 kg
+WP031 NEG-W17 L=0 baseline (my IC: circular r=1, v=1): |dJ_perp|=3.5108, |dJ_z|=4.0e-11, i_end=42.7606 deg, d|L|=-0.1107 (G4N 3.0859, 44.3968, -0.0322; paper 3.087)
+WP032 G2 direct: I_COM/I0=0.872500 (formula 0.872500); T'/T0 (radial projection)=1.1987 (G4N 1.1987; paper 0.8163)
+WP032 NEG-W7: true radial coefficient 9 mu C22 R_B^2/r^4 vs paper 3; with J2: 3C22-J2/2 = 0.00865
+WP032 NEG-W9 planar isotropic triad Hessian ~ Hess(lap_2D U) at L4 (big primary): [[3/4, 15*sqrt(3)/4], [15*sqrt(3)/4, 33/4]] -> xx:yy = 1:11, both positive
+WP033 G3 sens axis x: d(w_xy^2)=+4.0802, d(w_z^2)=+4.0000, d(gap)=+0.0802
+WP033 G3 sens axis y: d(w_xy^2)=-3.3748, d(w_z^2)=-1.0000, d(gap)=-2.3748
+WP033 G3 sens axis z: d(w_xy^2)=-0.7054, d(w_z^2)=-3.0000, d(gap)=+2.2946
+WP033 G3 sens axis eq: d(w_xy^2)=+0.3527, d(w_z^2)=+1.5000, d(gap)=-1.1473
+WP033 NEG-W11: 1003.71-1737.4=-733.7 km
+WP033 NEG-W13: chi(600)=10.886, z=18.24 cm
+WP033 NEG-W14: eta/0.20=8.08x, chi/0.15=144x, const-g drift=15.99 m, centrifugal relief=1.270e-05 m/s^2 = 15.7% of g

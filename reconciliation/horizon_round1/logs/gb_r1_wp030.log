@@ -1,0 +1,36 @@
+Thm2.1 max|Izz-I0|: 1.3e-15
+Thm2.2 max|sum m rho^2 - paper Q|: 3.8e-15 (paper formula = MASS quadrupole)
+NEG-W4 max|(Ixx-Iyy)+2iIxy + sum m rho^2|: 4.4e-16 -> inertia-tensor form has opposite sign: CONFIRMED
+Thm2.3 paper chart: Delta theta0 (deg): -90.000000
+Thm2.3 paper chart: NET rotation of labelled bodies (deg): +90.000000; max per-step spin 1.2e-10
+NEG-W2 collision check Phi=0.0000: [np.float64(1.732050808), np.float64(0.0), np.float64(1.732050808)]
+NEG-W2 collision check Phi=3.1416: [np.float64(1.732050808), np.float64(1.732050808), np.float64(0.0)]
+NEG-W2 Theta=0 shape: [(1+0j), (-1+0j), (-0+0j)]
+equilateral location in paper chart (Th=pi/2,Phi=pi/2) sides: [np.float64(1.414214), np.float64(1.414214), np.float64(1.414214)]
+G4N basis loop beta=pi/3 chi:0->-2pi net rotation (deg): -90.0000; min d_ij/L=0.517638 (sqrt(2-sqrt3)=0.517638); |Q e^-2i th0| variation=1.4e-15; |Q|/I0=0.866025 (sin b=0.866025)
+G4N basis beta=0 sides: [np.float64(1.414214), np.float64(1.414214), np.float64(1.414214)]
+G1 q=0.5000: T/(I0 Om^2/2)=0.3333 vs q^2/(1-q^2)=0.3333; max|rho|/L=1.0000 vs sqrt(2(1+q)/3)=1.0000
+G1 q=0.7071: T/(I0 Om^2/2)=1.0000 vs q^2/(1-q^2)=1.0000; max|rho|/L=1.0668 vs sqrt(2(1+q)/3)=1.0668
+G1 q=0.8500: T/(I0 Om^2/2)=2.6036 vs q^2/(1-q^2)=2.6036; max|rho|/L=1.1106 vs sqrt(2(1+q)/3)=1.1106
+G1 q=0.9500: T/(I0 Om^2/2)=9.2564 vs q^2/(1-q^2)=9.2564; max|rho|/L=1.1402 vs sqrt(2(1+q)/3)=1.1402
+S1 naive [mu/3*(a+b-2c)]: -3.3202867056e-09 relerr 5.75e-08
+S1 naive [(a+b-2c)/3*mu]: -3.3202867056e-09 relerr 5.75e-08
+S1 naive [mean accel minus point (3 accelerations)]: -3.3202880445e-09 relerr 3.46e-07
+S1 naive [accel sum order 2]: -3.3202880445e-09 relerr 3.46e-07
+S1 naive [np.float32? (no) a+b then -2c]: -3.3202867056e-09 relerr 5.75e-08
+S1 paper naive value: -3.3202862681e-9 relerr 1.89e-07
+S1 naive eps=1e-07: relerr 8.20e-03 (paper 8.20e-3 at 1e-7, 100% at <=1e-8)
+S1 naive eps=1e-08: relerr 4.80e-01 (paper 8.20e-3 at 1e-7, 100% at <=1e-8)
+NEG-W5 tension mu M L/rp^3 L=100 rp=6300km: 0.1594 N
+NEG-W5 tension mu M L/rp^3 L=100 rp=7000km: 0.1162 N
+NEG-W5 tension mu M L/rp^3 L=100 rp=6800km: 0.1268 N
+NEG-W5 Regime B tension L=20km rp=5250km: 55.09 N (paper 55.1)
+NEG-W1 Regime B tension L=20km rp=6800km: 25.35 N ; at a: 25.35
+NEG-W6 Bennu tension mu M L/R^3: 3.131e-05 N; pure gravity-gradient 2/3 of that 2.087e-05
+NEG-W6 |da_par| 2 mu L^2/R^4: 2.505e-09 m/s^2 ; 1AU SRP A/M=0.01: 4.56e-08
+NEG-W6 boost ratio (L/R)^2 Bennu/Earth: 7.840e+06; L^2/R^4 ratio at fixed mu: 6.147e+13
+NEG-W6 Bennu dv/yr e=0.25 a=2500: 11.69 mm/s/yr; v_c=4.424 cm/s
+NEG-W6 Bennu dv/yr e=0.25 rp=2500: 3.70 mm/s/yr
+Note8 Keplerian a_f,e_f from dE (mu=1,M=3,p=0.96): 1.00486, 0.21130 (paper 1.0046, 0.2106)
+F35 q(0.0275): 0.847858
+Earth radius: mean 6371.0 vs equatorial 6378.137: rp=6800 km is 429 km (mean) / 421.9 km (equatorial) altitude

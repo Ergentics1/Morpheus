@@ -1,0 +1,9 @@
+closure |X(T)-X0| = 1.623738229572169e-08  C_J0= 3.12579292  |dCJ|= 4.440892098500626e-16
+||M^T Om M - Om||_inf = 7.755374120677061e-11
+eigvals: [7.46721284e+02+0.00000e+00j 1.00000000e+00+1.10000e-04j
+ 1.00000000e+00-1.10000e-04j 8.40930000e-01+5.41144e-01j
+ 8.40930000e-01-5.41144e-01j 1.33900000e-03+0.00000e+00j]
+lambda_u= 746.7212838965431  nu1=(lu+1/lu)/2= 373.3613115421492
+nu2=cos(arg)= 0.8409300147110403  winding deg/orbit= 32.76154243396955
+W^u sign -1: min distance to Moon centre = 47315.0 km; surface impact event: False at t=87.56 d
+W^u sign +1: min distance to Moon centre = 1737.4 km; surface impact event: True at t=17.37 d
