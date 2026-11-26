@@ -1,0 +1,90 @@
+{
+  "all_passed": true,
+  "checks": {
+    "D1_k11_c149_and_theorem_g3": {
+      "c149_max_defect": 0.0048532457954511,
+      "c2_em": 3.1904252136222078,
+      "d_l2_dd_m": 180.5044661331742,
+      "d_l2_em_km": 64514.90948742492,
+      "didymos_gap_50m_x": 0.294150415539737,
+      "didymos_gap_50m_y": -0.12655106252566029,
+      "didymos_gap_50m_z": 0.6678499151679755,
+      "didymos_gap_pt": 0.2803101139879334,
+      "didymos_y_exact_resonance_L_m": 40.43649584425472,
+      "gamma2_em": 0.1678327510078692,
+      "in_k11_box": true,
+      "kz_em": 0.27902439445211247,
+      "kz_hill": 0.29150262212918115,
+      "passed": true,
+      "scale_boost_dd_vs_em": 798406.9304822742,
+      "theorem_g3_hess_over_c4_l2": {
+        "x": [
+          8.000007065539853,
+          -4.000003532769926,
+          -4.000003532769926
+        ],
+        "y": [
+          -3.999997349469819,
+          2.9999977922387795,
+          0.9999995581996014
+        ],
+        "z": [
+          -3.999997349469819,
+          0.9999995581996014,
+          2.9999977922387795
+        ]
+      }
+    },
+    "D2_bennu_tag_c151_c152_mc200": {
+      "c151_max_defect": 0.006626432713399688,
+      "c152_max_defect": 0.006746282501057466,
+      "centrifugal_frac_of_g": 0.15706100255372696,
+      "chi_rho1190": 21.5864559571658,
+      "chi_rho600_subsurface": 10.883927373360908,
+      "dx0_m": 22.718243294579505,
+      "dx_c151_const_g_m": 15.992588925443082,
+      "eta_surf_operating": 1.6167625090885052,
+      "g_centrifugal_56N_m_s2": 1.269651702843599e-05,
+      "g_surf_m_s2": 8.083812545442528e-05,
+      "mc200_closed_loop_max_miss_m": 1.4654009506752771e-06,
+      "mc200_closed_loop_safe": 200,
+      "mc200_open_loop_mean_miss_m": 20.40868130609456,
+      "mc200_open_loop_safe": 11,
+      "passed": true,
+      "z_const_cm": 80.19587230201746,
+      "z_max_rho1190_cm": 11.581272892477276,
+      "z_max_rho600_cm": 18.23788063252041
+    },
+    "P1_keyed_rct_1600": {
+      "arm_a_pass": 520,
+      "arm_b_pass": 1600,
+      "b01": 1080,
+      "c10": 0,
+      "n_trials": 1600,
+      "passed": true,
+      "seam_first_u64_hex": "0xda9392ed940a41ee"
+    },
+    "R1_42ode_halo_monodromy_wu_floquet": {
+      "abs_dCJ": 4.347633364432113e-13,
+      "broucke_nu1": 373.3613122878047,
+      "broucke_nu2": 0.8409300094773187,
+      "c150_max_defect": 0.004487298107780702,
+      "cj0": 3.1257929211578452,
+      "closure_err": 1.7227150289896713e-08,
+      "floquet_4orb_dv_m_s": 0.13543171338133056,
+      "floquet_controlled_4orb_km": 54.64526934107234,
+      "floquet_lambda_u": 746.7212853878568,
+      "floquet_reduction_factor": 3441.7858377966554,
+      "floquet_uncontrolled_2orb_km": 188077.31412068655,
+      "passed": true,
+      "symplectic_omega_err": 2.179149305447936e-08,
+      "torus_angle_deg": 32.76154298811081,
+      "wu_impacts_lunar_surface": true,
+      "wu_min_moon_dist_km": 1235.831396315637
+    }
+  },
+  "code_model_version": "wp033_audit.py v1.0",
+  "gates_passed": "4/4",
+  "license_data": "CC-BY-4.0",
+  "suite": "WP033_G4N_Cycle1_FirstPrinciples_Audit"
+}
