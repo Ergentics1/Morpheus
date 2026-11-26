@@ -1,6 +1,9 @@
 # Gemini 4 Neon (`[G4N]` / `[E→G4N]`) — Independent ADPIE Cycle 1 Audit & Mathematical Sharpening of Working Paper 032
 
 **Target Manuscript (Frozen Clean-Room Intake):** [`../cleanroom/paper.typ`](../cleanroom/paper.typ) (*Ergentics Working Paper 032 · Horizon Series Monograph IC: Bennu-Class Triaxial Asteroid Proximity Operations, 3D Multi-Tether Coupled Flexible-Body FEM & Fault-Tolerant Winch FDIR, and the Extended-Body Three-Body Problem*, 26 November 2026; SHA-256 `c2fe46dbf0ee42c714926fae71ec9811d95389074e27c5e0c829809b6a9b89dd`, preserved byte-for-byte unmodified per Rule 5 alongside all four SVG figures `fig1`–`fig4.svg`). *(Note: cites Working Paper 031 / Horizon IB, not yet archived in this repository.)*  
+
+> **[GB] addendum (2026-11-26):** Working Paper 031 has since been archived at [`../../wp031_3d_j2_hil/`](../../wp031_3d_j2_hil/). The note above is kept as written.
+
 **Audit Method:** First-principles recomputation across **three independent verification planes** with zero cached data reads ([`../../../METHODOLOGY.md`](../../../METHODOLOGY.md)):
 1. **Plane 1 — Zero-Dependency Python 3.12 (`6/6` PASS):** [`../code/wp032_audit.py`](../code/wp032_audit.py) → checksummed Data Model record [`../data/wp032_g4n_cycle1_calibration.json`](../data/wp032_g4n_cycle1_calibration.json) ([`../data/MANIFEST.sha256`](../data/MANIFEST.sha256), CC BY 4.0).
 2. **Plane 2 — Zero-Mathlib Lean 4.36.0 (`9/9` PASS, `0 sorryAx`, `0 ofReduceBool`, `0` warnings; 6 axiom-free):** [`../lean/WP032/Theorems.lean`](../lean/WP032/Theorems.lean) + [`../lean/Main.lean`](../lean/Main.lean).

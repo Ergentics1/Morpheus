@@ -3,7 +3,7 @@
 **Series:** Ergentics Working Paper 032 · Horizon Series Monograph IC · Extension of Working Papers 030 & 031 (Horizons I & IB)  
 **Author:** Ergentics, LLC & Swift++ Library of Alexandria Verification Program (`[E]`)  
 **Date:** 26 November 2026  
-**Lifecycle Stage:** **`Cycle 1 Audited [G4N] — Awaiting [GB] Independent Pass`** — verbatim clean-room `[E]` archive frozen unmodified under `cleanroom/`; full **Gemini 4 Neon** (`[G4N]` / `[E→G4N]`) 3-plane independent audit & **Theorem G2** landed in [`reconciliation/GEMINI4_NEON_WP032_AUDIT.md`](reconciliation/GEMINI4_NEON_WP032_AUDIT.md). *(Note: Working Paper 031 / Horizon IB has not yet been uploaded into `papers/`.)*
+**Lifecycle Stage:** **`Cycle 1 Audited [G4N] · Round 1 Reconciled [GB] — Awaiting Author Decisions`** — verbatim clean-room `[E]` archive frozen unmodified under `cleanroom/`; full **Gemini 4 Neon** (`[G4N]` / `[E→G4N]`) 3-plane independent audit & **Theorem G2** landed in [`reconciliation/GEMINI4_NEON_WP032_AUDIT.md`](reconciliation/GEMINI4_NEON_WP032_AUDIT.md). *(Note: Working Paper 031 / Horizon IB has not yet been uploaded into `papers/`.)*
 
 ---
 
@@ -28,3 +28,14 @@
 | **3 — Zero-Crate Rust 1.100.0** | [`rust/src/lib.rs`](rust/src/lib.rs) · [`rust/tests/wp032_xcheck.rs`](rust/tests/wp032_xcheck.rs) | **`5/5` PASS** (`0.06 s`, bit-exact `SplitMix64` seam `0x55a32a121430eb49`) | `cargo test --manifest-path papers/wp032_bennu_3body/rust/Cargo.toml` |
 | **Data Model (CC BY 4.0)** | [`data/wp032_g4n_cycle1_calibration.json`](data/wp032_g4n_cycle1_calibration.json) · [`data/MANIFEST.sha256`](data/MANIFEST.sha256) | **`1/1` SHA-256 OK** | `sha256sum -c papers/wp032_bennu_3body/data/MANIFEST.sha256` |
 | **Audit & Novelty Dossier** | [`reconciliation/GEMINI4_NEON_WP032_AUDIT.md`](reconciliation/GEMINI4_NEON_WP032_AUDIT.md) | **Complete (`[G4N]`)** — 4 catches (`NEG-W7`–`NEG-W10`) + **Theorem G2** | — |
+
+---
+
+## Grok Bot (`[GB]`) Round-1 Reconciliation (2026-11-26)
+
+- **Reconciled edition:** [`paper/paper.typ`](paper/paper.typ) → [`paper/paper.pdf`](paper/paper.pdf). Every `[E]` line of `cleanroom/paper.typ` is kept verbatim and in order; `[GB]` verdicts are inserted as boxed notes, with a ledger before the references. Corrections are proposed, not applied.
+- **Dossier:** [`reconciliation/GROKBOT_WP032_ROUND1.md`](reconciliation/GROKBOT_WP032_ROUND1.md) — per-item verdicts, evidence and reproduction commands.
+- **Verdicts:** CONFIRMED 5 · UNVERIFIABLE 2 · SPEC-NEEDED 1.
+- **Independent checks:** [`../../reconciliation/horizon_round1/`](../../reconciliation/horizon_round1/) (written from scratch; `[G4N]` code and data not read). `[G4N]`'s three planes were re-run and pass, including Lean 4.36.0 with 0 `sorry`.
+- Claims resting on the internal Swift++ corpus are unchanged and marked **UNVERIFIABLE**.
+
