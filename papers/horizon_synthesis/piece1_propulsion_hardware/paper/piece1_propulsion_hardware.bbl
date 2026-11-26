@@ -1,0 +1,87 @@
+\providecommand{\bysame}{\leavevmode\hbox to3em{\hrulefill}\thinspace}
+\providecommand{\MR}{\relax\ifhmode\unskip\space\fi MR }
+% \MRhref is called by the amsart/book/proc definition of \MR.
+\providecommand{\MRhref}[2]{%
+  \href{http://www.ams.org/mathscinet-getitem?mr=#1}{#2}
+}
+\providecommand{\href}[2]{#2}
+\begin{thebibliography}{10}
+
+\bibitem{beletsky1993}
+Vladimir~V. Beletsky and Evgenii~M. Levin, \emph{Dynamics of space tether
+  systems}, Advances in the Astronautical Sciences, vol.~83, Univelt / American
+  Astronautical Society, 1993.
+
+\bibitem{brouwer1959}
+Dirk Brouwer, \emph{Solution of the problem of artificial satellite theory
+  without drag}, The Astronomical Journal \textbf{64} (1959), 378--397.
+
+\bibitem{ergentics2026wp030}
+Ergentics, \emph{Horizon monograph {I} ({WP}~030) and {IB} ({WP}~031): Frozen
+  clean-room manuscripts and {R}ound-1 reconciliation archive}, Morpheus
+  repository (\texttt{papers/wp030\_shape\_propulsion/},
+  \texttt{papers/wp031\_3d\_j2\_hil/}), 2026, Internal \texttt{Swift++} Library
+  of Alexandria Epochs XXXVI--XXXVII corpus logs preserved as provenance.
+
+\bibitem{gueron2006}
+Eduardo Gu{\'e}ron, Cl{\'a}udio A.~S. Maia, and George E.~A. Matsas,
+  \emph{Swimming versus swinging effects in spacetime}, Physical Review D
+  \textbf{73} (2006), 024020.
+
+\bibitem{guichardet1984}
+Alain Guichardet, \emph{On rotation and vibration motions of molecules},
+  Annales de l'Institut Henri Poincar{\'e}, Physique Th{\'e}orique \textbf{40}
+  (1984), no.~3, 329--342.
+
+\bibitem{iwai1987}
+Toshihiro Iwai, \emph{A geometric setting for internal motions of the quantum
+  three-body system}, Journal of Mathematical Physics \textbf{28} (1987),
+  no.~6, 1315--1326.
+
+\bibitem{kaula1966}
+William~M. Kaula, \emph{Theory of satellite geodesy}, Blaisdell, 1966.
+
+\bibitem{krawczyk1969}
+Rudolf Krawczyk, \emph{Newton-{A}lgorithmen zur {B}estimmung von {N}ullstellen
+  mit {F}ehlerschranken}, Computing \textbf{4} (1969), 187--201.
+
+\bibitem{landis1990}
+Geoffrey~A. Landis, \emph{Reactionless propulsion using tethers}, Vision-21:
+  Space Travel for the Next Millennium, NASA CP-10059 / NTRS 19910012850, 1990,
+  Published 1991; NASA NTRS document ID 19910012850.
+
+\bibitem{landis1992}
+\bysame, \emph{Reactionless orbital propulsion using tether deployment}, Acta
+  Astronautica \textbf{26} (1992), no.~5, 307--312.
+
+\bibitem{makino2003}
+Kyoko Makino and Martin Berz, \emph{Taylor models and other validated
+  functional inclusion methods}, International Journal of Pure and Applied
+  Mathematics \textbf{4} (2003), no.~4, 379--456.
+
+\bibitem{martinez1987}
+Manuel Martinez-Sanchez and Sarah~A. Gavit, \emph{Orbital modifications using
+  forced tether-length variations}, Journal of Guidance, Control, and Dynamics
+  \textbf{10} (1987), no.~3, 233--241.
+
+\bibitem{montgomery1993}
+Richard Montgomery, \emph{Gauge theory of the falling cat}, Dynamics and
+  Control of Mechanical Systems, Fields Institute Communications, vol.~1,
+  American Mathematical Society, 1993, pp.~193--218.
+
+\bibitem{moore1966}
+Ramon~E. Moore, \emph{Interval analysis}, Prentice-Hall, 1966.
+
+\bibitem{shapere1989b}
+Alfred Shapere and Frank Wilczek, \emph{Gauge kinematics of deformable bodies},
+  American Journal of Physics \textbf{57} (1989), no.~6, 514--518.
+
+\bibitem{shapere1989a}
+\bysame, \emph{Geometry of self-propulsion at low {R}eynolds number}, Journal
+  of Fluid Mechanics \textbf{198} (1989), 557--585.
+
+\bibitem{wisdom2003}
+Jack Wisdom, \emph{Swimming in spacetime: Motion by cyclic changes in body
+  shape}, Science \textbf{299} (2003), no.~5614, 1865--1869.
+
+\end{thebibliography}

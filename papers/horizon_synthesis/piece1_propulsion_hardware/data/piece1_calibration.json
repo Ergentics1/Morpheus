@@ -1,0 +1,169 @@
+{
+  "conventions": {
+    "I0_canonical": "(2/3) M L^2",
+    "R_E_m": 6378137.0,
+    "flight_baseline": "spin-tensioned Hopf triad with coupled mechanical spring-drum hub",
+    "holonomy_basis": "equilateral-pole w_+/- (-90 deg physical, collision-free)"
+  },
+  "gates": {
+    "D1_cancellation_and_orders": true,
+    "D2_hopf_holonomy_and_G1": true,
+    "D3_safe_perigee_K9_missions": true,
+    "D4_theorem_G4_mechanical_hub": true,
+    "P1_keyed_SplitMix64_RCT": true,
+    "R1_open_planar_4body": true,
+    "R2_3d_j2_with_L0_control": true
+  },
+  "piece": "Horizon Synthesis Piece I (WP030 + WP031)",
+  "results": {
+    "D1": {
+      "exact_da_mps2": -3.3202868965895734e-09,
+      "relerr_factored_order": 5.752852515700392e-08,
+      "relerr_mean_sub_order": 3.4572808824348784e-07,
+      "unit_eps_relerr": {
+        "1e-05": 8.257370426597714e-08,
+        "1e-06": 1.488571236605039e-05,
+        "1e-07": 0.008200764668209815,
+        "1e-08": 0.48029736616687496,
+        "5e-09": 1.0
+      }
+    },
+    "D2": {
+      "g1_ke_q50": 0.3333333333333333,
+      "g1_ke_q85": 2.6036036036036028,
+      "g1_ke_q95": 9.256410256410254,
+      "g1_max_num_err": 9.384748533847187e-11,
+      "g1_rmax_q95": 1.140175425099138,
+      "g4n_basis_min_sep_over_L": 0.5176380902050417,
+      "g4n_basis_physical_rot_deg": -89.99999999999999,
+      "neg_w4_q_inertia_plus_q_mass_err": 0.0,
+      "paper_chart_chart_dth0_deg": -90.0,
+      "paper_chart_min_sep_over_L": 1.1102230246251565e-16,
+      "paper_chart_physical_rot_deg": 89.99999999999999
+    },
+    "D3": {
+      "bennu_coupling_ratio_eps2": 7840000.0,
+      "bennu_da_mps2": 2.504704e-09,
+      "bennu_dv_yr_mmps": 11.68914604876835,
+      "bennu_tension_N": 3.13088e-05,
+      "dv_yr_e025_20km_mps": 198.58261507901938,
+      "dv_yr_e040_20km_mps": 186.68443614258985,
+      "dv_yr_opt_100m_mmps": 4.997205481273413,
+      "dv_yr_opt_20km_mps": 199.88821925093652,
+      "f35_loss_at_00275": 0.847858421732176,
+      "k8_e50_star": 0.11501333195111577,
+      "k9_e_opt": 0.281701557908774,
+      "r_p_safe_km": 6978.137,
+      "srp_1au_mps2": 4.5600000000000005e-08,
+      "tension_regime_a_safe_N": 0.11730575011331439,
+      "tension_regime_b_safe_tidal_N": 23.46115002266288
+    },
+    "D4": {
+      "i0_invariant_floor_ratio": 9.846793362858131,
+      "m_hall_5yr_dry_kg": 105.12458386686855,
+      "m_hall_5yr_wet_kg": 100.5179477945134,
+      "m_hw_mech_hub_canon_kg": 45.428437193716405,
+      "m_zylon_canon_kg": 3.9284371937164075,
+      "p_orb_full_3arm_W": 61.781477645303944,
+      "p_orb_full_canon_W": 41.18765176353596,
+      "q50_p_circ_canon_W": 928.1772655767745,
+      "q50_p_heat_elec_3arm_W": 468.3076203591909,
+      "q50_p_heat_elec_canon_W": 312.2050802394606,
+      "q50_p_heat_mech_hub_canon_W": 13.92265898365163,
+      "q50_ratio_consistent": 15.1601301298687,
+      "q80_ratio_consistent": 45.587006309528384,
+      "q90_ratio_consistent": 118.89522766378288,
+      "r_eq_canon_km": 16.32993161855452,
+      "strain_allow_pct": 0.42962962962962964,
+      "t_pk_3arm_exact_N": 54.74268338621337,
+      "t_pk_canon_exact_N": 44.69721381565226,
+      "t_pk_wp031_printed_N": 62.563066727100995
+    },
+    "P1": {
+      "final_digest": "0x1156b7558c78243a",
+      "passed": 1600,
+      "seed": "0x484f52495a5f5031",
+      "trials": 1600
+    },
+    "R1": {
+      "landis_2mass_unassisted": {
+        "final_spin_rate": 2.199044764431931,
+        "max_tumble_deg": 16215.01761433772
+      },
+      "spec": {
+        "L": 0.04,
+        "M": 3.0,
+        "a0": 1.0,
+        "e0": 0.2,
+        "k_sw": 8.0,
+        "mu": 1.0,
+        "orbits": 5,
+        "q_max": 0.85,
+        "steps_per_orbit": 2000
+      },
+      "triad_circular_null_e0": {
+        "a_osc": 1.0008963974599223,
+        "a_tot": 1.0003144524463086,
+        "dE_osc": 1.1453989297915967e-05,
+        "dE_tot": 5.424638501505541e-06,
+        "e_osc": 0.0029036604756090168,
+        "e_tot": 0.0,
+        "max_dJ_tot": 4.0234482412415673e-13,
+        "max_dL": 4.0234482412415673e-13,
+        "max_dp": 2.682298827494378e-13
+      },
+      "triad_ecc_e020": {
+        "a_osc": 1.0183875196725365,
+        "a_tot": 1.0150106898414035,
+        "dE_osc": 0.027083285071751284,
+        "dE_tot": 0.023906614632831946,
+        "e_osc": 0.23944373545041192,
+        "e_tot": 0.23280282039784136,
+        "max_dJ_tot": 8.206768598029157e-13,
+        "max_dL": 8.206768598029157e-13,
+        "max_dp": 5.361266985914881e-13
+      },
+      "triad_ideal_5orb_dE": 0.028038194444444456
+    },
+    "R2": {
+      "oblate_L04_triad": {
+        "delta_L_norm": -0.036353788380234064,
+        "final_Sz": 0.0021504514919623205,
+        "i_end_deg": 44.3757012958161,
+        "max_dJperp": 3.021686260635419,
+        "max_dJz_tot": 2.76667577736589e-13,
+        "p_end": 1.0500185708571323
+      },
+      "oblate_L0_control": {
+        "delta_L_norm": -0.03223591217913935,
+        "final_Sz": 0.0,
+        "i_end_deg": 44.39679954443175,
+        "max_dJperp": 3.085947771140679,
+        "max_dJz_tot": 2.5002222514558525e-13,
+        "p_end": 1.0528335248135443
+      },
+      "real_earth_J2_scale_at_9304km": 0.0005087564826631919,
+      "rodrigues_fig1_image": [
+        1,
+        1,
+        1
+      ],
+      "rodrigues_true_axis": [
+        1,
+        1,
+        -1
+      ],
+      "spherical_J2_0": {
+        "delta_L_norm": -4.0101255649460654e-13,
+        "final_Sz": 0.0,
+        "i_end_deg": 45.0,
+        "max_dJperp": 2.8332891588433995e-13,
+        "max_dJz_tot": 2.8377300509419e-13,
+        "p_end": 0.9999999999997327
+      },
+      "subtracted_di_shape_deg": -0.021098248615651016,
+      "subtracted_dp_shape": -0.0028149539564119586
+    }
+  },
+  "schema_version": "1.0.0"
+}

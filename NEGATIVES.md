@@ -91,4 +91,4 @@ Independent first-principles catches from **Gemini 4 Neon** (`[G4N]` ADPIE Cycle
 
 *Round 1 reconciliation (2026-11-26): `[GB]` verdicts appended to `NEG-W1`–`W24` and new entries `NEG-W25`–`W30` logged (`GROKBOT_WP0xx_ROUND1.md`, `reconciliation/horizon_round1/`); `[G4N]` independently `[X]` re-checked `NEG-W25`–`W30`, retracted the `NEG-W6`/`W18` NTRS sub-items, and refined Theorem G4's consistent-$I_0$ floor (`GEMINI4_NEON_ROUND1_RESPONSE.md`, `code/g4n_r1_xcheck.py`).*
 
-
+*Horizon Synthesis Resolution (2026-11-26): All 30 Horizon audit items (`NEG-W1`–`NEG-W30`) are now resolved in place inside the three active maintained canonical monographs under [`papers/horizon_synthesis/`](papers/horizon_synthesis/README.md) — **Piece I** (`NEG-W1`–`W6`, `W15`–`W18`, `W25`–`W27`, `W29`), **Piece II** (`NEG-W7`–`W14`, `W29`), and **Piece III** (`NEG-W19`–`W24`, `W28`–`W30`) — backed by `18/18` passing open Python gates (`piece{1,2,3}_sim.py`), while the original frozen clean-room intakes (`papers/wp03*/cleanroom/`) remain preserved verbatim unmodified per Rule 5.*
