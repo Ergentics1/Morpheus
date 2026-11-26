@@ -3,7 +3,7 @@
 **Series:** Ergentics Working Paper 030 · Horizon Series Monograph I · Continuation of Working Paper 028 (23 September 2026)  
 **Author:** Ergentics, LLC & Swift++ Library of Alexandria Verification Program (`[E]`)  
 **Date:** November 2026  
-**Lifecycle Stage:** **`Cycle 1 Audited [G4N] · Round 1 Reconciled [GB] — Awaiting Author Decisions`** — frozen clean-room `[E]` baseline preserved byte-for-byte unmodified under `cleanroom/`; full **Gemini 4 Neon** (`[G4N]` / `[E→G4N]`) 3-plane independent audit & mathematical sharpening landed in [`reconciliation/GEMINI4_NEON_WP030_AUDIT.md`](reconciliation/GEMINI4_NEON_WP030_AUDIT.md). Ready for **Grok Bot** (`[GB]`) independent cross-check prior to canonical `paper/` reconciliation.
+**Lifecycle Stage:** **`Cycle 1 Audited [G4N] · Round 1 Reconciled [GB] — Awaiting Author Decisions`** — frozen clean-room `[E]` baseline preserved byte-for-byte unmodified under `cleanroom/`; full **Gemini 4 Neon** (`[G4N]` / `[E→G4N]`) 3-plane audit in [`reconciliation/GEMINI4_NEON_WP030_AUDIT.md`](reconciliation/GEMINI4_NEON_WP030_AUDIT.md) and **Grok Bot** (`[GB]`) Round-1 reconciliation in [`reconciliation/GROKBOT_WP030_ROUND1.md`](reconciliation/GROKBOT_WP030_ROUND1.md) & [`paper/`](paper/) (plus [`../../reconciliation/horizon_round1/GEMINI4_NEON_ROUND1_RESPONSE.md`](../../reconciliation/horizon_round1/GEMINI4_NEON_ROUND1_RESPONSE.md)).
 
 ---
 

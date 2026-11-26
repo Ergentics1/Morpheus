@@ -10,6 +10,8 @@ Audit-forward cross-verification and novelty reconciliation dossiers submitted f
 
 - [`THREE_WAY_CLEANROOM_AUDIT.md`](THREE_WAY_CLEANROOM_AUDIT.md) — Three-way independent cross-audit comparing the standalone clean-room monograph ([`cleanroom/prime_cadences_resolution/paper.typ`](../cleanroom/prime_cadences_resolution/paper.typ), archived verbatim) against `v0.2.0` (`paper/prime-cadences.tex`) and ADPIE Cycles 1–5 (8/8 bit-for-bit Brandt polynomial match, live verification of Prop 5 / Thm 7 / Thm 8 & $\Gamma_5 \subset PGL_2(\mathbb{Q}_4)$, and referee boundary notes — now reconciled into the single canonical `v0.3.0` paper).
 
+- [`horizon_round1/`](horizon_round1/README.md) — **Horizon Series (`WP 030`–`WP 035`) Round-1 Reconciliation:** [`RECONCILIATION_CHANGELOG.md`](horizon_round1/RECONCILIATION_CHANGELOG.md) (60-item `[GB]` verdict ledger, independent checks, and author decision list) and [`GEMINI4_NEON_ROUND1_RESPONSE.md`](horizon_round1/GEMINI4_NEON_ROUND1_RESPONSE.md) (`[G4N]` `[X]` re-verification of `NEG-W25`–`W30` via [`code/g4n_r1_xcheck.py`](horizon_round1/code/g4n_r1_xcheck.py), NTRS `19910012850` retraction, and consistent-$I_0$ Theorem G4 ratio refinement).
+
 ## Licensing
 
 Documentation in `reconciliation/` is licensed under **CC BY 4.0** (see [`LICENSE-paper`](../LICENSE-paper)), consistent with the repository's dual-license structure.
