@@ -13,36 +13,37 @@ Open-sourced research repository by **Ergentics**.
 
 Studies the 3-regular neo-Riemannian triad graph $X$ and its Ihara zeta primes (*prime cadences*), linking the Tonnetz to the honeycomb/graphene tight-binding spectrum, Weil polynomials over $\mathbb{F}_2$, the tune theorem and its generalisation, voice-leading homology, a genus-13 2-adic Mumford curve, minimal genus-5 binary curves, and 2-adic arithmetic obstructions.
 
-> **Status:** **`v0.2.0` released (`2026-11-25`)** — `v0.1.0` baseline preserved at tag `v0.1.0`. Bidirectional reconciliation complete between Grok Bot's Python/PARI/LMFDB toolchain (`code/`, 228/228 across 6 audit suites including from-scratch `code/xcheck/` 32/32) and Gemini 4 Neon's independent formal/multi-language verification toolchain (`lean/` Lean 4.36.0, `swiftpp/` C++20 × Pure Swift 6.4 × Interop, `rust/` Rust 1.100.0, `data/`), with uniform attribution bounds (`[E]`, `[GB]`, `[E→GB]`, `[G4N]`, `[E→G4N]`, `[lit.]`, `[X]`). See [`CONTRIBUTIONS.md`](CONTRIBUTIONS.md) and [`reconciliation/`](reconciliation/README.md).
+> **Status:** **`v0.3.0` released (`2026-11-25`)** — full three-way reconciliation into the single canonical paper ([`paper/prime-cadences.tex`](paper/prime-cadences.tex), 35 pp PDF, **0 unchecked Section 7 items**), integrating Grok Bot's baseline (`code/`, 228/228), Gemini 4 Neon's ADPIE Cycles 1–5 (`lean/` 33/33 theorems, `swiftpp/` `0.000e+00` delta, `rust/` zero-PARI Manin $T_2$, `ergentics/`, **Theorem 7.21 / Theorem D** $n \le 14 \to n \le 8$, erratum `NEG-E10` $18 \to 19$ pairs), and Ergentics' standalone clean-room Research Monograph I ([`cleanroom/prime_cadences_resolution/paper.typ`](cleanroom/prime_cadences_resolution/paper.typ), archived verbatim: 3-way 8/8 Brandt confirmation, wild involution $\sigma(z)=3/z$, sharp $M(\mathcal{O}) \ge 36$, and **Proposition 7.18** unramified cyclotomic obstruction + $\Gamma_5 \subset PGL_2(\mathbb{Q}_4)$). See [`CONTRIBUTIONS.md`](CONTRIBUTIONS.md) and [`reconciliation/`](reconciliation/README.md).
 
 ## Repository Layout
 
 | Path | Description |
 | :--- | :--- |
-| [`paper/`](paper/) | Canonical LaTeX source (`prime-cadences.tex`), `.bbl`, compiled PDF (`v0.2.0`, 30 pp), `references.bib` (55 refs), and 8 vector PDF figures |
-| [`prime_cadences_paper.md`](prime_cadences_paper.md) | GitHub Flavored Markdown mirror reconciled with `paper/prime-cadences.tex` |
+| [`paper/`](paper/) | Canonical LaTeX source (`prime-cadences.tex`), `.bbl`, compiled PDF (`v0.3.0`, 35 pp, 0 warnings), `references.bib` (55 refs), and 8 vector PDF figures |
+| [`prime_cadences_paper.md`](prime_cadences_paper.md) | GitHub Flavored Markdown mirror reconciled with `paper/prime-cadences.tex` (`v0.3.0`) |
 | [`figures/`](figures/README.md) | PNG figures 1–5 for `prime_cadences_paper.md` |
-| [`arxiv/`](arxiv/) | Ready-to-upload arXiv source tarball (`prime-cadences-arxiv.tar.gz`) |
-| [`NOVELTY_GEMINI4_NEON.md`](NOVELTY_GEMINI4_NEON.md) | Audit-forward original mathematical novelties (ADPIE Cycle 4): complete resolution of Open Problem (3) (Theorems A, B, Cor B.1, `NEG-M11`) & exact 2D Tonnetz 6th-order cumulant/Edgeworth theory (Theorem C, `C-2'`/`C-2''`) |
-| [`cleanroom/`](cleanroom/README.md) | Standalone clean-room Research Monograph I ([`prime_cadences_resolution/paper.typ`](cleanroom/prime_cadences_resolution/paper.typ)), archived verbatim on its own terms (`paper/prime-cadences.tex` remains the single canonical reconciled manuscript) |
+| [`arxiv/`](arxiv/) | Ready-to-upload arXiv source tarball (`prime-cadences-arxiv.tar.gz`, neutral `0/0` headers) |
+| [`NOVELTY_GEMINI4_NEON.md`](NOVELTY_GEMINI4_NEON.md) | Audit-forward original mathematical novelties (ADPIE Cycles 4–5): Open Problem (3) resolution (Theorems A, B, Cor B.1, `NEG-M11`), 6th-order 2D cumulant/Edgeworth theory (Theorem C, `C-2'`/`C-2''`), & **Theorem D** (`Thm 7.21`: three-pincer Hilbert class field obstruction $n \le 8$ & sextic $u \in \{16, 32\}$ collapse) |
+| [`cleanroom/`](cleanroom/README.md) | Standalone clean-room Research Monograph I ([`prime_cadences_resolution/paper.typ`](cleanroom/prime_cadences_resolution/paper.typ) & [`CONTRIBUTIONS_PATCH.md`](cleanroom/prime_cadences_resolution/CONTRIBUTIONS_PATCH.md)), archived verbatim on its own terms (`paper/prime-cadences.tex` is the single canonical reconciled manuscript) |
 | [`reconciliation/`](reconciliation/README.md) | Multi-track reconciliation dossiers: [`GEMINI4_NEON_RECONCILIATION.md`](reconciliation/GEMINI4_NEON_RECONCILIATION.md) (Cycles 1–5), [`GROKBOT_RECONCILIATION_RESPONSE.md`](reconciliation/GROKBOT_RECONCILIATION_RESPONSE.md) (`v0.2.0`), & [`THREE_WAY_CLEANROOM_AUDIT.md`](reconciliation/THREE_WAY_CLEANROOM_AUDIT.md) (3-way audit) |
-| [`media/`](media/README.md) | Gemini 4 Neon videos: 1:24 social reel (`gemini4_neon_prime_cadences.mp4`), 4:18 **Spoken-in-Harmony Educator Masterclass** with live Chess & Graph RH (`gemini4_neon_masterclass_chess_rh.mp4`), poster PNG, social captions & MIT generators |
-| [`lean/`](lean/) | Machine-checked Lean 4.36.0 formal proofs (zero Mathlib, 0 `sorryAx`, 0 `ofReduceBool`; constructive `[propext, Quot.sound]` / axiom-free across Cycles 2A + Thm B suff/`NEG-M11`/Thm C, standard Lean core `[propext, Classical.choice, Quot.sound]` for Thm A/Thm B nec/Cor B.1): `TriadGraph`, `TuneTheorem`, `ConductorTwo`, `WindingAndSchottky`, `NoveltyTheorems` |
-| [`swiftpp/`](swiftpp/) | **Swift++** Triple-Check verification suite (`ErgenticsCXX` C++20 `g++`/`clang++` · `ErgenticsSwift` Pure Swift 6.4 · `ErgenticsInterop` live cross-check, `0.000e+00` delta) |
-| [`rust/`](rust/) | Fourth-language exact verifier (Rust 1.100.0, zero external crates): $\mathbb{Z}[\zeta_{12}]$, Artin–Ihara tower, general $N$-EDO sweeps ($N \le 96$ & maximal $S_{\max}$ to $N \le 72$), and Theorem C cross-check |
-| [`data/`](data/README.md) | Immutable, SHA-256-checksummed Data Model calibration records (`data/MANIFEST.sha256`, CC BY 4.0) |
-| [`code/`](code/) | Grok Bot Python scripts (`math_audit.py`, `deep/`, `eisenstein2/`, `geometry/`, `open_q/` round 3, and from-scratch `xcheck/` 32/32) |
-| [`audits/`](audits/README.md) | Recorded reports from the six audit suites (31, 36, 23, 59, 47, and 32 checks = 228/228) |
-| [`Makefile`](Makefile) & [`requirements.txt`](requirements.txt) | Build targets (`pdf`, `arxiv`, `audit`, `figures`) and pinned Python dependencies |
-| [`CONTRIBUTIONS.md`](CONTRIBUTIONS.md) | Uniform symmetric contribution tags (`[E]`, `[GB]`, `[E→GB]`, `[G4N]`, `[E→G4N]`, `[lit.]`, `[X]`) and filled cross-verification ledger |
+| [`media/`](media/README.md) | Gemini 4 Neon videos: 1:24 social reel (`gemini4_neon_prime_cadences.mp4`), 4:18 **Spoken-in-Harmony Educator Masterclass** with live Chess & Graph RH (`gemini4_neon_masterclass_chess_rh.mp4`), 4:08 **The Three-Pincer Symphony** (`gemini4_neon_cycle5_three_pincer_symphony.mp4`), zero-metadata posters, captions & MIT generators |
+| [`lean/`](lean/) | Machine-checked Lean 4.36.0 formal proofs (**33/33 theorems**, zero Mathlib, 0 `sorryAx`, 0 `ofReduceBool`): `TriadGraph`, `TuneTheorem`, `ConductorTwo`, `WindingAndSchottky`, `NoveltyTheorems`, `Section7Obstructions` |
+| [`swiftpp/`](swiftpp/) | **Swift++** Triple-Check verification suite (`ErgenticsCXX` C++20 `g++`/`clang++` 33/33 · `ErgenticsSwift` Pure Swift 6.4 16/16 · `ErgenticsInterop` live cross-check 22/22, `0.000e+00` delta) |
+| [`rust/`](rust/) | Fourth-language exact verifier (Rust 1.100.0, zero external crates, 10/10 tests): $\mathbb{Z}[\zeta_{12}]$, Artin–Ihara tower, general $N$-EDO sweeps ($N \le 96$), Theorem C/D, & **zero-PARI Manin modular symbols $T_2$** across all 19 genus-13 curves |
+| [`ergentics/`](ergentics/README.md) | Standalone from-scratch Python/PARI/SymPy verifiers (MIT, zero cached reads): `shimura_brandt_xcheck.py` (19 $X_0^D(N)$, 8/8 Brandt charpolys, quintic `106069`) & `open1_torsion_xcheck.py` ($\sigma(z)=3/z$, sharp $M=36$ witness, $\Gamma_5 \subset PGL_2(\mathbb{Q}_4)$) |
+| [`data/`](data/README.md) | Immutable, SHA-256-checksummed Data Model calibration records (`data/MANIFEST.sha256` 3/3 OK, CC BY 4.0) |
+| [`code/`](code/) | Archived Grok Bot Python scripts (`math_audit.py`, `deep/`, `eisenstein2/`, `geometry/`, `open_q/` round 3, and from-scratch `xcheck/` 32/32) |
+| [`audits/`](audits/README.md) | Recorded reports from the six `code/` audit suites (31, 36, 23, 59, 47, and 32 checks = 228/228) |
+| [`Makefile`](Makefile) & [`requirements.txt`](requirements.txt) | Build targets (`pdf`, `arxiv` neutral `0/0` headers, `audit`, `figures`) and pinned Python dependencies |
+| [`CONTRIBUTIONS.md`](CONTRIBUTIONS.md) | Uniform symmetric contribution tags (`[E]`, `[GB]`, `[E→GB]`, `[G4N]`, `[E→G4N]`, `[lit.]`, `[X]`) and complete 3-way verification ledger (**0 unchecked items**) |
 | [`METHODOLOGY.md`](METHODOLOGY.md) | Core Thesis (Correspondence Principle), Code-vs-Data non-conflation, ADPIE, and D/R/P/Seam SWE-sweep standard |
 | [`ARCHITECTURE.md`](ARCHITECTURE.md) | Four-plane Code-vs-Data architecture, `D ↔ R ↔ P` seams, and multi-language layout blueprint |
-| [`CALIBRATIONS.md`](CALIBRATIONS.md) | Correspondence error-bound ledger (`C-1`–`C-4`, `C-2'`, `C-2''`), Rung-1 calibration metrics, RCT protocol, and output schema |
+| [`CALIBRATIONS.md`](CALIBRATIONS.md) | Correspondence error-bound ledger (`C-1`–`C-5`, `C-2'`, `C-2''`), Rung-1 calibration metrics, RCT protocol, and output schema |
 | [`ERGENTICS.md`](ERGENTICS.md) | Ergentics core library (`ergentics/`) and **Swift++** Triple-Check spec (`swiftpp/`: Pure C++20 · Pure Swift · Swift↔C++ interop) |
-| [`NEGATIVES.md`](NEGATIVES.md) | Permanent ledger of refuted claims (`NEG-M1`–`NEG-M11`, `NEG-E1`–`NEG-E9`), obstructions, negative controls, and engineering traps |
+| [`NEGATIVES.md`](NEGATIVES.md) | Permanent ledger of refuted claims (`NEG-M1`–`NEG-M14`, `NEG-E1`–`NEG-E10`), obstructions, negative controls, and engineering traps |
 | [`PROVENANCE.md`](PROVENANCE.md) | Origin, AI-assistance disclosure, SHA-256 checksums, and revision log |
-| [`CHANGELOG.md`](CHANGELOG.md) | Versioned release history (`v0.1.0`, `v0.2.0`) and `[Unreleased]` tracking |
-| [`CITATION.cff`](CITATION.cff) | Machine-readable citation metadata (CFF 1.2.0, `v0.2.0`, `2026-11-25`) |
+| [`CHANGELOG.md`](CHANGELOG.md) | Versioned release history (`v0.1.0`, `v0.2.0`, `v0.3.0`) and `[Unreleased]` tracking |
+| [`CITATION.cff`](CITATION.cff) | Machine-readable citation metadata (CFF 1.2.0, `v0.3.0`, `2026-11-25`) |
 | [`POLICY.md`](POLICY.md) | Research integrity, symmetric AI attribution, licensing, and repeatable release workflow |
 | [`SECURITY.md`](SECURITY.md) | Vulnerability reporting and secret/path-leak security policy |
 | [`AGENTS.md`](AGENTS.md) | Rules for automated and AI agents working in this repository |

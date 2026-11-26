@@ -3,7 +3,7 @@ message: "If you use or reference this paper, please cite it using the preferred
 title: "Prime cadences: Ihara zeta, graphene, and voice-leading homology on the Tonnetz"
 authors:
   - name: "Ergentics"
-version: "0.2.0"
+version: "0.3.0"
 date-released: "2026-11-25"
 license: "CC-BY-4.0"
 keywords:
@@ -34,11 +34,17 @@ abstract: >-
   Schottky group whose Mumford curve C has genus 13, reduction graph X and
   automorphism group the transposition/inversion group. We compute its
   component group and gonality, find its order-12 factor in an explicit genus-5
-  curve over F_2 (genus 5 is minimal), and show via a trace invariant and a
-  2-adic edge-length argument that C admits no Cerednik-Drinfeld uniformisation
-  except possibly by a group with torsion at a ramified or inert place above 2.
-  No Shimura curve with torsion-free uniformisation has reduction graph X over
-  a totally real field of degree at most 5, or of degree at least 15.
+  curve over F_2 (genus 5 is minimal), and show via a trace invariant and
+  2-adic edge-length obstructions that C admits no Cerednik-Drinfeld
+  uniformisation except possibly by a group with torsion at a ramified place
+  (e_v=2, f_v=1 forces Eichler mass >= 36) or an inert place (where
+  inversion-free uniformisation at even f_v >= 2 forces Q(zeta_{2^{f_v}+1})^+
+  subset E, sharp via an explicit non-arithmetic group Gamma_5 subset
+  PGL_2(Q_4) with edge inversions). No Shimura curve with torsion-free
+  uniformisation has reduction graph X over a totally real field of degree at
+  most 5, or of degree at least 9 (sharpened unconditionally from n <= 14 to
+  n <= 8 via a three-pincer Hilbert class field obstruction, which also
+  eliminates sextic narrow-class ratios u in {16, 32}).
 preferred-citation:
   type: article
   title: "Prime cadences: Ihara zeta, graphene, and voice-leading homology on the Tonnetz"
