@@ -10,6 +10,7 @@ Open-sourced research repository by **Ergentics** (*Open Sourced Living*), struc
 | **02** | **[Working Paper 030 (Horizon Monograph I)](papers/wp030_shape_propulsion/README.md)** — *Shape-Controlled Gravitational Propulsion Resolved* | [`papers/wp030_shape_propulsion/`](papers/wp030_shape_propulsion/) | **`Cycle 1 Audited [G4N]`** — frozen clean-room `[E]` archive + 3-plane `[G4N]` audit (`Python 9/9`, `Lean 4 15/15`, `Rust 7/7`, 8 catches + Theorem G1); awaiting `[GB]` pass |
 | **03** | **[Working Paper 032 (Horizon Monograph IC)](papers/wp032_bennu_3body/README.md)** — *Bennu Triaxial Proximity, 3D FEM/FDIR & Extended-Body 3-Body Problem* | [`papers/wp032_bennu_3body/`](papers/wp032_bennu_3body/) | **`Cycle 1 Audited [G4N]`** — frozen clean-room `[E]` archive + 3-plane `[G4N]` audit (`Python 6/6`, `Lean 4 9/9`, `Rust 5/5`, 4 catches + Theorem G2); awaiting `[GB]` pass |
 | **04** | **[Working Paper 033 (Horizon Monograph ID)](papers/wp033_halo_tag_guidance/README.md)** — *3D CRTBP Halo/Lissajous Manifolds, Floquet Control & Bennu TAG Guidance* | [`papers/wp033_halo_tag_guidance/`](papers/wp033_halo_tag_guidance/) | **`Cycle 1 Audited [G4N]`** — frozen clean-room `[E]` archive + 3-plane `[G4N]` audit (`Python 4/4`, `Lean 4 7/7`, `Rust 4/4`, 4 catches + Theorem G3); awaiting `[GB]` pass |
+| **05** | **[Working Paper 031 (Horizon Monograph IB)](papers/wp031_3d_j2_hil/README.md)** — *3D Non-Planar $J_2$ Breaking, Collinear-Bridge $\mathrm{SO}(3)$, Safe-Perigee `K9` & HIL Sizing* | [`papers/wp031_3d_j2_hil/`](papers/wp031_3d_j2_hil/) | **`Cycle 1 Audited [G4N]`** — frozen clean-room `[E]` archive + 3-plane `[G4N]` audit (`Python 5/5`, `Lean 4 9/9`, `Rust 5/5`, 4 catches + Theorem G4); awaiting `[GB]` pass |
 
 ## Paper #01: *Prime Cadences*
 
@@ -28,7 +29,7 @@ Studies the 3-regular neo-Riemannian triad graph $X$ and its Ihara zeta primes (
 
 | Path | Description |
 | :--- | :--- |
-| [`papers/`](papers/README.md) | Multi-paper research registry and self-contained per-paper workspaces ([`wp030_shape_propulsion/`](papers/wp030_shape_propulsion/), [`wp032_bennu_3body/`](papers/wp032_bennu_3body/), [`wp033_halo_tag_guidance/`](papers/wp033_halo_tag_guidance/)) |
+| [`papers/`](papers/README.md) | Multi-paper research registry and self-contained per-paper workspaces ([`wp030_shape_propulsion/`](papers/wp030_shape_propulsion/), [`wp031_3d_j2_hil/`](papers/wp031_3d_j2_hil/), [`wp032_bennu_3body/`](papers/wp032_bennu_3body/), [`wp033_halo_tag_guidance/`](papers/wp033_halo_tag_guidance/)) |
 | [`paper/`](paper/) | Paper #01 (*Prime Cadences*) canonical LaTeX source (`prime-cadences.tex`), `.bbl`, compiled PDF (`v0.3.1`, 35 pp, 0 LaTeX warnings), `references.bib` (56 refs), and 8 vector PDF figures |
 | [`prime_cadences_paper.md`](prime_cadences_paper.md) | GitHub Flavored Markdown mirror reconciled 1-to-1 with `paper/prime-cadences.tex` (`v0.3.1`, 56 refs) |
 | [`figures/`](figures/README.md) | PNG figures 1–5 for `prime_cadences_paper.md` |
@@ -50,7 +51,7 @@ Studies the 3-regular neo-Riemannian triad graph $X$ and its Ihara zeta primes (
 | [`ARCHITECTURE.md`](ARCHITECTURE.md) | Four-plane Code-vs-Data architecture, `D ↔ R ↔ P` seams, and multi-language layout blueprint |
 | [`CALIBRATIONS.md`](CALIBRATIONS.md) | Correspondence error-bound ledger (`C-1`–`C-5`, `C-2'`, `C-2''`), Rung-1 calibration metrics, RCT protocol, and output schema |
 | [`ERGENTICS.md`](ERGENTICS.md) | Ergentics core library (`ergentics/`) and **Swift++** Triple-Check spec (`swiftpp/`: Pure C++20 · Pure Swift · Swift↔C++ interop) |
-| [`NEGATIVES.md`](NEGATIVES.md) | Permanent ledger of refuted claims (`NEG-M1`–`NEG-M14`, `NEG-E1`–`NEG-E11`, `NEG-W1`–`NEG-W14`), obstructions, negative controls, and engineering traps |
+| [`NEGATIVES.md`](NEGATIVES.md) | Permanent ledger of refuted claims (`NEG-M1`–`NEG-M14`, `NEG-E1`–`NEG-E11`, `NEG-W1`–`NEG-W18`), obstructions, negative controls, and engineering traps |
 | [`PROVENANCE.md`](PROVENANCE.md) | Origin, AI-assistance disclosure, SHA-256 checksums, and revision log |
 | [`CHANGELOG.md`](CHANGELOG.md) | Versioned release history (`v0.1.0`, `v0.2.0`, `v0.3.0`, `v0.3.1`) and `[Unreleased]` tracking |
 | [`CITATION.cff`](CITATION.cff) | Machine-readable citation metadata (CFF 1.2.0, `v0.3.1`, `2026-11-25`) |

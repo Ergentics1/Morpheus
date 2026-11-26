@@ -1,0 +1,8 @@
+[package]
+name = "wp031-rust"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+description = "Zero-crate independent Rust cross-verifier for Working Paper 031 (Horizon IB)"
+
+[dependencies]
