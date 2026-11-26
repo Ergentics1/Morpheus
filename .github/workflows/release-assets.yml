@@ -62,7 +62,7 @@ jobs:
           echo "tag=$TAG" >> "$GITHUB_OUTPUT"
           echo "mode=$MODE" >> "$GITHUB_OUTPUT"
           echo "checkout_ref=$CHECKOUT_REF" >> "$GITHUB_OUTPUT"
-          echo "title=${INPUT_TITLE:-Prime Cadences $TAG}" >> "$GITHUB_OUTPUT"
+          echo "title=${INPUT_TITLE:-Morpheus $TAG}" >> "$GITHUB_OUTPUT"
 
       - name: Checkout exact release ref
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -79,36 +79,65 @@ jobs:
         run: |
           set -euo pipefail
 
-          test -f paper/prime-cadences.pdf
-          test -f arxiv/prime-cadences-arxiv.tar.gz
+          PDFS=(
+            "paper/prime-cadences.pdf"
+            "papers/horizon_synthesis/piece1_propulsion_hardware/paper/piece1_propulsion_hardware.pdf"
+            "papers/horizon_synthesis/piece2_smallbody_crtbp/paper/piece2_smallbody_crtbp.pdf"
+            "papers/horizon_synthesis/piece3_nullcone_tuft_hagedorn/paper/piece3_nullcone_tuft_hagedorn.pdf"
+          )
+          TARS=(
+            "arxiv/prime-cadences-arxiv.tar.gz"
+            "papers/horizon_synthesis/piece1_propulsion_hardware/arxiv/piece1-propulsion-hardware-arxiv.tar.gz"
+            "papers/horizon_synthesis/piece2_smallbody_crtbp/arxiv/piece2-smallbody-crtbp-arxiv.tar.gz"
+            "papers/horizon_synthesis/piece3_nullcone_tuft_hagedorn/arxiv/piece3-nullcone-tuft-hagedorn-arxiv.tar.gz"
+          )
+
+          for f in "${PDFS[@]}" "${TARS[@]}"; do
+            test -f "$f"
+          done
 
           python3 - <<'PY'
           import pathlib, re, sys, tarfile
 
-          pdf = pathlib.Path("paper/prime-cadences.pdf").read_bytes()
+          pdfs = [
+              "paper/prime-cadences.pdf",
+              "papers/horizon_synthesis/piece1_propulsion_hardware/paper/piece1_propulsion_hardware.pdf",
+              "papers/horizon_synthesis/piece2_smallbody_crtbp/paper/piece2_smallbody_crtbp.pdf",
+              "papers/horizon_synthesis/piece3_nullcone_tuft_hagedorn/paper/piece3_nullcone_tuft_hagedorn.pdf",
+          ]
+          tars = [
+              "arxiv/prime-cadences-arxiv.tar.gz",
+              "papers/horizon_synthesis/piece1_propulsion_hardware/arxiv/piece1-propulsion-hardware-arxiv.tar.gz",
+              "papers/horizon_synthesis/piece2_smallbody_crtbp/arxiv/piece2-smallbody-crtbp-arxiv.tar.gz",
+              "papers/horizon_synthesis/piece3_nullcone_tuft_hagedorn/arxiv/piece3-nullcone-tuft-hagedorn-arxiv.tar.gz",
+          ]
+
           rx = re.compile(rb"(/home/[A-Za-z0-9._-]+/|/Users/[A-Za-z0-9._-]+/|[A-Za-z]:\\Users\\[A-Za-z0-9._-]+\\|" + b"file:" + b"///)")
-          if rx.search(pdf):
-              print("::error::Local path metadata match in paper/prime-cadences.pdf", file=sys.stderr)
-              sys.exit(1)
+          for rel in pdfs:
+              if rx.search(pathlib.Path(rel).read_bytes()):
+                  print(f"::error::Local path metadata match in {rel}", file=sys.stderr)
+                  sys.exit(1)
 
-          with tarfile.open("arxiv/prime-cadences-arxiv.tar.gz", "r:gz") as tf:
-              for m in tf.getmembers():
-                  if m.uid != 0 or m.gid != 0 or m.uname != "" or m.gname != "":
-                      print(f"::error::Non-neutral tar header in arxiv bundle: {m.name} ({m.uid}/{m.gid} {m.uname}/{m.gname})", file=sys.stderr)
-                      sys.exit(1)
+          for rel in tars:
+              with tarfile.open(rel, "r:gz") as tf:
+                  for m in tf.getmembers():
+                      if m.uid != 0 or m.gid != 0 or m.uname != "" or m.gname != "":
+                          print(f"::error::Non-neutral tar header in {rel}: {m.name} ({m.uid}/{m.gid} {m.uname}/{m.gname})", file=sys.stderr)
+                          sys.exit(1)
 
-          print("PDF and neutral-tar hygiene checks passed.")
+          print(f"PDF ({len(pdfs)}) and neutral-tar ({len(tars)}) hygiene checks passed.")
           PY
 
           mkdir -p release-assets
-          cp paper/prime-cadences.pdf release-assets/prime-cadences.pdf
-          cp arxiv/prime-cadences-arxiv.tar.gz release-assets/prime-cadences-arxiv.tar.gz
-          (cd release-assets && sha256sum prime-cadences.pdf prime-cadences-arxiv.tar.gz > SHA256SUMS.txt && sha256sum -c SHA256SUMS.txt)
+          for f in "${PDFS[@]}" "${TARS[@]}"; do
+            cp "$f" "release-assets/$(basename "$f")"
+          done
+          (cd release-assets && sha256sum *.pdf *.tar.gz > SHA256SUMS.txt && sha256sum -c SHA256SUMS.txt)
 
           if [[ "$MODE" == "draft" ]]; then
             gh release upload "$TAG" -R "$GITHUB_REPOSITORY" \
-              release-assets/prime-cadences.pdf \
-              release-assets/prime-cadences-arxiv.tar.gz \
+              release-assets/*.pdf \
+              release-assets/*.tar.gz \
               release-assets/SHA256SUMS.txt \
               --clobber
             gh release edit "$TAG" -R "$GITHUB_REPOSITORY" --draft=false
@@ -120,14 +149,14 @@ jobs:
           ver = tag.lstrip("v")
           changelog = pathlib.Path("CHANGELOG.md").read_text(encoding="utf-8")
           m = re.search(rf"^## \[{re.escape(ver)}\][^\n]*\n(.*?)(?=^## \[|\Z)", changelog, re.M | re.S)
-          body = m.group(1).strip() if m else f"Release {tag} of Prime Cadences."
+          body = m.group(1).strip() if m else f"Release {tag} of Morpheus."
           sums = pathlib.Path("release-assets/SHA256SUMS.txt").read_text(encoding="utf-8").strip()
           notes = f"{body}\n\n### Attached Release Assets (`SHA256SUMS.txt`)\n```text\n{sums}\n```\n"
           pathlib.Path("release-assets/RELEASE_NOTES.md").write_text(notes, encoding="utf-8")
           PY
             gh release create "$TAG" -R "$GITHUB_REPOSITORY" \
-              release-assets/prime-cadences.pdf \
-              release-assets/prime-cadences-arxiv.tar.gz \
+              release-assets/*.pdf \
+              release-assets/*.tar.gz \
               release-assets/SHA256SUMS.txt \
               --verify-tag \
               --title "$TITLE" \

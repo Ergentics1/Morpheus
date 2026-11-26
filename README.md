@@ -56,7 +56,7 @@ Studies the 3-regular neo-Riemannian triad graph $X$ and its Ihara zeta primes (
 | [`ERGENTICS.md`](ERGENTICS.md) | Ergentics core library (`ergentics/`) and **Swift++** Triple-Check spec (`swiftpp/`: Pure C++20 · Pure Swift · Swift↔C++ interop) |
 | [`NEGATIVES.md`](NEGATIVES.md) | Permanent ledger of refuted claims (`NEG-M1`–`NEG-M14`, `NEG-E1`–`NEG-E11`, `NEG-W1`–`NEG-W30`), obstructions, negative controls, and engineering traps |
 | [`PROVENANCE.md`](PROVENANCE.md) | Origin, AI-assistance disclosure, SHA-256 checksums, and revision log |
-| [`CHANGELOG.md`](CHANGELOG.md) | Versioned release history (`v0.1.0`, `v0.2.0`, `v0.3.0`, `v0.3.1`) and `[Unreleased]` tracking |
+| [`CHANGELOG.md`](CHANGELOG.md) | Versioned release history (`v0.1.0`, `v0.2.0`, `v0.3.0`, `v0.3.1`, `v0.4.0`) and `[Unreleased]` tracking |
 | [`CITATION.cff`](CITATION.cff) | Machine-readable citation metadata (CFF 1.2.0, `v0.3.1`, `2026-11-25`) |
 | [`POLICY.md`](POLICY.md) | Research integrity, symmetric AI attribution, licensing, and automated immutable release workflow |
 | [`SECURITY.md`](SECURITY.md) | Vulnerability reporting and secret/path-leak security policy |
