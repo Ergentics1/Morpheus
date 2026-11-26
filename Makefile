@@ -15,7 +15,7 @@ paper/$(PAPER).pdf: paper/$(PAPER).tex paper/references.bib $(wildcard paper/fig
 # arXiv bundle: source, pre-built .bbl, figures (arXiv does not run BibTeX on .bib alone).
 arxiv: pdf
 	mkdir -p arxiv
-	tar -czf arxiv/$(PAPER)-arxiv.tar.gz -C paper $(PAPER).tex $(PAPER).bbl references.bib figures
+	tar --owner=0 --group=0 --numeric-owner -czf arxiv/$(PAPER)-arxiv.tar.gz -C paper $(PAPER).tex $(PAPER).bbl references.bib figures
 	@echo "wrote arxiv/$(PAPER)-arxiv.tar.gz"
 
 # Independent audits (each prints PASS/FAIL lines and a total).

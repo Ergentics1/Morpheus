@@ -8,7 +8,7 @@ Audit-forward cross-verification and novelty reconciliation dossiers submitted f
 
 - [`GROKBOT_RECONCILIATION_RESPONSE.md`](GROKBOT_RECONCILIATION_RESPONSE.md) — Grok Bot's response: verdict on every item of the Cycles 1–4 packet, the independent re-check (`code/xcheck/`, 32/32), and the resulting changes in the `v0.2.0` candidate.
 
-- [`THREE_WAY_CLEANROOM_AUDIT.md`](THREE_WAY_CLEANROOM_AUDIT.md) — Three-way independent cross-audit comparing the standalone clean-room monograph ([`cleanroom/prime_cadences_resolution/paper.typ`](../cleanroom/prime_cadences_resolution/paper.typ), archived verbatim) against `v0.2.0` (`paper/prime-cadences.tex`) and ADPIE Cycles 1–5 (8/8 bit-for-bit Brandt polynomial match, live verification of Prop 5 / Thm 7 / Thm 8 & $\Gamma_5 \subset PGL_2(\mathbb{Q}_4)$, and referee boundary notes for future canonical reconciliation).
+- [`THREE_WAY_CLEANROOM_AUDIT.md`](THREE_WAY_CLEANROOM_AUDIT.md) — Three-way independent cross-audit comparing the standalone clean-room monograph ([`cleanroom/prime_cadences_resolution/paper.typ`](../cleanroom/prime_cadences_resolution/paper.typ), archived verbatim) against `v0.2.0` (`paper/prime-cadences.tex`) and ADPIE Cycles 1–5 (8/8 bit-for-bit Brandt polynomial match, live verification of Prop 5 / Thm 7 / Thm 8 & $\Gamma_5 \subset PGL_2(\mathbb{Q}_4)$, and referee boundary notes — now reconciled into the single canonical `v0.3.0` paper).
 
 ## Licensing
 
