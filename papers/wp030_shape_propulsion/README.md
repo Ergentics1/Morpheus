@@ -3,7 +3,7 @@
 **Series:** Ergentics Working Paper 030 · Horizon Series Monograph I · Continuation of Working Paper 028 (23 September 2026)  
 **Author:** Ergentics, LLC & Swift++ Library of Alexandria Verification Program (`[E]`)  
 **Date:** November 2026  
-**Lifecycle Stage:** **`Cycle 1 Audited [G4N] — Awaiting [GB] Independent Pass`** — frozen clean-room `[E]` baseline preserved byte-for-byte unmodified under `cleanroom/`; full **Gemini 4 Neon** (`[G4N]` / `[E→G4N]`) 3-plane independent audit & mathematical sharpening landed in [`reconciliation/GEMINI4_NEON_WP030_AUDIT.md`](reconciliation/GEMINI4_NEON_WP030_AUDIT.md). Ready for **Grok Bot** (`[GB]`) independent cross-check prior to canonical `paper/` reconciliation.
+**Lifecycle Stage:** **`Cycle 1 Audited [G4N] · Round 1 Reconciled [GB] — Awaiting Author Decisions`** — frozen clean-room `[E]` baseline preserved byte-for-byte unmodified under `cleanroom/`; full **Gemini 4 Neon** (`[G4N]` / `[E→G4N]`) 3-plane independent audit & mathematical sharpening landed in [`reconciliation/GEMINI4_NEON_WP030_AUDIT.md`](reconciliation/GEMINI4_NEON_WP030_AUDIT.md). Ready for **Grok Bot** (`[GB]`) independent cross-check prior to canonical `paper/` reconciliation.
 
 ---
 
@@ -47,3 +47,14 @@ All verifiers compute directly from first principles with zero cached data reads
   6. **Moderate (`NEG-W6`):** Regime C `7.84e6×` is $(L/R)^2$ (not $L^2/R^4$), Bennu tension is `3.13e-5 N` (not `< 10^-6 N`), and 1 AU SRP exceeds raw Bennu $|\Delta a_\parallel|$.
   7. **Minor (`NEG-W6`):** `C138 <= 1e-6` requires zero-octupole symmetry (`1.29e-5` over general $\chi$); `F35` loss at $e^* = 0.0275$ is `84.8%` (`0.8479`), not `84.6%`; Ref `[1]` NTRS ID should be `19910012826` (CP-10059) / `19910029285` (Landis tether paper).
   8. **Diagnostic note:** Specify $\mu_{\mathrm{tot}} = G(M_p + M)$ in Theorem 1 and osculating vs. total energy convention for §3.1 `a_f / e_f`.
+
+---
+
+## Grok Bot (`[GB]`) Round-1 Reconciliation (2026-11-26)
+
+- **Reconciled edition:** [`paper/paper.typ`](paper/paper.typ) → [`paper/paper.pdf`](paper/paper.pdf). Every `[E]` line of `cleanroom/paper.typ` is kept verbatim and in order; `[GB]` verdicts are inserted as boxed notes, with a ledger before the references. Corrections are proposed, not applied.
+- **Dossier:** [`reconciliation/GROKBOT_WP030_ROUND1.md`](reconciliation/GROKBOT_WP030_ROUND1.md) — per-item verdicts, evidence and reproduction commands.
+- **Verdicts:** CONFIRMED 8 · CONFIRMED-IN-SUBSTANCE 1 · DISPUTED 1 · UNVERIFIABLE 3 · SPEC-NEEDED 1 · NEW 3.
+- **Independent checks:** [`../../reconciliation/horizon_round1/`](../../reconciliation/horizon_round1/) (written from scratch; `[G4N]` code and data not read). `[G4N]`'s three planes were re-run and pass, including Lean 4.36.0 with 0 `sorry`.
+- Claims resting on the internal Swift++ corpus are unchanged and marked **UNVERIFIABLE**.
+

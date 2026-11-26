@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="300" viewBox="0 0 760 300">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="380.0" y="20" text-anchor="middle" font-family="DejaVu Sans,Helvetica,sans-serif" font-size="12.5" font-weight="bold" fill="#0f172a">H4 Resolution: Iso-Inertial Hopf 3-Mass Triad vs. 2-Mass Landis Tether (Zero Reaction Wheels)</text>
+<text x="192.0" y="38" text-anchor="middle" font-family="DejaVu Sans,Helvetica,sans-serif" font-size="9.6" font-weight="bold" fill="#1e293b">(a) Constant-Inertia Morphing (I_zz = 2/3 M L^2 = const)</text>
+<rect x="24" y="46" width="336" height="206" rx="5" fill="#f8fafc" stroke="#cbd5e1" stroke-width="0.9"/>
+<line x1="38" y1="146" x2="126" y2="146" stroke="#cbd5e1" stroke-width="0.7" stroke-dasharray="2,2"/>
+<line x1="82" y1="102" x2="82" y2="190" stroke="#cbd5e1" stroke-width="0.7" stroke-dasharray="2,2"/>
+<circle cx="82" cy="146" r="36.0" fill="none" stroke="#94a3b8" stroke-width="0.7" stroke-dasharray="3,2"/>
+<line x1="118.0" y1="146.0" x2="46.0" y2="146.0" stroke="#0284c7" stroke-width="1.6" opacity="0.75"/>
+<line x1="46.0" y1="146.0" x2="82.0" y2="146.0" stroke="#0284c7" stroke-width="1.6" opacity="0.75"/>
+<line x1="82.0" y1="146.0" x2="118.0" y2="146.0" stroke="#0284c7" stroke-width="1.6" opacity="0.75"/>
+<circle cx="118.0" cy="146.0" r="5.2" fill="#1d4ed8" stroke="#ffffff" stroke-width="1.1"/>
+<circle cx="46.0" cy="146.0" r="5.2" fill="#059669" stroke="#ffffff" stroke-width="1.1"/>
+<circle cx="82.0" cy="146.0" r="5.2" fill="#dc2626" stroke="#ffffff" stroke-width="1.1"/>
+<text x="82" y="68" text-anchor="middle" font-family="DejaVu Sans,Helvetica,sans-serif" font-size="8.2" font-weight="bold" fill="#0f172a">a = 0 (Radial)</text>
+<text x="82" y="222" text-anchor="middle" font-family="DejaVu Sans Mono,monospace" font-size="7.8" fill="#1e40af">da_r = -2 eps^2</text>
+<line x1="148" y1="146" x2="236" y2="146" stroke="#cbd5e1" stroke-width="0.7" stroke-dasharray="2,2"/>
+<line x1="192" y1="102" x2="192" y2="190" stroke="#cbd5e1" stroke-width="0.7" stroke-dasharray="2,2"/>
+<circle cx="192" cy="146" r="36.0" fill="none" stroke="#94a3b8" stroke-width="0.7" stroke-dasharray="3,2"/>
+<line x1="217.5" y1="131.3" x2="166.5" y2="131.3" stroke="#0284c7" stroke-width="1.6" opacity="0.75"/>
+<line x1="166.5" y1="131.3" x2="192.0" y2="175.4" stroke="#0284c7" stroke-width="1.6" opacity="0.75"/>
+<line x1="192.0" y1="175.4" x2="217.5" y2="131.3" stroke="#0284c7" stroke-width="1.6" opacity="0.75"/>
+<circle cx="217.5" cy="131.3" r="5.2" fill="#1d4ed8" stroke="#ffffff" stroke-width="1.1"/>
+<circle cx="166.5" cy="131.3" r="5.2" fill="#059669" stroke="#ffffff" stroke-width="1.1"/>
+<circle cx="192.0" cy="175.4" r="5.2" fill="#dc2626" stroke="#ffffff" stroke-width="1.1"/>
+<text x="192" y="68" text-anchor="middle" font-family="DejaVu Sans,Helvetica,sans-serif" font-size="8.2" font-weight="bold" fill="#0f172a">a = pi/4 (Equilat.)</text>
+<text x="192" y="222" text-anchor="middle" font-family="DejaVu Sans Mono,monospace" font-size="7.8" fill="#1e40af">da_r = -0.5 eps^2</text>
+<line x1="258" y1="146" x2="346" y2="146" stroke="#cbd5e1" stroke-width="0.7" stroke-dasharray="2,2"/>
+<line x1="302" y1="102" x2="302" y2="190" stroke="#cbd5e1" stroke-width="0.7" stroke-dasharray="2,2"/>
+<circle cx="302" cy="146" r="36.0" fill="none" stroke="#94a3b8" stroke-width="0.7" stroke-dasharray="3,2"/>
+<line x1="302.0" y1="125.2" x2="302.0" y2="125.2" stroke="#0284c7" stroke-width="1.6" opacity="0.75"/>
+<line x1="302.0" y1="125.2" x2="302.0" y2="187.6" stroke="#0284c7" stroke-width="1.6" opacity="0.75"/>
+<line x1="302.0" y1="187.6" x2="302.0" y2="125.2" stroke="#0284c7" stroke-width="1.6" opacity="0.75"/>
+<circle cx="302.0" cy="125.2" r="5.2" fill="#1d4ed8" stroke="#ffffff" stroke-width="1.1"/>
+<circle cx="302.0" cy="125.2" r="5.2" fill="#059669" stroke="#ffffff" stroke-width="1.1"/>
+<circle cx="302.0" cy="187.6" r="5.2" fill="#dc2626" stroke="#ffffff" stroke-width="1.1"/>
+<text x="302" y="68" text-anchor="middle" font-family="DejaVu Sans,Helvetica,sans-serif" font-size="8.2" font-weight="bold" fill="#0f172a">a = pi/2 (Transv.)</text>
+<text x="302" y="222" text-anchor="middle" font-family="DejaVu Sans Mono,monospace" font-size="7.8" fill="#1e40af">da_r = +1 eps^2</text>
+<text x="192.0" y="242" text-anchor="middle" font-family="DejaVu Sans,Helvetica,sans-serif" font-size="8" fill="#475569">Horizontal = radial r-hat | Vertical = transverse theta-hat | S_rel = 0 identically</text>
+<text x="576.0" y="38" text-anchor="middle" font-family="DejaVu Sans,Helvetica,sans-serif" font-size="9.6" font-weight="bold" fill="#1e293b">(b) Cumulative Pitch Drift / Tumble Over 5 Orbits (e0 = 0.2)</text>
+<rect x="415" y="46" width="322" height="206" fill="#f8fafc" stroke="#94a3b8" stroke-width="0.9"/>
+<line x1="415" y1="219.8" x2="737" y2="219.8" stroke="#e2e8f0" stroke-width="0.8"/>
+<text x="410" y="222.8" text-anchor="end" font-family="DejaVu Sans,Helvetica,sans-serif" font-size="7.3" fill="#475569">0.1 deg</text>
+<line x1="415" y1="187.6" x2="737" y2="187.6" stroke="#e2e8f0" stroke-width="0.8"/>
+<text x="410" y="190.6" text-anchor="end" font-family="DejaVu Sans,Helvetica,sans-serif" font-size="7.3" fill="#475569">1 deg</text>
+<line x1="415" y1="155.4" x2="737" y2="155.4" stroke="#e2e8f0" stroke-width="0.8"/>
+<text x="410" y="158.4" text-anchor="end" font-family="DejaVu Sans,Helvetica,sans-serif" font-size="7.3" fill="#475569">10 deg</text>
+<line x1="415" y1="123.2" x2="737" y2="123.2" stroke="#e2e8f0" stroke-width="0.8"/>
+<text x="410" y="126.2" text-anchor="end" font-family="DejaVu Sans,Helvetica,sans-serif" font-size="7.3" fill="#475569">100 deg</text>
+<line x1="415" y1="91.1" x2="737" y2="91.1" stroke="#e2e8f0" stroke-width="0.8"/>
+<text x="410" y="94.1" text-anchor="end" font-family="DejaVu Sans,Helvetica,sans-serif" font-size="7.3" fill="#475569">1,000 deg</text>
+<line x1="415" y1="58.9" x2="737" y2="58.9" stroke="#e2e8f0" stroke-width="0.8"/>
+<text x="410" y="61.9" text-anchor="end" font-family="DejaVu Sans,Helvetica,sans-serif" font-size="7.3" fill="#475569">10,000 deg</text>
+<line x1="415" y1="124.7" x2="737" y2="124.7" stroke="#b91c1c" stroke-width="1.0" stroke-dasharray="4,3"/>
+<text x="732" y="135.7" text-anchor="end" font-family="DejaVu Sans,Helvetica,sans-serif" font-size="7.3" font-weight="bold" fill="#b91c1c">90 deg Tumble Threshold</text>
+<text x="415.0" y="264.0" text-anchor="middle" font-family="DejaVu Sans,Helvetica,sans-serif" font-size="8" fill="#475569">0</text>
+<text x="479.4" y="264.0" text-anchor="middle" font-family="DejaVu Sans,Helvetica,sans-serif" font-size="8" fill="#475569">1</text>
+<text x="543.8" y="264.0" text-anchor="middle" font-family="DejaVu Sans,Helvetica,sans-serif" font-size="8" fill="#475569">2</text>
+<text x="608.2" y="264.0" text-anchor="middle" font-family="DejaVu Sans,Helvetica,sans-serif" font-size="8" fill="#475569">3</text>
+<text x="672.6" y="264.0" text-anchor="middle" font-family="DejaVu Sans,Helvetica,sans-serif" font-size="8" fill="#475569">4</text>
+<text x="737.0" y="264.0" text-anchor="middle" font-family="DejaVu Sans,Helvetica,sans-serif" font-size="8" fill="#475569">5</text>
+<text x="576.0" y="278.0" text-anchor="middle" font-family="DejaVu Sans,Helvetica,sans-serif" font-size="8.2" fill="#334155">Completed Orbits (M = 3, L_max = 0.02, Zero Reaction Wheels)</text>
+<path d="M415.0,246.3 L417.0,143.7 L419.1,124.4 L421.1,115.3 L423.2,109.7 L425.2,105.6 L427.3,102.4 L429.3,99.8 L431.4,97.6 L433.4,95.7 L435.5,94.0 L437.5,92.5 L439.6,91.2 L441.6,90.1 L443.7,89.4 L445.7,89.0 L447.8,88.9 L449.8,88.9 L451.9,88.9 L453.9,88.9 L456.0,88.9 L458.0,88.9 L460.1,89.0 L462.1,89.0 L464.2,89.1 L466.2,89.3 L468.3,89.4 L470.3,89.7 L472.4,90.0 L474.4,90.3 L476.5,90.6 L478.5,90.8 L480.6,90.9 L482.6,90.4 L484.7,89.5 L486.7,88.7 L488.8,87.9 L490.8,87.1 L492.9,86.4 L494.9,85.7 L497.0,85.0 L499.0,84.3 L501.1,83.7 L503.1,83.1 L505.2,82.6 L507.2,82.2 L509.3,81.9 L511.3,81.8 L513.4,81.8 L515.4,81.8 L517.5,81.8 L519.5,81.7 L521.6,81.7 L523.6,81.7 L525.7,81.6 L527.7,81.6 L529.8,81.5 L531.8,81.5 L533.9,81.4 L535.9,81.4 L538.0,81.4 L540.0,81.5 L542.1,81.5 L544.1,81.5 L546.2,81.1 L548.2,80.3 L550.3,79.5 L552.3,78.7 L554.4,77.9 L556.4,77.2 L558.5,76.5 L560.5,75.8 L562.6,75.2 L564.6,74.6 L566.7,74.0 L568.7,73.4 L570.8,73.0 L572.8,72.7 L574.9,72.5 L576.9,72.5 L579.0,72.4 L581.0,72.4 L583.1,72.4 L585.1,72.4 L587.2,72.4 L589.2,72.4 L591.3,72.5 L593.3,72.5 L595.4,72.5 L597.4,72.5 L599.5,72.6 L601.5,72.6 L603.6,72.6 L605.6,72.6 L607.7,72.5 L609.7,72.2 L611.8,71.2 L613.8,70.0 L615.9,68.8 L617.9,67.8 L620.0,66.8 L622.0,65.8 L624.1,65.0 L626.1,64.1 L628.2,63.4 L630.2,62.6 L632.3,62.0 L634.3,61.4 L636.4,60.9 L638.4,60.6 L640.5,60.5 L642.5,60.5 L644.6,60.4 L646.6,60.4 L648.7,60.3 L650.7,60.3 L652.8,60.3 L654.8,60.3 L656.9,60.2 L658.9,60.2 L661.0,60.2 L663.0,60.2 L665.1,60.2 L667.1,60.2 L669.2,60.2 L671.2,60.2 L673.3,60.2 L675.3,60.1 L677.4,59.8 L679.4,59.6 L681.5,59.3 L683.5,59.1 L685.6,58.8 L687.6,58.6 L689.7,58.3 L691.7,58.1 L693.8,57.9 L695.8,57.6 L697.9,57.4 L699.9,57.2 L702.0,57.1 L704.0,57.1 L706.1,57.0 L708.1,57.0 L710.2,57.0 L712.2,57.0 L714.3,57.0 L716.3,57.0 L718.4,57.0 L720.4,57.0 L722.5,57.0 L724.5,57.0 L726.6,57.0 L728.6,57.1 L730.7,57.1 L732.7,57.1 L734.8,57.1 L736.8,57.2 L737.0,57.2" fill="none" stroke="#dc2626" stroke-width="2.0"/>
+<path d="M415.0,246.3 L417.0,157.8 L419.1,142.0 L421.1,135.4 L423.2,131.9 L425.2,129.9 L427.3,128.6 L429.3,127.8 L431.4,127.2 L433.4,126.7 L435.5,126.4 L437.5,126.2 L439.6,126.0 L441.6,125.9 L443.7,126.0 L445.7,126.5 L447.8,127.3 L449.8,128.5 L451.9,130.3 L453.9,132.8 L456.0,136.6 L458.0,143.2 L460.1,159.9 L462.1,154.6 L464.2,141.0 L466.2,134.8 L468.3,131.1 L470.3,128.7 L472.4,127.1 L474.4,125.8 L476.5,124.8 L478.5,123.8 L480.6,123.7 L482.6,125.5 L484.7,128.7 L486.7,134.5 L488.8,149.1 L490.8,148.2 L492.9,133.4 L494.9,126.7 L497.0,122.3 L499.0,118.8 L501.1,115.7 L503.1,113.2 L505.2,111.1 L507.2,109.6 L509.3,108.4 L511.3,107.7 L513.4,107.2 L515.4,106.9 L517.5,106.6 L519.5,106.2 L521.6,105.8 L523.6,105.4 L525.7,105.1 L527.7,104.8 L529.8,104.5 L531.8,104.4 L533.9,104.5 L535.9,104.7 L538.0,105.1 L540.0,105.5 L542.1,106.0 L544.1,106.2 L546.2,105.7 L548.2,104.7 L550.3,103.9 L552.3,103.2 L554.4,102.6 L556.4,102.1 L558.5,101.5 L560.5,100.9 L562.6,100.2 L564.6,99.5 L566.7,98.8 L568.7,98.2 L570.8,97.7 L572.8,97.3 L574.9,97.1 L576.9,96.9 L579.0,96.8 L581.0,96.7 L583.1,96.6 L585.1,96.4 L587.2,96.2 L589.2,96.0 L591.3,95.8 L593.3,95.6 L595.4,95.4 L597.4,95.2 L599.5,95.2 L601.5,95.2 L603.6,95.3 L605.6,95.5 L607.7,95.8 L609.7,95.9 L611.8,95.8 L613.8,95.6 L615.9,95.4 L617.9,95.2 L620.0,95.1 L622.0,95.0 L624.1,94.9 L626.1,94.9 L628.2,95.0 L630.2,95.0 L632.3,95.1 L634.3,95.3 L636.4,95.4 L638.4,95.6 L640.5,95.8 L642.5,95.9 L644.6,96.1 L646.6,96.2 L648.7,96.3 L650.7,96.3 L652.8,96.4 L654.8,96.4 L656.9,96.3 L658.9,96.2 L661.0,96.1 L663.0,95.9 L665.1,95.8 L667.1,95.6 L669.2,95.5 L671.2,95.4 L673.3,95.2 L675.3,94.6 L677.4,94.0 L679.4,93.3 L681.5,92.5 L683.5,91.8 L685.6,91.1 L687.6,90.5 L689.7,89.8 L691.7,89.2 L693.8,88.6 L695.8,88.0 L697.9,87.4 L699.9,86.9 L702.0,86.5 L704.0,86.2 L706.1,86.0 L708.1,85.8 L710.2,85.7 L712.2,85.7 L714.3,85.6 L716.3,85.6 L718.4,85.6 L720.4,85.7 L722.5,85.8 L724.5,85.9 L726.6,86.0 L728.6,86.1 L730.7,86.2 L732.7,86.3 L734.8,86.4 L736.8,86.3 L737.0,86.3" fill="none" stroke="#d97706" stroke-width="2.0"/>
+<path d="M415.0,239.2 L417.0,238.9 L419.1,239.0 L421.1,238.5 L423.2,238.4 L425.2,238.7 L427.3,238.8 L429.3,238.7 L431.4,238.6 L433.4,238.5 L435.5,238.5 L437.5,238.7 L439.6,238.8 L441.6,238.9 L443.7,239.0 L445.7,239.0 L447.8,238.9 L449.8,238.8 L451.9,238.7 L453.9,238.6 L456.0,238.5 L458.0,238.5 L460.1,238.6 L462.1,238.6 L464.2,238.7 L466.2,238.6 L468.3,238.5 L470.3,238.3 L472.4,238.3 L474.4,238.5 L476.5,238.5 L478.5,238.0 L480.6,237.2 L482.6,237.3 L484.7,237.7 L486.7,238.1 L488.8,238.0 L490.8,237.8 L492.9,237.7 L494.9,237.8 L497.0,238.0 L499.0,238.0 L501.1,237.9 L503.1,237.8 L505.2,237.7 L507.2,237.6 L509.3,237.5 L511.3,237.5 L513.4,237.6 L515.4,237.7 L517.5,237.8 L519.5,237.9 L521.6,237.9 L523.6,237.9 L525.7,237.9 L527.7,237.8 L529.8,237.8 L531.8,237.9 L533.9,238.0 L535.9,238.2 L538.0,238.1 L540.0,237.9 L542.1,238.1 L544.1,238.9 L546.2,239.0 L548.2,239.0 L550.3,238.5 L552.3,238.3 L554.4,238.6 L556.4,238.7 L558.5,238.7 L560.5,238.6 L562.6,238.4 L564.6,238.4 L566.7,238.5 L568.7,238.7 L570.8,238.8 L572.8,238.9 L574.9,239.0 L576.9,239.0 L579.0,238.9 L581.0,238.8 L583.1,238.7 L585.1,238.6 L587.2,238.6 L589.2,238.6 L591.3,238.7 L593.3,238.8 L595.4,238.7 L597.4,238.6 L599.5,238.4 L601.5,238.3 L603.6,238.5 L605.6,238.6 L607.7,238.2 L609.7,237.4 L611.8,237.3 L613.8,237.7 L615.9,238.1 L617.9,238.1 L620.0,237.8 L622.0,237.8 L624.1,237.8 L626.1,238.0 L628.2,238.1 L630.2,238.0 L632.3,237.9 L634.3,237.8 L636.4,237.7 L638.4,237.6 L640.5,237.6 L642.5,237.6 L644.6,237.7 L646.6,237.8 L648.7,237.9 L650.7,237.9 L652.8,237.9 L654.8,237.9 L656.9,237.8 L658.9,237.7 L661.0,237.8 L663.0,238.0 L665.1,238.2 L667.1,238.1 L669.2,237.9 L671.2,238.0 L673.3,238.8 L675.3,239.0 L677.4,239.1 L679.4,238.6 L681.5,238.3 L683.5,238.6 L685.6,238.7 L687.6,238.7 L689.7,238.6 L691.7,238.5 L693.8,238.4 L695.8,238.5 L697.9,238.6 L699.9,238.8 L702.0,238.9 L704.0,239.0 L706.1,239.0 L708.1,238.9 L710.2,238.8 L712.2,238.7 L714.3,238.6 L716.3,238.6 L718.4,238.6 L720.4,238.7 L722.5,238.8 L724.5,238.8 L726.6,238.6 L728.6,238.5 L730.7,238.3 L732.7,238.5 L734.8,238.6 L736.8,238.4 L737.0,238.3" fill="none" stroke="#059669" stroke-width="2.2"/>
+<rect x="493" y="160" width="236" height="44" rx="4" fill="#ffffff" fill-opacity="0.95" stroke="#cbd5e1" stroke-width="0.8"/>
+<line x1="501" y1="171" x2="517" y2="171" stroke="#dc2626" stroke-width="2.2"/>
+<text x="522" y="174" font-family="DejaVu Sans,Helvetica,sans-serif" font-size="7.4" font-weight="bold" fill="#dc2626">2-Mass Landis (0.25L): 11,425 deg (31.7 tumbles)</text>
+<line x1="501" y1="183" x2="517" y2="183" stroke="#d97706" stroke-width="2.2"/>
+<text x="522" y="186" font-family="DejaVu Sans,Helvetica,sans-serif" font-size="7.4" font-weight="bold" fill="#b45309">2-Mass Landis (0.50L): 1,475 deg (4.1 tumbles)</text>
+<line x1="501" y1="195" x2="517" y2="195" stroke="#059669" stroke-width="2.2"/>
+<text x="522" y="198" font-family="DejaVu Sans,Helvetica,sans-serif" font-size="7.4" font-weight="bold" fill="#059669">Hopf 3-Mass Triad: 0.00 deg quad error (0 tumbles)</text>
+</svg>

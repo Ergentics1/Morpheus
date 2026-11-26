@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="295" viewBox="0 0 760 295">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="380.0" y="20" text-anchor="middle" font-family="DejaVu Sans,Helvetica,sans-serif" font-size="12.5" font-weight="bold" fill="#0f172a">H5 Resolution: LEO Dominance Thresholds, Propellantless Viability Frontier &amp; Eq. (5) Efficiency (K8)</text>
+<text x="213.5" y="38" text-anchor="middle" font-family="DejaVu Sans,Helvetica,sans-serif" font-size="9.5" font-weight="bold" fill="#1e293b">(a) LEO Annual Delta-v vs. Half-Span L (a = 7,000 km)</text>
+<rect x="56" y="46" width="315" height="198" fill="#f8fafc" stroke="#94a3b8" stroke-width="0.9"/>
+<line x1="56" y1="244.0" x2="371" y2="244.0" stroke="#e2e8f0" stroke-width="0.8"/>
+<text x="51" y="247.0" text-anchor="end" font-family="DejaVu Sans,Helvetica,sans-serif" font-size="7.3" fill="#475569">1 mm/s</text>
+<line x1="56" y1="189.0" x2="371" y2="189.0" stroke="#e2e8f0" stroke-width="0.8"/>
+<text x="51" y="192.0" text-anchor="end" font-family="DejaVu Sans,Helvetica,sans-serif" font-size="7.3" fill="#475569">0.1 m/s</text>
+<line x1="56" y1="161.5" x2="371" y2="161.5" stroke="#e2e8f0" stroke-width="0.8"/>
+<text x="51" y="164.5" text-anchor="end" font-family="DejaVu Sans,Helvetica,sans-serif" font-size="7.3" fill="#475569">1 m/s</text>
+<line x1="56" y1="134.0" x2="371" y2="134.0" stroke="#e2e8f0" stroke-width="0.8"/>
+<text x="51" y="137.0" text-anchor="end" font-family="DejaVu Sans,Helvetica,sans-serif" font-size="7.3" fill="#475569">10 m/s</text>
+<line x1="56" y1="106.5" x2="371" y2="106.5" stroke="#e2e8f0" stroke-width="0.8"/>
+<text x="51" y="109.5" text-anchor="end" font-family="DejaVu Sans,Helvetica,sans-serif" font-size="7.3" fill="#475569">100 m/s</text>
+<line x1="56" y1="79.0" x2="371" y2="79.0" stroke="#e2e8f0" stroke-width="0.8"/>
+<text x="51" y="82.0" text-anchor="end" font-family="DejaVu Sans,Helvetica,sans-serif" font-size="7.3" fill="#475569">1 km/s</text>
+<line x1="56" y1="51.5" x2="371" y2="51.5" stroke="#e2e8f0" stroke-width="0.8"/>
+<text x="51" y="54.5" text-anchor="end" font-family="DejaVu Sans,Helvetica,sans-serif" font-size="7.3" fill="#475569">10 km/s</text>
+<line x1="56.0" y1="46" x2="56.0" y2="244" stroke="#e2e8f0" stroke-width="0.8"/>
+<text x="56.0" y="256.0" text-anchor="middle" font-family="DejaVu Sans,Helvetica,sans-serif" font-size="7.8" fill="#475569">100 m</text>
+<line x1="172.7" y1="46" x2="172.7" y2="244" stroke="#e2e8f0" stroke-width="0.8"/>
+<text x="172.7" y="256.0" text-anchor="middle" font-family="DejaVu Sans,Helvetica,sans-serif" font-size="7.8" fill="#475569">1 km</text>
+<line x1="289.3" y1="46" x2="289.3" y2="244" stroke="#e2e8f0" stroke-width="0.8"/>
+<text x="289.3" y="256.0" text-anchor="middle" font-family="DejaVu Sans,Helvetica,sans-serif" font-size="7.8" fill="#475569">10 km</text>
+<line x1="370.9" y1="46" x2="370.9" y2="244" stroke="#e2e8f0" stroke-width="0.8"/>
+<text x="370.9" y="256.0" text-anchor="middle" font-family="DejaVu Sans,Helvetica,sans-serif" font-size="7.8" fill="#475569">50 km</text>
+<text x="213.5" y="270.0" text-anchor="middle" font-family="DejaVu Sans,Helvetica,sans-serif" font-size="8.2" fill="#334155">Triad Half-Span L (log scale; M = 1,000 kg)</text>
+<rect x="56" y="142.3" width="315" height="101.7" fill="#fee2e2" fill-opacity="0.45"/>
+<line x1="56" y1="142.3" x2="371" y2="142.3" stroke="#dc2626" stroke-width="1.0" stroke-dasharray="4,3"/>
+<text x="366" y="153.3" text-anchor="end" font-family="DejaVu Sans,Helvetica,sans-serif" font-size="7.4" font-weight="bold" fill="#b91c1c">LEO Drag (~5 m/s/yr) Dominates Below</text>
+<line x1="56" y1="74.2" x2="371" y2="74.2" stroke="#7c3aed" stroke-width="1.0" stroke-dasharray="3,3"/>
+<text x="62" y="70.2" font-family="DejaVu Sans,Helvetica,sans-serif" font-size="7.3" font-weight="bold" fill="#6d28d9">1 kW Hall Thruster (~1.5 km/s/yr, expellant)</text>
+<path d="M56.0,224.4 L62.4,221.3 L68.9,218.3 L75.3,215.3 L81.7,212.2 L88.1,209.2 L94.6,206.2 L101.0,203.2 L107.4,200.1 L113.9,197.1 L120.3,194.1 L126.7,191.0 L133.1,188.0 L139.6,185.0 L146.0,181.9 L152.4,178.9 L158.9,175.9 L165.3,172.9 L171.7,169.8 L178.1,166.8 L184.6,163.8 L191.0,160.7 L197.4,157.7 L203.9,154.7 L210.3,151.6 L216.7,148.6 L223.1,145.6 L229.6,142.5 L236.0,139.5 L242.4,136.5 L248.9,133.5 L255.3,130.4 L261.7,127.4 L268.1,124.4 L274.6,121.3 L281.0,118.3 L287.4,115.3 L293.9,112.2 L300.3,109.2 L306.7,106.2 L313.1,103.1 L319.6,100.1 L326.0,97.1 L332.4,94.1 L338.9,91.0 L345.3,88.0 L351.7,85.0 L358.1,81.9 L364.6,78.9 L371.0,75.9" fill="none" stroke="#0284c7" stroke-width="2.2"/>
+<path d="M56.0,211.3 L62.4,208.2 L68.9,205.2 L75.3,202.2 L81.7,199.1 L88.1,196.1 L94.6,193.1 L101.0,190.1 L107.4,187.0 L113.9,184.0 L120.3,181.0 L126.7,177.9 L133.1,174.9 L139.6,171.9 L146.0,168.8 L152.4,165.8 L158.9,162.8 L165.3,159.7 L171.7,156.7 L178.1,153.7 L184.6,150.7 L191.0,147.6 L197.4,144.6 L203.9,141.6 L210.3,138.5 L216.7,135.5 L223.1,132.5 L229.6,129.4 L236.0,126.4 L242.4,123.4 L248.9,120.4 L255.3,117.3 L261.7,114.3 L268.1,111.3 L274.6,108.2 L281.0,105.2 L287.4,102.2 L293.9,99.1 L300.3,96.1 L306.7,93.1 L313.1,90.0 L319.6,87.0 L326.0,84.0 L332.4,81.0 L338.9,77.9 L345.3,74.9 L351.7,71.9 L358.1,68.8 L364.6,65.8 L371.0,62.8" fill="none" stroke="#059669" stroke-width="2.2"/>
+<circle cx="59.0" cy="224.4" r="4.2" fill="#dc2626" stroke="#ffffff" stroke-width="1"/>
+<text x="66.0" y="238.4" font-family="DejaVu Sans,Helvetica,sans-serif" font-size="7.4" font-weight="bold" fill="#b91c1c">Paper 028 (100 m): 5.2 mm/s/yr</text>
+<circle cx="324.5" cy="84.7" r="4.5" fill="#059669" stroke="#ffffff" stroke-width="1.1"/>
+<rect x="200.5" y="90.7" width="118" height="14" rx="3" fill="#ffffff" fill-opacity="0.92" stroke="#6ee7b7" stroke-width="0.7"/>
+<text x="259.5" y="100.7" text-anchor="middle" font-family="DejaVu Sans,Helvetica,sans-serif" font-size="7.3" font-weight="bold" fill="#047857">20 km (e=0.25): 620 m/s/yr</text>
+<text x="581.0" y="38" text-anchor="middle" font-family="DejaVu Sans,Helvetica,sans-serif" font-size="9.5" font-weight="bold" fill="#1e293b">(b) Eq. (5) Cycle Efficiency eta_prop(e) &amp; Krawczyk K8</text>
+<rect x="426" y="46" width="310" height="198" fill="#f8fafc" stroke="#94a3b8" stroke-width="0.9"/>
+<line x1="426" y1="244.0" x2="736" y2="244.0" stroke="#e2e8f0" stroke-width="0.8"/>
+<text x="421" y="247.0" text-anchor="end" font-family="DejaVu Sans,Helvetica,sans-serif" font-size="7.8" fill="#475569">0%</text>
+<line x1="426" y1="194.5" x2="736" y2="194.5" stroke="#e2e8f0" stroke-width="0.8"/>
+<text x="421" y="197.5" text-anchor="end" font-family="DejaVu Sans,Helvetica,sans-serif" font-size="7.8" fill="#475569">25%</text>
+<line x1="426" y1="145.0" x2="736" y2="145.0" stroke="#e2e8f0" stroke-width="0.8"/>
+<text x="421" y="148.0" text-anchor="end" font-family="DejaVu Sans,Helvetica,sans-serif" font-size="7.8" fill="#475569">50%</text>
+<line x1="426" y1="95.5" x2="736" y2="95.5" stroke="#e2e8f0" stroke-width="0.8"/>
+<text x="421" y="98.5" text-anchor="end" font-family="DejaVu Sans,Helvetica,sans-serif" font-size="7.8" fill="#475569">75%</text>
+<line x1="426" y1="46.0" x2="736" y2="46.0" stroke="#e2e8f0" stroke-width="0.8"/>
+<text x="421" y="49.0" text-anchor="end" font-family="DejaVu Sans,Helvetica,sans-serif" font-size="7.8" fill="#475569">100%</text>
+<text x="426.0" y="256.0" text-anchor="middle" font-family="DejaVu Sans,Helvetica,sans-serif" font-size="7.8" fill="#475569">0.0</text>
+<text x="488.0" y="256.0" text-anchor="middle" font-family="DejaVu Sans,Helvetica,sans-serif" font-size="7.8" fill="#475569">0.1</text>
+<text x="550.0" y="256.0" text-anchor="middle" font-family="DejaVu Sans,Helvetica,sans-serif" font-size="7.8" fill="#475569">0.2</text>
+<text x="612.0" y="256.0" text-anchor="middle" font-family="DejaVu Sans,Helvetica,sans-serif" font-size="7.8" fill="#475569">0.3</text>
+<text x="674.0" y="256.0" text-anchor="middle" font-family="DejaVu Sans,Helvetica,sans-serif" font-size="7.8" fill="#475569">0.4</text>
+<text x="736.0" y="256.0" text-anchor="middle" font-family="DejaVu Sans,Helvetica,sans-serif" font-size="7.8" fill="#475569">0.5</text>
+<text x="581.0" y="270.0" text-anchor="middle" font-family="DejaVu Sans,Helvetica,sans-serif" font-size="8.2" fill="#334155">Orbital Eccentricity e</text>
+<path d="M426.6,242.8 L430.5,235.5 L434.5,228.4 L438.4,221.7 L442.3,215.1 L446.2,208.8 L450.1,202.8 L454.0,196.9 L457.9,191.3 L461.9,185.9 L465.8,180.7 L469.7,175.6 L473.6,170.8 L477.5,166.1 L481.4,161.6 L485.4,157.3 L489.3,153.1 L493.2,149.1 L497.1,145.2 L501.0,141.5 L504.9,137.8 L508.9,134.4 L512.8,131.0 L516.7,127.8 L520.6,124.7 L524.5,121.7 L528.4,118.8 L532.4,116.0 L536.3,113.3 L540.2,110.7 L544.1,108.3 L548.0,105.8 L551.9,103.5 L555.9,101.3 L559.8,99.1 L563.7,97.1 L567.6,95.1 L571.5,93.1 L575.4,91.3 L579.4,89.5 L583.3,87.8 L587.2,86.1 L591.1,84.5 L595.0,83.0 L598.9,81.5 L602.8,80.1 L606.8,78.7 L610.7,77.3 L614.6,76.1 L618.5,74.8 L622.4,73.6 L626.3,72.5 L630.3,71.4 L634.2,70.3 L638.1,69.3 L642.0,68.3 L645.9,67.4 L649.8,66.5 L653.8,65.6 L657.7,64.8 L661.6,64.0 L665.5,63.2 L669.4,62.4 L673.3,61.7 L677.3,61.0 L681.2,60.3 L685.1,59.7 L689.0,59.1 L692.9,58.5 L696.8,57.9 L700.8,57.4 L704.7,56.8 L708.6,56.3 L712.5,55.9 L716.4,55.4 L720.3,54.9 L724.3,54.5 L728.2,54.1 L732.1,53.7 L736.0,53.3" fill="none" stroke="#1d4ed8" stroke-width="2.1"/>
+<path d="M426.6,240.9 L430.5,223.3 L434.5,208.6 L438.4,196.1 L442.3,185.4 L446.2,176.2 L450.1,168.1 L454.0,160.9 L457.9,154.6 L461.9,148.9 L465.8,143.8 L469.7,139.3 L473.6,135.1 L477.5,131.3 L481.4,127.9 L485.4,124.7 L489.3,121.8 L493.2,119.1 L497.1,116.6 L501.0,114.3 L504.9,112.2 L508.9,110.2 L512.8,108.4 L516.7,106.6 L520.6,105.0 L524.5,103.5 L528.4,102.1 L532.4,100.8 L536.3,99.5 L540.2,98.3 L544.1,97.2 L548.0,96.2 L551.9,95.2 L555.9,94.3 L559.8,93.4 L563.7,92.5 L567.6,91.8 L571.5,91.0 L575.4,90.3 L579.4,89.6 L583.3,89.0 L587.2,88.4 L591.1,87.8 L595.0,87.2 L598.9,86.7 L602.8,86.2 L606.8,85.7 L610.7,85.3 L614.6,84.8 L618.5,84.4 L622.4,84.0 L626.3,83.6 L630.3,83.3 L634.2,82.9 L638.1,82.6 L642.0,82.3 L645.9,82.0 L649.8,81.7 L653.8,81.4 L657.7,81.2 L661.6,80.9 L665.5,80.7 L669.4,80.4 L673.3,80.2 L677.3,80.0 L681.2,79.8 L685.1,79.6 L689.0,79.4 L692.9,79.3 L696.8,79.1 L700.8,78.9 L704.7,78.8 L708.6,78.6 L712.5,78.5 L716.4,78.3 L720.3,78.2 L724.3,78.1 L728.2,78.0 L732.1,77.9 L736.0,77.7" fill="none" stroke="#059669" stroke-width="2.1"/>
+<path d="M426.6,243.0 L430.5,236.8 L434.5,230.8 L438.4,225.0 L442.3,219.5 L446.2,214.1 L450.1,209.0 L454.0,204.0 L457.9,199.2 L461.9,194.6 L465.8,190.2 L469.7,185.9 L473.6,181.8 L477.5,177.8 L481.4,174.0 L485.4,170.3 L489.3,166.7 L493.2,163.3 L497.1,160.0 L501.0,156.8 L504.9,153.8 L508.9,150.8 L512.8,148.0 L516.7,145.2 L520.6,142.6 L524.5,140.0 L528.4,137.6 L532.4,135.2 L536.3,132.9 L540.2,130.7 L544.1,128.6 L548.0,126.6 L551.9,124.6 L555.9,122.7 L559.8,120.9 L563.7,119.1 L567.6,117.4 L571.5,115.8 L575.4,114.2 L579.4,112.7 L583.3,111.2 L587.2,109.8 L591.1,108.4 L595.0,107.1 L598.9,105.9 L602.8,104.6 L606.8,103.5 L610.7,102.3 L614.6,101.3 L618.5,100.2 L622.4,99.2 L626.3,98.2 L630.3,97.3 L634.2,96.4 L638.1,95.5 L642.0,94.7 L645.9,93.9 L649.8,93.1 L653.8,92.4 L657.7,91.7 L661.6,91.0 L665.5,90.3 L669.4,89.7 L673.3,89.0 L677.3,88.5 L681.2,87.9 L685.1,87.3 L689.0,86.8 L692.9,86.3 L696.8,85.8 L700.8,85.4 L704.7,84.9 L708.6,84.5 L712.5,84.1 L716.4,83.7 L720.3,83.3 L724.3,82.9 L728.2,82.6 L732.1,82.3 L736.0,81.9" fill="none" stroke="#dc2626" stroke-width="2.1"/>
+<line x1="497.3" y1="145.0" x2="497.3" y2="244" stroke="#1d4ed8" stroke-width="0.9" stroke-dasharray="3,2"/>
+<circle cx="497.3" cy="145.0" r="4.5" fill="#1d4ed8" stroke="#ffffff" stroke-width="1.2"/>
+<text x="505.3" y="158.0" font-family="DejaVu Sans,Helvetica,sans-serif" font-size="7.5" font-weight="bold" fill="#1e3a8a">K8: e_50* = 0.1150 (w=4.86e-16)</text>
+<rect x="558" y="192" width="170" height="44" rx="4" fill="#ffffff" fill-opacity="0.95" stroke="#cbd5e1" stroke-width="0.8"/>
+<line x1="565" y1="203" x2="579" y2="203" stroke="#1d4ed8" stroke-width="2.1"/>
+<text x="584" y="206" font-family="DejaVu Sans,Helvetica,sans-serif" font-size="7.3" font-weight="bold" fill="#1d4ed8">eta_act=1.0, eta_regen=0 (K8)</text>
+<line x1="565" y1="215" x2="579" y2="215" stroke="#059669" stroke-width="2.1"/>
+<text x="584" y="218" font-family="DejaVu Sans,Helvetica,sans-serif" font-size="7.3" font-weight="bold" fill="#059669">eta_act=0.85, eta_regen=0.80</text>
+<line x1="565" y1="227" x2="579" y2="227" stroke="#dc2626" stroke-width="2.1"/>
+<text x="584" y="230" font-family="DejaVu Sans,Helvetica,sans-serif" font-size="7.3" font-weight="bold" fill="#dc2626">eta_act=0.85, eta_regen=0</text>
+</svg>
