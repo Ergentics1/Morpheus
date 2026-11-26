@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="740" height="282" viewBox="0 0 740 282">
+<style>
+  .bg { fill: #ffffff; }
+  .panel { fill: #f8fafc; stroke: #cbd5e1; stroke-width: 1; }
+  .title { font: 700 11.6px "Helvetica Neue", Arial, sans-serif; fill: #0f172a; }
+  .sub { font: 400 8.9px "Helvetica Neue", Arial, sans-serif; fill: #475569; }
+  .lbl { font: 600 9.2px "Helvetica Neue", Arial, sans-serif; fill: #1e293b; }
+  .tick { font: 400 8.2px "Helvetica Neue", Arial, sans-serif; fill: #475569; }
+  .badge { font: 700 8.2px "Helvetica Neue", Arial, sans-serif; }
+  .grid { stroke: #e2e8f0; stroke-width: 0.7; }
+  .ax { stroke: #334155; stroke-width: 1.1; }
+</style>
+<rect class="bg" width="740" height="282"/>
+<rect class="panel" x="58" y="44" width="292" height="186" rx="4"/>
+<text class="title" x="58" y="21">A. Sec. 5.2 Closed-Cut Exhaustion Divergence (F39)</text>
+<text class="sub" x="58" y="35">H = &#x2113;&#x00B2;(&#x2115;) &#x2295; &#x2113;&#x00B2;(&#x2115;), 0 &#x2264; s &#x2264; &#x03C0;&#x00B2;, e&#x207B;&#x03C0;&#x00B2; &#x2264; C_b&#x2020;C_b &#x2264; 1</text>
+<line class="grid" x1="58" y1="54.33" x2="350" y2="54.33"/>
+<text class="tick" x="52" y="57.33" text-anchor="end">+10&#x00B3;</text>
+<line class="grid" x1="58" y1="95.58" x2="350" y2="95.58"/>
+<text class="tick" x="52" y="98.58" text-anchor="end">+10</text>
+<line class="ax" x1="58" y1="137.00" x2="350" y2="137.00"/>
+<text class="tick" x="52" y="140.00" text-anchor="end">0</text>
+<line class="grid" x1="58" y1="178.42" x2="350" y2="178.42"/>
+<text class="tick" x="52" y="181.42" text-anchor="end">&#x2212;10</text>
+<line class="grid" x1="58" y1="219.67" x2="350" y2="219.67"/>
+<text class="tick" x="52" y="222.67" text-anchor="end">&#x2212;10&#x00B3;</text>
+<line class="grid" x1="58.00" y1="44" x2="58.00" y2="230"/>
+<text class="tick" x="58.00" y="244" text-anchor="middle">10&#x00B9;</text>
+<line class="grid" x1="131.00" y1="44" x2="131.00" y2="230"/>
+<text class="tick" x="131.00" y="244" text-anchor="middle">10&#x00B2;</text>
+<line class="grid" x1="204.00" y1="44" x2="204.00" y2="230"/>
+<text class="tick" x="204.00" y="244" text-anchor="middle">10&#x00B3;</text>
+<line class="grid" x1="277.00" y1="44" x2="277.00" y2="230"/>
+<text class="tick" x="277.00" y="244" text-anchor="middle">10&#x2074;</text>
+<line class="grid" x1="350.00" y1="44" x2="350.00" y2="230"/>
+<text class="tick" x="350.00" y="244" text-anchor="middle">10&#x2075;</text>
+<polyline fill="none" stroke="#059669" stroke-width="2.3" points="58.00,129.00 65.30,127.72 72.60,126.34 79.90,124.85 87.20,123.28 94.50,121.62 101.80,119.89 109.10,118.10 116.40,116.27 123.70,114.38 131.00,112.47 138.30,110.52 145.60,108.55 152.90,106.56 160.20,104.56 167.50,102.54 174.80,100.52 182.10,98.48 189.40,96.44 196.70,94.39 204.00,92.34 211.30,90.29 218.60,88.23 225.90,86.17 233.20,84.11 240.50,82.05 247.80,79.99 255.10,77.92 262.40,75.86 269.70,73.80 277.00,71.73 284.30,69.67 291.60,67.60 298.90,65.53 306.20,63.47 313.50,61.40 320.80,59.34 328.10,57.27 335.40,55.20 342.70,53.14 350.00,51.07"/>
+<polyline fill="none" stroke="#d97706" stroke-width="1.9" stroke-dasharray="5,3" points="58.00,145.00 65.30,146.28 72.60,147.66 79.90,149.15 87.20,150.72 94.50,152.38 101.80,154.11 109.10,155.89 116.40,157.73 123.70,159.61 131.00,161.53 138.30,163.48 145.60,165.45 152.90,167.44 160.20,169.44 167.50,171.46 174.80,173.48 182.10,175.52 189.40,177.56 196.70,179.61 204.00,181.66 211.30,183.71 218.60,185.77 225.90,187.83 233.20,189.89 240.50,191.95 247.80,194.01 255.10,196.07 262.40,198.14 269.70,200.20 277.00,202.27 284.30,204.33 291.60,206.40 298.90,208.46 306.20,210.53 313.50,212.60 320.80,214.66 328.10,216.73 335.40,218.80 342.70,220.86 350.00,222.93"/>
+<polyline fill="none" stroke="#dc2626" stroke-width="2.2" points="58.00,149.16 65.30,150.74 72.60,152.40 79.90,154.12 87.20,155.91 94.50,157.75 101.80,159.63 109.10,161.55 116.40,163.50 123.70,165.47 131.00,167.46 138.30,169.46 145.60,171.48 152.90,173.50 160.20,175.54 167.50,177.58 174.80,179.63 182.10,181.68 189.40,183.73 196.70,185.79 204.00,187.85 211.30,189.91 218.60,191.97 225.90,194.03 233.20,196.10 240.50,198.16 247.80,200.22 255.10,202.29 262.40,204.35 269.70,206.42 277.00,208.49 284.30,210.55 291.60,212.62 298.90,214.68 306.20,216.75 313.50,218.82 320.80,220.88 328.10,222.95 335.40,225.02 342.70,227.08 350.00,229.15"/>
+<text class="badge" x="70" y="66" fill="#047857">Paired P_M (pair): Z[X] &#x2192; +&#x221E;</text>
+<text class="badge" x="206" y="156" fill="#b45309">Cycle r=4 (threshold)</text>
+<text class="badge" x="70" y="216" fill="#b91c1c">Cycle P_M (r=5): Z[X] &#x2192; &#x2212;&#x221E;</text>
+<text class="lbl" x="204.0" y="261" text-anchor="middle">Truncation count M (both P_M &#x2192; 1 strongly)</text>
+<rect class="panel" x="420" y="44" width="300" height="186" rx="4"/>
+<text class="title" x="420" y="21">B. Cycle Dilution &amp; F39 Falsification Region</text>
+<text class="sub" x="420" y="35">Normalized boost expectation (1+c)/(r&#x2212;1+c) crosses 1/2 at r &#x2265; 4</text>
+<rect x="453.33" y="145.45" width="266.67" height="84.55" fill="#fee2e2" fill-opacity="0.65"/>
+<line class="grid" x1="420" y1="230.00" x2="720" y2="230.00"/>
+<text class="tick" x="414" y="233.00" text-anchor="end">0.00</text>
+<line class="grid" x1="420" y1="187.73" x2="720" y2="187.73"/>
+<text class="tick" x="414" y="190.73" text-anchor="end">0.25</text>
+<line class="ax" x1="420" y1="145.45" x2="720" y2="145.45" stroke-dasharray="4,3"/>
+<text class="tick" x="414" y="148.45" text-anchor="end">0.50</text>
+<line class="grid" x1="420" y1="103.18" x2="720" y2="103.18"/>
+<text class="tick" x="414" y="106.18" text-anchor="end">0.75</text>
+<line class="grid" x1="420" y1="60.91" x2="720" y2="60.91"/>
+<text class="tick" x="414" y="63.91" text-anchor="end">1.00</text>
+<line class="grid" x1="420.00" y1="44" x2="420.00" y2="230"/>
+<text class="tick" x="420.00" y="244" text-anchor="middle">2</text>
+<line class="grid" x1="453.33" y1="44" x2="453.33" y2="230"/>
+<text class="tick" x="453.33" y="244" text-anchor="middle">4</text>
+<line class="grid" x1="520.00" y1="44" x2="520.00" y2="230"/>
+<text class="tick" x="520.00" y="244" text-anchor="middle">8</text>
+<line class="grid" x1="586.67" y1="44" x2="586.67" y2="230"/>
+<text class="tick" x="586.67" y="244" text-anchor="middle">12</text>
+<line class="grid" x1="653.33" y1="44" x2="653.33" y2="230"/>
+<text class="tick" x="653.33" y="244" text-anchor="middle">16</text>
+<line class="grid" x1="720.00" y1="44" x2="720.00" y2="230"/>
+<text class="tick" x="720.00" y="244" text-anchor="middle">20</text>
+<polyline fill="none" stroke="#1d4ed8" stroke-width="2.3" points="420.00,60.91 423.75,91.97 427.50,113.38 431.25,129.05 435.00,141.00 438.75,150.43 442.50,158.04 446.25,164.33 450.00,169.61 453.75,174.10 457.50,177.97 461.25,181.34 465.00,184.30 468.75,186.92 472.50,189.25 476.25,191.35 480.00,193.24 483.75,194.95 487.50,196.52 491.25,197.94 495.00,199.25 498.75,200.46 502.50,201.58 506.25,202.62 510.00,203.58 513.75,204.48 517.50,205.31 521.25,206.10 525.00,206.84 528.75,207.53 532.50,208.18 536.25,208.80 540.00,209.38 543.75,209.93 547.50,210.45 551.25,210.95 555.00,211.42 558.75,211.87 562.50,212.29 566.25,212.70 570.00,213.09 573.75,213.46 577.50,213.82 581.25,214.16 585.00,214.49 588.75,214.80 592.50,215.10 596.25,215.39 600.00,215.67 603.75,215.94 607.50,216.20 611.25,216.44 615.00,216.69 618.75,216.92 622.50,217.14 626.25,217.36 630.00,217.57 633.75,217.77 637.50,217.96 641.25,218.15 645.00,218.34 648.75,218.52 652.50,218.69 656.25,218.86 660.00,219.02 663.75,219.18 667.50,219.33 671.25,219.48 675.00,219.63 678.75,219.77 682.50,219.90 686.25,220.04 690.00,220.17 693.75,220.30 697.50,220.42 701.25,220.54 705.00,220.66 708.75,220.77 712.50,220.88 716.25,220.99 720.00,221.10"/>
+<circle cx="453.33" cy="173.63" r="4.0" fill="#b45309" stroke="#fff" stroke-width="1.2"/>
+<text class="badge" x="460.33" y="165.63" fill="#b45309">r=4: 0.333</text>
+<circle cx="586.67" cy="214.63" r="4.0" fill="#dc2626" stroke="#fff" stroke-width="1.2"/>
+<text class="badge" x="593.67" y="202.63" fill="#dc2626">F39 witness r=12: 0.091</text>
+<text class="badge" x="528" y="138.45" fill="#334155">Sign-flip threshold 1/2 (X = &#x0394;O &#x2212; &#x03B4;/2)</text>
+<text class="badge" x="548" y="179.27" fill="#b91c1c">Z_P (cyc)[X] &lt; 0 despite dim H = &#x221E;</text>
+<text class="lbl" x="570.0" y="261" text-anchor="middle">Cycle length r of basis permutation V</text>
+</svg>
