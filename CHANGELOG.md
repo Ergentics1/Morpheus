@@ -4,6 +4,9 @@ All notable changes to **Morpheus** are documented here. Manuscript updates cut 
 
 ## [Unreleased]
 
+### Fixed (round-3 referee review of `v0.3.1`)
+- `CONTRIBUTIONS.md`: the cross-verification preamble no longer says "All 27 … results below are independently verified". The table has 30 rows, and Thm 7.20(c) was only spot-checked (as the paper and the closing note already say). It now reads "Each … result below has at least one independent check", matching the paper.
+
 ## [0.3.1] - 2026-11-25
 
 ### Fixed (round-2 referee review of `v0.3.0`)

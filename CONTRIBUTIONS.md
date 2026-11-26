@@ -101,7 +101,7 @@ Working independently from the archived baselines under Ergentics' direction (`l
 
 ### Complete independent first-principles cross-verification (`[X]`, zero cached data reads — every numbered result has at least one independent check)
 
-All 27 baseline and reconciled results below are independently verified across our multi-language formal and computational planes (no conclusion of Sections 2–7 overturned; two wording/cutoff errata `NEG-E8` and `NEG-E10` corrected). "Lean" denotes a kernel-checked Lean 4.36.0 proof with **33/33 theorems**, 0 `sorryAx`, 0 `ofReduceBool`, and zero Mathlib.
+Each baseline and reconciled result below has at least one independent check across our multi-language formal and computational planes (the scope of each check is given in its row; see the two limits stated after the table) (no conclusion of Sections 2–7 overturned; two wording/cutoff errata `NEG-E8` and `NEG-E10` corrected). "Lean" denotes a kernel-checked Lean 4.36.0 proof with **33/33 theorems**, 0 `sorryAx`, 0 `ofReduceBool`, and zero Mathlib.
 
 | Paper label (`v0.3.1`) | What was independently verified (`[X]`) | Planes |
 | :--- | :--- | :--- |
