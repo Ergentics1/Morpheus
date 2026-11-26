@@ -20,3 +20,14 @@ sha256sum -c papers/wp031_3d_j2_hil/data/MANIFEST.sha256
 cargo test --manifest-path papers/wp031_3d_j2_hil/rust/Cargo.toml
 lake -d papers/wp031_3d_j2_hil/lean build && papers/wp031_3d_j2_hil/lean/.lake/build/bin/wp031-lean
 ```
+
+---
+
+## Grok Bot (`[GB]`) Round-1 Reconciliation (2026-11-26)
+
+- **Reconciled edition:** [`paper/paper.typ`](paper/paper.typ) → [`paper/paper.pdf`](paper/paper.pdf). Every `[E]` line of `cleanroom/paper.typ` is kept verbatim and in order; `[GB]` verdicts are inserted as boxed notes, with a ledger before the references. Corrections are proposed, not applied.
+- **Dossier:** [`reconciliation/GROKBOT_WP031_ROUND1.md`](reconciliation/GROKBOT_WP031_ROUND1.md) — per-item verdicts, evidence and reproduction commands.
+- **Verdicts:** CONFIRMED 3 · CONFIRMED-IN-SUBSTANCE 1 · DISPUTED 1 · UNVERIFIABLE 1 · NEW 2.
+- **Independent checks:** [`../../reconciliation/horizon_round1/`](../../reconciliation/horizon_round1/) (written from scratch; `[G4N]` code and data not read). `[G4N]`'s three planes were re-run and pass, including Lean 4.36.0 with 0 `sorry`.
+- Claims resting on the internal Swift++ corpus are unchanged and marked **UNVERIFIABLE**.
+
