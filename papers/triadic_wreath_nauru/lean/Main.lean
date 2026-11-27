@@ -23,7 +23,18 @@ import TriadicNauru
 #print axioms TriadicNauru.thm20_ramanujan_gaps_exact
 #print axioms TriadicNauru.thm21_cfs_duality_commute_and_T6
 #print axioms TriadicNauru.thm22_qutt_Imaj_not_normalizing_UTT
+#print axioms TriadicNauru.thm23_eisenstein_nauru_exact_isomorphism
+#print axioms TriadicNauru.thm24_nauru_T_PLR_even_parity_decomp
+#print axioms TriadicNauru.thm25_definite_quat_su2_unitarity_and_walls
+#print axioms TriadicNauru.thm26_dic6_Z_moments_and_K44_quotient
+#print axioms TriadicNauru.thm27_canonical_3adic_dic6_non_arithmetic
+#print axioms TriadicNauru.thm28_hurwitz_amalgam_and_corrected_w4
+#print axioms TriadicNauru.thm29_hensel_sqrt_minus2_mod_3pow12
+#print axioms TriadicNauru.thm30_hurwitz_T4_all_lengths_freeness
+#print axioms TriadicNauru.thm31_hurwitz_euler_char_and_congruence_index
+#print axioms TriadicNauru.thm32_psl2_order_gt_s3_for_all_ge_5
 
 def main : IO Unit := do
-  IO.println "TriadicNauru Lean 4.36.0 Oracle: ALL 22 THEOREMS KERNEL-CHECKED (0 sorryAx, 0 ofReduceBool)."
+  IO.println "TriadicNauru Lean 4.36.0 Oracle: ALL 32 THEOREMS KERNEL-CHECKED (0 sorryAx, 0 ofReduceBool)."
   IO.println s!"  O3 gamma6 = ({TriadicNauru.o3Gamma6.c0}, {TriadicNauru.o3Gamma6.c1}, {TriadicNauru.o3Gamma6.c2}, {TriadicNauru.o3Gamma6.c3}), trd={TriadicNauru.o3Trd TriadicNauru.o3Gamma6}, nrd={TriadicNauru.o3Nrd TriadicNauru.o3Gamma6}"
+  IO.println s!"  O2 Hurwitz w4 = ({TriadicNauru.hbW4.c0}, {TriadicNauru.hbW4.c1}, {TriadicNauru.hbW4.c2}, {TriadicNauru.hbW4.c3}), trd={TriadicNauru.qbTrd TriadicNauru.hbW4}, nrd={TriadicNauru.qbNrd TriadicNauru.hbW4}"

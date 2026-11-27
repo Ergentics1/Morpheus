@@ -802,3 +802,620 @@ impl SplitMix64 {
         z ^ (z >> 31)
     }
 }
+
+/// Gate D10 (Rust): Exact Eisenstein-Nauru `{6,3}_{(2,2)} <-> GP(12,5)` 36/36 edge isomorphism,
+/// `<T, PLR>` decomposition (`s=T6 o P, g=T3 o (LR)^2`), F31 falsifier, & canonical 3-adic wall.
+pub fn verify_eisenstein_nauru_and_su2() -> bool {
+    let phi = |is_b: bool, a: usize, b: usize| -> usize {
+        if !is_b {
+            if b == 0 { (12 - (2 * a) % 12) % 12 } else { 12 + (17 - (2 * a) % 12) % 12 }
+        } else {
+            if b == 0 { (13 - (2 * a) % 12) % 12 } else { 12 + (12 - (2 * a) % 12) % 12 }
+        }
+    };
+    let mut imgs = HashSet::new();
+    for is_b in [false, true] {
+        for a in 0..6 {
+            for b in 0..2 {
+                imgs.insert(phi(is_b, a, b));
+            }
+        }
+    }
+    if imgs.len() != 24 {
+        return false;
+    }
+    let nadj = nauru_adj();
+    let mut nauru_edges = BTreeSet::new();
+    for u in 0..24 {
+        for &v in &nadj[u] {
+            nauru_edges.insert((u.min(v), u.max(v)));
+        }
+    }
+    let mut eis_edges = BTreeSet::new();
+    for a in 0..6 {
+        for b in 0..2 {
+            let u = phi(false, a, b);
+            for (da, db) in [(0usize, 0usize), (1, 0), (0, 1)] {
+                let ny = b + db;
+                let q = ny / 2;
+                let na = (a + da + 4 * q) % 6;
+                let nb = ny % 2;
+                let v = phi(true, na, nb);
+                eis_edges.insert((u.min(v), u.max(v)));
+            }
+        }
+    }
+    // Check <T, PLR> words
+    let t3 = utt_perm(false, 3, 3);
+    let t6 = utt_perm(false, 6, 6);
+    let t9 = utt_perm(false, 9, 9);
+    let p = utt_perm(true, 0, 0);
+    let l = utt_perm(true, 4, 8);
+    let r = utt_perm(true, 9, 3);
+    let lr2 = comp(&comp(&l, &r), &comp(&l, &r));
+    let rl2 = comp(&comp(&r, &l), &comp(&r, &l));
+    let s_ok = utt_perm(true, 6, 6) == comp(&t6, &p);
+    let g_ok = utt_perm(false, 1, 5) == comp(&t3, &lr2);
+    let ginv_ok = utt_perm(false, 11, 7) == comp(&t9, &rl2);
+    // Canonical 3-adic Dic_6 wall: gX=[[3,0],[0,1]], gY=[[2,1],[1,2]], adj(gY)=[[2,-1],[-1,2]]
+    let mm = |x: [[i64; 2]; 2], y: [[i64; 2]; 2]| -> [[i64; 2]; 2] {
+        [
+            [x[0][0] * y[0][0] + x[0][1] * y[1][0], x[0][0] * y[0][1] + x[0][1] * y[1][1]],
+            [x[1][0] * y[0][0] + x[1][1] * y[1][0], x[1][0] * y[0][1] + x[1][1] * y[1][1]],
+        ]
+    };
+    let w4 = mm(mm([[2, 1], [1, 2]], [[3, 0], [0, 1]]), mm([[2, -1], [-1, 2]], [[3, 0], [0, 1]]));
+    let tr = w4[0][0] + w4[1][1];
+    let det = w4[0][0] * w4[1][1] - w4[0][1] * w4[1][0];
+    eis_edges == nauru_edges && eis_edges.len() == 36 && s_ok && g_ok && ginv_ok && tr == 34 && det == 81
+}
+
+/// Gate D11 (Rust): Explicit 3-adic Hurwitz B_2 (D=6, p=3) Dic_6 realization:
+/// |Aut(Z)|=96, 32 valid surjections, exact 16 principal Gamma(4) + 16 level-8 lifts,
+/// index 48 in (O_2/8O_2)^1/{±1} (order 384), and exact K_{4,4} double-coset quotient across all 32.
+pub fn verify_hurwitz_b2_dic6_k44() -> bool {
+    type Q4 = [i64; 4];
+    let qmul = |x: Q4, y: Q4| -> Q4 {
+        [
+            x[0] * y[0] - x[1] * y[1] - x[2] * y[2] - x[3] * y[3],
+            x[0] * y[1] + x[1] * y[0] + x[2] * y[3] - x[3] * y[2],
+            x[0] * y[2] - x[1] * y[3] + x[2] * y[0] + x[3] * y[1],
+            x[0] * y[3] + x[1] * y[2] - x[2] * y[1] + x[3] * y[0],
+        ]
+    };
+    let qconj = |x: Q4| -> Q4 { [x[0], -x[1], -x[2], -x[3]] };
+    let qnrd = |x: Q4| -> i64 { x[0] * x[0] + x[1] * x[1] + x[2] * x[2] + x[3] * x[3] };
+    // Verify corrected length-4 relator (ty*b)(tx*a)(b*ty)(tx*a) = 4*(5, 6, -2, 4)
+    let qa1: Q4 = [0, 1, 1, 0];
+    let qb1: Q4 = [0, 1, -1, 0];
+    let qtx1: Q4 = [0, 1, 1, 1];
+    let qty1: Q4 = [0, 1, -1, 1];
+    let w4_raw = qmul(qmul(qmul(qty1, qb1), qmul(qtx1, qa1)), qmul(qmul(qb1, qty1), qmul(qtx1, qa1)));
+    if w4_raw != [20, 24, -8, 16] {
+        return false;
+    }
+    // Build Z = Cay(Dic_6, {x, x^-1, y, y^3})
+    let dic6_mul = |u: usize, v: usize| -> usize {
+        let (k1, f1) = (u % 12, u / 12);
+        let (k2, f2) = (v % 12, v / 12);
+        if f1 == 0 {
+            12 * f2 + (k1 + k2) % 12
+        } else if f2 == 0 {
+            12 + (k1 + 12 - k2) % 12
+        } else {
+            (k1 + 18 - k2) % 12
+        }
+    };
+    let mut adj = [[0usize; 4]; 24];
+    for u in 0..24 {
+        adj[u] = [dic6_mul(u, 1), dic6_mul(u, 11), dic6_mul(u, 12), dic6_mul(u, 18)];
+    }
+    // Find Aut(Z) (order 96)
+    let mut order = vec![0usize];
+    let mut seen = [false; 24];
+    seen[0] = true;
+    let mut q = VecDeque::from([0usize]);
+    while let Some(u) = q.pop_front() {
+        for &v in &adj[u] {
+            if !seen[v] {
+                seen[v] = true;
+                order.push(v);
+                q.push_back(v);
+            }
+        }
+    }
+    let mut auts: Vec<Perm24> = Vec::new();
+    let mut perm = [255u8; 24];
+    let mut used = [false; 24];
+    fn bt_z(
+        pos: usize,
+        order: &[usize],
+        adj: &[[usize; 4]; 24],
+        perm: &mut Perm24,
+        used: &mut [bool; 24],
+        out: &mut Vec<Perm24>,
+    ) {
+        if pos == 24 {
+            out.push(*perm);
+            return;
+        }
+        let u = order[pos];
+        let mut cands = Vec::new();
+        if pos == 0 {
+            cands.extend(0..24);
+        } else {
+            let mapped: Vec<usize> = adj[u].iter().filter(|&&w| perm[w] != 255).map(|&w| perm[w] as usize).collect();
+            for &c in &adj[mapped[0]] {
+                if mapped[1..].iter().all(|&m| adj[m].contains(&c)) {
+                    cands.push(c);
+                }
+            }
+        }
+        for c in cands {
+            if !used[c] {
+                perm[u] = c as u8;
+                used[c] = true;
+                bt_z(pos + 1, order, adj, perm, used, out);
+                perm[u] = 255;
+                used[c] = false;
+            }
+        }
+    }
+    bt_z(0, &order, &adj, &mut perm, &mut used, &mut auts);
+    if auts.len() != 96 {
+        return false;
+    }
+    let id = id24();
+    let invs: Vec<Perm24> = auts.iter().copied().filter(|&g| g != id && comp(&g, &g) == id).collect();
+    let stab_invs: Vec<Perm24> = invs.iter().copied().filter(|&g| g[0] == 0).collect();
+    let nbr0 = adj[0];
+    let mut valid_homs = Vec::new();
+    for &ga in &stab_invs {
+        for &gb in &stab_invs {
+            if ga == gb {
+                continue;
+            }
+            let fb: Vec<usize> = nbr0.iter().copied().filter(|&v| gb[v] as usize == v).collect();
+            let fa: Vec<usize> = nbr0.iter().copied().filter(|&v| ga[v] as usize == v).collect();
+            if fb.len() != 2 || fa.len() != 2 {
+                continue;
+            }
+            for &gtx in &invs {
+                if !fb.contains(&(gtx[0] as usize)) || comp(&gtx, &gb) != comp(&gb, &gtx) {
+                    continue;
+                }
+                for &gty in &invs {
+                    if !fa.contains(&(gty[0] as usize)) || comp(&gty, &ga) != comp(&ga, &gty) {
+                        continue;
+                    }
+                    if gen_group(&[ga, gb, gtx, gty]).len() == 96 {
+                        valid_homs.push([ga, gb, gtx, gty]);
+                    }
+                }
+            }
+        }
+    }
+    if valid_homs.len() != 32 {
+        return false;
+    }
+    // Hurwitz O_2 arithmetic mod m
+    let o2_mod = |c: Q4, m: i64| -> Q4 {
+        let a = [
+            ((c[0] - c[3]) / 2).rem_euclid(m),
+            ((c[1] - c[3]) / 2).rem_euclid(m),
+            ((c[2] - c[3]) / 2).rem_euclid(m),
+            c[3].rem_euclid(m),
+        ];
+        let na = [(-a[0]).rem_euclid(m), (-a[1]).rem_euclid(m), (-a[2]).rem_euclid(m), (-a[3]).rem_euclid(m)];
+        a.min(na)
+    };
+    let from_o2 = |a: Q4| -> Q4 { [2 * a[0] + a[3], 2 * a[1] + a[3], 2 * a[2] + a[3], a[3]] };
+    let o2_mul_mod = |u: Q4, v: Q4, m: i64| -> Q4 {
+        let c = qmul(from_o2(u), from_o2(v));
+        o2_mod([c[0] / 2, c[1] / 2, c[2] / 2, c[3] / 2], m)
+    };
+    let hmul = |x: Q4, y: Q4| -> Q4 {
+        let mut r = qmul(x, y);
+        for t in &mut r {
+            *t /= 2;
+        }
+        while r.iter().all(|&t| t % 3 == 0) {
+            for t in &mut r {
+                *t /= 3;
+            }
+        }
+        while r.iter().all(|&t| t % 2 == 0) {
+            let p0 = (r[0] / 2).rem_euclid(2);
+            if r.iter().all(|&t| (t / 2).rem_euclid(2) == p0) {
+                for t in &mut r {
+                    *t /= 2;
+                }
+            } else {
+                break;
+            }
+        }
+        r
+    };
+    let hmod_o2 = |mut x: Q4, m: i64| -> Option<Q4> {
+        let mut n = qnrd(x) / 4;
+        let mut v2 = 0u32;
+        while n % 2 == 0 {
+            n /= 2;
+            v2 += 1;
+        }
+        let mut v3 = 0u32;
+        while n % 3 == 0 {
+            n /= 3;
+            v3 += 1;
+        }
+        if n != 1 || v2 % 2 != 0 || v3 % 2 != 0 {
+            return None;
+        }
+        let d2 = 1i64 << (v2 / 2);
+        for t in &mut x {
+            *t /= d2;
+        }
+        // 3^-1 mod 16 is 11 (3*11=33=1 mod 16)
+        let mut p3 = 1i64;
+        for _ in 0..(v3 / 2) {
+            p3 = (p3 * 3) % (2 * m);
+        }
+        let mut inv3 = 1i64;
+        for cand in 1..(2 * m) {
+            if (p3 * cand) % (2 * m) == 1 {
+                inv3 = cand;
+                break;
+            }
+        }
+        Some(o2_mod([x[0] * inv3, x[1] * inv3, x[2] * inv3, x[3] * inv3], m))
+    };
+
+    let qgens: [Q4; 4] = [[0, 2, 2, 0], [0, 2, -2, 0], [0, 2, 2, 2], [0, 2, -2, 2]];
+    let id8 = o2_mod([2, 0, 0, 0], 8);
+    let id4 = o2_mod([2, 0, 0, 0], 4);
+    let mut principal = 0usize;
+    let mut level8 = 0usize;
+    let mut distinct_h8: BTreeSet<Vec<Q4>> = BTreeSet::new();
+
+    for pgens in &valid_homs {
+        let mut reps: HashMap<Perm24, Q4> = HashMap::new();
+        reps.insert(id, [2, 0, 0, 0]);
+        let mut dq = VecDeque::from([id]);
+        while let Some(g) = dq.pop_front() {
+            let rg = reps[&g];
+            for k in 0..4 {
+                let h = comp(&g, &pgens[k]);
+                if !reps.contains_key(&h) {
+                    reps.insert(h, hmul(rg, qgens[k]));
+                    dq.push_back(h);
+                }
+            }
+        }
+        let mut img8: HashSet<Q4> = HashSet::new();
+        let mut img4: HashSet<Q4> = HashSet::new();
+        for (&g, &rg) in &reps {
+            for k in 0..4 {
+                let h = comp(&g, &pgens[k]);
+                let gq = hmul(hmul(rg, qgens[k]), qconj(reps[&h]));
+                let Some(m8) = hmod_o2(gq, 8) else { return false };
+                let Some(m4) = hmod_o2(gq, 4) else { return false };
+                img8.insert(m8);
+                img4.insert(m4);
+            }
+        }
+        let close = |seed: &HashSet<Q4>, idm: Q4, m: i64| -> Vec<Q4> {
+            let mut s: BTreeSet<Q4> = BTreeSet::new();
+            let mut q2 = VecDeque::from([idm]);
+            s.insert(idm);
+            while let Some(u) = q2.pop_front() {
+                for &sg in seed {
+                    let v = o2_mul_mod(u, sg, m);
+                    if s.insert(v) {
+                        q2.push_back(v);
+                    }
+                }
+            }
+            s.into_iter().collect()
+        };
+        let h8 = close(&img8, id8, 8);
+        let h4 = close(&img4, id4, 4);
+        if h8.len() != 8 {
+            return false;
+        }
+        match h4.len() {
+            1 => principal += 1,
+            2 => level8 += 1,
+            _ => return false,
+        }
+        distinct_h8.insert(h8);
+    }
+    if principal != 16 || level8 != 16 || distinct_h8.len() != 2 {
+        return false;
+    }
+    // Check double-coset quotient H8 \ G_mod8 / U == K_{4,4} for both H8 subgroups
+    let mut g_mod8: BTreeSet<Q4> = BTreeSet::new();
+    for a0 in 0..8 {
+        for a1 in 0..8 {
+            for a2 in 0..8 {
+                for a3 in 0..8 {
+                    let c = from_o2([a0, a1, a2, a3]);
+                    if (qnrd(c) / 4).rem_euclid(8) == 1 {
+                        g_mod8.insert(o2_mod(c, 8));
+                    }
+                }
+            }
+        }
+    }
+    if g_mod8.len() != 384 {
+        return false;
+    }
+    let mut hurwitz24: Vec<Q4> = Vec::new();
+    for sgn in [-2i64, 2] {
+        hurwitz24.extend([[sgn, 0, 0, 0], [0, sgn, 0, 0], [0, 0, sgn, 0], [0, 0, 0, sgn]]);
+    }
+    for s0 in [-1i64, 1] {
+        for s1 in [-1i64, 1] {
+            for s2 in [-1i64, 1] {
+                for s3 in [-1i64, 1] {
+                    hurwitz24.push([s0, s1, s2, s3]);
+                }
+            }
+        }
+    }
+    let e0: Q4 = [0, 2, 2, 2];
+    let ne0: Q4 = [0, -2, -2, -2];
+    let u_even: Vec<Q4> = hurwitz24.iter().map(|&u| o2_mod(u, 8)).collect::<BTreeSet<_>>().into_iter().collect();
+    let u_odd: Vec<Q4> = hurwitz24
+        .iter()
+        .map(|&u| {
+            let r = qmul(qmul(e0, u), ne0);
+            o2_mod([(r[0] / 4) * 3, (r[1] / 4) * 3, (r[2] / 4) * 3, (r[3] / 4) * 3], 8)
+        })
+        .collect::<BTreeSet<_>>()
+        .into_iter()
+        .collect();
+    for h8 in &distinct_h8 {
+        let mut ev: BTreeSet<Vec<Q4>> = BTreeSet::new();
+        let mut od: BTreeSet<Vec<Q4>> = BTreeSet::new();
+        for &g in &g_mod8 {
+            let mut ce: BTreeSet<Q4> = BTreeSet::new();
+            let mut co: BTreeSet<Q4> = BTreeSet::new();
+            for &h in h8 {
+                let hg = o2_mul_mod(h, g, 8);
+                for &u in &u_even {
+                    ce.insert(o2_mul_mod(hg, u, 8));
+                }
+                for &u in &u_odd {
+                    co.insert(o2_mul_mod(hg, u, 8));
+                }
+            }
+            ev.insert(ce.into_iter().collect());
+            od.insert(co.into_iter().collect());
+        }
+        if ev.len() != 4 || od.len() != 4 {
+            return false;
+        }
+        for ec in &ev {
+            let eset: HashSet<Q4> = ec.iter().copied().collect();
+            for oc in &od {
+                let inter = oc.iter().filter(|&&x| eset.contains(&x)).count();
+                if inter != 24 {
+                    return false;
+                }
+            }
+        }
+    }
+    true
+}
+
+/// Gate D12 (Rust): Zero-PARI Manin modular symbols T_3 over F_{1000003} across all 19 genus-25
+/// 3-adic Borel Shimura levels (NEG-M20), returning true iff 0/19 satisfy Dic_6 nullities.
+pub fn verify_all_19_3adic_shimura_levels_excluded() -> bool {
+    let manin_t3_mat = |m_level: i64| -> Vec<Vec<i64>> {
+        let mut pts_set = BTreeSet::new();
+        for c in 0..m_level {
+            for d in 0..m_level {
+                if gcd_i64(gcd_i64(c, d), m_level) == 1 {
+                    pts_set.insert(canon_p1(c, d, m_level));
+                }
+            }
+        }
+        let pts: Vec<(i64, i64)> = pts_set.into_iter().collect();
+        let n = pts.len();
+        let idx: HashMap<(i64, i64), usize> = pts.iter().enumerate().map(|(i, &p)| (p, i)).collect();
+        let mut parent: Vec<usize> = (0..n).collect();
+        let mut sign: Vec<i64> = vec![1; n];
+        let mut killed = vec![false; n];
+        fn find(x: usize, p: &[usize], s: &[i64]) -> (usize, i64) {
+            let mut cur = x;
+            let mut acc = 1i64;
+            while p[cur] != cur {
+                acc *= s[cur];
+                cur = p[cur];
+            }
+            (cur, acc)
+        }
+        let mut merge = |u: usize, v: usize, rel: i64| {
+            let (ru, su) = find(u, &parent, &sign);
+            let (rv, sv) = find(v, &parent, &sign);
+            if ru == rv {
+                if su * sv != rel {
+                    killed[ru] = true;
+                }
+            } else {
+                parent[rv] = ru;
+                sign[rv] = su * sv * rel;
+                if killed[rv] {
+                    killed[ru] = true;
+                }
+            }
+        };
+        for (i, &(c, d)) in pts.iter().enumerate() {
+            let js = idx[&canon_p1(d, -c, m_level)];
+            merge(i, js, -1);
+            let jj = idx[&canon_p1(-c, d, m_level)];
+            merge(i, jj, -1);
+        }
+        let mut rep_map: HashMap<usize, usize> = HashMap::new();
+        for i in 0..n {
+            let (r, _) = find(i, &parent, &sign);
+            if !killed[r] && !rep_map.contains_key(&r) {
+                let id = rep_map.len();
+                rep_map.insert(r, id);
+            }
+        }
+        let num_vars = rep_map.len();
+        let mut pivots: BTreeMap<usize, BTreeMap<usize, i64>> = BTreeMap::new();
+        let mut seen_t = vec![false; n];
+        for i in 0..n {
+            if seen_t[i] {
+                continue;
+            }
+            let (c, d) = pts[i];
+            let j = idx[&canon_p1(d, -c - d, m_level)];
+            let k = idx[&canon_p1(-c - d, c, m_level)];
+            seen_t[i] = true;
+            seen_t[j] = true;
+            seen_t[k] = true;
+            let mut row: BTreeMap<usize, i64> = BTreeMap::new();
+            for &u in &[i, j, k] {
+                let (r, s) = find(u, &parent, &sign);
+                if !killed[r] {
+                    let col = rep_map[&r];
+                    let e = row.entry(col).or_insert(0);
+                    *e = (*e + s).rem_euclid(MOD_Q);
+                    if *e == 0 {
+                        row.remove(&col);
+                    }
+                }
+            }
+            while let Some((&c0, &v0)) = row.iter().next() {
+                if let Some(prow) = pivots.get(&c0) {
+                    for (&pc, &pv) in prow {
+                        let e = row.entry(pc).or_insert(0);
+                        *e = (*e - v0 * pv).rem_euclid(MOD_Q);
+                        if *e == 0 {
+                            row.remove(&pc);
+                        }
+                    }
+                } else {
+                    let inv = mod_inv_i64(v0, MOD_Q);
+                    for val in row.values_mut() {
+                        *val = (*val * inv).rem_euclid(MOD_Q);
+                    }
+                    pivots.insert(c0, row);
+                    break;
+                }
+            }
+        }
+        let piv_keys: Vec<usize> = pivots.keys().copied().rev().collect();
+        for &c0 in &piv_keys {
+            let mut row = pivots[&c0].clone();
+            let sub_cols: Vec<(usize, i64)> = row.iter().filter(|(&k, _)| k != c0 && pivots.contains_key(&k)).map(|(&k, &v)| (k, v)).collect();
+            for (sc, sv) in sub_cols {
+                row.remove(&sc);
+                for (&pc, &pv) in &pivots[&sc] {
+                    if pc != sc {
+                        let e = row.entry(pc).or_insert(0);
+                        *e = (*e - sv * pv).rem_euclid(MOD_Q);
+                        if *e == 0 {
+                            row.remove(&pc);
+                        }
+                    }
+                }
+            }
+            pivots.insert(c0, row);
+        }
+        let free_cols: Vec<usize> = (0..num_vars).filter(|c| !pivots.contains_key(c)).collect();
+        let free_idx: HashMap<usize, usize> = free_cols.iter().enumerate().map(|(i, &c)| (c, i)).collect();
+        let dim = free_cols.len();
+        let vec_of_pt = |i: usize| -> Vec<i64> {
+            let (r, s) = find(i, &parent, &sign);
+            let mut v = vec![0i64; dim];
+            if killed[r] {
+                return v;
+            }
+            let col = rep_map[&r];
+            if let Some(&fi) = free_idx.get(&col) {
+                v[fi] = s.rem_euclid(MOD_Q);
+            } else {
+                for (&f, &val) in &pivots[&col] {
+                    if f != col {
+                        v[free_idx[&f]] = (-s * val).rem_euclid(MOD_Q);
+                    }
+                }
+            }
+            v
+        };
+        let mut basis_pts: Vec<Option<(usize, i64)>> = vec![None; dim];
+        for i in 0..n {
+            let (r, s) = find(i, &parent, &sign);
+            if !killed[r] {
+                let col = rep_map[&r];
+                if let Some(&fi) = free_idx.get(&col) {
+                    if basis_pts[fi].is_none() {
+                        basis_pts[fi] = Some((i, s));
+                    }
+                }
+            }
+        }
+        let h3 = [
+            (1, 0, 0, 3),
+            (1, 0, 1, 3),
+            (1, 0, 2, 3),
+            (2, 1, 1, 2),
+            (3, 0, 0, 1),
+            (3, 1, 0, 1),
+            (3, 2, 0, 1),
+        ];
+        let mut t3 = vec![vec![0i64; dim]; dim];
+        for b in 0..dim {
+            let (ipt, spt) = basis_pts[b].unwrap();
+            let (c, d) = pts[ipt];
+            for (a, bb, cc, dd) in h3 {
+                let j = idx[&canon_p1(a * c + cc * d, bb * c + dd * d, m_level)];
+                let vj = vec_of_pt(j);
+                for r in 0..dim {
+                    t3[r][b] = (t3[r][b] + spt * vj[r]).rem_euclid(MOD_Q);
+                }
+            }
+        }
+        t3
+    };
+    let sq_nullity = |t: &[Vec<i64>], shift: i64| -> usize {
+        let d = t.len();
+        let mut sq = vec![vec![0i64; d]; d];
+        for i in 0..d {
+            for k in 0..d {
+                let tik = t[i][k];
+                if tik != 0 {
+                    for j in 0..d {
+                        sq[i][j] = (sq[i][j] + tik * t[k][j]).rem_euclid(MOD_Q);
+                    }
+                }
+            }
+        }
+        nullity_mod(&sq, shift)
+    };
+    // Ground-truth check at M=11 (a3 = -1) & M=14 (a3 = -2)
+    let t11 = manin_t3_mat(11);
+    let t14 = manin_t3_mat(14);
+    if t11.len() != 1 || t11[0][0] != MOD_Q - 1 || t14.len() != 1 || t14[0][0] != MOD_Q - 2 {
+        return false;
+    }
+    const LEVELS_19: [i64; 19] = [
+        230, 238, 110, 112, 161, 104, 143, 133, 370, 250, 266, 298, 302, 314, 185, 149, 151, 374, 410,
+    ];
+    for &m in &LEVELS_19 {
+        let t3 = manin_t3_mat(m);
+        let n3 = sq_nullity(&t3, 3);
+        let n9 = sq_nullity(&t3, 9);
+        if m == 374 && !(n3 == 4 && n9 == 0) {
+            return false;
+        }
+        if n3 >= 4 && n9 >= 2 {
+            return false;
+        }
+    }
+    true
+}

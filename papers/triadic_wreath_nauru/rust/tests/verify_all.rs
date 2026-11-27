@@ -41,3 +41,18 @@ fn test_seam_splitmix64_bit_exact_replay() {
         assert_eq!(r1.next_u64(), r2.next_u64());
     }
 }
+
+#[test]
+fn test_d10_eisenstein_nauru_and_su2() {
+    assert!(verify_eisenstein_nauru_and_su2());
+}
+
+#[test]
+fn test_d11_hurwitz_b2_dic6_32homs_and_k44() {
+    assert!(verify_hurwitz_b2_dic6_k44());
+}
+
+#[test]
+fn test_d12_zero_pari_manin_t3_all_19_genus25_excluded() {
+    assert!(verify_all_19_3adic_shimura_levels_excluded());
+}

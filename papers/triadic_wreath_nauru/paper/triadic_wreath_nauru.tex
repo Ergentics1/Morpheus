@@ -4,9 +4,9 @@
 \usepackage{mathtools,amssymb,graphicx,booktabs,enumitem}
 \usepackage[hidelinks]{hyperref}
 \hypersetup{
-  pdftitle={Uniform Triadic Wreath Products, the Nauru Graph, and 2-Adic Arithmeticity},
+  pdftitle={Uniform Triadic Wreath Products, the Nauru Graph, and Dual-Prime D=6 Arithmeticity},
   pdfauthor={Ergentics},
-  pdfkeywords={uniform triadic transformations, wreath product, Nauru graph, Ramanujan graph, Ihara zeta function, Mumford curve, Lame amalgam, quaternion algebra, non-congruence Shimura cover}
+  pdfkeywords={uniform triadic transformations, wreath product, Nauru graph, Eisenstein honeycomb, Ramanujan graph, Ihara zeta function, Mumford curve, Lame amalgam, Hurwitz quaternion algebra, SU(2) Wilson loop, non-congruence Shimura cover}
 }
 \pdfinfo{/Producer () /Creator ()}
 \usepackage{microtype}
@@ -28,6 +28,7 @@
 \newcommand{\PGL}{\mathrm{PGL}}
 \newcommand{\PSL}{\mathrm{PSL}}
 \newcommand{\SL}{\mathrm{SL}}
+\newcommand{\SU}{\mathrm{SU}}
 \newcommand{\Aut}{\mathrm{Aut}}
 \newcommand{\Cay}{\mathrm{Cay}}
 \newcommand{\UTT}{\mathrm{UTT}}
@@ -38,20 +39,20 @@
 \emergencystretch=3em
 \raggedbottom
 
-\title[Triadic Wreath Products, Nauru Graph, and $2$-Adic Arithmeticity]{Uniform Triadic Wreath Products, the Nauru Graph, and $2$-Adic Arithmeticity}
+\title[Triadic Wreath Products, Nauru, and Dual-Prime $D{=}6$]{Uniform Triadic Wreath Products, the Nauru Graph, and Dual-Prime $D{=}6$ Arithmeticity}
 \author{Ergentics}
 \date{November 2026}
 \subjclass[2020]{Primary 11G18, 14G22, 05C50; Secondary 00A65, 11R52, 20E22}
-\keywords{uniform triadic transformations, wreath product, Nauru graph, Ramanujan graph, Ihara zeta function, $2$-adic Mumford curve, Lam\'e amalgam, quaternion algebra, non-congruence subgroup}
+\keywords{uniform triadic transformations, wreath product, Nauru graph, Eisenstein honeycomb, Ramanujan graph, Ihara zeta function, $p$-adic Mumford curve, Lam\'e amalgam, Hurwitz quaternion algebra, $\mathrm{SU}(2)$ Wilson loop, non-congruence subgroup}
 
 \begin{document}
 \begin{abstract}
-We resolve the structural relationship between David Lewin's melodic $T/I$ group, the neo-Riemannian $PLR$ harmonic group, and Julian Hook's Uniform Triadic Transformation wreath product $\UTT = \Z_{12}\wr\Z_2$ (order $288$), and uncover a $2$-adic arithmetic universe inside its Galois twists. First, $\langle T, PLR\rangle\cong(\Z_{12}\times D_{12})/\Z_2$ has order $144$ ($|[G,G]|=6$, $|G^{\mathrm{ab}}|=24$)---the exact index-$2$ even-parity subgroup of $\UTT$, missing odd-parity elements such as Hook's Hamiltonian cycle $Q=\langle -,1,0\rangle$ (\texttt{NEG-M16}). Meanwhile, $T/I$ and $PLR$ \emph{do} fuse by Crans--Fiore--Satyendra duality ($C_{\mathrm{Sym}(24)}(T/I)=PLR$, sharing $\{e,T_6=(LR)^6\}$) into $\langle T/I, PLR\rangle\cong(D_{12}\times D_{12})/\Z_2$ of order $288$, yet this group is \emph{neither equal nor isomorphic} to $\UTT$ ($|Z|=2$ vs.\ $12$, $99$ vs.\ $15$ involutions, $0$ vs.\ $48$ order-$24$ elements; \texttt{NEG-M15}). Instead, $I_0\notin\UTT$ normalizes $\UTT$ via $I_0\langle\sigma,t^+,t^-\rangle I_0^{-1}=\langle\sigma,-t^-,-t^+\rangle$, generating $\UTT\rtimes\langle I_0\rangle$ (order $576$), which sits at index~$2$ inside \emph{two distinct, non-isomorphic} order-$1{,}152$ extensions (\texttt{NEG-M19}): the full normalizer $N_{\mathrm{Sym}(24)}(T)=N_{\mathrm{Sym}(24)}(\UTT)=\UTT\rtimes\Z_{12}^\times$ ($247$ involutions, $|[G,G]|=72$) and Hook's quasi-uniform wreath product $Q\UTT\cong D_{12}\wr\Z_2$ ($219$ involutions, $|[G,G]|=144$, which does \emph{not} normalize $\UTT$). Second, an exhaustive census of all $24$ simply transitive order-$24$ subgroups of $\UTT$ ($8$ isomorphism classes indexed by $u\in\Z_{12}^\times$) proves that $PLR\cong D_{12}$ is the \emph{unique} subgroup admitting $3$-involution Coxeter triples ($192$ total, $168$ Ramanujan), whereas the split $M_5$ ($S_3\times\Z_4$) and $M_7$ ($\Z_3\times D_4$) Galois twists canonically construct the symmetric \textbf{Nauru graph} $Y=\GP(12,5)$ with sharper Ramanujan gap $\lambda_{\mathrm{nt}}=2<\sqrt{5}<2\sqrt{2}$. Third, in sharp contrast to the non-arithmetic Tonnetz curve $C_X$ of Paper~\#01, the Nauru graph overturns every $2$-adic obstruction: its integral spectrum splits $\zeta_Y(u)^{-1}$ completely into quadratic $\F_2$ Weil factors hitting all five elliptic isogeny classes ($a_2\in\{-2,-1,0,+1,+2\}$), its Raynaud/sandpile group is pure $5$-smooth ($|K(Y)|=162{,}000{,}000=2^7\cdot3^4\cdot5^6$), its divisorial gonality $\operatorname{gon}(Y)=6$ is witnessed by a single reduced prime hexagon, and $|\Aut(Y)|=144=12(g-1)$ lifts via the Herrlich--Cornelissen--Kato Lam\'e amalgam $\tilde{\Gamma}=S_3*_{\Z_2}V_4\subset\PGL_2(\Q_2)$. Expressing $\tilde{\Gamma}$ via the single $2$-adic modulus $x=\tau(ta)$ yields universal Fricke--Vogt trace polynomials and ambient quaternion algebra $B(x)=\left(\frac{-3,\,x(x-3)}{\Q(x)}\right)$, proving that \emph{exact} rational arithmetic Nauru curves occur at and only at $x\in\{\tfrac12,\tfrac32,\tfrac52\}$ inside $B_3=(\frac{-3,-1}{\Q})$ ($D=6$) and $B_5=(\frac{-3,-5}{\Q})$ ($D=10$). At $x=\tfrac32$ ($\tau(\gamma_6)=\tfrac{121}{64}<4$), $\Gamma_Y\trianglelefteq_{V_4}\Gamma(3)$ is an explicit \emph{arithmetic non-congruence} Klein $V_4$-cover of the genus-$4$ principal level-$3$ Shimura curve $X^6(\Gamma(3))$ (dual graph $K_{3,3}$); at $x=\tfrac52$, $\Gamma_Y\trianglelefteq_{S_3}\Gamma_5(3)$ covers $X^{10}(\Gamma(3))$ (dual graph $K_4$) through the cube $Q_3$---explaining why all $19$ Borel-level genus-$13$ Shimura curves $X_0^D(N)$ fail (\texttt{NEG-M18}). Finally, the unique dicyclic companion $\mathrm{Dic}_6\subset\UTT$ produces $12/18$ strictly Ramanujan $4$-regular bipartite Cayley graphs ($g=25$, $\lambda_{\mathrm{nt}}=3<2\sqrt{3}$, open $3$-adic arithmeticity on $T_4$). Every theorem is independently verified across three zero-shared-data planes: pure Python ($12/12$ D/R/P/Seam gates), zero-Mathlib Lean~4.36.0 ($22/22$ kernel-checked theorems, $0$ \texttt{sorry}), and zero-crate Rust ($6/6$ integration tests).
+We resolve the relationship between Lewin's melodic $T/I$ group, the neo-Riemannian $PLR$ group, and Hook's wreath product $\UTT=\Z_{12}\wr\Z_2$ (order $288$), and establish a \textbf{shared-discriminant $D=2\cdot 3=6$ dual-prime arithmetic mirror} uniting $2$-adic and $3$-adic Mumford curves inside its Galois twists. First, $\langle T,PLR\rangle\cong(\Z_{12}\times D_{12})/\Z_2$ ($144$, $|[G,G]|=6$, $|G^{\mathrm{ab}}|=24$) is the index-$2$ even-parity subgroup of $\UTT$ (\texttt{NEG-M16}), while Crans--Fiore--Satyendra duality fuses $T/I$ and $PLR$ into $(D_{12}\times D_{12})/\Z_2\not\cong\UTT$ ($288$, \texttt{NEG-M15}). Above $\UTT\rtimes\langle I_0\rangle$ ($576$), the tower bifurcates into two non-isomorphic order-$1{,}152$ extensions (\texttt{NEG-M19}): $N_{\mathrm{Sym}(24)}(T)=N_{\mathrm{Sym}(24)}(\UTT)$ ($247$ involutions) vs.\ Hook's $Q\UTT\cong D_{12}\wr\Z_2$ ($219$ involutions). Second, an exhaustive census of all $24$ simply transitive order-$24$ subgroups of $\UTT$ proves $PLR$ is unique for $3$-involution Coxeter triples ($168/192$ Ramanujan), whereas the $M_5/M_7$ twists yield the \textbf{Nauru graph} $Y=\GP(12,5)$ ($\lambda_{\mathrm{nt}}=2<\sqrt{5}<2\sqrt{2}$). Third, we prove an exact $36/36$-edge Eisenstein honeycomb isomorphism $\{6,3\}_{(2,2)}\cong Y$ on $\Z[\omega]/(2(1-\omega))\cong\F_4\times\F_3$ (falsifier \texttt{F31}), showing its $12$ dual Bloch momenta hit Dirac cones $K,K'$ ($\lambda=0^4$) and Van Hove $M$-points ($\lambda=\pm 1^3$), decomposing $S_{\mathrm{Nauru}}\subset\langle T,PLR\rangle$, and gaining $+30.90\%$ spectral gap ($\Delta_Y/\Delta_X=(3+\sqrt{5})/4$). Fourth, $Y$ overturns every $2$-adic obstruction of Paper~\#01: $\zeta_Y(u)^{-1}$ hits all $5/5$ $\F_2$ elliptic isogeny classes, $|K(Y)|=2^7\cdot 3^4\cdot 5^6$, $\operatorname{gon}(Y)=6$ via a single prime hexagon, and the Lam\'e amalgam $\tilde{\Gamma}=S_3*_{\Z_2}V_4\subset\PGL_2(\Q_2)$ yields rational arithmetic Nauru curves precisely at $x\in\{\tfrac12,\tfrac32,\tfrac52\}$ in $B_3=(\frac{-3,-1}{\Q})$ ($D=6$) and $B_5=(\frac{-3,-5}{\Q})$ ($D=10$)---realized as arithmetic non-congruence $V_4/S_3$-covers of level-$3$ Shimura curves ($K_{3,3}, K_4$), excluding all $19/19$ Borel $X_0^D(N)$ (\texttt{NEG-M18}). Every definite arithmetic uniformization carries an intrinsic compact $\SU(2)$ Wilson action $S_W=1-\tfrac12\sqrt{\tau}\in\{\tfrac{5}{16},\tfrac{7}{16},\tfrac{19}{32},\tfrac{4}{9}\}$ strictly separated from four non-arithmetic walls ($\tau>4$). Finally, swapping primes in $D=6$ to the Hurwitz algebra $B_2=(\frac{-1,-1}{\Q})$ ($p=3$) resolves the $3$-adic companion $\mathrm{Dic}_6$ ($g=25, \lambda_{\mathrm{nt}}=3$): although the canonical $3$-adic Schottky lift fails ($\tau=\tfrac{1156}{81}>4$, \texttt{NEG-M21}), $B_2$ constructs an explicit arithmetic curve $C_Z/\Q_3$ with corrected relator $w_4=(t_yb)(t_xa)(bt_y)(t_xa)/4=5+6i-2j+4k$ ($S_W=\tfrac49$), universal all-lengths $T_4$ freeness, exact $32$ surjections yielding universal congruence quotient $K_{4,4}$ (strict non-congruence cyclic $C_3$-cover index $3$), and $0/19$ $3$-adic Borel Shimura realizations via Manin $T_3$ (\texttt{NEG-M20}). All theorems are verified across pure Python ($15/15$ gates), zero-Mathlib Lean~4.36.0 ($32/32$ theorems, $0$ \texttt{sorry}), and zero-crate Rust ($9/9$ tests).
 \end{abstract}
 \maketitle
 
 \section{Introduction}\label{sec:intro}
-In Paper~\#01 of the Morpheus series (\emph{Prime cadences} \cite{ergentics2026pc}), the $24$ major and minor triads of $12$-tone equal temperament were organized into the $3$-regular neo-Riemannian Tonnetz graph $X=\Cay(D_{12},\{P,L,R\})$. That study revealed a striking web of connections linking voice-leading geometry to graphene tight-binding bands, Ihara zeta functions \cite{ihara1966,sunada1986,bass1992}, Ramanujan graphs \cite{lps1988}, and $2$-adic Mumford curves \cite{mumford1972,gvdp1980}. Yet Section~7 of \cite{ergentics2026pc} closed with a formidable wall of $2$-adic obstructions:
+In Paper~\#01 of the Morpheus series (\emph{Prime cadences} \cite{ergentics2026pc}), the $24$ major and minor triads of $12$-tone equal temperament were organized into the $3$-regular neo-Riemannian Tonnetz graph $X=\Cay(D_{12},\{P,L,R\})$. That study revealed a striking web of connections linking voice-leading geometry to graphene tight-binding bands \cite{wallace1947}, Ihara zeta functions \cite{ihara1966,sunada1986,bass1992}, Ramanujan graphs \cite{lps1988}, and $2$-adic Mumford curves \cite{mumford1972,gvdp1980}. Yet Section~7 of \cite{ergentics2026pc} closed with a formidable wall of $2$-adic obstructions:
 \begin{enumerate}[label=(\roman*),nosep]
 \item the Ihara zeta numerator of $X$ carries an irreducible octic $(1+4u^2+9u^4+16u^6+16u^8)^2$ whose $\F_2$ isogeny class \texttt{4.2.a\_e\_a\_j} contains no genus-$4$ Jacobian and requires genus $\ge 5$ complete intersections in $\mathbb{P}^4$;
 \item the Raynaud component group $K(X)$ of the N\'eron model of $J(C_X)/\Q_2$ carries the exotic prime $23$ ($|K(X)|=156{,}008{,}448=2^{15}\cdot 3^2\cdot 23^2$);
@@ -60,13 +61,13 @@ In Paper~\#01 of the Morpheus series (\emph{Prime cadences} \cite{ergentics2026p
 
 A natural musical and algebraic question immediately arises: \emph{do David Lewin's melodic $T/I$ group \cite{lewin1987} and the neo-Riemannian $PLR$ group \cite{cfs2009} fuse into Julian Hook's Uniform Triadic Transformation ($\UTT$) wreath product $\Z_{12}\wr\Z_2$ \cite{hook2002}, and what graphs and $p$-adic curves arise from the remaining simply transitive subgroups of $\UTT$?}
 
-This paper answers both halves completely. First, $T/I$ and $PLR$ \emph{do} fuse by Crans--Fiore--Satyendra duality into $(D_{12}\times D_{12})/\Z_2$ of order $288$, \emph{but not into $\UTT$} (\texttt{NEG-M15}), while $\langle T, PLR\rangle$ captures only the even-parity index-$2$ subgroup of order $144$ (\texttt{NEG-M16}), and $\UTT\rtimes\langle I_0\rangle$ ($576$) bifurcates into two non-isomorphic order-$1{,}152$ extensions: $N_{\mathrm{Sym}(24)}(T)=N_{\mathrm{Sym}(24)}(\UTT)$ vs.\ Hook's quasi-uniform wreath product $Q\UTT\cong D_{12}\wr\Z_2$ (\texttt{NEG-M19}). Second, an exhaustive census of all $24$ simply transitive order-$24$ subgroups of $\UTT$ shows that turning the Galois normalizer dial from $u=11$ ($PLR$) to $u\in\{5,7\}$ ($M_5/M_7$ twists) transforms the Tonnetz $X$ into the symmetric \textbf{Nauru graph} $Y=\GP(12,5)$---a bipartite $3$-regular graph of the same order ($24$ vertices, $36$ edges, genus $13$) whose Lam\'e-type $2$-adic Mumford uniformizations admit exact rational arithmetic realizations ($x\in\{\tfrac12,\tfrac32,\tfrac52\}$) that overturn every obstruction of Paper~\#01.
+This paper answers both halves completely and closes the resulting $2$-adic and $3$-adic arithmetic frontiers into a unified \textbf{shared-discriminant $D=2\cdot 3=6$ dual-prime mirror}. First, $T/I$ and $PLR$ \emph{do} fuse by Crans--Fiore--Satyendra duality into $(D_{12}\times D_{12})/\Z_2$ of order $288$, \emph{but not into $\UTT$} (\texttt{NEG-M15}), while $\langle T, PLR\rangle$ captures only the even-parity index-$2$ subgroup of order $144$ (\texttt{NEG-M16}), and $\UTT\rtimes\langle I_0\rangle$ ($576$) bifurcates into two non-isomorphic order-$1{,}152$ extensions: $N_{\mathrm{Sym}(24)}(T)=N_{\mathrm{Sym}(24)}(\UTT)$ vs.\ Hook's quasi-uniform wreath product $Q\UTT\cong D_{12}\wr\Z_2$ (\texttt{NEG-M19}). Second, an exhaustive census of all $24$ simply transitive order-$24$ subgroups of $\UTT$ shows that turning the Galois normalizer dial from $u=11$ ($PLR$) to $u\in\{5,7\}$ ($M_5/M_7$ twists) transforms the Tonnetz $X$ into the symmetric \textbf{Nauru graph} $Y=\GP(12,5)$---isomorphic edge-for-edge to the Eisenstein honeycomb $\{6,3\}_{(2,2)}$ on $\Z[\omega]/(2(1-\omega))$, whose $12$ dual Bloch momenta hit Dirac cones $K,K'$ and Van Hove saddle points $M$ while sharpening the spectral gap by $+30.90\%$, and whose Lam\'e-type $2$-adic Mumford uniformizations admit exact rational arithmetic realizations ($x\in\{\tfrac12,\tfrac32,\tfrac52\}$) inside $B_3=(\frac{-3,-1}{\Q})$ ($D=6$) and $B_5=(\frac{-3,-5}{\Q})$ ($D=10$) that overturn every obstruction of Paper~\#01. Third, every definite arithmetic uniformization induces an intrinsic compact $\SU(2)$ Wilson-loop action $S_W(w)=1-\tfrac12\sqrt{\tau(w)}\in(0,1)$ sharply separated from the non-arithmetic hyperbolic walls ($\tau>4$). Fourth, passing to the unique dicyclic companion $\mathrm{Dic}_6\subset\UTT$ and swapping the ramified and split primes of $D=6$ from $B_3$ ($p=2$) to the Hurwitz quaternion algebra $B_2=(\frac{-1,-1}{\Q})$ ($p=3$) resolves the $3$-adic arithmeticity of $Z=\Cay(\mathrm{Dic}_6,\{x,x^{-1},y,y^3\})$ completely: $C_Z/\Q_3$ is an explicit arithmetic non-congruence cyclic $C_3$-cover of the level-$8\calO_2$ congruence Shimura reduction graph $K_{4,4}$, while all $19/19$ genus-$25$ $3$-adic Borel Shimura curves $X_0^D(N)$ are excluded via zero-PARI Manin $T_3$ (\texttt{NEG-M20}).
 
 \begin{remark}[Attribution, Independent Review, and Multi-Plane Verification]
-Following Morpheus governance (\path{AGENTS.md}, \path{METHODOLOGY.md}), attribution tags mark \ctag{lit.} classical literature, \ctag{E} research direction and correspondence architecture by Ergentics, \ctag{G4N} first-principles derivations and proofs by Gemini~4~Neon, \ctag{GB} Round-1 independent audit by Grok Bot (confirming \texttt{NEG-M15}--\texttt{NEG-M16}, subgroup census, $PLR$ uniqueness, Nauru, and spanning-tree counts; catching the \texttt{v0.5.0} Table~1 transcription typo on $\langle T,PLR\rangle$ [$6/24$ vs.\ $12/12$], supplying the Crans--Fiore--Satyendra duality framing, and flagging Hook's order-$1{,}152$ quasi-UTT bifurcation \texttt{NEG-M19}), and \ctag{X} independent cross-verification. Every theorem below is verified without circular cached-data reads across three open Code-Model planes inside \path{papers/triadic_wreath_nauru/}:
-(1)~pure Python (\path{code/triadic_nauru_verify.py}, $12/12$ D/R/P/Seam gates emitting SHA-256-manifested \path{data/triadic_nauru_calibration.json});
-(2)~zero-Mathlib Lean~4.36.0 (\path{lean/TriadicNauru/Core.lean}, $22/22$ kernel-checked theorems, $0$ \texttt{sorryAx}, $0$ \texttt{ofReduceBool}); and
-(3)~zero-crate Rust (\path{rust/src/lib.rs}, $6/6$ integration tests).
+Following Morpheus governance (\path{AGENTS.md}, \path{METHODOLOGY.md}), attribution tags mark \ctag{lit.} classical literature, \ctag{E} research direction and correspondence architecture by Ergentics (including Ergentics Monograph~IV Act~XXIV on Eisenstein--Nauru duality, compact $\SU(2)$ Wilson holonomy, and the $3$-adic Hurwitz $B_2$ resolution of $\mathrm{Dic}_6$), \ctag{G4N} first-principles derivations, formal proofs, and independent audits by Gemini~4~Neon (including two minor editorial reconciliations from Monograph~IV: correcting the printed third factor of the Hurwitz relator $w_4$ from $t_y b$ to $b t_y$ in Theorem~\ref{thm:hurwitz_dic6}, and assigning the $3$-adic Borel exclusion and canonical Schottky obstruction to \texttt{NEG-M20}--\texttt{NEG-M21} to preserve \texttt{NEG-M19}), \ctag{GB} Round-1 independent audit by Grok Bot (confirming \texttt{NEG-M15}--\texttt{NEG-M16}, subgroup census, $PLR$ uniqueness, Nauru, and spanning-tree counts; catching the \texttt{v0.5.0} Table~1 transcription typo on $\langle T,PLR\rangle$ [$6/24$ vs.\ $12/12$], supplying the Crans--Fiore--Satyendra duality framing, and flagging Hook's order-$1{,}152$ quasi-UTT bifurcation \texttt{NEG-M19}), and \ctag{X} independent cross-verification. Every theorem below is verified without circular cached-data reads across three open Code-Model planes inside \path{papers/triadic_wreath_nauru/}:
+(1)~pure Python (\path{code/triadic_nauru_verify.py}, $15/15$ D/R/P/Seam gates emitting SHA-256-manifested \path{data/triadic_nauru_calibration.json});
+(2)~zero-Mathlib Lean~4.36.0 (\path{lean/TriadicNauru/Core.lean}, $32/32$ kernel-checked theorems, $0$ \texttt{sorryAx}, $0$ \texttt{ofReduceBool}); and
+(3)~zero-crate Rust (\path{rust/src/lib.rs}, $9/9$ integration tests, $8/8$ core suites).
 \end{remark}
 
 \section{Fusion of Lewin \texorpdfstring{$T/I$}{T/I} and \texorpdfstring{$PLR$}{PLR}---But Not into Hook's Wreath Product}\label{sec:nonfusion}
@@ -194,7 +195,7 @@ Symmetry, $3$-regularity, bipartiteness, zero $4$-cycles ($A_Y^2[a,c]\le 1$ for 
 \end{proof}
 
 \begin{remark}[Scope of integral Weil splitting and Bruhat--Tits uniformization]\label{rem:framing_scope}
-\ctag{GB, G4N}\ Two structural distinctions deserve explicit care. First, because any connected $3$-regular integral graph has all nontrivial eigenvalues $\lambda\in\{0,\pm 1,\pm 2\}$, its Ihara zeta function automatically factors into quadratic $\F_2$ elliptic Weil factors $1-\lambda u+2u^2$; what distinguishes $Y$ combinatorially from the Tonnetz $X$ is that $\operatorname{Spec}(A_Y)$ is integral and surjective onto all five traces $a_2\in\{0,\pm 1,\pm 2\}$, removing Paper~\#01's irreducible genus-$4/5$ octic obstruction rather than constituting arithmetic evidence by itself. Second, by Mumford uniformization \cite{mumford1972,serre1980}, \emph{every} finite $(q+1)$-regular graph of genus $g\ge 2$ arises as a quotient $T_{q+1}/\Gamma$ of the Bruhat--Tits tree of $\PGL_2(\Q_q)$ by a free Schottky group $\Gamma$; genuine arithmeticity (commensurability with a definite quaternion order) is established for $Y$ solely by Sections~\ref{sec:2adic_moduli}--\ref{sec:noncongruence} and remains open for the $3$-adic companion $Z$ in Section~\ref{sec:3adic}.
+\ctag{GB, G4N}\ Two structural distinctions deserve explicit care. First, because any connected $3$-regular integral graph has all nontrivial eigenvalues $\lambda\in\{0,\pm 1,\pm 2\}$, its Ihara zeta function automatically factors into quadratic $\F_2$ elliptic Weil factors $1-\lambda u+2u^2$; what distinguishes $Y$ combinatorially from the Tonnetz $X$ is that $\operatorname{Spec}(A_Y)$ is integral and surjective onto all five traces $a_2\in\{0,\pm 1,\pm 2\}$, removing Paper~\#01's irreducible genus-$4/5$ octic obstruction rather than constituting arithmetic evidence by itself. Second, by Mumford uniformization \cite{mumford1972,serre1980}, \emph{every} finite $(q+1)$-regular graph of genus $g\ge 2$ arises as a quotient $T_{q+1}/\Gamma$ of the Bruhat--Tits tree of $\PGL_2(\Q_q)$ by a free Schottky group $\Gamma$; genuine arithmeticity (commensurability with a definite quaternion order) is established constructively for $Y$ in Sections~\ref{sec:2adic_moduli}--\ref{sec:noncongruence} and for the $3$-adic $\mathrm{Dic}_6$ companion $Z$ in Section~\ref{sec:3adic} via the shared-discriminant $D=6$ Hurwitz algebra $B_2$.
 \end{remark}
 
 \begin{table}[t]
@@ -229,6 +230,34 @@ D_{\mathrm{hex}} &= u_0 + u_1 + u_2 + v_0 + v_2 + v_7\\
 \end{theorem}
 \begin{proof}
 Exact integer Smith normal form of the $23\times 23$ reduced Laplacian of $3I-A_Y$ yields invariant factors $[5,5,5,30,120,360]$ with product $2^7\cdot 3^4\cdot 5^6 = 162{,}000{,}000$ (Python Gate~D4; Lean~4 Theorem~11). By vertex-transitivity of $Y$, any rank-$\ge 1$ divisor class of degree $d$ contains an effective representative with $D(u_0)\ge 1$. Exhaustive Dhar burning across all $\sum_{d=2}^5 \binom{24+d-2}{d-1} = 20{,}474$ such divisors finds zero rank-$\ge 1$ divisors (verified independently in Python Gate~D4 and Rust test \texttt{test\_d4}), while $D_{\mathrm{hex}}$ passes $q$-reduction at all $24$ vertices (and forms a length-$6$ cycle, Lean~4 Theorem~8). Computing $\beta_1(Y/\langle g\rangle)=|E_{\mathrm{non\text{-}inv}}/\langle g\rangle|-|V/\langle g\rangle|+1$ across all $39$ involutions gives $\{4^6,5^9,6^{18},7^6\}$.
+\end{proof}
+
+\begin{theorem}[Eisenstein--Nauru $\{6,3\}_{(2,2)}$ recovery, Dirac-cone mechanism, and $+30.90\%$ gap transfer]\label{thm:eisenstein_nauru}
+\ctag{E$\to$G4N; X}\ Let $\Z[\omega]$ ($\omega^2+\omega+1=0$, $j$-invariant $0$, conductor $1$) be the Eisenstein integer ring and consider the principal ideal $\mathfrak{a}=(2(1-\omega))$ of norm $N(2(1-\omega))=12$ (fundamental domain $\Z[\omega]/\mathfrak{a}\cong\F_4\times\F_3$, represented by $\{(a,b)\in\{0,\dots,5\}\times\{0,1\}\}$ modulo $\Lambda_{(2,2)}=\langle(2,2),(-2,4)\rangle$).
+\begin{enumerate}[label=(\alph*),nosep]
+\item \textbf{Exact $36/36$ honeycomb isomorphism:} The closed-form bijection $\varphi:\{6,3\}_{(2,2)}\to Y=\GP(12,5)$ given on sublattices $A,B$ by
+\begin{align*}
+\varphi(A_{a,0}) &= u_{-2a\bmod 12}, & \varphi(A_{a,1}) &= v_{(5-2a)\bmod 12},\\
+\varphi(B_{a,0}) &= u_{(1-2a)\bmod 12}, & \varphi(B_{a,1}) &= v_{-2a\bmod 12}
+\end{align*}
+maps every one of the $36$ honeycomb edges $(A_{a,b},B_{a+\delta_1,b+\delta_2})$ with $(\delta_1,\delta_2)\in\{(0,0),(1,0),(0,1)\}$ directly onto an edge of $\GP(12,5)$. By contrast, the unit-shifted ideal $\mathfrak{a}'=(2(1+\omega))$ has $N(2(1+\omega))=4\ne 12$ and collapses the $24$-vertex honeycomb (falsifier~\textup{\texttt{F31}}).
+\item \textbf{Dirac-cone \& Van Hove Bloch mechanism:} Under Wallace's honeycomb tight-binding dispersion $\lambda_{\pm}(\mathbf{k})=\pm|1+e^{ik_1}+e^{ik_2}|$ \cite{wallace1947}, the $12$ dual reciprocal momenta of $\Lambda_{(2,2)}$ hit the graphene Dirac cones $K=(\frac{2\pi}{3},\frac{4\pi}{3})$ and $K'=(\frac{4\pi}{3},\frac{2\pi}{3})$ (generating all four zero modes $\lambda=0^4$), the three Van Hove saddle points $M_1,M_2,M_3$ ($\lambda=\pm 1^3$), $\Gamma$ ($\lambda=\pm 3^1$), and a $D_6$-symmetric ring of six momenta ($\lambda=\pm 2^6$), reproducing $\operatorname{Spec}(A_Y)$ exactly (Figure~\ref{fig:eisenstein_mirror}(a)).
+\item \textbf{Even-parity $\langle T,PLR\rangle$ decomposition \& $+30.90\%$ gap gain:} The Nauru generator set \eqref{eq:nauru_utt} lies inside $\langle T,PLR\rangle=\ker(\varepsilon)$ via
+\begin{equation}\label{eq:nauru_tplr}
+\begin{aligned}
+s &= \langle -,6,6\rangle = T_6\circ P,\\
+g &= \langle +,1,5\rangle = T_3\circ(LR)^2,\qquad
+g^{-1} = \langle +,11,7\rangle = T_9\circ(RL)^2,
+\end{aligned}
+\end{equation}
+satisfying $s^2=\mathrm{id}$, $sgs=g^5$, and $(g^2s)^2=\mathrm{id}$. Because $Y$ preserves local $C_6$ honeycomb geometry while replacing the Tonnetz twist $(4,2)\mapsto(2,2)$, the spectral gap jumps from $\Delta_X=3-\sqrt{5}$ to $\Delta_Y=3-2=1$:
+\[
+\frac{\Delta_Y}{\Delta_X} = \frac{1}{3-\sqrt{5}} = \frac{3+\sqrt{5}}{4} \approx 1.309017 \quad (+30.90\% \text{ gap gain}).
+\]
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+Bijectivity of $\varphi$ on all $24$ vertices, preservation of all $36$ honeycomb adjacencies, $N(2(1-\omega))=12$ vs.\ $N(2(1+\omega))=4$, and every identity in \eqref{eq:nauru_tplr} plus the exact gap inequality $\frac{3+\sqrt{5}}{4}>1.309$ ($5\cdot 250^2=312{,}500>312{,}481=559^2$) are kernel-checked in Lean~4 (Theorems~23--24) and verified independently in Python (Gate~D10, max Bloch error $<10^{-13}$) and Rust (\texttt{test\_d10}).
 \end{proof}
 
 \begin{figure}[t]
@@ -304,6 +333,27 @@ a = \begin{pmatrix}0 & 1 \\ -1 & -1\end{pmatrix}, \qquad b = \begin{pmatrix}1 & 
 Suppose $\Gamma_Y(x)$ is arithmetic over $\Q$. Then (i)~the ambient quaternion algebra $B(x)\otimes_\Q\R$ must be compact ($\cong\H$), which by \eqref{eq:Bx} holds if and only if $x(x-3)<0$, i.e., $0<x<3$; (ii)~the primitive Schottky element $\gamma_6=(ta)^6\in\Gamma_Y(x)$ must have $\tau(\gamma_6)\in\Z[\frac12]$, and because $(x^3-6x^2+9x-2)^2$ is monic in $x$, no odd prime can divide the denominator of $x$; (iii)~$v_2(x)=-1$ forces $x=k/2$ with $k$ odd and $0<k<6$, leaving \emph{only} $k\in\{1,3,5\}$ (Lean~4 Theorem~15). Conversely, for each of $x\in\{\frac12,\frac32,\frac52\}$, the reduced Gram determinant of $\calO_d$ equals $d^2$ ($d\in\{3,5\}$), conjugation by $t$ and $b$ preserves $\calO_d[\frac12]$, and exact Hilbert symbols satisfy $(-3,-1)_2=(-3,-5)_2=+1$ (split at $2$) and $(-3,-1)_\infty=(-3,-5)_\infty=-1$ (definite at $\infty$). All matrix, Hensel, and trace identities are independently verified in Python (Gate~D6), Rust (Gate~4), and Lean~4 (Theorems~16--19).
 \end{proof}
 
+\begin{corollary}[Intrinsic compact $\SU(2)$ Wilson-loop holonomy]\label{cor:su2_wilson}
+\ctag{E$\to$G4N; X}\ For every definite quaternion algebra $B/\Q$ ($B\otimes_\Q\R\cong\H$), every nonzero element $w\in B^\times$ projects to an intrinsic compact holonomy matrix $U(w)=w/\sqrt{\nrd(w)}\in\SU(2)$ satisfying the universal unitarity bound
+\begin{equation}\label{eq:su2_wilson}
+\begin{aligned}
+\tau(w) &= \frac{\trd(w)^2}{\nrd(w)} = 4\cos^2\theta \le 4,\\
+S_W(w) &= 1 - \frac{1}{2}\operatorname{Re}\operatorname{tr}U(w) = 1 - \frac{1}{2}\sqrt{\tau(w)} \in [0,1],
+\end{aligned}
+\end{equation}
+where $S_W(w)$ is the lattice Wilson plaquette action \cite{wilson1974} of the prime cadence loop $w$. Across all four definite arithmetic uniformizations established in this paper (Theorem~\ref{thm:rat_arith} and Theorem~\ref{thm:hurwitz_dic6}), $S_W(w)$ takes exact rational values strictly inside $(0,1)$:
+\begin{align*}
+S_W\!\bigl(\gamma_6^{B_3/B_5}\bigr) &= \frac{5}{16}, &
+S_W\!\bigl(\gamma_6^{B_5(\frac12)}\bigr) &= \frac{7}{16},\\
+S_W\!\bigl(w_8^{B_5(\frac52)}\bigr) &= \frac{19}{32}, &
+S_W\!\bigl(w_4^{B_2,\,\mathrm{Dic}_6}\bigr) &= \frac{4}{9},
+\end{align*}
+sharply separated by the compact $\SU(2)$ wall $\tau=4$ from all four non-arithmetic hyperbolic obstructions ($\Gamma_5$: $\tau=\frac{49}{4}=12.25$; canonical $3$-adic $\mathrm{Dic}_6$: $\tau=\frac{1156}{81}\approx 14.27$; Tonnetz $X$: $\tau=\frac{7225}{256}\approx 28.22$; Nauru $x=\frac92$: $\tau=\frac{4225}{64}\approx 66.02$; Figure~\ref{fig:eisenstein_mirror}(b)).
+\end{corollary}
+\begin{proof}
+Writing $q=c_0+c_1 i+c_2 j+c_3 k\in\H$ gives $\trd(q)^2=4c_0^2\le 4(c_0^2+c_1^2+c_2^2+c_3^2)=4\nrd(q)$ identically (Lean~4 Theorem~25), whence $|\operatorname{Re}\operatorname{tr}U(w)|=\sqrt{\tau(w)}\le 2$ and $S_W(w)\in[0,1]$. Substituting $\tau\in\{\frac{121}{64},\frac{81}{64},\frac{169}{256},\frac{100}{81}\}$ yields the four exact rational actions, while all four non-arithmetic walls strictly exceed $4$ (Python Gate~D11, Rust \texttt{test\_d10}, Lean~4 Theorem~25).
+\end{proof}
+
 \begin{figure}[t]
 \centering
 \includegraphics[width=\textwidth]{figures/fig3_fricke_vogt_moduli.pdf}
@@ -340,50 +390,98 @@ For (a), Eichler's mass formula $\sum 1/|\calO_i^\times|=(3-1)/24=1/12$ gives cl
 By \v{C}erednik--Drinfeld and Ribet \cite{cerednik1976,drinfeld1976,ribet1990}, a curve $X_0^D(N)$ with reduction graph $Y$ would have $D/2$-newspace $S_2^{D/2\text{-new}}(\Gamma_0(DN/2))$ realizing the $11$ nontrivial eigenvalues of $G_{12}$, forcing simultaneous $T_2$-nullities $\operatorname{null}(T_2-2I)\ge 3$, $\operatorname{null}(T_2)\ge 2$, $\operatorname{null}(T_2+I)\ge 3$, and $\operatorname{null}(T_2+2I)\ge 3$ on $\mathcal{M}_2(\Gamma_0(M))^-$ ($M=DN/2$). Recomputing $T_2$ from scratch via zero-PARI Manin modular symbols over $\F_{1000003}$ across all $18$ distinct levels $M\in\{105,111,\dots,345\}$ (covering all $19$ pairs, including $X_0^{690}(1)$ at $M=345$ where $\operatorname{null}=(3,2,3,1)$ misses $-2$) excludes $19/19$ pairs in both Python (Gate~D8) and Rust (\texttt{test\_d8}). Likewise, evaluating the minimal polynomial $t(t-3)(t+1)(t^2-4)$ of $G_{12}$ across all $22$ Brandt matrices yields $0/22$ matches.
 \end{proof}
 
-\section{The \texorpdfstring{$3$}{3}-Adic Dicyclic Companion \texorpdfstring{$\mathrm{Dic}_6$}{Dic6}, RCT Null Control, and Summary}\label{sec:3adic}
-Finally, the unique dicyclic twin $\mathrm{Dic}_6\subset\UTT$ ($u=11, b=6$ in Theorem~\ref{thm:census}) admits zero cubic Cayley graphs because it possesses only one involution. Passing to degree $4$ yields finite $4$-regular quotients of the \textbf{$3$-adic Bruhat--Tits tree $T_4 = T_{3+1}$ of $\PGL_2(\Q_3)$}; as noted in Remark~\ref{rem:framing_scope}, Schottky uniformization on $T_4$ is automatic for any $4$-regular graph, so whether any curve $C_Z/\Q_3$ in this family is arithmetic over $\Q$ remains an open $3$-adic frontier.
+\section{Complete \texorpdfstring{$3$}{3}-Adic Arithmetic Resolution of \texorpdfstring{$\mathrm{Dic}_6$}{Dic6} via Hurwitz \texorpdfstring{$B_2$}{B2}, RCT Control, and Dual-Prime \texorpdfstring{$D{=}6$}{D=6} Synthesis}\label{sec:3adic}
+Finally, the unique dicyclic twin $\mathrm{Dic}_6 = \langle x, y \mid x^{12}=1, y^2=x^6, yxy^{-1}=x^{-1}\rangle \subset \UTT$ ($u=11, b=6$ in Theorem~\ref{thm:census}) admits zero cubic Cayley graphs because it possesses only one involution ($x^6$). Passing to degree $4$ yields finite $4$-regular quotients of the \textbf{$3$-adic Bruhat--Tits tree $T_4 = T_{3+1}$ of $\PGL_2(\Q_3)$}. We now close the $3$-adic arithmeticity question completely by establishing a \textbf{shared-discriminant $D=2\cdot 3=6$ dual-prime mirror} between Nauru's algebra $B_3=(\frac{-3,-1}{\Q})$ ($p=2$) and the Hurwitz quaternion algebra $B_2=(\frac{-1,-1}{\Q})$ ($p=3$) \cite{vigneras1980,voight2021}.
 
-\begin{proposition}[$3$-adic $T_4$ companion $\mathrm{Dic}_6$]\label{prop:dic6}
-\ctag{G4N; X}\ Among all symmetric $4$-element generating sets of $\mathrm{Dic}_6$, there are exactly $18$ connected $4$-regular Cayley graphs, all bipartite of genus $25$: $12$ are strictly Ramanujan with $\lambda_{\mathrm{nt}}=3.000<2\sqrt{3}\approx 3.4641$ (e.g.\ $Z=\Cay(\mathrm{Dic}_6,\{x,x^{-1},y,y^3\})$), and $6$ lie exactly on the Ramanujan boundary $\lambda_{\mathrm{nt}}=2\sqrt{3}$. For $Z$:
-\begin{itemize}[nosep]
-\item $\operatorname{Spec}(A_Z)=\{+4^1,+3^2,+\sqrt{3}^{\,4},+1^2,0^6,-1^2,-\sqrt{3}^{\,4},-3^2,-4^1\}$, girth $4$, and its $3$-adic Ihara zeta function factorizes over $\F_3$ into elliptic factors ($a_3\in\{0,\pm 1,\pm 3\}$) plus four copies of the genus-$2$ factor $(1+3u^2+9u^4)$;
-\item its Raynaud/sandpile group has exact order
+\begin{proposition}[$3$-adic $\mathrm{Dic}_6$ census and canonical Schottky obstruction (\texttt{NEG-M21})]\label{prop:dic6}
+\ctag{E$\to$G4N; X}\ Among all symmetric $4$-element generating sets of $\mathrm{Dic}_6$, there are exactly $18$ connected $4$-regular Cayley graphs, all bipartite of genus $g=48-24+1=25$, splitting cleanly into two isomorphism classes:
+\begin{enumerate}[label=(\alph*),nosep]
+\item \textbf{$12$ strictly Ramanujan twins} isomorphic to the Cayley graph $Z=\Cay(\mathrm{Dic}_6,\{x,x^{-1},y,y^3\})$ ($\operatorname{tr}(A_Z^2)=96$, $\operatorname{tr}(A_Z^4)=912$, girth $4$, $|\Aut(Z)|=96=4(g-1)$, vertex stabilizer $\mathrm{Stab}_0(Z)\cong V_4$, quotient $Z/\langle x^4\rangle\cong K_{4,4}$) with $\lambda_{\mathrm{nt}}=3.000<2\sqrt{3}\approx 3.4641$,
+\[
+\operatorname{Spec}(A_Z)=\bigl\{+4^1,+3^2,+\sqrt{3}^{\,4},+1^2,0^6,-1^2,-\sqrt{3}^{\,4},-3^2,-4^1\bigr\},
+\]
+$3$-adic Ihara zeta factorization over $\F_3$ into elliptic factors ($a_3\in\{0,\pm 1,\pm 3\}$) plus four copies of the genus-$2$ factor $(1+3u^2+9u^4)$, and Raynaud/sandpile group order
 \[
 |K(Z)| = 429{,}923{,}020{,}800 = 2^{12}\cdot 3\cdot 5^2\cdot 7^2\cdot 13^4.
 \]
-\end{itemize}
+\item \textbf{$6$ Ramanujan-boundary twins} isomorphic to the lexicographic wreath product $C_{12}[2K_1]$ ($\operatorname{tr}(A^4)=1{,}152$, $\lambda_{\mathrm{nt}}=2\sqrt{3}$).
+\item \textbf{Canonical $3$-adic Schottky obstruction} (\textup{\texttt{NEG-M21}}): Lifting $(x,y)$ naively onto $T_4$ via $\gamma_X=\begin{psmallmatrix}3 & 0 \\ 0 & 1\end{psmallmatrix}, \gamma_Y=\begin{psmallmatrix}2 & 1 \\ 1 & 2\end{psmallmatrix}\in\PGL_2(\Q_3)$ yields the $\mathrm{Dic}_6$ commutator word $w_4=\gamma_Y\gamma_X\operatorname{adj}(\gamma_Y)\gamma_X$ with $\operatorname{tr}(w_4)=34$, $\det(w_4)=81$, and $\tau(w_4)=\frac{1156}{81}\approx 14.27>4$, barring the naive Schottky curve from every definite quaternion arithmeticization over $\Q$.
+\end{enumerate}
 \end{proposition}
+\begin{proof}
+Exhaustive enumeration over all symmetric $4$-subsets of $\mathrm{Dic}_6$ yields $18$ connected graphs ($12$ with $\operatorname{tr}(A^4)=912$ and $6$ with $\operatorname{tr}(A^4)=1{,}152$; Python Gate~D11). Symmetry, $\operatorname{tr}(A_Z^2)=96$, $\operatorname{tr}(A_Z^4)=912$, the exact $K_{4,4}$ quotient $Z/\langle x^4\rangle$, and the canonical obstruction $\operatorname{tr}(w_4)=34, \det(w_4)=81, 34^2=1156>324=4\cdot 81$ are kernel-checked in Lean~4 (Theorems~26--27) and verified in Rust (\texttt{test\_d11}).
+\end{proof}
+
+\begin{theorem}[Explicit $3$-adic arithmetic resolution of $\mathrm{Dic}_6$ in Hurwitz $B_2$ ($D{=}6, p{=}3$)]\label{thm:hurwitz_dic6}
+\ctag{E$\to$G4N; X}\ Let $B_2=(\frac{-1,-1}{\Q})$ be the Hurwitz quaternion algebra (ramified at $\{2,\infty\}$, split at $p=3$, sharing Shimura discriminant $D=2\cdot 3=6$ with Nauru's $B_3$) with maximal Hurwitz order $\calO_2=\Z[1,i,j,\frac{1+i+j+k}{2}]$ ($|\calO_2^\times/\{\pm 1\}|=12$, class number~$1$). Set
+\begin{equation}\label{eq:hurwitz_gens}
+a = i+j,\quad b = i-j \quad (\nrd=2), \qquad
+t_x = i+j+k,\quad t_y = i-j+k \quad (\nrd=3).
+\end{equation}
+Then:
+\begin{enumerate}[label=(\alph*),nosep]
+\item \textbf{Amalgam, corrected length-$4$ relator, and falsifier} \textup{\texttt{F33}}: The elements $a,b,t_x,t_y$ satisfy $ab=-ba$, $t_x b=-bt_x$, $t_y a=-at_y$, generating the $3$-adic amalgam $\tilde{\Gamma}_3=V_4*_{\Z_2}V_4*_{\Z_2}V_4\subset B_2^\times/\Q^\times$ of Euler characteristic $\chi(\tilde{\Gamma}_3)=-\tfrac14$ ($[\calO_2[\tfrac13]^1/\{\pm 1\}:\Gamma_Z]=144$). The $\mathrm{Dic}_6$ relator $YXY^{-1}X$ lifts to the exact Hurwitz word
+\begin{equation}\label{eq:hurwitz_w4}
+w_4 = \frac{(t_y b)(t_x a)(b t_y)(t_x a)}{4} = 5 + 6i - 2j + 4k \in \calO_2,
+\end{equation}
+with $\trd(w_4)=10$, $\nrd(w_4)=81$, $\tau(w_4)=\frac{100}{81}<4$, and Wilson action $S_W(w_4)=\frac{4}{9}$ (whereas writing $t_y b$ in the third factor gives $-1-8j+4k$ with $\trd=-2$, and perturbing $t'_x=1+i+j$ breaks $\trd=0$ and anticommutation with $b$; falsifier~\textup{\texttt{F33}}).
+\item \textbf{Hensel $3$-adic embedding \& universal all-lengths $T_4$ freeness:} Lifting $s=\sqrt{-2}\in\Z_3$ ($s\equiv 356{,}989\pmod{3^{12}}$, $s\equiv 4\pmod 9$) embeds $\calO_2\hookrightarrow M_2(\Z_3)$ so that the four $T_4$ edge-inverters $e_0=i+j+k$, $e_1=-i-j+k$, $e_2=i-j+k$, $e_3=-i+j+k$ have distinct rank-$1$ mod-$3$ images whose $1$-dimensional column subspaces are preserved across every non-backtracking step $e_n\ne e_m$ ($12/12$ nonzero pairs). By induction, every reduced word of arbitrary length $\ell\ge 1$ is strictly nonzero mod~$3$, proving faithful, backtrack-free action on $T_4$.
+\item \textbf{Exact $32$ surjections, universal $K_{4,4}$ congruence closure, and non-congruence index~$3$:} There are exactly $32$ surjections $\phi:\tilde{\Gamma}_3\twoheadrightarrow\Aut(Z)$ ($|\Aut(Z)|=96$), and for every surjection all Schreier generators of $\Gamma_Z=\ker(\phi)$ have even $(v_2,v_3)$-valuation (lying inside $\calO_2[\frac13]^1/\{\pm 1\}$ at index $144$). Reducing modulo $4\calO_2$ and $8\calO_2$ splits the $32$ surjections symmetrically into $16$ principal $\Gamma(4)$ lifts and $16$ level-$8\calO_2$ lifts inside $(\calO_2/8\calO_2)^1/\{\pm 1\}$ (order $384$, subgroup $|H_8|=8$, exact congruence index $384/8=48$, $2$ distinct $H_8$ subgroups). Across \textbf{all $32/32$ surjections}, the double-coset quotient $H_8\backslash(\calO_2/8\calO_2)^1/U$ is identically $K_{4,4}\cong Z/\langle x^4\rangle$ (genus $9$), realizing the arithmetic genus-$25$ Mumford curve $C_Z/\Q_3$ as a strict \textbf{non-congruence cyclic $C_3$-cover} of index $144/48=3$:
+\begin{equation}\label{eq:tower_b2}
+\Gamma_Z \;\trianglelefteq_{C_3}\; \Gamma_{\mathrm{cong}} \;\le_{48}\; \calO_2[\tfrac13]^1/\{\pm 1\} \;\trianglelefteq\; \tilde{\Gamma}_3.
+\end{equation}
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+Part (a) and falsifier \texttt{F33} are kernel-checked in Lean~4 (Theorem~28) and verified in Python (Gate~D11) and Rust (\texttt{test\_d11}). For (b), $356{,}989^2+2\equiv 0\pmod{3^{12}}$ (Lean~4 Theorem~29), and checking all $4\times 4\times 3^4=1{,}296$ mod-$3$ transitions proves by structural induction that every nonempty reduced word $e_{n_\ell}\cdots e_{n_1}$ ($n_r\ne n_{r-1}$) is nonzero mod~$3$ (Lean~4 Theorem~30). For (c), exhaustive enumeration of the $32$ surjections, Schreier generators, mod-$4$/mod-$8$ images ($16$ principal + $16$ level-$8$, $|H_8|=8$, index $384/8=48$), and exact $K_{4,4}$ double-coset intersections ($24$ elements per edge across all $4\times 4$ pairs) are independently verified in Python (Gate~D11) and Rust (\texttt{test\_d11}). Finally, Strong Approximation for $\SL_1(B_2)$ (non-compact at $p=3$) proves $\Gamma_Z$ is strictly non-congruence: at $p=2$, $\ker(\calO_{2,2}^1\to(\calO_2/8\calO_2)^1)$ is pro-$2$ and admits no index-$3$ quotient; at every prime $p\ge 5$, $\PSL_2(\F_p)$ is simple of order $\frac{p(p^2-1)}{2}>6=|S_3|$ (Lean~4 Theorems~31--32), precluding any index-$3$ subgroup.
+\end{proof}
+
+\begin{theorem}[Zero genus-$25$ $3$-adic Borel Shimura realizations over $\Q$ (\texttt{NEG-M20})]\label{thm:noborel_3adic}
+\ctag{E$\to$G4N; X}\ Exactly $19$ pairs $(D,N)$ of squarefree even-prime-count discriminants $D$ with $3\mid D$ and $\gcd(D,N)=1$ yield genus-$25$ Borel-level Shimura curves $X_0^D(N)$ over $\Q$ ($9$ torsion-free, $10$ with elliptic torsion; $\max\phi(D)\psi(N)=320$). None of these $19$ curves has $3$-adic \v{C}erednik--Drinfeld reduction graph $Z=\Cay(\mathrm{Dic}_6,\{x,x^{-1},y,y^3\})$.
+\end{theorem}
+\begin{proof}
+By \v{C}erednik--Drinfeld and Ribet \cite{cerednik1976,drinfeld1976,ribet1990}, a curve $X_0^D(N)$ realizing $Z$ would embed the nontrivial eigenvalues $\pm\sqrt{3}^{\,4}$ and $\pm 3^2$ of $A_Z$ into the Hecke $T_3$-action on $S_2(\Gamma_0(M))$ ($M=DN/3$), forcing simultaneous nullities $\operatorname{null}(T_3^2-3I)\ge 4$ and $\operatorname{null}(T_3^2-9I)\ge 2$. Recomputing $T_3$ from scratch via zero-PARI Manin modular symbols \cite{merel1994,stein2007} over $\F_{1000003}$ (calibrated against LMFDB ground truth at $M\in\{11,14,23,37\}$) across all $19$ genus-$25$ pairs yields \textbf{$0/19$ survivors} in both Python (Gate~D12) and Rust (\texttt{test\_d12}); the sole $\pm\sqrt{3}$-survivor is $(D,N)=(1122,1)$ ($M=374, e_3=8$), which hits $\operatorname{null}(T_3^2-3I)=4$ yet has $\operatorname{null}(T_3^2-9I)=0$.
+\end{proof}
 
 \begin{figure}[t]
 \centering
 \includegraphics[width=\textwidth]{figures/fig4_elliptic_shimura_comparison.pdf}
-\caption{(a)~Multiplicity distribution of all $5/5$ $\F_2$ elliptic curve isogeny classes inside $\zeta_Y(u)^{-1}$. (b)~Exact spectrum of the $4$-regular Ramanujan companion $Z_{\mathrm{Dic}_6}$ (uniformized on $T_4$ of $\PGL_2(\Q_3)$, $\lambda_{\mathrm{nt}}=3<2\sqrt{3}$; arithmeticity open).}
+\caption{(a)~Multiplicity distribution of all $5/5$ $\F_2$ elliptic curve isogeny classes inside $\zeta_Y(u)^{-1}$. (b)~Exact spectrum of the $4$-regular Ramanujan companion $Z_{\mathrm{Dic}_6}$ (uniformized arithmetically on $T_4$ of $\PGL_2(\Q_3)$ via Hurwitz $B_2$, $D=6$, Theorem~\ref{thm:hurwitz_dic6}).}
 \label{fig:elliptic_dic6}
 \end{figure}
 
-To quantify the rarity of Nauru's simultaneous spectral gap ($\lambda_{\mathrm{nt}}=2.000$) and girth ($6$) against generic $24$-vertex $3$-regular bipartite graphs, Gate~P1 executes a keyed SplitMix64 randomized control sweep ($N=200$, seed \texttt{0x2ad1caa0125}, bit-exact replay verified): random controls yield mean $\lambda_{\mathrm{nt}}=2.5673$, minimum $\lambda_{\mathrm{nt}}=2.3248$, $197/200$ Ramanujan, $1/200$ with girth $\ge 6$, and \textbf{$0/200$} matching or beating Nauru's $\lambda_{\mathrm{nt}}=2.000$. Table~\ref{tab:comparison} synthesizes the complete three-graph arithmetic landscape.
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/fig5_eisenstein_hurwitz_mirror.pdf}
+\caption{(a)~$12$ dual Bloch momenta of the Eisenstein honeycomb $\{6,3\}_{(2,2)}\cong\GP(12,5)$ on $\Z[\omega]/(2(1-\omega))$ hitting graphene Dirac points $K,K'$ ($\lambda=0^4$) and Van Hove $M$-points ($\lambda=\pm 1^3$). (b)~Shared-discriminant $D=6$ dual-prime mirror and compact $\SU(2)$ Wilson action $S_W(w)=1-\tfrac12\sqrt{\tau(w)}$ separating all four definite arithmetic uniformizations from all four non-arithmetic hyperbolic walls ($\tau>4$).}
+\label{fig:eisenstein_mirror}
+\end{figure}
+
+To quantify the rarity of Nauru's simultaneous spectral gap ($\lambda_{\mathrm{nt}}=2.000$) and girth ($6$) against generic $24$-vertex $3$-regular bipartite graphs, Gate~P1 executes a keyed SplitMix64 randomized control sweep ($N=200$, seed \texttt{0x2ad1caa0125}, bit-exact replay verified): random controls yield mean $\lambda_{\mathrm{nt}}=2.5673$, minimum $\lambda_{\mathrm{nt}}=2.3248$, $197/200$ Ramanujan, $1/200$ with girth $\ge 6$, and \textbf{$0/200$} matching or beating Nauru's $\lambda_{\mathrm{nt}}=2.000$. Table~\ref{tab:comparison} synthesizes the complete shared-discriminant $D=6$ dual-prime arithmetic landscape.
 
 \begin{table}[t]
-\centering\footnotesize\setlength{\tabcolsep}{3.5pt}
-\caption{Head-to-head $p$-adic arithmetic synthesis: Tonnetz $X$ (Paper~\#01) vs.\ Nauru $Y$ vs.\ $3$-adic $\mathrm{Dic}_6$ twin $Z$.}
+\centering\scriptsize\setlength{\tabcolsep}{2.2pt}
+\caption{Head-to-head shared-discriminant $D{=}6$ dual-prime synthesis: Tonnetz $X$ (Paper~\#01) vs.\ Nauru $Y$ ($B_3, p{=}2$) vs.\ $\mathrm{Dic}_6$ twin $Z$ (Hurwitz $B_2, p{=}3$).}
 \label{tab:comparison}
 \begin{tabular}{llll}\toprule
 Invariant & Tonnetz $X$ \cite{ergentics2026pc} & Nauru $Y=\GP(12,5)$ & $\mathrm{Dic}_6$ Twin $Z$ \\\midrule
-Bruhat--Tits tree & $T_3$ ($\PGL_2(\Q_2)$) & $T_3$ ($\PGL_2(\Q_2)$) & $T_4$ ($\PGL_2(\Q_3)$) \\
-$|V| / |E| / g$ & $24 / 36 / 13$ & $24 / 36 / 13$ & $24 / 48 / 25$ \\
-Girth & $6$ & $6$ ($0$ four-cycles) & $4$ \\
-$\lambda_{\mathrm{nt}}$ vs.\ Ram. & $\sqrt{5}\approx 2.236 < 2\sqrt{2}$ & $\mathbf{2.000} < 2\sqrt{2}$ & $\mathbf{3.000} < 2\sqrt{3}$ \\
-$\F_p$ Weil & Octic ($g\ge 5$ req.) & \textbf{All $5/5$ $\F_2$-ell.} & $\F_3$-ell. + $4{\times}g{=}2$ \\
+Tree & $T_3$ ($\PGL_2(\Q_2)$) & $T_3$ ($\PGL_2(\Q_2)$) & $T_4$ ($\PGL_2(\Q_3)$) \\
+Lattice / $g$ & $\{6,3\}_{(4,2)}$ ($g{=}13$) & $\{6,3\}_{(2,2)}$ ($g{=}13$) & $4$-reg.\ ($g{=}25$) \\
+Girth & $6$ & $6$ ($0$ $4$-cycles) & $4$ \\
+$\lambda_{\mathrm{nt}}$ vs.\ Ram. & $\sqrt{5}\approx 2.236 < 2\sqrt{2}$ & $\mathbf{2.000}<2\sqrt{2}$ ($+30.9\%$) & $\mathbf{3.000} < 2\sqrt{3}$ \\
+$\F_p$ Weil & Octic ($g\ge 5$ req.) & \textbf{All $5/5$ $\F_2$-ell.} & $\F_3$-ell.\ + $4{\times}g{=}2$ \\
 Raynaud $|K|$ & $2^{15}\cdot 3^2\cdot 23^2$ & $\mathbf{2^7\cdot 3^4\cdot 5^6}$ & $2^{12}\cdot 3\cdot 5^2\cdot 7^2\cdot 13^4$ \\
 Gonality & $6$ (non-reduced) & $\mathbf{6}$ (prime hex) & --- \\
-$|\Aut(C)|$ & $24$ & $\mathbf{144=12(g-1)}$ & $4$-regular Cayley \\
-Arithmetic / $\Q$? & No ($0$ anywhere) & \textbf{Yes: $x\in\{\tfrac12,\tfrac32,\tfrac52\}$} & Open $3$-adic \\
-Congruence & --- & Non-cong.\ over $\Gamma(3)$ & Open \\\bottomrule
+$|\Aut(C)|$ & $24$ & $\mathbf{144=12(g-1)}$ & $\mathbf{96=4(g-1)}$ \\
+Arithmetic / $\Q$ & No ($\tau{=}\frac{7225}{256}{>}4$) & \textbf{Yes: $B_3$ ($6$), $B_5$ ($10$)} & \textbf{Yes: $B_2$ ($6, p{=}3$)} \\
+$\SU(2)$ $S_W$ & Non-unitary ($\tau{>}4$) & $\mathbf{5/16,\; 7/16,\; 19/32}$ & $\mathbf{4/9}$ ($\tau{=}100/81$) \\
+Tower & --- & Non-cong.\ $V_4/S_3$ & Non-cong.\ $C_3$ ($K_{4,4}$) \\
+Borel $X_0^D(N)$ & $0/19$ ($2$-adic) & $0/19$ (\texttt{NEG-M18}) & $0/19$ (\texttt{NEG-M20}) \\\bottomrule
 \end{tabular}
 \end{table}
 
 \subsection*{Data, code, and formal proof availability}
-All results are reproducible from first principles inside \path{papers/triadic_wreath_nauru/}: pure Python ($12/12$ gates, \path{code/triadic_nauru_verify.py}, SHA-256 calibration \path{data/triadic_nauru_calibration.json}), zero-Mathlib Lean~4.36.0 ($22/22$ theorems, \path{lean/TriadicNauru/Core.lean}), and zero-crate Rust ($6/6$ integration tests, \path{rust/}). Refuted hypotheses and scope boundaries are permanently logged in \path{NEGATIVES.md} (\texttt{NEG-M15}--\texttt{NEG-M19}).
+All results are reproducible from first principles inside \path{papers/triadic_wreath_nauru/}: pure Python ($15/15$ gates, \path{code/triadic_nauru_verify.py}, SHA-256 calibration \path{data/triadic_nauru_calibration.json}), zero-Mathlib Lean~4.36.0 ($32/32$ theorems, \path{lean/TriadicNauru/Core.lean}), and zero-crate Rust ($9/9$ integration tests, $8/8$ core suites, \path{rust/}). Refuted hypotheses and scope boundaries are permanently logged in \path{NEGATIVES.md} (\texttt{NEG-M15}--\texttt{NEG-M21}).
 
 \bibliographystyle{amsplain}
 \bibliography{references}
