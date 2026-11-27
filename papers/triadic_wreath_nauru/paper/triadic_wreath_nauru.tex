@@ -1,0 +1,373 @@
+\documentclass[11pt]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{mathtools,amssymb,graphicx,booktabs,enumitem}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{
+  pdftitle={Uniform Triadic Wreath Products, the Nauru Graph, and 2-Adic Arithmeticity},
+  pdfauthor={Ergentics},
+  pdfkeywords={uniform triadic transformations, wreath product, Nauru graph, Ramanujan graph, Ihara zeta function, Mumford curve, Lame amalgam, quaternion algebra, non-congruence Shimura cover}
+}
+\pdfinfo{/Producer () /Creator ()}
+\usepackage{microtype}
+\numberwithin{equation}{section}
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}\newtheorem{remark}[theorem]{Remark}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\F}{\mathbb{F}}
+\renewcommand{\H}{\mathbb{H}}
+\newcommand{\calO}{\mathcal{O}}
+\newcommand{\PGL}{\mathrm{PGL}}
+\newcommand{\PSL}{\mathrm{PSL}}
+\newcommand{\SL}{\mathrm{SL}}
+\newcommand{\Aut}{\mathrm{Aut}}
+\newcommand{\Cay}{\mathrm{Cay}}
+\newcommand{\UTT}{\mathrm{UTT}}
+\newcommand{\GP}{\mathrm{GP}}
+\newcommand{\nrd}{\operatorname{nrd}}
+\newcommand{\trd}{\operatorname{trd}}
+\newcommand{\ctag}[1]{\textup{\textsf{\scriptsize[#1]}}}
+\emergencystretch=3em
+\raggedbottom
+
+\title[Triadic Wreath Products, Nauru Graph, and $2$-Adic Arithmeticity]{Uniform Triadic Wreath Products, the Nauru Graph, and $2$-Adic Arithmeticity}
+\author{Ergentics}
+\date{November 2026}
+\subjclass[2020]{Primary 11G18, 14G22, 05C50; Secondary 00A65, 11R52, 20E22}
+\keywords{uniform triadic transformations, wreath product, Nauru graph, Ramanujan graph, Ihara zeta function, $2$-adic Mumford curve, Lam\'e amalgam, quaternion algebra, non-congruence subgroup}
+
+\begin{document}
+\begin{abstract}
+We resolve the structural relationship between David Lewin's melodic $T/I$ group, the neo-Riemannian $PLR$ harmonic group, and Julian Hook's Uniform Triadic Transformation wreath product $\UTT = \Z_{12}\wr\Z_2$ (order $288$), and uncover an unexpected $2$-adic arithmetic universe inside its Galois twists. First, $\langle T, PLR\rangle$ has order $144$---the exact index-$2$ even-parity subgroup of $\UTT$, missing odd-parity elements such as Hook's Hamiltonian cycle $Q=\langle -,1,0\rangle$ (\texttt{NEG-M16})---while $\langle T/I, PLR\rangle$ has order $288$ yet is \emph{neither equal nor isomorphic} to $\UTT$ ($|Z|=2$ vs.\ $12$, $99$ vs.\ $15$ involutions, $0$ vs.\ $48$ order-$24$ elements; \texttt{NEG-M15}). Instead, $I_0\notin\UTT$ normalizes $\UTT$ via $I_0\langle\sigma,t^+,t^-\rangle I_0^{-1}=\langle\sigma,-t^-,-t^+\rangle$, generating $\UTT\rtimes\langle I_0\rangle$ (order $576$) inside $N_{\mathrm{Sym}(24)}(T)=\UTT\rtimes\Z_{12}^\times$ (order $1{,}152$). Second, an exhaustive census of all $24$ simply transitive order-$24$ subgroups of $\UTT$ (8 isomorphism classes indexed by $u\in\Z_{12}^\times$) proves that $PLR\cong D_{12}$ is the \emph{unique} subgroup admitting $3$-involution Coxeter triples ($192$ total, $168$ Ramanujan), whereas the split $M_5$ ($S_3\times\Z_4$) and $M_7$ ($\Z_3\times D_4$) Galois twists canonically construct the symmetric \textbf{Nauru graph} $Y=\GP(12,5)$ with sharper Ramanujan gap $\lambda_{\mathrm{nt}}=2<\sqrt{5}<2\sqrt{2}$. Third, in sharp contrast to the non-arithmetic Tonnetz curve $C_X$ of Paper~\#01, the Nauru graph flips every $2$-adic invariant: its Ihara zeta function splits $100\%$ into quadratic Weil factors hitting \emph{all five} elliptic isogeny classes over $\F_2$ ($a_2\in\{-2,-1,0,+1,+2\}$), its Raynaud/sandpile group is pure $5$-smooth ($|K(Y)|=162{,}000{,}000=2^7\cdot3^4\cdot5^6$), its divisorial gonality $\operatorname{gon}(Y)=6$ is witnessed by a single reduced prime hexagon, and $|\Aut(Y)|=144=12(g-1)$ lifts via the Herrlich--Cornelissen--Kato Lam\'e amalgam $\tilde{\Gamma}=S_3*_{\Z_2}V_4\subset\PGL_2(\Q_2)$. Expressing $\tilde{\Gamma}$ via the single $2$-adic modulus $x=\tau(ta)$ yields universal Fricke--Vogt trace polynomials and ambient quaternion algebra $B(x)=\left(\frac{-3,\,x(x-3)}{\Q(x)}\right)$, proving that \emph{exact} rational arithmetic Nauru curves occur at and only at $x\in\{\tfrac12,\tfrac32,\tfrac52\}$ inside $B_3=(\frac{-3,-1}{\Q})$ ($D=6$) and $B_5=(\frac{-3,-5}{\Q})$ ($D=10$). At $x=\tfrac32$ ($\tau(\gamma_6)=\tfrac{121}{64}<4$), $\Gamma_Y\trianglelefteq_{V_4}\Gamma(3)$ is an explicit \emph{arithmetic non-congruence} Klein $V_4$-cover of the genus-$4$ principal level-$3$ Shimura curve $X^6(\Gamma(3))$ (dual graph $K_{3,3}$); at $x=\tfrac52$, $\Gamma_Y\trianglelefteq_{S_3}\Gamma_5(3)$ covers $X^{10}(\Gamma(3))$ (dual graph $K_4$) through the cube $Q_3$---explaining why all $19$ Borel-level genus-$13$ Shimura curves $X_0^D(N)$ fail (\texttt{NEG-M18}). Finally, the unique dicyclic companion $\mathrm{Dic}_6\subset\UTT$ lifts to $4$-regular bipartite Ramanujan graphs on the $3$-adic Bruhat--Tits tree $T_4$ of $\PGL_2(\Q_3)$ ($g=25$, $\lambda_{\mathrm{nt}}=3<2\sqrt{3}$). Every theorem is independently verified across three zero-shared-data planes: pure Python ($12/12$ D/R/P/Seam gates), zero-Mathlib Lean~4.36.0 ($20/20$ kernel-checked theorems, $0$ \texttt{sorry}), and zero-crate Rust ($6/6$ integration tests).
+\end{abstract}
+\maketitle
+
+\section{Introduction}\label{sec:intro}
+In Paper~\#01 of the Morpheus series (\emph{Prime cadences} \cite{ergentics2026pc}), the $24$ major and minor triads of $12$-tone equal temperament were organized into the $3$-regular neo-Riemannian Tonnetz graph $X=\Cay(D_{12},\{P,L,R\})$. That study revealed a striking web of connections linking voice-leading geometry to graphene tight-binding bands, Ihara zeta functions \cite{ihara1966,sunada1986,bass1992}, Ramanujan graphs \cite{lps1988}, and $2$-adic Mumford curves \cite{mumford1972,gvdp1980}. Yet Section~7 of \cite{ergentics2026pc} closed with a formidable wall of $2$-adic obstructions:
+\begin{enumerate}[label=(\roman*),nosep]
+\item the Ihara zeta numerator of $X$ carries an irreducible octic $(1+4u^2+9u^4+16u^6+16u^8)^2$ whose $\F_2$ isogeny class \texttt{4.2.a\_e\_a\_j} contains no genus-$4$ Jacobian and requires genus $\ge 5$ complete intersections in $\mathbb{P}^4$;
+\item the Raynaud component group $K(X)$ of the N\'eron model of $J(C_X)/\Q_2$ carries the exotic prime $23$ ($|K(X)|=156{,}008{,}448=2^{15}\cdot 3^2\cdot 23^2$);
+\item the Schottky curve $C_X$ has $|\Aut(C_X)|=24$ and primitive trace invariant $\tau(\gamma_0)=7225/256\approx 28.22>4$, barring $C_X$ from every torsion-free arithmetic uniformization over any number field and every $2$-adic Shimura curve $X_0^D(N)$ over $\Q$ (all $19$ genus-$13$ pairs excluded).
+\end{enumerate}
+
+A natural musical and algebraic question immediately arises: \emph{do David Lewin's melodic $T/I$ group \cite{lewin1987} and the neo-Riemannian $PLR$ group \cite{cfs2009} fuse into Julian Hook's Uniform Triadic Transformation ($\UTT$) wreath product $\Z_{12}\wr\Z_2$ \cite{hook2002}, and what graphs and $p$-adic curves live inside the remaining simply transitive subgroups of $\UTT$?}
+
+This paper answers both halves completely. First, we prove that $T/I$ and $PLR$ do \emph{not} fuse into $\UTT$---they generate a non-isomorphic group of the same order $288$ (\texttt{NEG-M15}), while $\langle T, PLR\rangle$ captures only the even-parity index-$2$ subgroup of order $144$ (\texttt{NEG-M16}). Second, an exhaustive census of all $24$ simply transitive order-$24$ subgroups of $\UTT$ shows that turning the Galois normalizer dial from $u=11$ ($PLR$) to $u\in\{5,7\}$ ($M_5/M_7$ twists) transforms the Tonnetz $X$ into the symmetric \textbf{Nauru graph} $Y=\GP(12,5)$---a bipartite $3$-regular graph of the same order ($24$ vertices, $36$ edges, genus $13$) on the same $2$-adic Bruhat--Tits tree $T_3$ of $\PGL_2(\Q_2)$ whose $2$-adic arithmetic reverses every single obstruction of Paper~\#01.
+
+\begin{remark}[Attribution and Multi-Plane Verification Standard]
+Following Morpheus governance (\path{AGENTS.md}, \path{METHODOLOGY.md}), attribution tags mark \ctag{lit.} classical literature, \ctag{E} research direction and correspondence architecture by Ergentics, \ctag{G4N} first-principles derivations and proofs by Gemini~4~Neon, and \ctag{X} independent cross-verification. Every theorem below is independently verified without circular cached-data reads across three open Code-Model planes inside \path{papers/triadic_wreath_nauru/}:
+(1)~pure Python (\path{code/triadic_nauru_verify.py}, $12/12$ D/R/P/Seam gates emitting SHA-256-manifested \path{data/triadic_nauru_calibration.json});
+(2)~zero-Mathlib Lean~4.36.0 (\path{lean/TriadicNauru/Core.lean}, $20/20$ kernel-checked theorems, $0$ \texttt{sorryAx}, $0$ \texttt{ofReduceBool}); and
+(3)~zero-crate Rust (\path{rust/src/lib.rs}, $6/6$ integration tests).
+\end{remark}
+
+\section{Non-Fusion of Lewin \texorpdfstring{$T/I$}{T/I} and \texorpdfstring{$PLR$}{PLR} vs.\ Hook's Wreath Product}\label{sec:nonfusion}
+Label the $24$ major and minor triads as $(r,+)\in\Z_{12}\times\{+\}$ (major triad $\{r,r+4,r+7\}$) and $(r,-)\in\Z_{12}\times\{-\}$ (minor triad $\{r,r+3,r+7\}$). A \emph{Uniform Triadic Transformation} (UTT) in Hook's sense \cite{hook2002} is a triple $\langle\sigma,t^+,t^-\rangle$ with $\sigma\in\{+,-\}$ and $t^+,t^-\in\Z_{12}$, acting on triads by
+\begin{equation}\label{eq:utt_act}
+\langle +, t^+, t^-\rangle(r,\pm) = (r + t^\pm,\pm), \qquad
+\langle -, t^+, t^-\rangle(r,\pm) = (r + t^\pm,\mp).
+\end{equation}
+The group $\UTT$ is isomorphic to the wreath product $\Z_{12}\wr\Z_2 = (\Z_{12}\times\Z_{12})\rtimes\Z_2$ of order $288$. The transposition group $T=\langle T_1\rangle$ is generated by $T_1 = \langle +,1,1\rangle$, and the neo-Riemannian generators act as
+\begin{equation}\label{eq:plr_utt}
+P = \langle -,0,0\rangle, \qquad L = \langle -,4,8\rangle, \qquad R = \langle -,9,3\rangle,
+\end{equation}
+generating the dihedral group $PLR\cong D_{12}$ of order $24$ \cite{cfs2009}. Meanwhile, Lewin's pitch-class inversion $I_0(x)=-x\pmod{12}$ reverses interval orientation and therefore maps major to minor triads with negated roots:
+\begin{equation}\label{eq:I0_act}
+I_0(r,+) = (5-r,-), \qquad I_0(r,-) = (5-r,+).
+\end{equation}
+
+\begin{theorem}[Even-parity obstruction of $\langle T, PLR\rangle$ (\texttt{NEG-M16})]\label{thm:parity}
+\ctag{E$\to$G4N; X}\ The map $\varepsilon:\UTT\to\Z_2$ defined by $\varepsilon(\langle\sigma,t^+,t^-\rangle) = (t^+ + t^-)\bmod 2$ is a surjective group homomorphism. Every generator $T_1,P,L,R$ lies in $\ker(\varepsilon)$, and
+\[
+\langle T, PLR\rangle = \ker(\varepsilon) \trianglelefteq_2 \UTT, \qquad |\langle T, PLR\rangle| = 144.
+\]
+In particular, Hook's order-$24$ Hamiltonian cycle $Q=\langle -,1,0\rangle$ has $\varepsilon(Q)=1$ and does not belong to $\langle T, PLR\rangle$.
+\end{theorem}
+\begin{proof}
+Under composition $g\circ h$ of $g=\langle\sigma_1,t_1^+,t_1^-\rangle$ and $h=\langle\sigma_2,t_2^+,t_2^-\rangle$, the coordinate sum $(t^+ + t^-)$ shifts by $(t_1^+ + t_1^-) + (t_2^+ + t_2^-)\pmod{12}$ regardless of whether $\sigma_2$ swaps the two coordinates. Since $2\mid 12$, reducing modulo $2$ gives $\varepsilon(g\circ h)=\varepsilon(g)+\varepsilon(h)\pmod 2$. From \eqref{eq:plr_utt}, $1+1\equiv 0+0\equiv 4+8\equiv 9+3\equiv 0\pmod 2$, whereas $1+0\equiv 1\pmod 2$ for $Q$. Direct closure confirms $|\langle T,PLR\rangle|=144 = |\ker(\varepsilon)|$ (kernel-checked in Lean~4, Theorems~1--2).
+\end{proof}
+
+\begin{theorem}[Non-fusion of $\langle T/I, PLR\rangle$ and $\UTT$ (\texttt{NEG-M15})]\label{thm:nonfusion}
+\ctag{E$\to$G4N; X}\ Lewin's inversion $I_0$ does not lie in $\UTT$, yet normalizes $\UTT$ inside $\mathrm{Sym}(24)$ via the exact conjugation law
+\begin{equation}\label{eq:I0_conj}
+I_0\,\langle\sigma, t^+, t^-\rangle\,I_0^{-1} = \langle\sigma, -t^-, -t^+\rangle.
+\end{equation}
+Consequently, $\langle T/I, PLR\rangle$ and $\UTT$ are two \emph{distinct, non-isomorphic} subgroups of order $288$ inside $\UTT\rtimes\langle I_0\rangle$ (order $576$), which itself sits at index $2$ inside the full Galois normalizer $N_{\mathrm{Sym}(24)}(T)=\UTT\rtimes\Z_{12}^\times$ (order $1{,}152$, adjoining $M_5,M_7:(r,\pm)\mapsto (ur,\pm)$). Their exact group invariants separate them sharply:
+\begin{center}\footnotesize\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lccccc}\toprule
+Group & Order & $|Z(G)|$ & Inv. & Ord-$24$ & $|[G,G]|$ / $|G^{\mathrm{ab}}|$ \\\midrule
+$\langle T, PLR\rangle$ & $144$ & $12$ & $15$ & $0$ & $12$ / $12$ \\
+$\UTT = \Z_{12}\wr\Z_2$ & $288$ & $12$ & $15$ & $48$ & $12$ / $24$ \\
+$\langle T/I, PLR\rangle\cong (D_{12}{\times}D_{12})/\Z_2$ & $288$ & $2$ & $99$ & $0$ (max $12$) & $18$ / $16$ \\\bottomrule
+\end{tabular}
+\end{center}
+\end{theorem}
+\begin{proof}
+Every $g\in\UTT$ shifts major roots by $+t^+$ (preserving cyclic orientation), whereas $I_0$ sends $(0,+)\mapsto(5,-)$ and $(1,+)\mapsto(4,-)$, reversing cyclic orientation; thus $I_0\notin\UTT$ (Lean~4 Theorem~3). Direct evaluation of $I_0\circ\langle\sigma,t^+,t^-\rangle\circ I_0$ on $(r,\pm)$ establishes \eqref{eq:I0_conj} identically for all $24$ triads (Lean~4 Theorem~4). Hence $\langle\UTT, I_0\rangle = \UTT\rtimes\langle I_0\rangle$ has order $2\cdot 288 = 576$, and both $\UTT$ and $\langle T/I, PLR\rangle = \langle T, PLR\rangle\rtimes\langle I_0\rangle$ are index-$2$ subgroups of order $288$ sharing $\langle T,PLR\rangle$ as their intersection. Invariant enumeration in both Python (Gate~D1) and Rust confirms all five separating invariants above.
+\end{proof}
+
+\section{Exhaustive Simply Transitive UTT Census and the Nauru Graph}\label{sec:census}
+A subgroup $H\le\UTT$ acting simply transitively on the $24$ triads necessarily has order $24$ and an index-$2$ mode-preserving subgroup $H_+$ of order $12$ acting simply transitively on both modes. Thus $H_+ = \{\langle +, r, u r\rangle : r\in\Z_{12}\}$ for a unique Galois unit $u\in\Z_{12}^\times=\{1,5,7,11\}$. Adjoining a mode-reversing element $g_0=\langle -,0,b\rangle$ closes a subgroup $H=H_+\cup g_0 H_+$ if and only if $g_0^2=\langle +,b,b\rangle\in H_+$, i.e., $(u-1)b\equiv 0\pmod{12}$.
+
+\begin{theorem}[Complete $24$-subgroup simply transitive UTT census]\label{thm:census}
+\ctag{G4N; X}\ Hook's $\UTT$ contains exactly $24$ simply transitive subgroups of order $24$, partitioning into $8$ isomorphism classes indexed by $u\in\Z_{12}^\times$:
+\begin{center}\footnotesize\setlength{\tabcolsep}{3.5pt}
+\begin{tabular}{cccrccc}\toprule
+$u$ & Class & \# & Inv. & Coxeter (Ram.) & Mixed (Ram.) & Best $\lambda_{\mathrm{nt}}$ \\\midrule
+$1$ & $\Z_{12}{\times}\Z_2$ & $6$ & $3$ & $0$ ($0$) & $8$ ($8$) & $1{+}\sqrt{3}\approx 2.732$ \\
+$1$ & $\Z_{24}$ & $6$ & $1$ & $0$ ($0$) & $4$ ($0$) & $1{+}2\cos\frac{\pi}{12}\approx 2.932$ \\
+$5$ & $S_3{\times}\Z_4$ & $2$ & $7$ & $0$ ($0$) & $24$ ($24$) & $\mathbf{2.000}$ (Nauru) \\
+$5$ & $\Z_3{\rtimes}\Z_8$ & $2$ & $1$ & $0$ ($0$) & $0$ ($0$) & --- \\
+$7$ & $\Z_3{\times}D_4$ & $3$ & $5$ & $0$ ($0$) & $16$ ($16$) & $\mathbf{2.000}$ (Nauru) \\
+$7$ & $\Z_3{\times}Q_8$ & $3$ & $1$ & $0$ ($0$) & $0$ ($0$) & --- \\
+$11$ & $D_{12}$ ($PLR$) & $1$ & $13$ & $\mathbf{192}$ ($\mathbf{168}$) & $24$ ($24$) & $\sqrt{5}\approx 2.236$ (Tonnetz) \\
+$11$ & $\mathrm{Dic}_6$ & $1$ & $1$ & $0$ ($0$) & $0$ ($0$) & --- ($4$-reg.\ $T_4$) \\\bottomrule
+\end{tabular}
+\end{center}
+In particular:
+\begin{enumerate}[label=(\alph*),nosep]
+\item $PLR\cong D_{12}$ is the \emph{unique} simply transitive $\UTT$ subgroup admitting $3$-involution Coxeter triples ($192$ triples; all $168$ bipartite mode-reversing triples are Ramanujan with $\lambda_{\mathrm{nt}}\in\{\sqrt{5},2.394,\sqrt{7},1+\sqrt{3}\}<2\sqrt{2}$, while all $24$ non-bipartite triples using $\langle +,6,6\rangle$ fail at $1+2\cos\frac{\pi}{12}\approx 2.932>2\sqrt{2}$).
+\item Every cubic Cayley graph of $\Z_{24}$ fails the Ramanujan bound ($\lambda_{\mathrm{nt}}\ge 1+2\cos\frac{\pi}{12}>2\sqrt{2}$).
+\item The split $M_5$ ($S_3\times\Z_4$, $u=5,b\in\{0,6\}$) and $M_7$ ($\Z_3\times D_4$, $u=7,b\in\{0,4,8\}$) subgroups realize the \textbf{Nauru graph} $Y=\GP(12,5)$ via the symmetric generator set
+\begin{equation}\label{eq:nauru_utt}
+S_{\mathrm{Nauru}} = \bigl\{\langle -,6,6\rangle,\;\langle +,1,5\rangle,\;\langle +,11,7\rangle\bigr\},
+\end{equation}
+under the triad labeling $u_r=(r,+)$ and $v_r=(r+6,-)$ ($r\in\Z_{12}$), attaining the strictly sharper Ramanujan spectral radius $\lambda_{\mathrm{nt}}(Y)=2.000<\sqrt{5}\approx 2.236<2\sqrt{2}\approx 2.828$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+Solving $(u-1)b\equiv 0\pmod{12}$ yields $12,4,6,2$ values of $b$ for $u=1,5,7,11$ respectively, totaling $24$ subgroups. Exhaustive enumeration of all $3$-involution triples and all symmetric mixed triples $\{s,g,g^{-1}\}$ ($s^2=1, g^2\ne 1$) with cyclic-Jacobi and exact Fourier diagonalization verifies every entry in the table (Python Gate~D2). Under $u_r=(r,+)$ and $v_r=(r+6,-)$, the involution $\langle -,6,6\rangle$ maps $u_r\leftrightarrow v_r$ (spokes), while $\langle +,1,5\rangle$ shifts $u_r\mapsto u_{r+1}$ (outer $12$-cycle) and $v_r\mapsto v_{r+5}$ (inner $\{12/5\}$-star), reproducing the generalized Petersen graph $\GP(12,5)$ edge-for-edge.
+\end{proof}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/fig1_utt_census.pdf}
+\caption{(a)~Normalizer lattice separating $\UTT=\Z_{12}\wr\Z_2$ from the non-isomorphic group $\langle T/I,PLR\rangle$ (\texttt{NEG-M15}) and isolating the index-$2$ even-parity subgroup $\langle T,PLR\rangle$ (\texttt{NEG-M16}). (b)~Optimal cubic nontrivial spectral radius $\lambda_{\mathrm{nt}}$ across all $8$ simply transitive $\UTT$ classes versus the Ramanujan bound $2\sqrt{2}\approx 2.828$.}
+\label{fig:utt_census}
+\end{figure}
+
+\section{Exact \texorpdfstring{$\F_2$}{F2} Elliptic Weil Splitting, Prime Cadences, and Tropical Invariants}\label{sec:weil_tropical}
+Both the Tonnetz $X$ and the Nauru graph $Y=\GP(12,5)$ are connected, bipartite, $3$-regular graphs with $24$ vertices, $36$ edges, and first Betti number $g=36-24+1=13$. Yet their arithmetic spectra diverge completely.
+
+\begin{theorem}[Pure integer spectrum, $5/5$ $\F_2$-elliptic splitting, and prime cadences]\label{thm:nauru_weil}
+\ctag{G4N; X}\ The Nauru graph $Y=\GP(12,5)$ is bipartite of girth $6$ (zero $4$-cycles, $12$ undirected hexagons) with exact integer adjacency spectrum
+\[
+\operatorname{Spec}(A_Y) = \bigl\{+3^1,\; +2^6,\; +1^3,\; 0^4,\; -1^3,\; -2^6,\; -3^1\bigr\}.
+\]
+Its Ihara zeta function factorizes completely into quadratic Weil polynomials over $\F_2$:
+\begin{multline}\label{eq:nauru_zeta}
+\zeta_Y(u)^{-1} = (1-u^2)^{13}(1-4u^2)(1+2u^2)^4\\
+\times (1-u+2u^2)^3(1+u+2u^2)^3(1-2u+2u^2)^6(1+2u+2u^2)^6,
+\end{multline}
+hitting \emph{all five} elliptic curve isogeny classes over $\F_2$ ($a_2\in\{-2,-1,0,+1,+2\}$, explicit smooth models in Table~\ref{tab:f2_elliptic}) with zero higher-genus abelian factors. Its exact directed prime cadence counts $\pi_Y(m)$ satisfy $\pi_Y(m)=0$ for $m\le 5$ and odd $m$, and for even $6\le m\le 24$:
+\begin{center}\footnotesize\setlength{\tabcolsep}{3.5pt}
+\begin{tabular}{c|cccccccccc}\toprule
+$m$ & $6$ & $8$ & $10$ & $12$ & $14$ & $16$ & $18$ & $20$ & $22$ & $24$ \\\midrule
+$\pi_Y(m)$ & $24$ & $108$ & $216$ & $564$ & $2{,}232$ & $8{,}820$ & $31{,}824$ & $104{,}292$ & $384{,}792$ & $1{,}401{,}744$ \\\bottomrule
+\end{tabular}
+\end{center}
+Moreover, the three free bipartition-swapping involutions $g_c:u_r\leftrightarrow v_{5r+c}$ ($c\in\{2,6,10\}$) identify $Y$ as the bipartite double of the $12$-vertex \emph{Truncated Tetrahedron} $G_{12}=\Cay(A_4,\{s,r,r^{-1}\})$, whose adjacency spectrum is $\{+3^1,+2^3,0^2,-1^3,-2^3\}$.
+\end{theorem}
+\begin{proof}
+Symmetry, $3$-regularity, bipartiteness, zero $4$-cycles ($A_Y^2[a,c]\le 1$ for all $a\ne c$), and traces $\operatorname{tr}(A_Y^{2k})\in\{72,360,2232\}$ are kernel-checked in Lean~4 (Theorems~5--9). Substituting $\operatorname{Spec}(A_Y)$ into Bass's determinant identity $\zeta_Y(u)^{-1}=(1-u^2)^{|E|-|V|}\det(I-uA_Y+2u^2 I)$ yields \eqref{eq:nauru_zeta} directly (note $|E|-|V|=12$, and $\lambda=\pm 3$ supplies the thirteenth factor $(1-u^2)$ along with $(1-4u^2)$). Point counts $\#E(\F_2)=3-a_2$ on the five Weierstrass equations are kernel-checked in Lean~4 (Theorem~10). M\"obius inversion of $N_m(Y)=24\,\mathbf{1}_{2\mid m}+\sum_\lambda s_m(\lambda)$ with $s_0=2,s_1=\lambda,s_m=\lambda s_{m-1}-2s_{m-2}$ produces $\pi_Y(m)$ exactly (Python Gate~D3). Finally, $5(5r+c)+c\equiv r+6c\equiv r\pmod{12}$ when $c\in\{2,6,10\}$ shows $g_c$ is a fixed-point-free involution reversing bipartition, yielding the $12$-vertex quotient $G_{12}$.
+\end{proof}
+
+\begin{table}[t]
+\centering\footnotesize\setlength{\tabcolsep}{5pt}
+\caption{All five elliptic curve isogeny classes over $\F_2$ realized inside $\zeta_Y(u)^{-1}$.}
+\label{tab:f2_elliptic}
+\begin{tabular}{rclccl}\toprule
+$a_2$ & Mult. & Ihara factor & Explicit smooth model over $\F_2$ & $\#E(\F_2)$ & Type \\\midrule
+$+2$ & $6$ & $1-2u+2u^2$ & $y^2+y=x^3+x+1$ & $1$ & Supersingular \\
+$+1$ & $3$ & $1-u+2u^2$ & $y^2+xy=x^3+x^2+1$ & $2$ & Ordinary \\
+$0$ & $4$ & $1+2u^2$ & $y^2+y=x^3$ & $3$ & Supersingular \\
+$-1$ & $3$ & $1+u+2u^2$ & $y^2+xy=x^3+1$ & $4$ & Ordinary \\
+$-2$ & $6$ & $1+2u+2u^2$ & $y^2+y=x^3+x$ & $5$ & Supersingular \\\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{theorem}[Pure $5$-smooth Raynaud component group and prime-hexagon gonality]\label{thm:tropical}
+\ctag{G4N; X}\ Let $C_Y/\Q_2$ be any Mumford curve with minimal skeleton $Y=\GP(12,5)$ (unit edge lengths).
+\begin{enumerate}[label=(\alph*),nosep]
+\item By Raynaud \cite{raynaud1970}, the component group of the N\'eron model of $J(C_Y)/\Q_2$ equals the critical (sandpile) group of $Y$:
+\begin{align*}
+K(Y) &\cong \Z/5 \oplus \Z/5 \oplus \Z/5 \oplus \Z/30 \oplus \Z/120 \oplus \Z/360,\\
+|K(Y)| &= 162{,}000{,}000 = 2^7\cdot 3^4\cdot 5^6.
+\end{align*}
+\item The Baker--Norine divisorial gonality \cite{bn2007} of $Y$ is $\operatorname{gon}(Y)=6$, attained by the reduced (square-free) single prime-hexagon divisor
+\begin{align*}
+D_{\mathrm{hex}} &= u_0 + u_1 + u_2 + v_0 + v_2 + v_7\\
+&= \mathrm{C} + \mathrm{C}\sharp + \mathrm{D} + \mathrm{f}\sharp\mathrm{m} + \mathrm{a}\flat\mathrm{m} + \mathrm{c}\sharp\mathrm{m}, \qquad r(D_{\mathrm{hex}}) = 1.
+\end{align*}
+\item None of the $39$ involutions in $\Aut(Y)$ has a tree quotient; the exact distribution of metric-quotient Betti numbers $\beta_1(Y/\langle g\rangle)$ is $\{4^6, 5^9, 6^{18}, 7^6\}$ ($\min\beta_1=4>0$). By Chan's criterion \cite{chan2013} and Baker specialization \cite{baker2008}, $C_Y$ is not hyperelliptic.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+Exact integer Smith normal form of the $23\times 23$ reduced Laplacian of $3I-A_Y$ yields invariant factors $[5,5,5,30,120,360]$ with product $2^7\cdot 3^4\cdot 5^6 = 162{,}000{,}000$ (Python Gate~D4; Lean~4 Theorem~11). By vertex-transitivity of $Y$, any rank-$\ge 1$ divisor class of degree $d$ contains an effective representative with $D(u_0)\ge 1$. Exhaustive Dhar burning across all $\sum_{d=2}^5 \binom{24+d-2}{d-1} = 20{,}474$ such divisors finds zero rank-$\ge 1$ divisors (verified independently in Python Gate~D4 and Rust test \texttt{test\_d4}), while $D_{\mathrm{hex}}$ passes $q$-reduction at all $24$ vertices (and forms a length-$6$ cycle, Lean~4 Theorem~8). Computing $\beta_1(Y/\langle g\rangle)=|E_{\mathrm{non\text{-}inv}}/\langle g\rangle|-|V/\langle g\rangle|+1$ across all $39$ involutions gives $\{4^6,5^9,6^{18},7^6\}$.
+\end{proof}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/fig2_nauru_towers.pdf}
+\caption{(a)~Exact partition of $Y=\GP(12,5)$ into the $6$ Klein $V_4$-orbits of size $4$ under $N=\Gamma(3)/\Gamma_Y$ ($B_3$, $x=\tfrac32$); collapsing colors produces the genus-$4$ Shimura reduction graph $K_{3,3}$. (b)~Reduced degree-$6$ divisorial gonality witness $D_{\mathrm{hex}}$ (a single length-$6$ prime cadence).}
+\label{fig:nauru_towers}
+\end{figure}
+
+\section{\texorpdfstring{$2$}{2}-Adic Lam\'e Moduli Space and Complete Classification of Rational Arithmetic Nauru Curves}\label{sec:2adic_moduli}
+We now lift the full combinatorial symmetry of $Y=\GP(12,5)$ into $\PGL_2(\Q_2)$ acting on the $3$-regular Bruhat--Tits tree $T_3$ \cite{serre1980}.
+
+\begin{proposition}[Lam\'e amalgam and split obstruction (\texttt{NEG-M17})]\label{prop:lame_amalgam}
+\ctag{G4N; X}\ The full automorphism group $\Aut(Y)$ has order $144 = 12(g-1)$, acting transitively on vertices ($|G_v|=6$, $G_v\cong S_3$), undirected edges ($|G_e|=4$, $G_e\cong V_4=\Z_2\times\Z_2$), and directed arcs ($|G_{\vec{e}}|=2$). Its amalgam lift
+\begin{equation}\label{eq:lame_amalgam}
+\tilde{\Gamma} = S_3 *_{\Z_2} V_4 = \bigl\langle a,b,t \mid a^3=b^2=t^2=1,\; bab=a^{-1},\; tb=bt \bigr\rangle
+\end{equation}
+has Euler characteristic $\chi(\tilde{\Gamma})=\tfrac16+\tfrac14-\tfrac12=-\tfrac{1}{12}$ (the first Herrlich--Cornelissen--Kato Lam\'e amalgam \cite{herrlich1980,ck2002}), and $\Gamma_Y = \ker(\tilde{\Gamma}\to\Aut(Y))$ is automatically a torsion-free free group of rank $13$. Moreover, in $\PGL_2(\Q_2)$:
+\begin{enumerate}[label=(\alph*),nosep]
+\item No split involution $b\in\PGL_2(\Z_2)$ ($\det(b)\in -(\Q_2^\times)^2$, e.g.\ $\det(b)=-1$) admits a commuting edge-inverter $t$ on $T_3$, because $v_2(q^2-p^2)\ge 3\neq 1$ for all odd $p,q\in\Z_2$ (\texttt{NEG-M17}).
+\item Using non-split involutions $b_p=\begin{psmallmatrix}p & 1 \\ p+1 & -p\end{psmallmatrix}$ with $p\equiv 1\pmod 4$ ($\det(b_p)=-(p^2+p+1)\equiv 5$ or $1\pmod 8$), the edge-inverters $t_u=\begin{psmallmatrix}u & 1 \\ -2pu-(p+1) & -u\end{psmallmatrix}$ ($u\in 2\Z_2$) satisfy $t_u b_p = -b_p t_u$ and $v_2(\det(t_u))=1$, realizing two disjoint $1$-parameter $\Q_2$-families of genus-$13$ Mumford curves $C_Y/\Q_2$ with $|\Aut(C_Y)|=144=12(g-1)$.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+Because $S_3$ and $V_4$ inject into $\Aut(Y)$, every finite-order element of $\tilde{\Gamma}$ (conjugate into $S_3$ or $V_4$ by Bass--Serre \cite{serre1980}) maps nontrivially into $\Aut(Y)$; hence $\Gamma_Y$ is torsion-free of rank $1-144\cdot(-\tfrac{1}{12})=13$. For (a), any traceless $t$ anti-commuting with $b=\begin{psmallmatrix}0 & 1 \\ 1 & 0\end{psmallmatrix}$ has $t=\begin{psmallmatrix}p & q \\ -q & -p\end{psmallmatrix}$ with $\det(t)=q^2-p^2$; for odd $p,q$, $q^2-p^2\equiv 0\pmod 8$ (Lean~4 Theorem~14), ruling out $v_2(\det t)=1$. For (b), with $a=\begin{psmallmatrix}0 & -1 \\ 1 & -1\end{psmallmatrix}$ and $b_p$, direct matrix computation yields $b_p t_u + t_u b_p = 0$ and $\det(t_u)=(p+1)+2pu-u^2\equiv p+1\pmod 4$, which has $2$-adic valuation $1$ precisely when $p\equiv 1\pmod 4$ (Lean~4 Theorem~13 for $p=1$).
+\end{proof}
+
+\begin{theorem}[Universal Fricke--Vogt law and quaternion algebra $B(x)$]\label{thm:fricke_vogt}
+\ctag{G4N; X}\ Every discrete embedding $\rho:\tilde{\Gamma}=S_3*_{\Z_2}V_4\hookrightarrow\PGL_2(L)$ acting properly on $T_3$ is uniquely determined up to $\PGL_2(\overline{L})$-conjugacy by the single trace modulus $x = \tau(ta) = \operatorname{tr}(ta)^2/\det(ta)$ ($v_2(x)=-1$). Lifting $a^2+a+1=0$, setting $i=2a+1$ ($i^2=-3$), $j=b$ ($j^2=D_b=-\det b$), and $k=ij$, every traceless $t$ anti-commuting with $b$ takes the form $t=\alpha i + \gamma k$, giving
+\begin{equation}\label{eq:x_quad}
+x = \frac{3\alpha^2}{\alpha^2 - D_b \gamma^2} \iff D_b\left(\frac{\gamma}{\alpha}\right)^2 = \frac{x - 3}{x}.
+\end{equation}
+Consequently, the quaternion algebra generated by $\tilde{\Gamma}$ over $\Q(x)$ is identically
+\begin{equation}\label{eq:Bx}
+B(x) = \left(\frac{-3,\; x(x-3)}{\Q(x)}\right),
+\end{equation}
+and the trace invariants of hyperbolic words satisfy exact universal polynomials in $x$:
+\begin{align}
+\tau(ta) &= x, & \tau(ta\cdot ta^2) &= (x-1)^2, \label{eq:fv1}\\
+\tau((ta)^2 ta^2) &= x(x-2)^2, & \tau((ta)^3 ta^2) &= (x^2-3x+1)^2, \label{eq:fv2}
+\end{align}
+together with the shortest length-$6$ prime cadence invariant
+\begin{equation}\label{eq:fv3}
+\tau(\gamma_6) = \tau((ta)^6) = (x^3 - 6x^2 + 9x - 2)^2.
+\end{equation}
+\end{theorem}
+\begin{proof}
+Since $\{1,i,j,k\}$ spans $M_2(L)$ with $ij=-ji$, a traceless element $t=\alpha i+\beta j+\gamma k$ satisfies $tj+jt=2\beta D_b=0\iff \beta=0$. Then $t^2 = 3(D_b\gamma^2-\alpha^2)$, so $\nrd(t)=3(\alpha^2-D_b\gamma^2)$, while $ta=t(i-1)/2$ has $\trd(ta)=-3\alpha$, proving \eqref{eq:x_quad} and \eqref{eq:Bx} (since multiplying the second Hilbert slot by the square $(x/\alpha\gamma)^2$ gives $D_b\sim x(x-3)$). Writing $\tau(ta)=x=2+\mu+\mu^{-1}$ with $s=\mu+\mu^{-1}=x-2$, we obtain $\tau((ta)^6) = 2+(\mu^6+\mu^{-6}) = (s^3-3s)^2 = (x^3-6x^2+9x-2)^2$; identities \eqref{eq:fv1}--\eqref{eq:fv2} follow from the Fricke trace relation $\operatorname{tr}(XY)+\operatorname{tr}(XY^{-1})=\operatorname{tr}(X)\operatorname{tr}(Y)$ and are verified identically in Python Gate~D5.
+\end{proof}
+
+\begin{theorem}[Complete classification of rational arithmetic Nauru curves]\label{thm:rat_arith}
+\ctag{G4N; X}\ Within the $1$-parameter Lam\'e Nauru family $C_Y(x)/\Q_2$, a rational modulus $x\in\Q$ yields an arithmetic Schottky group $\Gamma_Y(x)$ over $\Q$ if and only if
+\[
+x \in \left\{\frac{1}{2},\quad \frac{3}{2},\quad \frac{5}{2}\right\}.
+\]
+Specifically:
+\begin{enumerate}[label=(\alph*),nosep]
+\item \textbf{$x=\tfrac32$ in $B_3=(\frac{-3,-1}{\Q})$ (Shimura discriminant $D=2\cdot 3=6$):} Maximal order $\calO_3=\Z[1,\omega,j,\omega j]$ (reduced discriminant $3$, $\omega=\frac{-1+i}{2}$), edge-inverter $t=(2\omega+1)(1+j)=i+k$ ($\nrd(t)=6$), $\tilde{\Gamma}=\mathrm{Norm}_{B_3^\times}(\calO_3[\tfrac12])/\Q^\times$, and shortest length-$6$ prime cadence
+\begin{align*}
+\gamma_6 &= \frac{(ta)^6}{27} = 4 - 3\omega + 3j - 3\omega j \in \calO_3,\\
+\trd(\gamma_6) &= 11,\qquad \nrd(\gamma_6) = 64,\qquad \tau(\gamma_6) = \frac{121}{64}\in [0,4].
+\end{align*}
+Its explicit $2$-adic representation $\calO_3\hookrightarrow M_2(\Z_2)$ is given via the Hensel-lifted $2$-adic integer $q=\frac{1+\sqrt{-7}}{2}\in 2\Z_2$ ($q\equiv 38\pmod{64}$):
+\[
+a = \begin{pmatrix}0 & 1 \\ -1 & -1\end{pmatrix}, \qquad b = \begin{pmatrix}1 & q \\ q-1 & -1\end{pmatrix}, \qquad t = \begin{pmatrix}1 & 2 \\ -2 & -1\end{pmatrix}(I+b).
+\]
+\item \textbf{$x=\tfrac52$ in $B_5=(\frac{-3,-5}{\Q})$ (Shimura discriminant $D=2\cdot 5=10$):} Maximal order $\calO_5=\Z[1,\omega,t,\omega t]$ (reduced discriminant $5$) with Atkin--Lehner involution $b=j$ ($\nrd(b)=5$) and $t=\frac{5i+k}{3}$ ($\nrd(t)=10$), yielding $\tau(\gamma_6)=\frac{121}{64}$ and length-$8$ trace $\tau(w_8)=\frac{169}{256}$.
+\item \textbf{$x=\tfrac12$ in $B_5=(\frac{-3,-5}{\Q})$ (Shimura discriminant $D=10$):} Maximal order $\calO_5=\Z[1,\omega,t,\omega t]$ with $b=j$ and $t=\frac{i+k}{3}$ ($\nrd(t)=2$), yielding $\gamma_6 = 7 + 5t + 5\omega t$, $\trd(\gamma_6)=9$, $\nrd(\gamma_6)=64$, and $\tau(\gamma_6)=\frac{81}{64}\in [0,4]$.
+\item \textbf{Non-arithmetic continuum witness ($x=\tfrac92$):} Setting $u=0$ in Proposition~\ref{prop:lame_amalgam}(b) gives rational $a=\begin{psmallmatrix}0&-1\\1&-1\end{psmallmatrix}$, $b=\begin{psmallmatrix}1&1\\2&-1\end{psmallmatrix}$, $t_0=\begin{psmallmatrix}0&1\\-2&0\end{psmallmatrix}\in\PGL_2(\Q_2)$ realizing $Y$ and $|\Aut|=144$ with $x=\frac92>3$ and $\tau(\gamma_6)=\frac{4225}{64}\approx 66.02>4$ (strictly non-arithmetic).
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+Suppose $\Gamma_Y(x)$ is arithmetic over $\Q$. Then (i)~the ambient quaternion algebra $B(x)\otimes_\Q\R$ must be compact ($\cong\H$), which by \eqref{eq:Bx} holds if and only if $x(x-3)<0$, i.e., $0<x<3$; (ii)~the primitive Schottky element $\gamma_6=(ta)^6\in\Gamma_Y(x)$ must have $\tau(\gamma_6)\in\Z[\frac12]$, and because $(x^3-6x^2+9x-2)^2$ is monic in $x$, no odd prime can divide the denominator of $x$; (iii)~$v_2(x)=-1$ forces $x=k/2$ with $k$ odd and $0<k<6$, leaving \emph{only} $k\in\{1,3,5\}$ (Lean~4 Theorem~15). Conversely, for each of $x\in\{\frac12,\frac32,\frac52\}$, the reduced Gram determinant of $\calO_d$ equals $d^2$ ($d\in\{3,5\}$), conjugation by $t$ and $b$ preserves $\calO_d[\frac12]$, and exact Hilbert symbols satisfy $(-3,-1)_2=(-3,-5)_2=+1$ (split at $2$) and $(-3,-1)_\infty=(-3,-5)_\infty=-1$ (definite at $\infty$). All matrix, Hensel, and trace identities are independently verified in Python (Gate~D6), Rust (Gate~4), and Lean~4 (Theorems~16--19).
+\end{proof}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/fig3_fricke_vogt_moduli.pdf}
+\caption{Universal Fricke--Vogt trace polynomials of $S_3*_{\Z_2}V_4\subset\PGL_2(\Q_2)$ against the compact archimedean ceiling $\tau=4$. Inside the definite window $0<x<3$, integrality of the monic sextic $\tau(\gamma_6)$ singles out exactly three rational arithmetic Nauru curves $x\in\{\tfrac12,\tfrac32,\tfrac52\}$.}
+\label{fig:fricke_vogt}
+\end{figure}
+
+\section{Arithmetic Non-Congruence Shimura Covers and Borel-Level Exclusion}\label{sec:noncongruence}
+Why did the exhaustive genus-$13$ Shimura curve census of Paper~\#01 miss the Nauru graph, even though $C_Y(\frac32)$, $C_Y(\frac52)$, and $C_Y(\frac12)$ are genuinely arithmetic over $\Q$? The answer lies in the distinction between \emph{Borel-level} Shimura curves $X_0^D(N)$ ($\gcd(D,N)=1$) and \emph{non-congruence Galois covers of principal level-$3$ Shimura curves}.
+
+\begin{theorem}[Explicit arithmetic non-congruence towers]\label{thm:noncongruence}
+\ctag{G4N; X}\ Let $\Gamma_Y(x)\subset B_d^\times/\Q^\times$ denote the arithmetic Nauru Schottky group of Theorem~\ref{thm:rat_arith}.
+\begin{enumerate}[label=(\alph*),nosep]
+\item \textbf{At $x=\tfrac32$ in $B_3$ ($D=6$):} Let $\Gamma(3)=\ker\bigl(\calO_3[\tfrac12]^1/\{\pm 1\}\to (\calO_3/3\calO_3)^1/\{\pm 1\}\bigr)$ be the principal level-$3$ congruence subgroup at the ramified prime $3\mid 6$. Then $[\tilde{\Gamma}:\Gamma(3)]=36$, the tree quotient $T_3/\Gamma(3)$ is the complete bipartite utility graph $K_{3,3}$ (uniformizing the genus-$4$ congruence Shimura curve $X^6(\Gamma(3))$), and $\Gamma_Y(\frac32)$ sits as an index-$4$ normal subgroup with Klein four-group deck group:
+\begin{equation}\label{eq:tower_b3}
+\Gamma_Y\bigl(\tfrac32\bigr) \;\trianglelefteq_{V_4}\; \Gamma(3) \;\trianglelefteq_{18}\; \calO_3[\tfrac12]^1/\{\pm 1\} \;\trianglelefteq_2\; \tilde{\Gamma}.
+\end{equation}
+Furthermore, $\Gamma_Y(\frac32)$ is \textbf{non-congruence} inside $B_3^\times/\Q^\times$: it contains no principal congruence subgroup of $\calO_3[\frac12]^1/\{\pm 1\}$.
+\item \textbf{At $x=\tfrac52$ in $B_5$ ($D=10$):} Reduction modulo the split prime $3\nmid 10$ maps $\tilde{\Gamma}\to\PGL_2(\F_3)\cong S_4$ (order $24$) with quotient graph $T_3/\Gamma_5(3)=K_4$ (tetrahedron, genus-$3$ congruence Shimura curve $X^{10}(\Gamma(3))$). The Nauru group sits as an index-$6$ normal subgroup with deck group $S_3$, factoring through the cube $Q_3$ (genus $5$):
+\begin{equation}\label{eq:tower_b5}
+\Gamma_Y\bigl(\tfrac52\bigr) \;\trianglelefteq_{\Z_3}\; \Gamma_{\mathrm{Cube}} \;\trianglelefteq_{\Z_2}\; \Gamma_5(3) \;\trianglelefteq_{S_4}\; \tilde{\Gamma}.
+\end{equation}
+Its overlap with reduction modulo $9$ remains of order $24$, leaving the $S_3$ cover non-congruence at $3$-power levels.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+For (a), Eichler's mass formula $\sum 1/|\calO_i^\times|=(3-1)/24=1/12$ gives class number $1$ and $|\calO_3^\times/\{\pm 1\}|=6$, so $\calO_3[\frac12]^1/\{\pm 1\}\cong S_3*_{\Z_2}S_3$ ($\chi=-1/6$), and adjoining $t$ yields the full normalizer $\tilde{\Gamma}$ ($\chi=-1/12$). Computing the joint image of $\langle a,b,t\rangle$ in $\Aut(Y)\times (\tilde{\Gamma}/\Gamma(3))$ gives order $144$ with second projection of order $36$ and kernel $N\cong V_4$ acting freely on $Y$ with $6$ orbits of size $4$ forming $K_{3,3}$ (Python Gate~D7, Rust Gate~4). To prove non-congruence, apply Strong Approximation to the simply connected group $\SL_1(B_3)$ (non-compact at $v=2$): the congruence closure of $\widetilde{\Gamma(3)}\subset\calO_3[\frac12]^1$ in $\prod_{p\ne 2}\calO_{3,p}^1$ is $(1+3\calO_{3,3})^1\times\prod_{p\ge 5}\SL_2(\Z_p)$ (up to global $\{\pm 1\}$). At $p=3$, $(1+3\calO_{3,3})^1$ is pro-$3$ (odd), while for every prime $p\ge 5$, $\SL_2(\F_p)$ is perfect and $\ker(\SL_2(\Z_p)\to\SL_2(\F_p))$ is pro-$p$ (odd), so $\SL_2(\Z_p)$ admits no index-$2$ or index-$4$ quotient. Hence no congruence subgroup can have index $4$ in $\Gamma(3)$ (confirmed concretely at $p=5$ by joint surjection onto $\Aut(Y)\times A_5$ of order $8{,}640$). Part (b) follows analogously by computing the joint image mod $3$ (order $144$, projection $24$, kernel $S_3$ with bipartition-preserving $\Z_3\trianglelefteq S_3$ yielding $Q_3$ and bipartition-swapping involutions folding $Q_3\to K_4$) and mod $9$ (joint order $3{,}888$, overlap $144\cdot 648/3{,}888=24$).
+\end{proof}
+
+\begin{theorem}[Zero Borel-level Shimura realizations over $\Q$ (\texttt{NEG-M18})]\label{thm:noborel}
+\ctag{G4N; X}\ None of the $19$ genus-$13$ Borel-level Shimura curves $X_0^D(N)$ over $\Q$ ($2\mid D$, $\gcd(D,N)=1$), and none of the $22$ definite Brandt graphs over totally real fields of degree $n\le 4$ ($h_F^+=1$) from Proposition~7.19 of \cite{ergentics2026pc}, has $2$-adic \v{C}erednik--Drinfeld reduction graph $Y=\GP(12,5)$.
+\end{theorem}
+\begin{proof}
+By \v{C}erednik--Drinfeld and Ribet \cite{cerednik1976,drinfeld1976,ribet1990}, a curve $X_0^D(N)$ with reduction graph $Y$ would have $D/2$-newspace $S_2^{D/2\text{-new}}(\Gamma_0(DN/2))$ realizing the $11$ nontrivial eigenvalues of $G_{12}$, forcing simultaneous $T_2$-nullities $\operatorname{null}(T_2-2I)\ge 3$, $\operatorname{null}(T_2)\ge 2$, $\operatorname{null}(T_2+I)\ge 3$, and $\operatorname{null}(T_2+2I)\ge 3$ on $\mathcal{M}_2(\Gamma_0(M))^-$ ($M=DN/2$). Recomputing $T_2$ from scratch via zero-PARI Manin modular symbols over $\F_{1000003}$ across all $18$ distinct levels $M\in\{105,111,\dots,345\}$ (covering all $19$ pairs, including $X_0^{690}(1)$ at $M=345$ where $\operatorname{null}=(3,2,3,1)$ misses $-2$) excludes $19/19$ pairs in both Python (Gate~D8) and Rust (\texttt{test\_d8}). Likewise, evaluating the minimal polynomial $t(t-3)(t+1)(t^2-4)$ of $G_{12}$ across all $22$ Brandt matrices yields $0/22$ matches.
+\end{proof}
+
+\section{The \texorpdfstring{$3$}{3}-Adic Dicyclic Companion \texorpdfstring{$\mathrm{Dic}_6$}{Dic6}, RCT Null Control, and Summary}\label{sec:3adic}
+Finally, the unique dicyclic twin $\mathrm{Dic}_6\subset\UTT$ ($u=11, b=6$ in Theorem~\ref{thm:census}) admits zero cubic Cayley graphs because it possesses only one involution. Passing to degree $4$ moves naturally from the $2$-adic Bruhat--Tits tree $T_3$ to the $4$-regular \textbf{$3$-adic Bruhat--Tits tree $T_4 = T_{3+1}$ of $\PGL_2(\Q_3)$}.
+
+\begin{proposition}[$3$-adic Bruhat--Tits $T_4$ companion $\mathrm{Dic}_6$]\label{prop:dic6}
+\ctag{G4N; X}\ Among all symmetric $4$-element generating sets of $\mathrm{Dic}_6$, there are exactly $18$ connected $4$-regular Cayley graphs, all bipartite of genus $25$: $12$ are strictly Ramanujan with $\lambda_{\mathrm{nt}}=3.000<2\sqrt{3}\approx 3.4641$ (e.g.\ $Z=\Cay(\mathrm{Dic}_6,\{x,x^{-1},y,y^3\})$), and $6$ lie exactly on the Ramanujan boundary $\lambda_{\mathrm{nt}}=2\sqrt{3}$. For $Z$:
+\begin{itemize}[nosep]
+\item $\operatorname{Spec}(A_Z)=\{+4^1,+3^2,+\sqrt{3}^{\,4},+1^2,0^6,-1^2,-\sqrt{3}^{\,4},-3^2,-4^1\}$, girth $4$, and its $3$-adic Ihara zeta function factorizes over $\F_3$ into elliptic factors ($a_3\in\{0,\pm 1,\pm 3\}$) plus four copies of the genus-$2$ factor $(1+3u^2+9u^4)$;
+\item its Raynaud/sandpile group has exact order
+\[
+|K(Z)| = 429{,}923{,}020{,}800 = 2^{12}\cdot 3\cdot 5^2\cdot 7^2\cdot 13^4.
+\]
+\end{itemize}
+\end{proposition}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/fig4_elliptic_shimura_comparison.pdf}
+\caption{(a)~Multiplicity distribution of all $5/5$ $\F_2$ elliptic curve isogeny classes inside $\zeta_Y(u)^{-1}$. (b)~Exact spectrum of the $3$-adic $4$-regular Ramanujan companion $Z_{\mathrm{Dic}_6}$ on the Bruhat--Tits tree $T_4$ of $\PGL_2(\Q_3)$ ($\lambda_{\mathrm{nt}}=3<2\sqrt{3}$).}
+\label{fig:elliptic_dic6}
+\end{figure}
+
+To quantify the rarity of Nauru's simultaneous spectral gap ($\lambda_{\mathrm{nt}}=2.000$) and girth ($6$) against generic $24$-vertex $3$-regular bipartite graphs, Gate~P1 executes a keyed SplitMix64 randomized control sweep ($N=200$, seed \texttt{0x2ad1caa0125}, bit-exact replay verified): random controls yield mean $\lambda_{\mathrm{nt}}=2.5673$, minimum $\lambda_{\mathrm{nt}}=2.3248$, $197/200$ Ramanujan, $1/200$ with girth $\ge 6$, and \textbf{$0/200$} matching or beating Nauru's $\lambda_{\mathrm{nt}}=2.000$. Table~\ref{tab:comparison} synthesizes the complete three-graph arithmetic landscape.
+
+\begin{table}[t]
+\centering\footnotesize\setlength{\tabcolsep}{3.5pt}
+\caption{Head-to-head $p$-adic arithmetic synthesis: Tonnetz $X$ (Paper~\#01) vs.\ Nauru $Y$ vs.\ $3$-adic $\mathrm{Dic}_6$ twin $Z$.}
+\label{tab:comparison}
+\begin{tabular}{llll}\toprule
+Invariant & Tonnetz $X$ \cite{ergentics2026pc} & Nauru $Y=\GP(12,5)$ & $\mathrm{Dic}_6$ Twin $Z$ \\\midrule
+Bruhat--Tits tree & $T_3$ ($\PGL_2(\Q_2)$) & $T_3$ ($\PGL_2(\Q_2)$) & $T_4$ ($\PGL_2(\Q_3)$) \\
+$|V| / |E| / g$ & $24 / 36 / 13$ & $24 / 36 / 13$ & $24 / 48 / 25$ \\
+Girth & $6$ & $6$ ($0$ four-cycles) & $4$ \\
+$\lambda_{\mathrm{nt}}$ vs.\ Ram. & $\sqrt{5}\approx 2.236 < 2\sqrt{2}$ & $\mathbf{2.000} < 2\sqrt{2}$ & $\mathbf{3.000} < 2\sqrt{3}$ \\
+$\F_p$ Weil & Octic ($g\ge 5$ req.) & \textbf{All $5/5$ $\F_2$-ell.} & $\F_3$-ell. + $4{\times}g{=}2$ \\
+Raynaud $|K|$ & $2^{15}\cdot 3^2\cdot 23^2$ & $\mathbf{2^7\cdot 3^4\cdot 5^6}$ & $2^{12}\cdot 3\cdot 5^2\cdot 7^2\cdot 13^4$ \\
+Gonality & $6$ (non-reduced) & $\mathbf{6}$ (prime hex) & --- \\
+$|\Aut(C)|$ & $24$ & $\mathbf{144=12(g-1)}$ & $4$-regular Cayley \\
+Arithmetic / $\Q$? & No ($0$ anywhere) & \textbf{Yes: $x\in\{\tfrac12,\tfrac32,\tfrac52\}$} & Open $3$-adic \\
+Congruence & --- & Non-cong.\ over $\Gamma(3)$ & Open \\\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection*{Data, code, and formal proof availability}
+All results are reproducible from first principles inside \path{papers/triadic_wreath_nauru/}: pure Python ($12/12$ gates, \path{code/triadic_nauru_verify.py}, SHA-256 calibration \path{data/triadic_nauru_calibration.json}), zero-Mathlib Lean~4.36.0 ($20/20$ theorems, \path{lean/TriadicNauru/Core.lean}), and zero-crate Rust ($6/6$ integration tests, \path{rust/}). Refuted hypotheses and scope boundaries are permanently logged in \path{NEGATIVES.md} (\texttt{NEG-M15}--\texttt{NEG-M18}).
+
+\bibliographystyle{amsplain}
+\bibliography{references}
+\end{document}

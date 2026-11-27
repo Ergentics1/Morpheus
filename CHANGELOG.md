@@ -4,6 +4,12 @@ All notable changes to **Morpheus** are documented here. Manuscript updates cut 
 
 ## [Unreleased]
 
+## [0.5.0] - 2026-11-27
+
+### Added
+- **Paper `PC-II` — *Uniform Triadic Wreath Products, the Nauru Graph, and $2$-Adic Arithmeticity* (`papers/triadic_wreath_nauru/`, sequel to Paper #01):** complete 15 pp AMS `LaTeX` monograph (`0` warnings, `0` overfull hboxes, `0` local-path metadata), standalone-verified neutral `0/0` arXiv bundle (`triadic-wreath-nauru-arxiv.tar.gz`), 4 TikZ/PGFPlots vector PDF figures, 1-to-1 GFM mirror, and three independent zero-shared-data verification planes — pure Python (`code/triadic_nauru_verify.py`, `12/12` D/R/P/Seam gates + SplitMix64 $N=200$ RCT null control + SHA-256-manifested `data/triadic_nauru_calibration.json`), zero-Mathlib Lean 4.36.0 (`lean/TriadicNauru/Core.lean`, `20/20` kernel-checked theorems, `0 sorryAx`, `0 ofReduceBool`), and zero-crate Pure Rust (`rust/`, `6/6` integration tests). Resolves Lewin $T/I$ vs. $PLR$ vs. Hook $\mathrm{UTT} = \mathbb{Z}_{12}\wr\mathbb{Z}_2$ non-fusion (`144` / `288 != 288` / `576` / `1,152`, `NEG-M15`–`NEG-M16`), classifies all 24 simply transitive UTT subgroups (8 classes; unique $PLR$ Coxeter triples `168/192` Ramanujan; Nauru $Y = \mathrm{GP}(12,5)$ with $\lambda_{\mathrm{nt}} = 2.000$), proves complete reversal of Paper #01's $2$-adic obstructions (all `5/5` $\mathbb{F}_2$ elliptic curves, pure $5$-smooth Raynaud $|K(Y)| = 162{,}000{,}000 = 2^7\cdot 3^4\cdot 5^6$, reduced prime-hexagon gonality $\operatorname{gon}(Y)=6$, Lamé amalgam $S_3 *_{\mathbb{Z}_2} V_4$ of order `144 = 12(g-1)`, `NEG-M17`), derives the universal Fricke–Vogt quaternion law $B(x) = (-3, x(x-3))_{\mathbb{Q}(x)}$ and exact rational arithmetic classification $x \in \{\frac12, \frac32, \frac52\}$ ($B_3, B_5$), constructs explicit arithmetic **non-congruence** Shimura covers $Y \to K_{3,3}$ ($X^6(\Gamma(3))$) and $Y \to Q_3 \to K_4$ ($X^{10}(\Gamma(3))$) reconciling `0/19` Borel-level Manin $T_2$ exclusion (`NEG-M18`), and opens the $3$-adic $\mathrm{Dic}_6$ frontier on $T_4$ of $\mathrm{PGL}_2(\mathbb{Q}_3)$ ($g = 25$, `12/18` strict Ramanujan at $\lambda_{\mathrm{nt}} = 3 < 2\sqrt{3}$).
+- **Automated Immutable Release Wiring (`.github/workflows/release-assets.yml`):** added `papers/triadic_wreath_nauru/paper/triadic_wreath_nauru.pdf` and `papers/triadic_wreath_nauru/arxiv/triadic-wreath-nauru-arxiv.tar.gz` to the automated release asset verification and publishing pipeline (now 5 canonical PDFs + 5 neutral arXiv tarballs + `SHA256SUMS.txt`).
+
 ## [0.4.0] - 2026-11-26
 
 ### Added

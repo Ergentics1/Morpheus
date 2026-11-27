@@ -1,0 +1,10 @@
+name = "triadic_nauru"
+version = "0.1.0"
+defaultTargets = ["TriadicNauru", "triadic-nauru-lean"]
+
+[[lean_lib]]
+name = "TriadicNauru"
+
+[[lean_exe]]
+name = "triadic-nauru-lean"
+root = "Main"

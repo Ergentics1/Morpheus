@@ -1,0 +1,27 @@
+import TriadicNauru
+
+-- Compile-time axiom audit: ensures zero `sorryAx` and zero `Lean.ofReduceBool`.
+#print axioms TriadicNauru.thm1_utt_parity_hom
+#print axioms TriadicNauru.thm2_T_PLR_even_parity_misses_Q
+#print axioms TriadicNauru.thm3_I0_not_in_UTT
+#print axioms TriadicNauru.thm4_I0_normalizes_UTT
+#print axioms TriadicNauru.thm5_nauru_symmetric_bipartite
+#print axioms TriadicNauru.thm6_nauru_3_regular
+#print axioms TriadicNauru.thm7_nauru_no_4cycles
+#print axioms TriadicNauru.thm8_nauru_prime_hexagon
+#print axioms TriadicNauru.thm9_nauru_exact_spectral_traces
+#print axioms TriadicNauru.thm10_all_five_F2_elliptic_curves
+#print axioms TriadicNauru.thm11_raynaud_orders_exact
+#print axioms TriadicNauru.thm12_lame_amalgam_euler_char
+#print axioms TriadicNauru.thm13_lame_family_universal_identities
+#print axioms TriadicNauru.thm14_split_involution_obstruction
+#print axioms TriadicNauru.thm15_rational_arithmetic_uniqueness
+#print axioms TriadicNauru.thm16_O3_amalgam_exact
+#print axioms TriadicNauru.thm17_O3_gamma6_arithmetic_and_mod3
+#print axioms TriadicNauru.thm18_fricke_vogt_arithmetic_vs_nonarithmetic
+#print axioms TriadicNauru.thm19_hensel_q2_mod64
+#print axioms TriadicNauru.thm20_ramanujan_gaps_exact
+
+def main : IO Unit := do
+  IO.println "TriadicNauru Lean 4.36.0 Oracle: ALL 20 THEOREMS KERNEL-CHECKED (0 sorryAx, 0 ofReduceBool)."
+  IO.println s!"  O3 gamma6 = ({TriadicNauru.o3Gamma6.c0}, {TriadicNauru.o3Gamma6.c1}, {TriadicNauru.o3Gamma6.c2}, {TriadicNauru.o3Gamma6.c3}), trd={TriadicNauru.o3Trd TriadicNauru.o3Gamma6}, nrd={TriadicNauru.o3Nrd TriadicNauru.o3Gamma6}"

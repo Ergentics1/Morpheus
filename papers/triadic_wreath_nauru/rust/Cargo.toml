@@ -1,0 +1,8 @@
+[package]
+name = "triadic-nauru-rust"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+description = "Zero-dependency independent Rust verifier for Uniform Triadic Wreath Products, the Nauru Graph, and 2-Adic Arithmeticity."
+
+[dependencies]
