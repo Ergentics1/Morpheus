@@ -82,7 +82,7 @@ pub struct GroupSummary {
     pub comm_order: usize,
 }
 
-pub fn analyze_group(elems: &[Perm24]) -> GroupSummary {
+pub fn analyze_group(elems: &[Perm24], gens: &[Perm24]) -> GroupSummary {
     let mut involutions = 0usize;
     let mut ord24 = 0usize;
     let mut center = 0usize;
@@ -92,32 +92,49 @@ pub fn analyze_group(elems: &[Perm24]) -> GroupSummary {
             24 => ord24 += 1,
             _ => {}
         }
-        if elems.iter().all(|h| comp(g, h) == comp(h, g)) {
+        if gens.iter().all(|h| comp(g, h) == comp(h, g)) {
             center += 1;
         }
     }
-    let invs: Vec<Perm24> = elems.iter().map(inv24).collect();
-    let mut comm_gens: HashSet<Perm24> = HashSet::new();
+    let gen_invs: Vec<Perm24> = gens.iter().map(inv24).collect();
     let id = id24();
-    for (i, g) in elems.iter().enumerate() {
-        for (j, h) in elems.iter().enumerate() {
-            let c = comp(&comp(g, h), &comp(&invs[i], &invs[j]));
-            if c != id {
-                comm_gens.insert(c);
+    let mut comm_seen: HashSet<Perm24> = HashSet::new();
+    let mut q: VecDeque<Perm24> = VecDeque::new();
+    comm_seen.insert(id);
+    q.push_back(id);
+    for (i, a) in gens.iter().enumerate() {
+        for (j, b) in gens.iter().enumerate() {
+            let c = comp(&comp(a, b), &comp(&gen_invs[i], &gen_invs[j]));
+            if comm_seen.insert(c) {
+                q.push_back(c);
             }
         }
     }
-    let comm_vec: Vec<Perm24> = comm_gens.into_iter().collect();
-    let comm_order = if comm_vec.is_empty() { 1 } else { gen_group(&comm_vec).len() };
+    while let Some(cur) = q.pop_front() {
+        for (s, si) in gens.iter().zip(gen_invs.iter()) {
+            let c1 = comp(&comp(s, &cur), si);
+            if comm_seen.insert(c1) {
+                q.push_back(c1);
+            }
+            let c2 = comp(&comp(si, &cur), s);
+            if comm_seen.insert(c2) {
+                q.push_back(c2);
+            }
+        }
+    }
+    let comm_vec: Vec<Perm24> = comm_seen.into_iter().collect();
+    let comm_order = gen_group(&comm_vec).len();
     GroupSummary { order: elems.len(), center, involutions, ord24, comm_order }
 }
 
-/// Gate 1: Non-fusion & normalizer tower (144 / 288 != 288 / 576 / 1152).
+/// Gate 1: Twin-diamond hierarchy (144 / 288 != 288 / 576 / 1152 != 1152 / 2304) + CFS duality.
 pub fn verify_non_fusion() -> bool {
     let t1 = utt_perm(false, 1, 1);
+    let t6 = utt_perm(false, 6, 6);
     let mut i0 = [0u8; 24];
     let mut m5 = [0u8; 24];
     let mut m7 = [0u8; 24];
+    let mut i_maj = [0u8; 24];
     for r in 0..12 {
         i0[r] = (12 + (17 - r) % 12) as u8;
         i0[12 + r] = ((17 - r) % 12) as u8;
@@ -125,6 +142,8 @@ pub fn verify_non_fusion() -> bool {
         m5[12 + r] = (12 + (5 * r) % 12) as u8;
         m7[r] = ((7 * r) % 12) as u8;
         m7[12 + r] = (12 + (7 * r) % 12) as u8;
+        i_maj[r] = ((12 - r) % 12) as u8;
+        i_maj[12 + r] = (12 + r) as u8;
     }
     let p = utt_perm(true, 0, 0);
     let l = utt_perm(true, 4, 8);
@@ -132,13 +151,57 @@ pub fn verify_non_fusion() -> bool {
     let a = utt_perm(false, 1, 0);
     let b = utt_perm(false, 0, 1);
 
-    let g_t_plr = analyze_group(&gen_group(&[t1, p, l, r]));
-    let g_ti_plr = analyze_group(&gen_group(&[t1, i0, p, l, r]));
-    let g_utt = analyze_group(&gen_group(&[a, b, p]));
-    let g_576 = gen_group(&[a, b, p, i0]);
-    let g_1152 = gen_group(&[a, b, p, i0, m5, m7]);
+    let gens_t_plr = [t1, p, l, r];
+    let gens_ti_plr = [t1, i0, p, l, r];
+    let gens_utt = [a, b, p];
+    let gens_576 = [a, b, p, i0];
+    let gens_nt = [a, b, p, i0, m5, m7];
+    let gens_qutt = [a, b, p, i_maj];
+
+    let set_ti: HashSet<Perm24> = gen_group(&[t1, i0]).into_iter().collect();
+    let set_plr: HashSet<Perm24> = gen_group(&[p, l, r]).into_iter().collect();
+    let elems_t_plr = gen_group(&gens_t_plr);
+    let elems_ti_plr = gen_group(&gens_ti_plr);
+    let elems_utt = gen_group(&gens_utt);
+    let elems_576 = gen_group(&gens_576);
+    let elems_nt = gen_group(&gens_nt);
+    let elems_qutt = gen_group(&gens_qutt);
+    let elems_2304 = gen_group(&[a, b, p, i_maj, m5]);
+
+    let g_t_plr = analyze_group(&elems_t_plr, &gens_t_plr);
+    let g_ti_plr = analyze_group(&elems_ti_plr, &gens_ti_plr);
+    let g_utt = analyze_group(&elems_utt, &gens_utt);
+    let g_576 = analyze_group(&elems_576, &gens_576);
+    let g_nt = analyze_group(&elems_nt, &gens_nt);
+    let g_qutt = analyze_group(&elems_qutt, &gens_qutt);
+
+    // Crans-Fiore-Satyendra duality: T/I and PLR commute, share only {id, T6 = (LR)^6}
+    let cfs_commute = set_ti.iter().all(|x| set_plr.iter().all(|y| comp(x, y) == comp(y, x)));
+    let ti_cap_plr: HashSet<Perm24> = set_ti.intersection(&set_plr).copied().collect();
+    let lr = comp(&l, &r);
+    let mut lr6 = id24();
+    for _ in 0..6 {
+        lr6 = comp(&lr, &lr6);
+    }
+
+    // Exact intersection N(T) cap QUTT = UTT >< <I0> (576), and QUTT does not normalize UTT
+    let set_nt: HashSet<Perm24> = elems_nt.iter().copied().collect();
+    let set_qutt: HashSet<Perm24> = elems_qutt.iter().copied().collect();
+    let set_utt: HashSet<Perm24> = elems_utt.iter().copied().collect();
+    let cap_1152 = set_nt.intersection(&set_qutt).count();
+    let qutt_norm_utt = set_utt.contains(&comp(&comp(&i_maj, &p), &inv24(&i_maj)));
 
     g_t_plr.order == 144
+        && g_t_plr.center == 12
+        && g_t_plr.involutions == 15
+        && g_t_plr.ord24 == 0
+        && g_t_plr.comm_order == 6
+        && (g_t_plr.order / g_t_plr.comm_order) == 24
+        && cfs_commute
+        && ti_cap_plr.len() == 2
+        && ti_cap_plr.contains(&id24())
+        && ti_cap_plr.contains(&t6)
+        && lr6 == t6
         && g_ti_plr.order == 288
         && g_utt.order == 288
         && g_ti_plr.center == 2
@@ -149,8 +212,20 @@ pub fn verify_non_fusion() -> bool {
         && g_utt.ord24 == 48
         && g_ti_plr.comm_order == 18
         && g_utt.comm_order == 12
-        && g_576.len() == 576
-        && g_1152.len() == 1152
+        && g_576.order == 576
+        && g_576.involutions == 171
+        && g_576.comm_order == 72
+        && g_nt.order == 1152
+        && g_nt.involutions == 247
+        && g_nt.ord24 == 192
+        && g_nt.comm_order == 72
+        && g_qutt.order == 1152
+        && g_qutt.involutions == 219
+        && g_qutt.ord24 == 96
+        && g_qutt.comm_order == 144
+        && cap_1152 == 576
+        && elems_2304.len() == 2304
+        && !qutt_norm_utt
 }
 
 /// Build Nauru graph Y = GP(12, 5) adjacency list.

@@ -1,7 +1,50 @@
 {
   "D1_non_fusion": {
+    "Aff_Z12_wr_Z2_order": 4608,
+    "CFS_duality_verified": true,
+    "Hook_QUTT_D12_wr_Z2": {
+      "abelianization_order": 8,
+      "center_order": 2,
+      "commutator_order": 144,
+      "involutions": 219,
+      "max_order": 24,
+      "order": 1152,
+      "order_24_elements": 96,
+      "order_spectrum": {
+        "1": 1,
+        "12": 240,
+        "2": 219,
+        "24": 96,
+        "3": 8,
+        "4": 372,
+        "6": 168,
+        "8": 48
+      }
+    },
     "I0_in_UTT": false,
-    "N_Sym24_T_order": 1152,
+    "N_Sym24_T": {
+      "abelianization_order": 16,
+      "center_order": 2,
+      "commutator_order": 72,
+      "involutions": 247,
+      "max_order": 24,
+      "order": 1152,
+      "order_24_elements": 192,
+      "order_spectrum": {
+        "1": 1,
+        "12": 192,
+        "2": 247,
+        "24": 192,
+        "3": 8,
+        "4": 168,
+        "6": 248,
+        "8": 96
+      }
+    },
+    "N_Sym24_UTT_equals_N_Sym24_T": true,
+    "QUTT_cap_NT_order": 576,
+    "QUTT_join_NT_order": 2304,
+    "QUTT_normalizes_UTT": false,
     "Q_hook_order": 24,
     "TI_PLR": {
       "abelianization_order": 16,
@@ -57,7 +100,25 @@
         "8": 24
       }
     },
-    "UTT_semidirect_I0_order": 576,
+    "UTT_semidirect_I0": {
+      "abelianization_order": 8,
+      "center_order": 2,
+      "commutator_order": 72,
+      "involutions": 171,
+      "max_order": 24,
+      "order": 576,
+      "order_24_elements": 96,
+      "order_spectrum": {
+        "1": 1,
+        "12": 144,
+        "2": 171,
+        "24": 96,
+        "3": 8,
+        "4": 36,
+        "6": 72,
+        "8": 48
+      }
+    },
     "pass": true
   },
   "D2_utt_census": {
