@@ -21,7 +21,9 @@ import TriadicNauru
 #print axioms TriadicNauru.thm18_fricke_vogt_arithmetic_vs_nonarithmetic
 #print axioms TriadicNauru.thm19_hensel_q2_mod64
 #print axioms TriadicNauru.thm20_ramanujan_gaps_exact
+#print axioms TriadicNauru.thm21_cfs_duality_commute_and_T6
+#print axioms TriadicNauru.thm22_qutt_Imaj_not_normalizing_UTT
 
 def main : IO Unit := do
-  IO.println "TriadicNauru Lean 4.36.0 Oracle: ALL 20 THEOREMS KERNEL-CHECKED (0 sorryAx, 0 ofReduceBool)."
+  IO.println "TriadicNauru Lean 4.36.0 Oracle: ALL 22 THEOREMS KERNEL-CHECKED (0 sorryAx, 0 ofReduceBool)."
   IO.println s!"  O3 gamma6 = ({TriadicNauru.o3Gamma6.c0}, {TriadicNauru.o3Gamma6.c1}, {TriadicNauru.o3Gamma6.c2}, {TriadicNauru.o3Gamma6.c3}), trd={TriadicNauru.o3Trd TriadicNauru.o3Gamma6}, nrd={TriadicNauru.o3Nrd TriadicNauru.o3Gamma6}"

@@ -368,4 +368,49 @@ theorem thm20_ramanujan_gaps_exact :
     (2 * 2 < 8) ∧ (5 < 8) ∧ (3 * 3 < 12) ∧ (2 * 2 < 5) := by
   decide
 
+/-- Theorem 21 (Crans-Fiore-Satyendra Duality Core): `T_1` and `I_0` commute with all
+    three neo-Riemannian generators `P, L, R` on all 24 triads, and `(L ∘ R)^6 = T_6`
+    (yielding the exact order-2 overlap `(T/I) ∩ PLR = {e, T_6}` and order `24*24/2 = 288`). -/
+def genT6 : UTT := ⟨false, ⟨6, by decide⟩, ⟨6, by decide⟩⟩
+def genLR : UTT := uttMul genL genR
+def genLR6 : UTT :=
+  let p2 := uttMul genLR genLR
+  let p3 := uttMul p2 genLR
+  uttMul p3 p3
+
+theorem thm21_cfs_duality_commute_and_T6 :
+    (∀ v : Fin 24, actI0 (uttAct genP v) = uttAct genP (actI0 v)) ∧
+    (∀ v : Fin 24, actI0 (uttAct genL v) = uttAct genL (actI0 v)) ∧
+    (∀ v : Fin 24, actI0 (uttAct genR v) = uttAct genR (actI0 v)) ∧
+    uttMul genT1 genP = uttMul genP genT1 ∧
+    uttMul genT1 genL = uttMul genL genT1 ∧
+    uttMul genT1 genR = uttMul genR genT1 ∧
+    genLR6 = genT6 := by
+  decide
+
+/-- Hook's mode-local major inversion `I_maj` generating `QUTT = D_12 wr Z_2`:
+    maps `(r,+) ↦ (-r,+)`, fixes `(r,-) ↦ (r,-)`. -/
+def actImaj (v : Fin 24) : Fin 24 :=
+  if h : v.val < 12 then
+    ⟨(12 - v.val) % 12, by omega⟩
+  else
+    v
+
+/-- Theorem 22 (NEG-M19 core — Order-1,152 Bifurcation): Hook's quasi-uniform group
+    `QUTT = D_12 wr Z_2` does NOT normalize `UTT`: conjugating `P` by `I_maj` reverses
+    major orientation (`(0,+) ↦ (0,-)` and `(1,+) ↦ (11,-)`), so `I_maj ∘ P ∘ I_maj ∉ UTT`,
+    separating `QUTT` from `N_Sym(24)(T) = N_Sym(24)(UTT) = UTT ⋊ Z_12^*`. -/
+theorem thm22_qutt_Imaj_not_normalizing_UTT :
+    ∀ g : UTT, ¬(uttAct g ⟨0, by decide⟩ = actImaj (uttAct genP (actImaj ⟨0, by decide⟩)) ∧
+                 uttAct g ⟨1, by decide⟩ = actImaj (uttAct genP (actImaj ⟨1, by decide⟩))) := by
+  have ha : actImaj (uttAct genP (actImaj ⟨0, by decide⟩)) = ⟨12, by decide⟩ := by decide
+  have hb : actImaj (uttAct genP (actImaj ⟨1, by decide⟩)) = ⟨23, by decide⟩ := by decide
+  intro g ⟨h0, h1⟩
+  rw [ha] at h0
+  rw [hb] at h1
+  cases g with | mk rev tp tm =>
+  have hv0 := congrArg Fin.val h0
+  have hv1 := congrArg Fin.val h1
+  cases rev <;> simp [uttAct] at hv0 hv1 <;> omega
+
 end TriadicNauru

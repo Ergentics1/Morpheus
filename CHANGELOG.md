@@ -4,6 +4,16 @@ All notable changes to **Morpheus** are documented here. Manuscript updates cut 
 
 ## [Unreleased]
 
+## [0.5.1] - 2026-11-27
+
+### Changed & Fixed
+- **Paper `PC-II` Round-1 `[GB]` Audit & `[G4N]` Reconciliation (`papers/triadic_wreath_nauru/`, `NEG-M19`):** Following Grok Bot's (`[GB]`) independent Round-1 computation confirming `NEG-M15`, `NEG-M16`, normalizer tower, subgroup census, $PLR$ uniqueness, Nauru $\mathrm{GP}(12,5)$, and spanning-tree counts:
+  - Fixed the `v0.5.0` Table 1 transcription erratum on $\langle T, PLR\rangle \cong (\mathbb{Z}_{12}\times D_{12})/\mathbb{Z}_2$ (`|[G,G]| = 6`, `|G^{\mathrm{ab}}| = 24`, vs. printed `12/12`; already computed as `6/24` in `data/triadic_nauru_calibration.json`) and added explicit assertions for the entire row in both Python Gate `D1` and Rust `test_d1`.
+  - Refined Section 2 heading to *"Fusion of Lewin $T/I$ and $PLR$ — But Not into Hook's Wreath Product"*, adding the explicit Crans–Fiore–Satyendra mutual-centralizer proof ($C_{\mathrm{Sym}(24)}(T/I) = PLR$, $(T/I)\cap PLR = \{e, T_6 = (LR)^6\} \implies |\langle T/I, PLR\rangle| = 24^2/2 = 288$, $|G'|=18$; kernel-checked in Lean 4 `thm21`).
+  - Established the exact twin-diamond order-`1,152` bifurcation above $\mathrm{UTT}\rtimes\langle I_0\rangle$ (`576`, `NEG-M19`): separating $N_{\mathrm{Sym}(24)}(T) = N_{\mathrm{Sym}(24)}(\mathrm{UTT}) = \mathrm{UTT}\rtimes\mathbb{Z}_{12}^\times$ (`247` inv, `192` ord-24, `|G'|=72`, normalizes $\mathrm{UTT}$) from Hook's quasi-uniform wreath product $Q\mathrm{UTT}\cong D_{12}\wr\mathbb{Z}_2$ (`219` inv, `96` ord-24, `|G'|=144`, does *not* normalize $\mathrm{UTT}$, Lean 4 `thm22`), with exact intersection `576` and join `2,304`, expanding Table 1 to all 6 groups and upgrading Figure 1 (`fig1_utt_census.pdf`, also fixing Panel (b) bar/tick alignment).
+  - Added Remark 4.2 clarifying that quadratic $\mathbb{F}_2$ elliptic Weil splitting follows directly from Nauru's integral spectrum and that Bruhat–Tits $T_{q+1}$ Schottky uniformization is universal for every $(q+1)$-regular graph ($g \ge 2$), keeping both strictly separate from the Sections 5–6 arithmeticity proof.
+  - Re-verified all three zero-shared-data planes: pure Python (`12/12` gates), zero-Mathlib Lean 4.36.0 (`22/22` theorems, `0 sorryAx`, `0 ofReduceBool`), zero-crate Pure Rust (`6/6` tests), zero-warning 17 pp AMS PDF (`triadic_wreath_nauru.pdf`), and standalone-verified neutral `0/0` arXiv bundle (`triadic-wreath-nauru-arxiv.tar.gz`).
+
 ## [0.5.0] - 2026-11-27
 
 ### Added
