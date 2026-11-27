@@ -1,0 +1,1924 @@
+#!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2026 Ergentics, LLC -- Triadic Wreath Products & 2-Adic Nauru Verifier
+"""Open, zero-dependency first-principles verifier and figure generator.
+
+Covers all theorems of:
+  "Uniform Triadic Wreath Products, the Nauru Graph, and 2-Adic Arithmeticity"
+
+Verification matrix (12/12 D / R / P / Seam gates, zero cached data reads):
+  D1  Non-fusion & normalizer tower: |<T,PLR>|=144, |<T/I,PLR>|=288 != UTT(288),
+      |UTT >< <I_0>|=576, |N_Sym(24)(T)|=1152.
+  D2  Exhaustive 24-subgroup simply transitive UTT census across 8 isomorphism
+      classes (u in {1,5,7,11}); PLR ~= D_12 uniqueness for Coxeter triples.
+  D3  Nauru graph Y = GP(12,5) from M_5/M_7 UTT generators; pure integer spectrum,
+      exact F_2 Weil elliptic factorization (5/5 elliptic classes), prime cadences
+      pi_Y(m) (m <= 24), and bipartite double Y -> G_12 (Truncated Tetrahedron).
+  D4  Exact Raynaud/Sandpile Smith Normal Form K(Y) (|K(Y)| = 162,000,000 = 2^7 3^4 5^6)
+      and exhaustive Dhar-burning divisorial gonality gon(Y) = 6 (prime hexagon).
+  D5  Full |Aut(Y)| = 144 = 12(g-1), Lame amalgam S_3 *_{Z_2} V_4, and universal
+      Fricke-Vogt trace polynomials & quaternion algebra B(x) = (-3, x(x-3)).
+  D6  Complete rational arithmetic classification x in {1/2, 3/2, 5/2}: maximal
+      orders O_3 (B_3, D=6) and O_5 (B_5, D=10), Hensel-lifted Q_2 embedding to 2^40,
+      exact tau(gamma_6) in {81/64, 121/64}, plus non-arithmetic witness x = 9/2.
+  D7  Explicit arithmetic non-congruence towers: V_4-cover Y -> K_{3,3} (X^6(Gamma(3)))
+      with mod-5 joint surjection onto Aut(Y) x A_5 (8,640) at x=3/2; S_3-cover
+      Y -> Q_3 -> K_4 (X^{10}(Gamma(3))) with mod-9 overlap 24 at x=5/2.
+  D8  Zero-PARI Manin modular symbols T_2 audit across all 18 levels covering all
+      19 genus-13 Borel-level Shimura curves X_0^D(N) over Q (0/19 survivors).
+  D9  3-adic Bruhat-Tits T_4 companion Dic_6: 3 bipartite 4-regular Ramanujan
+      graphs (lambda_nt = 3 < 2*sqrt(3)), g=25, girth 4, |K(Z)|=429,923,020,800.
+  R1  Global runtime invariants (Laplacian PSD nullity-1, symmetry, row-sum
+      conservation) & adversarial fault-injection guards (NaN/Inf/bad v_2).
+  P1  Keyed SplitMix64 RCT null control: Nauru spectral gap & girth vs. N=200
+      random 24-vertex 3-regular bipartite graphs (order-invariant bit-exact replay).
+  S1  Code-vs-Data emission: deterministic SHA-256 calibration artifact & 4 vector
+      PDF figures with zero local path metadata.
+"""
+
+from __future__ import annotations
+
+import hashlib
+import json
+import math
+import pathlib
+import shutil
+import subprocess
+import sys
+import tempfile
+from collections import Counter, deque
+from fractions import Fraction
+from itertools import combinations, combinations_with_replacement, product
+from typing import Dict, List, Sequence, Tuple
+
+MOD_Q = 1_000_003
+MAJ_NAMES = ["C", "C#", "D", "Eb", "E", "F", "F#", "G", "Ab", "A", "Bb", "B"]
+MIN_NAMES = ["cm", "c#m", "dm", "ebm", "em", "fm", "f#m", "gm", "abm", "am", "bbm", "bm"]
+
+
+# ==============================================================================
+# Keyed SplitMix64 PRNG (Seam D <-> P: zero global RNG state, bit-exact replay)
+# ==============================================================================
+class SplitMix64:
+    """Deterministic keyed 64-bit PRNG for reproducible RCT null controls."""
+
+    def __init__(self, seed: int) -> None:
+        self.state = seed & 0xFFFFFFFFFFFFFFFF
+
+    def next_u64(self) -> int:
+        self.state = (self.state + 0x9E3779B97F4A7C15) & 0xFFFFFFFFFFFFFFFF
+        z = self.state
+        z = ((z ^ (z >> 30)) * 0xBF58476D1CE4E5B9) & 0xFFFFFFFFFFFFFFFF
+        z = ((z ^ (z >> 27)) * 0x94D049BB133111EB) & 0xFFFFFFFFFFFFFFFF
+        return z ^ (z >> 31)
+
+    def randbelow(self, n: int) -> int:
+        if n <= 0:
+            raise ValueError("n must be positive")
+        return self.next_u64() % n
+
+    def shuffle(self, seq: List[int]) -> None:
+        for i in range(len(seq) - 1, 0, -1):
+            j = self.randbelow(i + 1)
+            seq[i], seq[j] = seq[j], seq[i]
+
+
+# ==============================================================================
+# Permutation & Linear Algebra Primitives (Exact Integer / Pure Python)
+# ==============================================================================
+def p_comp(g: Tuple[int, ...], h: Tuple[int, ...]) -> Tuple[int, ...]:
+    return tuple(g[h[i]] for i in range(len(g)))
+
+
+def p_inv(g: Tuple[int, ...]) -> Tuple[int, ...]:
+    out = [0] * len(g)
+    for i, x in enumerate(g):
+        out[x] = i
+    return tuple(out)
+
+
+def p_order(g: Tuple[int, ...]) -> int:
+    ident = tuple(range(len(g)))
+    cur, k = g, 1
+    while cur != ident:
+        cur = p_comp(cur, g)
+        k += 1
+    return k
+
+
+def generate_group(gens: Sequence[Tuple[int, ...]], n: int = 24) -> set:
+    ident = tuple(range(n))
+    seen = {ident}
+    q = deque([ident])
+    while q:
+        cur = q.popleft()
+        for g in gens:
+            nxt = p_comp(cur, g)
+            if nxt not in seen:
+                seen.add(nxt)
+                q.append(nxt)
+    return seen
+
+
+def group_invariants(G: set) -> Dict[str, object]:
+    elems = list(G)
+    n = len(elems[0])
+    ident = tuple(range(n))
+    orders = Counter(p_order(g) for g in elems)
+    center = [g for g in elems if all(p_comp(g, h) == p_comp(h, g) for h in elems)]
+    # Commutator subgroup [G, G]
+    comm_gens = set()
+    invs = {g: p_inv(g) for g in elems}
+    for g in elems:
+        gi = invs[g]
+        for h in elems:
+            c = p_comp(p_comp(g, h), p_comp(gi, invs[h]))
+            if c != ident:
+                comm_gens.add(c)
+    comm = generate_group(list(comm_gens), n) if comm_gens else {ident}
+    return {
+        "order": len(elems),
+        "center_order": len(center),
+        "involutions": orders.get(2, 0),
+        "order_24_elements": orders.get(24, 0),
+        "max_order": max(orders),
+        "commutator_order": len(comm),
+        "abelianization_order": len(elems) // len(comm),
+        "order_spectrum": {str(k): v for k, v in sorted(orders.items())},
+    }
+
+
+def jacobi_eigenvalues(M: Sequence[Sequence[float]], max_sweeps: int = 12) -> List[float]:
+    n = len(M)
+    A = [[float(M[i][j]) for j in range(n)] for i in range(n)]
+    for _ in range(max_sweeps):
+        max_off = 0.0
+        for p in range(n - 1):
+            for q in range(p + 1, n):
+                apq = A[p][q]
+                v = abs(apq)
+                if v > max_off:
+                    max_off = v
+                if v < 1e-14:
+                    continue
+                diff = A[p][p] - A[q][q]
+                theta = math.pi / 4.0 if abs(diff) < 1e-15 else 0.5 * math.atan2(2.0 * apq, diff)
+                c, s = math.cos(theta), math.sin(theta)
+                app, aqq = A[p][p], A[q][q]
+                A[p][p] = c * c * app + 2.0 * c * s * apq + s * s * aqq
+                A[q][q] = s * s * app - 2.0 * c * s * apq + c * c * aqq
+                A[p][q] = A[q][p] = 0.0
+                for i in range(n):
+                    if i != p and i != q:
+                        aip, aiq = A[i][p], A[i][q]
+                        A[i][p] = A[p][i] = c * aip + s * aiq
+                        A[i][q] = A[q][i] = -s * aip + c * aiq
+        if max_off < 1e-13:
+            break
+    return sorted((A[i][i] for i in range(n)), reverse=True)
+
+
+def exact_snf_invariants(mat: Sequence[Sequence[int]]) -> List[int]:
+    """Exact integer Smith Normal Form diagonal invariants (> 0) of a square integer matrix."""
+    n = len(mat)
+    A = [[int(mat[i][j]) for j in range(n)] for i in range(n)]
+    diag: List[int] = []
+    k = 0
+    while k < n:
+        # Find minimum non-zero |A[i][j]| in submatrix [k:, k:]
+        best = None
+        for i in range(k, n):
+            for j in range(k, n):
+                val = abs(A[i][j])
+                if val > 0 and (best is None or val < best[0]):
+                    best = (val, i, j)
+        if best is None:
+            break
+        _, bi, bj = best
+        A[k], A[bi] = A[bi], A[k]
+        for r in range(n):
+            A[r][k], A[r][bj] = A[r][bj], A[r][k]
+        if A[k][k] < 0:
+            for j in range(k, n):
+                A[k][j] = -A[k][j]
+
+        changed = True
+        while changed:
+            changed = False
+            piv = A[k][k]
+            for i in range(k + 1, n):
+                if A[i][k] != 0:
+                    q = A[i][k] // piv
+                    for j in range(k, n):
+                        A[i][j] -= q * A[k][j]
+                    if A[i][k] != 0:
+                        A[k], A[i] = A[i], A[k]
+                        if A[k][k] < 0:
+                            for j in range(k, n):
+                                A[k][j] = -A[k][j]
+                        changed = True
+                        break
+            if changed:
+                continue
+            piv = A[k][k]
+            for j in range(k + 1, n):
+                if A[k][j] != 0:
+                    q = A[k][j] // piv
+                    for i in range(k, n):
+                        A[i][j] -= q * A[i][k]
+                    if A[k][j] != 0:
+                        for r in range(n):
+                            A[r][k], A[r][j] = A[r][j], A[r][k]
+                        if A[k][k] < 0:
+                            for jj in range(k, n):
+                                A[k][jj] = -A[k][jj]
+                        changed = True
+                        break
+            if changed:
+                continue
+            # Ensure A[k][k] divides every entry in submatrix [k+1:, k+1:]
+            piv = A[k][k]
+            bad = None
+            for i in range(k + 1, n):
+                for j in range(k + 1, n):
+                    if A[i][j] % piv != 0:
+                        bad = i
+                        break
+                if bad is not None:
+                    break
+            if bad is not None:
+                for j in range(k, n):
+                    A[k][j] += A[bad][j]
+                changed = True
+        diag.append(abs(A[k][k]))
+        k += 1
+    return diag
+
+
+# ==============================================================================
+# Gate D1: Non-Fusion of Lewin T/I & PLR vs. Hook UTT Wreath Product
+# ==============================================================================
+def utt_perm(sigma: int, tp: int, tm: int) -> Tuple[int, ...]:
+    """Action of Hook UTT <sigma, t+, t-> on 24 triads: 0..11=(r,+), 12..23=(r,-)."""
+    out = [0] * 24
+    for r in range(12):
+        if sigma == 1:
+            out[r] = (r + tp) % 12
+            out[12 + r] = 12 + (r + tm) % 12
+        else:
+            out[r] = 12 + (r + tp) % 12
+            out[12 + r] = (r + tm) % 12
+    return tuple(out)
+
+
+def verify_d1_non_fusion() -> Dict[str, object]:
+    # Major triad (r,+) = {r, r+4, r+7}; minor triad (r,-) = {r, r+3, r+7}.
+    # T_1(r, +/-) = (r+1, +/-) = utt(+1, 1, 1)
+    # I_0(x) = -x mod 12: maps {r, r+4, r+7} -> {-r-7, -r-4, -r} = (-r-7, -) = (5-r, -),
+    # and maps {r, r+3, r+7} -> {-r-7, -r-3, -r} = (-r-7, +) = (5-r, +).
+    T1 = utt_perm(+1, 1, 1)
+    I0 = tuple([12 + (5 - r) % 12 for r in range(12)] + [(5 - r) % 12 for r in range(12)])
+    # Neo-Riemannian P, L, R:
+    #   P: (r,+) <-> (r,-)       => utt(-1, 0, 0)
+    #   L: (r,+) -> (r+4,-), (r,-) -> (r+8,+) => utt(-1, 4, 8)
+    #   R: (r,+) -> (r+9,-), (r,-) -> (r+3,+) => utt(-1, 9, 3)
+    P = utt_perm(-1, 0, 0)
+    L = utt_perm(-1, 4, 8)
+    R = utt_perm(-1, 9, 3)
+    # M_5 (u=5): {r, r+4, r+7} -> {5r, 5r+8, 5r+11} = {5r+8, 5r+11, 5r+3} = (5r+8, -)??
+    # Check: 5r+8 + 3 = 5r+11, 5r+8 + 7 = 5r+3? 8+7=15=3 != 0! Wait: 5*0=0, 5*4=8, 5*7=11 -> {8, 11, 0}?
+    # Actually 5*{0,4,7} = {0, 8, 11} (not a consonant triad!). Rather, M_5 acts on ROOT indices r -> 5r mod 12:
+    # On Z_12 x Z_2, N_Sym(24)(T) is generated by UTT, I_0, and the Galois scaling M_u: (r, s) -> (u*r, s)!
+    M5 = tuple([(5 * r) % 12 for r in range(12)] + [12 + (5 * r) % 12 for r in range(12)])
+    M7 = tuple([(7 * r) % 12 for r in range(12)] + [12 + (7 * r) % 12 for r in range(12)])
+    Q_hook = utt_perm(-1, 1, 0)  # Hook's odd-parity order-24 Hamiltonian cycle
+
+    G_T_PLR = generate_group([T1, P, L, R])
+    G_TI_PLR = generate_group([T1, I0, P, L, R])
+    G_UTT = generate_group([utt_perm(+1, 1, 0), utt_perm(+1, 0, 1), P])
+    G_576 = generate_group([utt_perm(+1, 1, 0), utt_perm(+1, 0, 1), P, I0])
+    G_1152 = generate_group([utt_perm(+1, 1, 0), utt_perm(+1, 0, 1), P, I0, M5, M7])
+
+    inv_T_PLR = group_invariants(G_T_PLR)
+    inv_TI_PLR = group_invariants(G_TI_PLR)
+    inv_UTT = group_invariants(G_UTT)
+
+    # Exact assertions
+    assert inv_T_PLR["order"] == 144
+    assert G_T_PLR.issubset(G_UTT)
+    assert Q_hook in G_UTT and Q_hook not in G_T_PLR and p_order(Q_hook) == 24
+    assert inv_TI_PLR["order"] == 288 and inv_UTT["order"] == 288
+    assert I0 not in G_UTT
+    assert inv_TI_PLR["center_order"] == 2 and inv_UTT["center_order"] == 12
+    assert inv_TI_PLR["involutions"] == 99 and inv_UTT["involutions"] == 15
+    assert inv_TI_PLR["order_24_elements"] == 0 and inv_UTT["order_24_elements"] == 48
+    assert inv_TI_PLR["commutator_order"] == 18 and inv_UTT["commutator_order"] == 12
+    assert inv_TI_PLR["abelianization_order"] == 16 and inv_UTT["abelianization_order"] == 24
+    # Verify I_0 normalizes UTT explicitly via conjugation identity
+    I0_inv = p_inv(I0)
+    for sigma in (+1, -1):
+        for tp in (0, 1, 5):
+            for tm in (0, 2, 7):
+                lhs = p_comp(p_comp(I0, utt_perm(sigma, tp, tm)), I0_inv)
+                rhs = utt_perm(sigma, (-tm) % 12, (-tp) % 12)
+                assert lhs == rhs
+    assert len(G_576) == 576
+    assert len(G_1152) == 1152
+    # Verify M_5 normalizes UTT: M_5 <sigma, t+, t-> M_5^-1 = <sigma, 5t+, 5t->
+    M5_inv = p_inv(M5)
+    for sigma in (+1, -1):
+        for tp, tm in [(1, 0), (0, 1), (1, 5)]:
+            assert p_comp(p_comp(M5, utt_perm(sigma, tp, tm)), M5_inv) == utt_perm(sigma, (5 * tp) % 12, (5 * tm) % 12)
+
+    return {
+        "T_PLR": inv_T_PLR,
+        "TI_PLR": inv_TI_PLR,
+        "UTT": inv_UTT,
+        "UTT_semidirect_I0_order": len(G_576),
+        "N_Sym24_T_order": len(G_1152),
+        "Q_hook_order": p_order(Q_hook),
+        "I0_in_UTT": False,
+        "TI_PLR_isomorphic_UTT": False,
+        "pass": True,
+    }
+
+
+# ==============================================================================
+# Gate D2: Exhaustive Simply Transitive Order-24 UTT Subgroup Census
+# ==============================================================================
+def verify_d2_utt_census() -> Dict[str, object]:
+    """Enumerate all simply transitive order-24 subgroups of UTT and classify by u in Z_12^*."""
+    # Any simply transitive order-24 subgroup H <= UTT has an index-2 mode-preserving
+    # subgroup H_+ of order 12 acting simply transitively on major triads (0..11) and
+    # minor triads (12..23). Hence H_+ = {<+, r, u*r> : r in Z_12} for a UNIQUE unit u in Z_12^* = {1,5,7,11}!
+    # Choosing any mode-reversing element g = <-, a, b> in H fixes H = H_+ union g*H_+;
+    # closure requires:
+    #   (1) g^2 = <+, a+b, a+b> in H_+  <=>  a + b == u*(a + b) (mod 12)  <=>  (u - 1)(a + b) == 0 (mod 12)
+    #   (2) g * <+, 1, u> * g^-1 = <+, u, 1> in H_+  <=>  u^2 == 1 (mod 12) (always true for u in Z_12^*!).
+    # Two cosets g*H_+ and g'*H_+ coincide iff g' = <+, r, ur> * g = <-, a+r, b+ur>,
+    # so we can fix a = 0 and vary b in Z_12 satisfying (u - 1) * b == 0 (mod 12)!
+    subgroups = []
+    ram_bound = 2.0 * math.sqrt(2.0)
+
+    for u in (1, 5, 7, 11):
+        valid_b = [b for b in range(12) if ((u - 1) * b) % 12 == 0]
+        for b in valid_b:
+            h_plus = [utt_perm(+1, r, (u * r) % 12) for r in range(12)]
+            g0 = utt_perm(-1, 0, b)
+            H = set(h_plus) | {p_comp(g0, x) for x in h_plus}
+            assert len(H) == 24
+            # Check closed & simply transitive
+            ident = tuple(range(24))
+            assert len({x[0] for x in H}) == 24
+            # Confirm subgroup closure
+            for x in (utt_perm(+1, 1, u), g0):
+                for y in H:
+                    assert p_comp(x, y) in H
+            orders = Counter(p_order(x) for x in H)
+            invs = [x for x in H if p_order(x) == 2]
+            # Classification name from (u, order spectrum)
+            if u == 1:
+                cls = "Z_12 x Z_2" if orders[2] == 3 else "Z_24"
+            elif u == 11:
+                cls = "D_12 (PLR)" if orders[2] == 13 else "Dic_6"
+            elif u == 5:
+                cls = "S_3 x Z_4" if orders[2] == 7 else "Z_3 >< Z_8"
+            else:  # u == 7
+                cls = "Z_3 x D_4" if orders[2] == 5 else "Z_3 x Q_8"
+
+            # Count 3-involution Coxeter triples (generating H) & Ramanujan ones
+            cox_triples = 0
+            cox_ram = 0
+            best_cox = 99.0
+            if len(invs) >= 3:
+                for i1, i2, i3 in combinations(invs, 3):
+                    if len(generate_group([i1, i2, i3])) == 24:
+                        cox_triples += 1
+                        # Adjacency spectrum of Cay(H, {i1, i2, i3})
+                        elems = sorted(H)
+                        eidx = {e: k for k, e in enumerate(elems)}
+                        A = [[0] * 24 for _ in range(24)]
+                        for k, e in enumerate(elems):
+                            for s in (i1, i2, i3):
+                                A[k][eidx[p_comp(e, s)]] = 1
+                        eigs = jacobi_eigenvalues(A)
+                        nt = max(abs(ev) for ev in eigs if abs(abs(ev) - 3.0) > 1e-6)
+                        if nt < ram_bound - 1e-6:
+                            cox_ram += 1
+                        if nt < best_cox:
+                            best_cox = nt
+
+            # Count ALL symmetric cubic generating sets S = {inv, x, x^-1} (plus 3-involution)
+            pairs_2 = []
+            seen_p = set()
+            for x in H:
+                if x != ident and p_order(x) > 2 and x not in seen_p:
+                    xi = p_inv(x)
+                    pairs_2.append((x, xi))
+                    seen_p.add(x)
+                    seen_p.add(xi)
+            mixed_cubic = 0
+            mixed_ram = 0
+            best_mixed = 99.0
+            for iv in invs:
+                for x, xi in pairs_2:
+                    if len(generate_group([iv, x, xi])) == 24:
+                        mixed_cubic += 1
+                        elems = sorted(H)
+                        eidx = {e: k for k, e in enumerate(elems)}
+                        A = [[0] * 24 for _ in range(24)]
+                        for k, e in enumerate(elems):
+                            for s in (iv, x, xi):
+                                A[k][eidx[p_comp(e, s)]] = 1
+                        eigs = jacobi_eigenvalues(A)
+                        nt = max(abs(ev) for ev in eigs if abs(abs(ev) - 3.0) > 1e-6)
+                        if nt < ram_bound - 1e-6:
+                            mixed_ram += 1
+                        if nt < best_mixed:
+                            best_mixed = nt
+
+            subgroups.append({
+                "u": u,
+                "b": b,
+                "class": cls,
+                "involutions": len(invs),
+                "coxeter_triples": cox_triples,
+                "coxeter_ramanujan": cox_ram,
+                "best_coxeter_lambda": None if cox_triples == 0 else round(best_cox, 6),
+                "mixed_cubic_total": mixed_cubic,
+                "mixed_cubic_ramanujan": mixed_ram,
+                "best_mixed_lambda": None if mixed_cubic == 0 else round(best_mixed, 6),
+            })
+
+    assert len(subgroups) == 24
+    by_class: Dict[str, List[Dict[str, object]]] = {}
+    for s in subgroups:
+        by_class.setdefault(str(s["class"]), []).append(s)
+    assert len(by_class) == 8
+
+    # Verify PLR ~= D_12 is the UNIQUE simply transitive UTT subgroup admitting 3-involution Coxeter triples
+    for cls, items in by_class.items():
+        if cls == "D_12 (PLR)":
+            assert len(items) == 1
+            assert items[0]["coxeter_triples"] == 192
+            assert items[0]["coxeter_ramanujan"] == 168
+        else:
+            assert all(it["coxeter_triples"] == 0 for it in items)
+
+    # Verify Z_24 fails Ramanujan on every cubic Cayley graph (1 + 2*cos(pi/12) = 2.931852 > 2*sqrt(2))
+    z24_best = min(it["best_mixed_lambda"] for it in by_class["Z_24"])
+    assert abs(z24_best - (1.0 + 2.0 * math.cos(math.pi / 12.0))) < 1e-5
+    assert z24_best > ram_bound
+
+    # Verify S_3 x Z_4 and Z_3 x D_4 achieve exact lambda_nt = 2.000000 (Nauru!)
+    assert min(it["best_mixed_lambda"] for it in by_class["S_3 x Z_4"]) == 2.0
+    assert min(it["best_mixed_lambda"] for it in by_class["Z_3 x D_4"]) == 2.0
+
+    # Verify Dic_6, Z_3 >< Z_8, Z_3 x Q_8 admit ZERO cubic Cayley graphs
+    for cls in ("Dic_6", "Z_3 >< Z_8", "Z_3 x Q_8"):
+        assert all(it["coxeter_triples"] == 0 and it["mixed_cubic_total"] == 0 for it in by_class[cls])
+
+    summary_classes = {}
+    for cls, items in sorted(by_class.items()):
+        bests = [v for it in items for v in (it["best_coxeter_lambda"], it["best_mixed_lambda"]) if v is not None]
+        summary_classes[cls] = {
+            "count": len(items),
+            "u": items[0]["u"],
+            "involutions": items[0]["involutions"],
+            "coxeter_triples_per_group": items[0]["coxeter_triples"],
+            "coxeter_ramanujan_per_group": items[0]["coxeter_ramanujan"],
+            "mixed_cubic_per_group": items[0]["mixed_cubic_total"],
+            "mixed_ramanujan_per_group": items[0]["mixed_cubic_ramanujan"],
+            "best_cubic_lambda": None if not bests else min(bests),
+        }
+
+    return {
+        "total_subgroups": len(subgroups),
+        "isomorphism_classes": len(by_class),
+        "classes": summary_classes,
+        "ramanujan_bound_cubic": round(ram_bound, 6),
+        "pass": True,
+    }
+
+
+# ==============================================================================
+# Gate D3: Nauru Graph Y = GP(12, 5), F_2 Elliptic Atlas, Prime Cadences & G_12
+# ==============================================================================
+def build_nauru_adj() -> List[List[int]]:
+    """Build Nauru graph GP(12, 5): 0..11 = u_r=(r,+), 12..23 = v_r=(r+6,-)."""
+    adj = [[] for _ in range(24)]
+    for r in range(12):
+        adj[r].extend([(r + 1) % 12, (r - 1) % 12, 12 + r])
+        adj[12 + r].extend([r, 12 + (r + 5) % 12, 12 + (r - 5) % 12])
+    return adj
+
+
+def verify_d3_nauru_weil() -> Dict[str, object]:
+    # 1. Verify UTT generators {<-,6,6>, <+,1,5>, <+,11,7>} realize exact GP(12, 5)
+    g_spoke = utt_perm(-1, 6, 6)
+    g_plus = utt_perm(+1, 1, 5)
+    g_minus = utt_perm(+1, 11, 7)
+    assert p_order(g_spoke) == 2 and p_comp(g_plus, g_minus) == tuple(range(24))
+
+    # Map vertex i of GP(12, 5) to triad index: u_r -> r, v_r -> 12 + (r+6)%12
+    nauru_to_triad = [r for r in range(12)] + [12 + (r + 6) % 12 for r in range(12)]
+    triad_to_nauru = {t: i for i, t in enumerate(nauru_to_triad)}
+    adj = build_nauru_adj()
+    for i in range(24):
+        t = nauru_to_triad[i]
+        utt_nbrs = sorted(triad_to_nauru[g[t]] for g in (g_spoke, g_plus, g_minus))
+        assert utt_nbrs == sorted(adj[i])
+
+    # 2. Exact integer spectrum verification via minimal polynomial & traces
+    A = [[1 if j in adj[i] else 0 for j in range(24)] for i in range(24)]
+    eigs_num = jacobi_eigenvalues(A)
+    spec_counts = Counter(int(round(e)) for e in eigs_num)
+    for e in eigs_num:
+        assert abs(e - round(e)) < 1e-9
+    expected_spec = {3: 1, 2: 6, 1: 3, 0: 4, -1: 3, -2: 6, -3: 1}
+    assert dict(spec_counts) == expected_spec
+
+    # Also verify exact integer trace power sums tr(A^k) for k = 1..8 against expected_spec
+    def matmul_int(X: List[List[int]], Y: List[List[int]]) -> List[List[int]]:
+        n = len(X)
+        return [[sum(X[i][k] * Y[k][j] for k in range(n)) for j in range(n)] for i in range(n)]
+
+    Ak = [[1 if i == j else 0 for j in range(24)] for i in range(24)]
+    traces = []
+    for k in range(1, 9):
+        Ak = matmul_int(Ak, A)
+        tr = sum(Ak[i][i] for i in range(24))
+        expected_tr = sum((lam ** k) * mult for lam, mult in expected_spec.items())
+        assert tr == expected_tr
+        traces.append(tr)
+
+    # 3. Exact prime cadence counts pi_Y(m) for m = 1..24 via Hashimoto / Ihara log-derivative
+    # From zeta_Y(u)^-1 = (1-u^2)^13 * prod_{lam in spec} (1 - lam*u + 2*u^2):
+    #   N_m(Y) = sum of m-th powers of reciprocal roots of zeta_Y(u)^-1
+    #   For each factor (1 - lam*u + 2*u^2), reciprocal roots r_+, r_- satisfy r_+ + r_- = lam, r_+*r_- = 2,
+    #   so s_m(lam) = r_+^m + r_-^m satisfies exact integer recurrence: s_0 = 2, s_1 = lam, s_m = lam*s_{m-1} - 2*s_{m-2}!
+    #   And (1 - u^2)^13 contributes 13 * (1^m + (-1)^m) = 26 if m even else 0!
+    N_m: Dict[int, int] = {}
+    s_rec: Dict[int, List[int]] = {}
+    for lam in expected_spec:
+        seq = [2, lam]
+        for m in range(2, 25):
+            seq.append(lam * seq[-1] - 2 * seq[-2])
+        s_rec[lam] = seq
+    for m in range(1, 25):
+        total = (24 if m % 2 == 0 else 0) + sum(mult * s_rec[lam][m] for lam, mult in expected_spec.items())
+        N_m[m] = total
+
+    def mobius(n: int) -> int:
+        if n == 1:
+            return 1
+        p, cnt, tmp = 2, 0, n
+        while p * p <= tmp:
+            if tmp % p == 0:
+                tmp //= p
+                if tmp % p == 0:
+                    return 0
+                cnt += 1
+            p += 1
+        if tmp > 1:
+            cnt += 1
+        return -1 if (cnt % 2 == 1) else 1
+
+    pi_Y: Dict[int, int] = {}
+    for m in range(1, 25):
+        num = sum(mobius(m // d) * N_m[d] for d in range(1, m + 1) if m % d == 0)
+        assert num % m == 0
+        pi_Y[m] = num // m
+
+    assert all(pi_Y[m] == 0 for m in range(1, 6))
+    assert pi_Y[6] == 24 and pi_Y[8] == 108 and pi_Y[10] == 216 and pi_Y[12] == 564
+    assert pi_Y[14] == 2232 and pi_Y[16] == 8820 and pi_Y[20] == 104292 and pi_Y[24] == 1401744
+
+    # 4. Verify all 5 elliptic curves over F_2 (exact point counts #E(F_2) = 3 - a_2)
+    f2_curves = [
+        (+2, 6, "y^2 + y = x^3 + x + 1", lambda x, y: (y * y + y - x ** 3 - x - 1) % 2),
+        (+1, 3, "y^2 + xy = x^3 + x^2 + 1", lambda x, y: (y * y + x * y - x ** 3 - x * x - 1) % 2),
+        (0, 4, "y^2 + y = x^3", lambda x, y: (y * y + y - x ** 3) % 2),
+        (-1, 3, "y^2 + xy = x^3 + 1", lambda x, y: (y * y + x * y - x ** 3 - 1) % 2),
+        (-2, 6, "y^2 + y = x^3 + x", lambda x, y: (y * y + y - x ** 3 - x) % 2),
+    ]
+    elliptic_atlas = []
+    for a2, mult, eq, fn in f2_curves:
+        pts = [(x, y) for x in (0, 1) for y in (0, 1) if fn(x, y) == 0]
+        n1 = 1 + len(pts)
+        assert n1 == 3 - a2
+        elliptic_atlas.append({"a2": a2, "multiplicity": mult, "equation": eq, "N1_F2": n1})
+
+    # 5. Verify free bipartition-swapping involution -> Truncated Tetrahedron G_12
+    # g_c: u_r <-> v_{(5r + c) mod 12} for c in {2, 6, 10}
+    inv_c = [12 + (5 * r + 2) % 12 for r in range(12)] + [(5 * r + 2) % 12 for r in range(12)]
+    assert all(inv_c[inv_c[v]] == v and inv_c[v] != v for v in range(24))
+    for u in range(24):
+        for w in adj[u]:
+            assert inv_c[w] in adj[inv_c[u]]
+    # Build 12-vertex quotient G_12
+    rep_id = {}
+    for v in range(24):
+        pair = (min(v, inv_c[v]), max(v, inv_c[v]))
+        if pair not in rep_id:
+            rep_id[pair] = len(rep_id)
+    assert len(rep_id) == 12
+    G12 = [[0] * 12 for _ in range(12)]
+    for u in range(24):
+        iu = rep_id[(min(u, inv_c[u]), max(u, inv_c[u]))]
+        for w in adj[u]:
+            iw = rep_id[(min(w, inv_c[w]), max(w, inv_c[w]))]
+            G12[iu][iw] = 1
+    assert all(G12[i][i] == 0 and sum(G12[i]) == 3 for i in range(12))
+    g12_eigs = Counter(int(round(e)) for e in jacobi_eigenvalues(G12))
+    assert dict(g12_eigs) == {3: 1, 2: 3, 0: 2, -1: 3, -2: 3}
+
+    return {
+        "spectrum": {str(k): v for k, v in sorted(expected_spec.items(), reverse=True)},
+        "traces_1_to_8": traces,
+        "prime_cadences_even": {str(m): pi_Y[m] for m in (6, 8, 10, 12, 14, 16, 18, 20, 22, 24)},
+        "f2_elliptic_atlas": elliptic_atlas,
+        "G12_spectrum": {str(k): v for k, v in sorted(g12_eigs.items(), reverse=True)},
+        "pass": True,
+    }
+
+
+# ==============================================================================
+# Gate D4: Exact Raynaud Sandpile SNF & Exhaustive Divisorial Gonality gon(Y)=6
+# ==============================================================================
+def q_reduced(adj: Sequence[Sequence[int]], D_in: Sequence[int], q: int) -> List[int]:
+    D = list(D_in)
+    n = len(adj)
+    while True:
+        burned = [False] * n
+        burned[q] = True
+        b_cnt = [0] * n
+        for w in adj[q]:
+            b_cnt[w] += 1
+        changed = True
+        while changed:
+            changed = False
+            for v in range(n):
+                if not burned[v] and b_cnt[v] > D[v]:
+                    burned[v] = True
+                    changed = True
+                    for w in adj[v]:
+                        b_cnt[w] += 1
+        U = [v for v in range(n) if not burned[v]]
+        if not U:
+            return D
+        for u in U:
+            for w in adj[u]:
+                if burned[w]:
+                    D[u] -= 1
+                    D[w] += 1
+
+
+def verify_d4_tropical() -> Dict[str, object]:
+    adj = build_nauru_adj()
+    # 1. Exact Smith Normal Form of reduced Laplacian (23x23 cofactor)
+    L_red = [[(3 if i == j else (-1 if j in adj[i] else 0)) for j in range(1, 24)] for i in range(1, 24)]
+    snf = exact_snf_invariants(L_red)
+    invariants = [d for d in snf if d > 1]
+    order_K = 1
+    for d in invariants:
+        order_K *= d
+    assert invariants == [5, 5, 5, 30, 120, 360]
+    assert order_K == 162_000_000 == (2 ** 7) * (3 ** 4) * (5 ** 6)
+
+    # 2. Exhaustive Dhar burning for degree d = 2..5 (zero witnesses) + exact degree-6 prime hexagon
+    dist0 = [-1] * 24
+    dist0[0] = 0
+    q_bfs = deque([0])
+    while q_bfs:
+        x = q_bfs.popleft()
+        for y in adj[x]:
+            if dist0[y] == -1:
+                dist0[y] = dist0[x] + 1
+                q_bfs.append(y)
+    q_order = sorted(range(24), key=lambda v: -dist0[v])
+
+    def has_rank_ge_1(D: List[int]) -> bool:
+        for q in q_order:
+            if D[q] == 0 and q_reduced(adj, D, q)[q] == 0:
+                return False
+        return True
+
+    tested_le_5 = 0
+    for d in range(2, 6):
+        for comb in combinations_with_replacement(range(24), d - 1):
+            tested_le_5 += 1
+            D = [0] * 24
+            D[0] = 1
+            for v in comb:
+                D[v] += 1
+            assert not has_rank_ge_1(D)
+    assert tested_le_5 == 20_474
+
+    hex_verts = (0, 1, 2, 12, 14, 19)
+    D_hex = [1 if v in hex_verts else 0 for v in range(24)]
+    assert has_rank_ge_1(D_hex)
+    hex_edges = [(u, v) for u in hex_verts for v in adj[u] if v in hex_verts and u < v]
+    assert len(hex_edges) == 6
+    hex_triads = [MAJ_NAMES[v] if v < 12 else MIN_NAMES[(v - 12 + 6) % 12] for v in hex_verts]
+
+    return {
+        "sandpile_invariants": invariants,
+        "sandpile_order": order_K,
+        "divisors_tested_deg_2_to_5": tested_le_5,
+        "gonality": 6,
+        "witness_vertices": list(hex_verts),
+        "witness_triads": hex_triads,
+        "witness_is_prime_hexagon": True,
+        "pass": True,
+    }
+
+
+# ==============================================================================
+# Gate D5 & D6 & D7: Aut(Y)=144, Lame Amalgam, Fricke-Vogt, B_3 & B_5 Towers
+# ==============================================================================
+def find_automorphisms(adj: Sequence[Sequence[int]]) -> List[Tuple[int, ...]]:
+    n = len(adj)
+    order, seen, q = [0], {0}, deque([0])
+    while q:
+        x = q.popleft()
+        for y in adj[x]:
+            if y not in seen:
+                seen.add(y)
+                order.append(y)
+                q.append(y)
+    auts: List[Tuple[int, ...]] = []
+
+    def bt(idx: int, mp: Dict[int, int], used: set) -> None:
+        if idx == n:
+            auts.append(tuple(mp[i] for i in range(n)))
+            return
+        u = order[idx]
+        if idx == 0:
+            cands = list(range(n))
+        else:
+            mn = [mp[w] for w in adj[u] if w in mp]
+            cset = set(adj[mn[0]])
+            for x in mn[1:]:
+                cset &= set(adj[x])
+            cands = [c for c in cset if c not in used]
+        for c in cands:
+            mp[u] = c
+            used.add(c)
+            bt(idx + 1, mp, used)
+            del mp[u]
+            used.remove(c)
+
+    bt(0, {}, set())
+    return auts
+
+
+def qmul_gen(q1: Tuple[Fraction, ...], q2: Tuple[Fraction, ...], A: Fraction, B: Fraction) -> Tuple[Fraction, ...]:
+    a1, b1, c1, d1 = q1
+    a2, b2, c2, d2 = q2
+    return (
+        a1 * a2 + A * b1 * b2 + B * c1 * c2 - A * B * d1 * d2,
+        a1 * b2 + b1 * a2 - B * c1 * d2 + B * d1 * c2,
+        a1 * c2 + c1 * a2 + A * b1 * d2 - A * d1 * b2,
+        a1 * d2 + d1 * a2 + b1 * c2 - c1 * b2,
+    )
+
+
+def qconj(q: Tuple[Fraction, ...]) -> Tuple[Fraction, ...]:
+    return (q[0], -q[1], -q[2], -q[3])
+
+
+def qnrd(q: Tuple[Fraction, ...], A: Fraction, B: Fraction) -> Fraction:
+    return qmul_gen(q, qconj(q), A, B)[0]
+
+
+def qtrd(q: Tuple[Fraction, ...]) -> Fraction:
+    return 2 * q[0]
+
+
+def solve4(cols: Sequence[Tuple[Fraction, ...]], v: Tuple[Fraction, ...]) -> Tuple[Fraction, ...]:
+    M = [[cols[c][r] for c in range(4)] + [v[r]] for r in range(4)]
+    for col in range(4):
+        piv = next(r for r in range(col, 4) if M[r][col] != 0)
+        M[col], M[piv] = M[piv], M[col]
+        f = M[col][col]
+        M[col] = [x / f for x in M[col]]
+        for r in range(4):
+            if r != col and M[r][col] != 0:
+                fac = M[r][col]
+                M[r] = [M[r][k] - fac * M[col][k] for k in range(5)]
+    return tuple(M[r][4] for r in range(4))
+
+
+def det4(M: List[List[Fraction]]) -> Fraction:
+    if len(M) == 1:
+        return M[0][0]
+    return sum(
+        ((-1) ** c) * M[0][c] * det4([[M[r][k] for k in range(len(M)) if k != c] for r in range(1, len(M))])
+        for c in range(len(M))
+    )
+
+
+def verify_d5_d6_d7_2adic_arithmetic() -> Tuple[Dict[str, object], Dict[str, object], Dict[str, object]]:
+    adj = build_nauru_adj()
+    auts = find_automorphisms(adj)
+    ident = tuple(range(24))
+    assert len(auts) == 144
+
+    # Check all 39 involutions -> 0 tree quotients (exact metric quotient beta_1 in {4,5,6,7})
+    invs = [g for g in auts if p_order(g) == 2]
+    assert len(invs) == 39
+    all_edges = {(min(u, w), max(u, w)) for u in range(24) for w in adj[u]}
+    b1_dist: Counter = Counter()
+    for g in invs:
+        v_orbs = {(min(v, g[v]), max(v, g[v])) for v in range(24)}
+        e_orbs = set()
+        for u, w in all_edges:
+            if g[u] == w and g[w] == u:
+                continue  # Inverted edge folds to a leaf (net 0 to beta_1)
+            e2 = (min(g[u], g[w]), max(g[u], g[w]))
+            e_orbs.add(min((u, w), e2))
+        b1_dist[len(e_orbs) - len(v_orbs) + 1] += 1
+    min_b1 = min(b1_dist)
+    assert dict(b1_dist) == {4: 6, 5: 9, 6: 18, 7: 6} and min_b1 == 4
+
+    # Extract Lame amalgam generators a (ord 3), b (ord 2), t (ord 2, swaps 0<->12)
+    G0 = [g for g in auts if g[0] == 0]
+    Ge = [g for g in auts if {g[0], g[12]} == {0, 12}]
+    a_Y = next(g for g in G0 if p_order(g) == 3)
+    b_Y = next(g for g in G0 if g[12] == 12 and p_order(g) == 2)
+    t_Y = next(g for g in Ge if g[0] == 12)
+    assert len(G0) == 6 and len(Ge) == 4
+    assert p_comp(t_Y, b_Y) == p_comp(b_Y, t_Y)
+    assert len(generate_group([a_Y, b_Y, t_Y])) == 144
+    assert p_order(p_comp(t_Y, a_Y)) == 6
+
+    # D5: Universal Fricke-Vogt polynomial check across rational parameter family
+    # t_u = [[u, 1], [-2u-2, -u]] for b = [[1, 1], [2, -1]], a = [[0, -1], [1, -1]]
+    def mm2(X, Y):
+        return [
+            [X[0][0] * Y[0][0] + X[0][1] * Y[1][0], X[0][0] * Y[0][1] + X[0][1] * Y[1][1]],
+            [X[1][0] * Y[0][0] + X[1][1] * Y[1][0], X[1][0] * Y[0][1] + X[1][1] * Y[1][1]],
+        ]
+
+    def det2(X):
+        return X[0][0] * X[1][1] - X[0][1] * X[1][0]
+
+    def tr2(X):
+        return X[0][0] + X[1][1]
+
+    a_mat = [[Fraction(0), Fraction(-1)], [Fraction(1), Fraction(-1)]]
+    a2_mat = mm2(a_mat, a_mat)
+    fv_samples = []
+    for u_val in (Fraction(0), Fraction(2), Fraction(-2), Fraction(-2, 5)):
+        tu = [[u_val, Fraction(1)], [-2 * u_val - 2, -u_val]]
+        w1 = mm2(tu, a_mat)
+        w2 = mm2(w1, mm2(tu, a2_mat))
+        w3 = mm2(w1, w2)
+        w4 = mm2(w1, w3)
+        w6 = mm2(mm2(w1, mm2(w1, w1)), mm2(w1, mm2(w1, w1)))
+        x = tr2(w1) ** 2 / det2(w1)
+        assert tr2(w2) ** 2 / det2(w2) == (x - 1) ** 2
+        assert tr2(w3) ** 2 / det2(w3) == x * (x - 2) ** 2
+        assert tr2(w4) ** 2 / det2(w4) == (x * x - 3 * x + 1) ** 2
+        assert tr2(w6) ** 2 / det2(w6) == (x ** 3 - 6 * x * x + 9 * x - 2) ** 2
+        fv_samples.append({"u": str(u_val), "x": str(x), "tau_gamma6": str((x ** 3 - 6 * x * x + 9 * x - 2) ** 2)})
+
+    d5_res = {
+        "aut_order": len(auts),
+        "involutions": len(invs),
+        "min_involution_quotient_b1": min_b1,
+        "vertex_stab": 6,
+        "edge_stab": 4,
+        "amalgam_euler_char": "-1/12",
+        "fricke_vogt_samples": fv_samples,
+        "pass": True,
+    }
+
+    # D6: Complete rational arithmetic classification x in {1/2, 3/2, 5/2}
+    # 1) B_3 = (-3, -1)_Q at x = 3/2, with exact Hensel-lifted Q_2 embedding mod 2^40
+    MOD40 = 1 << 40
+    s = 1
+    for k in range(3, 40):
+        if (s * s + 7) % (1 << (k + 1)) != 0:
+            s += 1 << (k - 1)
+    q_hen = ((1 + s) // 2) % MOD40
+    if q_hen % 2 == 1:
+        s = (-s) % MOD40
+        q_hen = ((1 + s) // 2) % MOD40
+    assert (q_hen * q_hen - q_hen + 2) % MOD40 == 0 and q_hen % 2 == 0 and (q_hen % 64) == 38
+
+    def mm_mod(X, Y, m):
+        return [
+            [(X[0][0] * Y[0][0] + X[0][1] * Y[1][0]) % m, (X[0][0] * Y[0][1] + X[0][1] * Y[1][1]) % m],
+            [(X[1][0] * Y[0][0] + X[1][1] * Y[1][0]) % m, (X[1][0] * Y[0][1] + X[1][1] * Y[1][1]) % m],
+        ]
+
+    i_m = [[1, 2], [-2 % MOD40, -1 % MOD40]]
+    a_m = [[0, 1], [-1 % MOD40, -1 % MOD40]]
+    j_m = [[1, q_hen], [(q_hen - 1) % MOD40, -1 % MOD40]]
+    k_m = mm_mod(i_m, j_m, MOD40)
+    t_m = [[(i_m[r][c] + k_m[r][c]) % MOD40 for c in range(2)] for r in range(2)]
+    assert mm_mod(a_m, mm_mod(a_m, a_m, MOD40), MOD40) == [[1, 0], [0, 1]]
+    assert mm_mod(j_m, j_m, MOD40) == [[-1 % MOD40, 0], [0, -1 % MOD40]]
+    assert mm_mod(t_m, t_m, MOD40) == [[-6 % MOD40, 0], [0, -6 % MOD40]]
+    assert mm_mod(t_m, j_m, MOD40) == [[(-x) % MOD40 for x in row] for row in mm_mod(j_m, t_m, MOD40)]
+    assert (t_m[0][0] * t_m[1][1] - t_m[0][1] * t_m[1][0]) % MOD40 == 6
+
+    # Check all three rational maximal orders: O_3 (x=3/2), O_5 (x=1/2), O_5 (x=5/2)
+    one = (Fraction(1), Fraction(0), Fraction(0), Fraction(0))
+    a_q = (Fraction(-1, 2), Fraction(1, 2), Fraction(0), Fraction(0))
+    b_q = (Fraction(0), Fraction(0), Fraction(1), Fraction(0))
+
+    arith_specs = [
+        ("x=1/2", Fraction(-3), Fraction(-5), (Fraction(0), Fraction(1, 3), Fraction(0), Fraction(1, 3)), 5, Fraction(81, 64), "use_t"),
+        ("x=3/2", Fraction(-3), Fraction(-1), (Fraction(0), Fraction(1), Fraction(0), Fraction(1)), 3, Fraction(121, 64), "use_b"),
+        ("x=5/2", Fraction(-3), Fraction(-5), (Fraction(0), Fraction(5, 3), Fraction(0), Fraction(1, 3)), 5, Fraction(121, 64), "use_t"),
+    ]
+    arith_records = {}
+    for label, Aq, Bq, t_q, exp_disc, exp_tau6, bmode in arith_specs:
+        basis = [one, a_q, b_q, qmul_gen(a_q, b_q, Aq, Bq)] if bmode == "use_b" else [one, a_q, t_q, qmul_gen(a_q, t_q, Aq, Bq)]
+        G_gram = [[qtrd(qmul_gen(e1, qconj(e2), Aq, Bq)) for e2 in basis] for e1 in basis]
+        dG = det4(G_gram)
+        assert dG == exp_disc * exp_disc
+        # Verify t normalizes O[1/2] (denominators only powers of 2)
+        nt = qnrd(t_q, Aq, Bq)
+        tinv = tuple(c / nt for c in qconj(t_q))
+        for e in basis:
+            ce = solve4(basis, qmul_gen(qmul_gen(t_q, e, Aq, Bq), tinv, Aq, Bq))
+            for coord in ce:
+                den = coord.denominator
+                while den % 2 == 0:
+                    den //= 2
+                assert den == 1
+        # Compute gamma_6 = (t * a)^6
+        ta = qmul_gen(t_q, a_q, Aq, Bq)
+        g6 = one
+        for _ in range(6):
+            g6 = qmul_gen(g6, ta, Aq, Bq)
+        tau_g6 = qtrd(g6) ** 2 / qnrd(g6, Aq, Bq)
+        assert tau_g6 == exp_tau6 and 0 < tau_g6 < 4
+        arith_records[label] = {
+            "quaternion_algebra": f"({int(Aq)}, {int(Bq)})_Q",
+            "reduced_discriminant": exp_disc,
+            "shimura_discriminant_D": 2 * exp_disc,
+            "nrd_t": str(nt),
+            "tau_ta": str(qtrd(ta) ** 2 / qnrd(ta, Aq, Bq)),
+            "tau_gamma6": str(tau_g6),
+        }
+
+    # Non-arithmetic rational witness x = 9/2
+    x92 = Fraction(9, 2)
+    tau6_92 = (x92 ** 3 - 6 * x92 * x92 + 9 * x92 - 2) ** 2
+    assert tau6_92 == Fraction(4225, 64) and tau6_92 > 4
+
+    d6_res = {
+        "rational_arithmetic_points": arith_records,
+        "hensel_q_mod_64": q_hen % 64,
+        "hensel_precision_bits": 40,
+        "non_arithmetic_witness_x": "9/2",
+        "non_arithmetic_tau_gamma6": str(tau6_92),
+        "pass": True,
+    }
+
+    # D7: Exact arithmetic non-congruence towers (B_3 -> K_{3,3} via V_4; B_5 -> Q_3 -> K_4 via S_3)
+    # Tower I: B_3 = (-3, -1)_Q, O_3 basis (1, a, j, aj), mod 3*O_3 -> order 36 (K_{3,3})
+    def to_ijk_b3(c):
+        return (c[0] - Fraction(c[1], 2), Fraction(c[1], 2), c[2] - Fraction(c[3], 2), Fraction(c[3], 2))
+
+    def from_ijk_b3(q):
+        return (int(q[0] + q[1]), int(2 * q[1]), int(q[2] + q[3]), int(2 * q[3]))
+
+    def o3_mul(x, y):
+        return from_ijk_b3(qmul_gen(to_ijk_b3(x), to_ijk_b3(y), Fraction(-3), Fraction(-1)))
+
+    a_o3, b_o3, t_o3 = (0, 1, 0, 0), (0, 0, 1, 0), (1, 2, 1, 2)
+
+    def conj_t3(x, mod):
+        prod = o3_mul(o3_mul(t_o3, x), t_o3)
+        inv_neg2 = pow(-2 % mod, -1, mod)
+        return tuple(((c // 3) * inv_neg2) % mod for c in prod)
+
+    def np_mod(u, p, mod):
+        u = tuple(c % mod for c in u)
+        for c in u:
+            if c % p != 0:
+                inv = pow(c, -1, mod)
+                return tuple((x * inv) % mod for x in u)
+        raise ValueError(u)
+
+    def mul_s3(g1, g2, mod):
+        p1, u1 = g1
+        p2, u2 = g2
+        u1c = conj_t3(u1, mod) if p2 == 1 else u1
+        return ((p1 + p2) % 2, np_mod(o3_mul(u1c, u2), 3, mod))
+
+    ga3, gb3, gt3 = (0, np_mod(a_o3, 3, 3)), (0, np_mod(b_o3, 3, 3)), (1, (1, 0, 0, 0))
+    id3 = (0, (1, 0, 0, 0))
+    jt3 = {(ident, id3)}
+    fr = deque([(ident, id3)])
+    while fr:
+        yc, mc = fr.popleft()
+        for yg, mg in ((a_Y, ga3), (b_Y, gb3), (t_Y, gt3)):
+            nx = (p_comp(yc, yg), mul_s3(mc, mg, 3))
+            if nx not in jt3:
+                jt3.add(nx)
+                fr.append(nx)
+    assert len(jt3) == 144
+    q36 = {m for _, m in jt3}
+    assert len(q36) == 36
+    N4 = [y for y, m in jt3 if m == id3]
+    assert len(N4) == 4 and Counter(p_order(g) for g in N4) == {1: 1, 2: 3}
+
+    # Verify mod-5 independence (joint image in Aut(Y) x PGL_2(F_5) has order 144 * 60 = 8,640)
+    ga5, gb5, gt5 = np_mod(a_o3, 5, 5), np_mod(b_o3, 5, 5), np_mod(t_o3, 5, 5)
+    id5 = (1, 0, 0, 0)
+    jt5 = {(ident, id5)}
+    fr5 = deque([(ident, id5)])
+    while fr5:
+        yc, mc = fr5.popleft()
+        for yg, mg in ((a_Y, ga5), (b_Y, gb5), (t_Y, gt5)):
+            nx = (p_comp(yc, yg), np_mod(o3_mul(mc, mg), 5, 5))
+            if nx not in jt5:
+                jt5.add(nx)
+                fr5.append(nx)
+    assert len(jt5) == 144 * 60 == 8640
+
+    # Tower II: B_5 at x = 5/2 mod 3 -> S_4 (order 24, K_4) and deck group S_3 (order 6)
+    t5 = (Fraction(0), Fraction(5, 3), Fraction(0), Fraction(1, 3))
+    b5_basis = [one, a_q, t5, qmul_gen(a_q, t5, Fraction(-3), Fraction(-5))]
+    mt5 = [[tuple(int(x) for x in solve4(b5_basis, qmul_gen(b5_basis[r], b5_basis[c], Fraction(-3), Fraction(-5)))) for c in range(4)] for r in range(4)]
+
+    def o5_mul(u, v):
+        out = [0, 0, 0, 0]
+        for r in range(4):
+            if u[r] == 0:
+                continue
+            for c in range(4):
+                if v[c] == 0:
+                    continue
+                p = mt5[r][c]
+                uv = u[r] * v[c]
+                for k in range(4):
+                    out[k] += uv * p[k]
+        return tuple(out)
+
+    a_o5 = (0, 1, 0, 0)
+    b_o5 = tuple(int(x) for x in solve4(b5_basis, b_q))
+    t_o5 = (0, 0, 1, 0)
+    ga_b5, gb_b5, gt_b5 = np_mod(a_o5, 3, 3), np_mod(b_o5, 3, 3), np_mod(t_o5, 3, 3)
+    id_b5 = (1, 0, 0, 0)
+    jt_b5 = {(ident, id_b5)}
+    fr_b5 = deque([(ident, id_b5)])
+    while fr_b5:
+        yc, mc = fr_b5.popleft()
+        for yg, mg in ((a_Y, ga_b5), (b_Y, gb_b5), (t_Y, gt_b5)):
+            nx = (p_comp(yc, yg), np_mod(o5_mul(mc, mg), 3, 3))
+            if nx not in jt_b5:
+                jt_b5.add(nx)
+                fr_b5.append(nx)
+    assert len(jt_b5) == 144
+    q24 = {m for _, m in jt_b5}
+    assert len(q24) == 24
+    N6 = [y for y, m in jt_b5 if m == id_b5]
+    assert len(N6) == 6 and Counter(p_order(g) for g in N6) == {1: 1, 2: 3, 3: 2}
+
+    d7_res = {
+        "B3_mod3_order": len(q36),
+        "B3_deck_group": "V_4 (order 4)",
+        "B3_base_graph": "K_{3,3} (genus 4, X^6(Gamma(3)))",
+        "B3_mod5_joint_order": len(jt5),
+        "B5_x52_mod3_order": len(q24),
+        "B5_x52_deck_group": "S_3 (order 6)",
+        "B5_x52_base_graph": "K_4 (genus 3, X^{10}(Gamma(3))) via Cube Q_3 (genus 5)",
+        "pass": True,
+    }
+    return d5_res, d6_res, d7_res
+
+
+# ==============================================================================
+# Gate D8: Zero-PARI Manin Modular Symbols T_2 Audit (All 19 Genus-13 X_0^D(N))
+# ==============================================================================
+def is_prime_int(n: int) -> bool:
+    if n < 2:
+        return False
+    if n % 2 == 0:
+        return n == 2
+    d = 3
+    while d * d <= n:
+        if n % d == 0:
+            return False
+        d += 2
+    return True
+
+
+def canon_p1(c: int, d: int, m: int) -> Tuple[int, int]:
+    c %= m
+    d %= m
+    g = math.gcd(c, m)
+    if g == 1:
+        return (1, (d * pow(c, -1, m)) % m)
+    if c == 0:
+        return (0, 1)
+    m1 = m // g
+    u0 = pow(c // g, -1, m1)
+    best = None
+    for k in range(g):
+        u = (u0 + k * m1) % m
+        if math.gcd(u, m) == 1:
+            cand = (g, (d * u) % m)
+            if best is None or cand < best:
+                best = cand
+    assert best is not None
+    return best
+
+
+def nullity_mod_q(M: List[List[int]], lam: int) -> int:
+    n = len(M)
+    A = [[(M[r][c] - (lam if r == c else 0)) % MOD_Q for c in range(n)] for r in range(n)]
+    rk = 0
+    for col in range(n):
+        piv = next((r for r in range(rk, n) if A[r][col] != 0), None)
+        if piv is None:
+            continue
+        A[rk], A[piv] = A[piv], A[rk]
+        inv = pow(A[rk][col], -1, MOD_Q)
+        row_rk = A[rk]
+        for j in range(col, n):
+            row_rk[j] = (row_rk[j] * inv) % MOD_Q
+        for r in range(rk + 1, n):
+            fac = A[r][col]
+            if fac != 0:
+                row_r = A[r]
+                for j in range(col, n):
+                    row_r[j] = (row_r[j] - fac * row_rk[j]) % MOD_Q
+        rk += 1
+    return n - rk
+
+
+def manin_minus_t2(m_level: int) -> Tuple[int, int, Dict[int, int]]:
+    pts = sorted({
+        canon_p1(c, d, m_level)
+        for c in range(m_level)
+        for d in range(m_level)
+        if math.gcd(math.gcd(c, d), m_level) == 1
+    })
+    n = len(pts)
+    idx = {p: i for i, p in enumerate(pts)}
+    parent = list(range(n))
+    sign = [1] * n
+    killed = [False] * n
+
+    def find(x: int) -> Tuple[int, int]:
+        s = 1
+        while parent[x] != x:
+            s *= sign[x]
+            x = parent[x]
+        return x, s
+
+    def add_rel2(x: int, y: int, rel_sign: int) -> None:
+        rx, sx = find(x)
+        ry, sy = find(y)
+        if rx == ry:
+            if sx != rel_sign * sy:
+                killed[rx] = True
+        else:
+            parent[rx] = ry
+            sign[rx] = rel_sign * sx * sy
+            if killed[rx]:
+                killed[ry] = True
+
+    for i, (c, d) in enumerate(pts):
+        add_rel2(i, idx[canon_p1(d, -c, m_level)], -1)
+        add_rel2(i, idx[canon_p1(-c, d, m_level)], -1)
+
+    rep_map: Dict[int, int] = {}
+    for i in range(n):
+        r, _ = find(i)
+        if not killed[r] and r not in rep_map:
+            rep_map[r] = len(rep_map)
+    m_cols = len(rep_map)
+
+    pivots: Dict[int, Dict[int, int]] = {}
+    for i, (c, d) in enumerate(pts):
+        i1 = idx[canon_p1(d, -c - d, m_level)]
+        i2 = idx[canon_p1(-c - d, c, m_level)]
+        row: Dict[int, int] = {}
+        for j in (i, i1, i2):
+            r, s = find(j)
+            if not killed[r]:
+                col = rep_map[r]
+                nv = (row.get(col, 0) + s) % MOD_Q
+                if nv == 0:
+                    row.pop(col, None)
+                else:
+                    row[col] = nv
+        while row:
+            c0 = min(row)
+            v0 = row[c0]
+            if c0 in pivots:
+                for k, pv in pivots[c0].items():
+                    nv = (row.get(k, 0) - v0 * pv) % MOD_Q
+                    if nv == 0:
+                        row.pop(k, None)
+                    else:
+                        row[k] = nv
+            else:
+                inv = pow(v0, -1, MOD_Q)
+                pivots[c0] = {k: (v * inv) % MOD_Q for k, v in row.items()}
+                break
+
+    for c in sorted(pivots, reverse=True):
+        prow = dict(pivots[c])
+        for k in list(prow):
+            if k != c and k in pivots:
+                fac = prow.pop(k)
+                for k2, v2 in pivots[k].items():
+                    if k2 != k:
+                        nv = (prow.get(k2, 0) - fac * v2) % MOD_Q
+                        if nv == 0:
+                            prow.pop(k2, None)
+                        else:
+                            prow[k2] = nv
+        pivots[c] = prow
+
+    free_cols = [c for c in range(m_cols) if c not in pivots]
+    free_idx = {c: i for i, c in enumerate(free_cols)}
+    dim = len(free_cols)
+
+    def vec_of_pt(i: int) -> List[int]:
+        r, s = find(i)
+        v = [0] * dim
+        if killed[r]:
+            return v
+        col = rep_map[r]
+        if col in free_idx:
+            v[free_idx[col]] = s % MOD_Q
+        else:
+            for f, val in pivots[col].items():
+                if f != col:
+                    v[free_idx[f]] = (-s * val) % MOD_Q
+        return v
+
+    basis_pts: List[Tuple[int, int] | None] = [None] * dim
+    for i in range(n):
+        r, s = find(i)
+        if not killed[r]:
+            col = rep_map[r]
+            if col in free_idx and basis_pts[free_idx[col]] is None:
+                basis_pts[free_idx[col]] = (i, s)
+
+    h2 = [(1, 0, 0, 2), (2, 0, 0, 1), (2, 1, 0, 1), (1, 0, 1, 2)]
+    t2 = [[0] * dim for _ in range(dim)]
+    for b in range(dim):
+        bp = basis_pts[b]
+        assert bp is not None
+        i_pt, s_pt = bp
+        c, d = pts[i_pt]
+        for a, bb, cc, dd in h2:
+            j = idx[canon_p1(a * c + cc * d, bb * c + dd * d, m_level)]
+            vj = vec_of_pt(j)
+            for r in range(dim):
+                if vj[r]:
+                    t2[r][b] = (t2[r][b] + s_pt * vj[r]) % MOD_Q
+
+    tr1 = sum(t2[i][i] for i in range(dim)) % MOD_Q
+    if tr1 > MOD_Q // 2:
+        tr1 -= MOD_Q
+    nulls = {lam: nullity_mod_q(t2, lam % MOD_Q) for lam in (2, 0, -1, -2)}
+    return dim, tr1, nulls
+
+
+def verify_d8_shimura_manin() -> Dict[str, object]:
+    odd_primes = [p for p in range(3, 1002, 2) if is_prime_int(p)]
+    d_cands: List[Tuple[int, int, int, int]] = []
+
+    def kr4(p: int) -> int:
+        return 0 if p == 2 else (1 if p % 4 == 1 else -1)
+
+    def kr3(p: int) -> int:
+        return 0 if p == 3 else (1 if p % 3 == 1 else -1)
+
+    def gen_d(idx: int, cnt: int, d_val: int, phi_d: int, e2_d: int, e3_d: int) -> None:
+        if cnt >= 2 and cnt % 2 == 0:
+            d_cands.append((d_val, phi_d, e2_d, e3_d))
+        for i in range(idx, len(odd_primes)):
+            p = odd_primes[i]
+            if phi_d * (p - 1) > 1000:
+                break
+            gen_d(i + 1, cnt + 1, d_val * p, phi_d * (p - 1), e2_d * (1 - kr4(p)), e3_d * (1 - kr3(p)))
+
+    gen_d(0, 1, 2, 1, 1, 2)
+    pairs = []
+    for d_val, phi_d, e2_d, e3_d in d_cands:
+        for n_val in range(1, 1000 // phi_d + 1, 2):
+            if math.gcd(d_val, n_val) != 1:
+                continue
+            tmp, psi_n, e2_n, e3_n, p = n_val, 1, 1, 1, 3
+            while p * p <= tmp:
+                if tmp % p == 0:
+                    k, pk_m1 = 0, 1
+                    while tmp % p == 0:
+                        if k >= 1:
+                            pk_m1 *= p
+                        tmp //= p
+                        k += 1
+                    psi_n *= pk_m1 * (p + 1)
+                    e2_n *= 1 + kr4(p)
+                    e3_n *= (1 if k == 1 else 0) if p == 3 else (1 + kr3(p))
+                p += 2
+            if tmp > 1:
+                psi_n *= tmp + 1
+                e2_n *= 1 + kr4(tmp)
+                e3_n *= 1 if tmp == 3 else (1 + kr3(tmp))
+            if phi_d * psi_n <= 1000:
+                e2, e3 = e2_d * e2_n, e3_d * e3_n
+                if 12 + phi_d * psi_n - 3 * e2 - 4 * e3 == 12 * 13:
+                    pairs.append((d_val, n_val, (d_val * n_val) // 2))
+    assert len(pairs) == 19
+    levels = sorted({m for _, _, m in pairs})
+    assert len(levels) == 18
+
+    level_reports = []
+    survivors = 0
+    for M in levels:
+        dim, tr1, nulls = manin_minus_t2(M)
+        feasible = nulls[2] >= 3 and nulls[0] >= 2 and nulls[-1] >= 3 and nulls[-2] >= 3
+        if feasible:
+            survivors += 1
+        level_reports.append({
+            "M": M,
+            "dim": dim,
+            "tr_T2": tr1,
+            "null_pos2": nulls[2],
+            "null_0": nulls[0],
+            "null_neg1": nulls[-1],
+            "null_neg2": nulls[-2],
+            "nauru_feasible": feasible,
+        })
+    assert survivors == 0
+    return {
+        "total_genus13_pairs": len(pairs),
+        "distinct_levels": len(levels),
+        "survivors": survivors,
+        "levels": level_reports,
+        "pass": True,
+    }
+
+
+# ==============================================================================
+# Gate D9: 3-Adic Bruhat-Tits T_4 Companion Dic_6 (4-Regular Ramanujan Twin)
+# ==============================================================================
+def verify_d9_dic6_3adic() -> Dict[str, object]:
+    def dic_mul(u: Tuple[int, int], v: Tuple[int, int]) -> Tuple[int, int]:
+        a1, e1 = u
+        b1, e2 = v
+        if e1 == 0:
+            return ((a1 + b1) % 12, e2)
+        return ((a1 - b1) % 12, 1) if e2 == 0 else ((a1 - b1 + 6) % 12, 0)
+
+    elems = [(k, e) for e in (0, 1) for k in range(12)]
+    eidx = {g: i for i, g in enumerate(elems)}
+    pairs = [((k, 0), ((12 - k) % 12, 0)) for k in range(1, 6)] + [((k, 1), ((k + 6) % 12, 1)) for k in range(6)]
+    ram_bound_4 = 2.0 * math.sqrt(3.0)
+
+    connected_cnt = 0
+    strict_ram_cnt = 0
+    weak_ram_cnt = 0
+    best_nt = 99.0
+    for p1, p2 in combinations(pairs, 2):
+        S = [p1[0], p1[1], p2[0], p2[1]]
+        seen = {(0, 0)}
+        q = deque([(0, 0)])
+        while q:
+            c = q.popleft()
+            for s in S:
+                nx = dic_mul(c, s)
+                if nx not in seen:
+                    seen.add(nx)
+                    q.append(nx)
+        if len(seen) != 24:
+            continue
+        connected_cnt += 1
+        A = [[0] * 24 for _ in range(24)]
+        for i, g in enumerate(elems):
+            for s in S:
+                A[i][eidx[dic_mul(g, s)]] = 1
+        eigs = jacobi_eigenvalues(A)
+        nt = max(abs(e) for e in eigs if abs(abs(e) - 4.0) > 1e-6)
+        if nt < ram_bound_4 - 1e-6:
+            strict_ram_cnt += 1
+        if nt <= ram_bound_4 + 1e-6:
+            weak_ram_cnt += 1
+        if nt < best_nt:
+            best_nt = nt
+
+    assert connected_cnt == 18 and strict_ram_cnt == 12 and weak_ram_cnt == 18 and abs(best_nt - 3.0) < 1e-6
+
+    # Canonical optimal graph S = {x, x^-1, y, y^3}
+    S_opt = [(1, 0), (11, 0), (0, 1), (6, 1)]
+    A_opt = [[0] * 24 for _ in range(24)]
+    for i, g in enumerate(elems):
+        for s in S_opt:
+            A_opt[i][eidx[dic_mul(g, s)]] = 1
+    L_red = [[(4 if i == j else -A_opt[i][j]) for j in range(1, 24)] for i in range(1, 24)]
+    snf = exact_snf_invariants(L_red)
+    invs = [d for d in snf if d > 1]
+    order_K = 1
+    for d in invs:
+        order_K *= d
+    assert order_K == 429_923_020_800 == (2 ** 12) * 3 * (5 ** 2) * (7 ** 2) * (13 ** 4)
+
+    return {
+        "connected_4reg_cayley": connected_cnt,
+        "strict_ramanujan_4reg_cayley": strict_ram_cnt,
+        "weak_ramanujan_4reg_cayley": weak_ram_cnt,
+        "optimal_lambda_nt": round(best_nt, 6),
+        "ramanujan_bound_4reg": round(ram_bound_4, 6),
+        "genus": 25,
+        "girth": 4,
+        "sandpile_invariants": invs,
+        "sandpile_order": order_K,
+        "pass": True,
+    }
+
+
+# ==============================================================================
+# Gate R1: Global Runtime Invariants & Adversarial Fault Injection
+# ==============================================================================
+def validate_lame_modulus(x: float) -> None:
+    if not math.isfinite(x):
+        raise ValueError(f"Non-finite Lame modulus rejected: {x}")
+
+
+def validate_graph_laplacian(A: Sequence[Sequence[int]], expected_deg: int) -> None:
+    n = len(A)
+    for i in range(n):
+        if A[i][i] != 0 or sum(A[i]) != expected_deg:
+            raise ValueError(f"Degree/loop invariant violated at vertex {i}")
+        for j in range(n):
+            if A[i][j] != A[j][i]:
+                raise ValueError(f"Asymmetry detected at ({i},{j})")
+    L = [[(expected_deg if i == j else -A[i][j]) for j in range(n)] for i in range(n)]
+    eigs = jacobi_eigenvalues(L)
+    zeros = sum(1 for e in eigs if abs(e) < 1e-8)
+    if zeros != 1 or min(eigs) < -1e-8:
+        raise ValueError(f"Laplacian PSD nullity-1 violated: min={min(eigs)}, zeros={zeros}")
+
+
+def verify_r1_runtime_guards() -> Dict[str, object]:
+    adj = build_nauru_adj()
+    A = [[1 if j in adj[i] else 0 for j in range(24)] for i in range(24)]
+    validate_graph_laplacian(A, 3)
+
+    faults_rejected = 0
+    # 1. NaN / Inf rejection
+    for bad_x in (float("nan"), float("inf"), float("-inf")):
+        try:
+            validate_lame_modulus(bad_x)
+        except ValueError:
+            faults_rejected += 1
+    # 2. Asymmetric matrix rejection
+    A_asym = [row[:] for row in A]
+    A_asym[0][2] = 1
+    try:
+        validate_graph_laplacian(A_asym, 3)
+    except ValueError:
+        faults_rejected += 1
+    # 3. Disconnected 3-regular graph (nullity 2 > 1) rejection
+    A_disc = [[0] * 8 for _ in range(8)]
+    for base in (0, 4):
+        for i in range(4):
+            for j in range(4):
+                if i != j:
+                    A_disc[base + i][base + j] = 1
+    try:
+        validate_graph_laplacian(A_disc, 3)
+    except ValueError:
+        faults_rejected += 1
+
+    assert faults_rejected == 5
+    return {"global_laplacian_psd_nullity_1": True, "faults_injected": 5, "faults_rejected": faults_rejected, "pass": True}
+
+
+# ==============================================================================
+# Gate P1 & Seam: Keyed SplitMix64 RCT Null Control (Random 24v 3-Reg Bipartite)
+# ==============================================================================
+def sample_random_bipartite_cubic(rng: SplitMix64) -> List[List[int]]:
+    """Sample a simple 24-vertex 3-regular bipartite graph via 3 disjoint matchings."""
+    while True:
+        edges = set()
+        ok = True
+        for _ in range(3):
+            perm = list(range(12))
+            rng.shuffle(perm)
+            for u, v in enumerate(perm):
+                if (u, v) in edges:
+                    ok = False
+                    break
+                edges.add((u, v))
+            if not ok:
+                break
+        if ok:
+            A = [[0] * 24 for _ in range(24)]
+            for u, v in edges:
+                A[u][12 + v] = A[12 + v][u] = 1
+            # Ensure connected
+            seen = {0}
+            q = deque([0])
+            while q:
+                x = q.popleft()
+                for y in range(24):
+                    if A[x][y] and y not in seen:
+                        seen.add(y)
+                        q.append(y)
+            if len(seen) == 24:
+                return A
+
+
+def graph_girth(A: Sequence[Sequence[int]]) -> int:
+    n = len(A)
+    nbrs = [[j for j in range(n) if A[i][j]] for i in range(n)]
+    best = 99
+    for s in range(n):
+        dist = [-1] * n
+        par = [-1] * n
+        dist[s] = 0
+        q = deque([s])
+        while q:
+            u = q.popleft()
+            if dist[u] * 2 + 1 >= best:
+                break
+            for v in nbrs[u]:
+                if dist[v] == -1:
+                    dist[v] = dist[u] + 1
+                    par[v] = u
+                    q.append(v)
+                elif par[u] != v:
+                    best = min(best, dist[u] + dist[v] + 1)
+    return best
+
+
+def verify_p1_rct_control(n_trials: int = 200, seed: int = 0x2AD1C_AA0125) -> Dict[str, object]:
+    def run_sweep(s: int) -> Tuple[List[float], List[int]]:
+        rng = SplitMix64(s)
+        lams: List[float] = []
+        girths: List[int] = []
+        for _ in range(n_trials):
+            A = sample_random_bipartite_cubic(rng)
+            eigs = jacobi_eigenvalues(A)
+            nt = max(abs(e) for e in eigs if abs(abs(e) - 3.0) > 1e-6)
+            lams.append(nt)
+            girths.append(graph_girth(A))
+        return lams, girths
+
+    lams1, girths1 = run_sweep(seed)
+    # Bit-exact replay assertion (Seam D <-> P)
+    lams2, girths2 = run_sweep(seed)
+    assert lams1 == lams2 and girths1 == girths2
+
+    ram_bound = 2.0 * math.sqrt(2.0)
+    mean_lam = sum(lams1) / n_trials
+    min_lam = min(lams1)
+    beats_nauru_lam = sum(1 for x in lams1 if x <= 2.0 + 1e-6)
+    ram_count = sum(1 for x in lams1 if x < ram_bound - 1e-6)
+    girth6_count = sum(1 for g in girths1 if g >= 6)
+    assert beats_nauru_lam == 0  # Nauru lambda_nt = 2.000 strictly beats all 200 random bipartite cubic controls
+
+    return {
+        "seed_hex": hex(seed),
+        "n_trials": n_trials,
+        "bit_exact_replay": True,
+        "random_mean_lambda_nt": round(mean_lam, 6),
+        "random_min_lambda_nt": round(min_lam, 6),
+        "random_ramanujan_count": ram_count,
+        "random_girth_ge_6_count": girth6_count,
+        "random_matching_or_beating_nauru_lambda": beats_nauru_lam,
+        "nauru_lambda_nt": 2.0,
+        "nauru_girth": 6,
+        "pass": True,
+    }
+
+
+# ==============================================================================
+# Publication-Grade Metadata-Free Vector PDF Figures via Standalone TikZ/PGFPlots
+# ==============================================================================
+def compile_tikz_figure(tex_source: str, out_pdf: pathlib.Path) -> None:
+    out_pdf.parent.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory() as td:
+        tdir = pathlib.Path(td)
+        tex_path = tdir / "fig.tex"
+        tex_path.write_text(tex_source, encoding="utf-8")
+        res = subprocess.run(
+            ["pdflatex", "-interaction=nonstopmode", "-halt-on-error", "fig.tex"],
+            cwd=tdir,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if res.returncode != 0:
+            raise RuntimeError(f"pdflatex figure failed for {out_pdf.name}:\n{res.stdout}\n{res.stderr}")
+        shutil.copyfile(tdir / "fig.pdf", out_pdf)
+
+
+def generate_all_figures(fig_dir: pathlib.Path) -> List[str]:
+    fig_dir.mkdir(parents=True, exist_ok=True)
+    generated = []
+
+    # Figure 1: Normalizer Tower & UTT 8-Class Spectral Census
+    fig1_tex = r"""\documentclass[tikz,border=6pt]{standalone}
+\pdfinfo{/Producer () /Creator ()}
+\usepackage{pgfplots,amsmath,amssymb}
+\pgfplotsset{compat=1.18}
+\begin{document}
+\begin{tikzpicture}[font=\small]
+  % Left panel: Galois Normalizer Tower
+  \begin{scope}[xshift=0cm,yshift=0.3cm]
+    \node[font=\bfseries] at (2.2,5.3) {(a) Wreath \& Normalizer Lattice};
+    \node[draw,rounded corners=3pt,fill=blue!8,minimum width=3.9cm,align=center] (N1152) at (2.2,4.45) {$N_{\mathrm{Sym}(24)}(T) = \mathrm{UTT}\rtimes \mathbb{Z}_{12}^\times$\\[-2pt]{\scriptsize order $1{,}152$ (adds $M_5,M_7$)}};
+    \node[draw,rounded corners=3pt,fill=blue!5,minimum width=3.9cm,align=center] (G576) at (2.2,3.25) {$\mathrm{UTT}\rtimes\langle I_0\rangle$\\[-2pt]{\scriptsize order $576$}};
+    \node[draw,rounded corners=3pt,fill=teal!10,minimum width=2.2cm,align=center] (UTT) at (0.7,1.95) {$\mathrm{UTT} = \mathbb{Z}_{12}\wr\mathbb{Z}_2$\\[-2pt]{\scriptsize $288$ ($|Z|=12$, $15$ inv.)}};
+    \node[draw,rounded corners=3pt,fill=red!8,minimum width=2.2cm,align=center] (TIPLR) at (3.7,1.95) {$\langle T/I, PLR\rangle$\\[-2pt]{\scriptsize $288$ ($|Z|=2$, $99$ inv.)}};
+    \node[draw,rounded corners=3pt,fill=gray!10,minimum width=3.4cm,align=center] (TPLR) at (2.2,0.65) {$\langle T, PLR\rangle$ (even parity)\\[-2pt]{\scriptsize order $144$ (misses $Q=\langle -,1,0\rangle$)}};
+    \draw[thick] (N1152) -- node[right,font=\scriptsize]{idx $2$} (G576);
+    \draw[thick] (G576) -- node[left,font=\scriptsize]{idx $2$} (UTT);
+    \draw[thick] (G576) -- node[right,font=\scriptsize]{idx $2$} (TIPLR);
+    \draw[thick] (UTT) -- node[left,font=\scriptsize]{idx $2$} (TPLR);
+    \draw[thick] (TIPLR) -- node[right,font=\scriptsize]{idx $2$} (TPLR);
+    \draw[red!70!black,dashed,thick] (UTT) -- node[above,font=\scriptsize\bfseries]{$\not\cong$} (TIPLR);
+  \end{scope}
+
+  % Right panel: Optimal cubic lambda_nt across all 8 UTT classes
+  \begin{scope}[xshift=6.6cm,yshift=0.2cm]
+    \begin{axis}[
+      title={\bfseries (b) Optimal Cubic $\lambda_{\mathrm{nt}}$ Across UTT Classes},
+      ybar,
+      width=7.4cm, height=5.4cm,
+      bar width=14pt,
+      ymin=0, ymax=3.25,
+      ylabel={$\lambda_{\mathrm{nt}}$ (nontrivial spectral radius)},
+      symbolic x coords={Nauru-M5,Nauru-M7,Tonnetz,Z12xZ2,Z24},
+      xtick=data,
+      xticklabels={$S_3{\times}\mathbb{Z}_4$,$\mathbb{Z}_3{\times}D_4$,$D_{12}$ (PLR),$\mathbb{Z}_{12}{\times}\mathbb{Z}_2$,$\mathbb{Z}_{24}$},
+      xticklabel style={font=\scriptsize,rotate=18,anchor=east},
+      nodes near coords,
+      every node near coord/.append style={font=\scriptsize,yshift=2pt},
+      grid=major,
+      grid style={dashed,gray!30},
+    ]
+      \addplot[fill=teal!60,draw=teal!80!black] coordinates {(Nauru-M5,2.000) (Nauru-M7,2.000)};
+      \addplot[fill=blue!45,draw=blue!75!black] coordinates {(Tonnetz,2.236) (Z12xZ2,2.732)};
+      \addplot[fill=red!55,draw=red!80!black] coordinates {(Z24,2.932)};
+      \draw[red!75!black,thick,dashed] (axis cs:Nauru-M5,2.8284) -- (axis cs:Z24,2.8284);
+      \node[red!75!black,font=\scriptsize,anchor=south east] at (axis cs:Z12xZ2,2.83) {Ramanujan $2\sqrt{2}\approx 2.828$};
+    \end{axis}
+    \node[font=\scriptsize,gray!70!black,align=center] at (3.0,-1.05) {Remaining 3 classes ($\mathrm{Dic}_6$, $\mathbb{Z}_3\rtimes\mathbb{Z}_8$, $\mathbb{Z}_3\times Q_8$): $0$ cubic graphs ($\mathrm{Dic}_6$ is $4$-regular, $T_4$ of $PGL_2(\mathbb{Q}_3)$).};
+  \end{scope}
+\end{tikzpicture}
+\end{document}
+"""
+    compile_tikz_figure(fig1_tex, fig_dir / "fig1_utt_census.pdf")
+    generated.append("fig1_utt_census.pdf")
+
+    # Figure 2: Nauru Graph Y = GP(12, 5) with Klein V_4 (K_{3,3}) fibers & deg-6 Gonality Hexagon
+    fig2_tex = r"""\documentclass[tikz,border=6pt]{standalone}
+\pdfinfo{/Producer () /Creator ()}
+\usepackage{amsmath,amssymb}
+\begin{document}
+\begin{tikzpicture}[font=\scriptsize]
+  % Left: Klein V_4 fibers -> K_{3,3} (B_3 at x = 3/2)
+  \begin{scope}[xshift=0cm]
+    \node[font=\small\bfseries] at (0,3.25) {(a) $B_3$ ($x{=}\frac{3}{2}$): Klein $V_4$-Orbits $\to K_{3,3}$};
+    \foreach \r in {0,...,11} {
+      \pgfmathsetmacro{\ang}{90 - \r*30}
+      \coordinate (U\r) at (\ang:2.45);
+      \coordinate (V\r) at (\ang:1.42);
+    }
+    \foreach \r in {0,...,11} {
+      \pgfmathtruncatemacro{\rn}{mod(\r+1,12)}
+      \pgfmathtruncatemacro{\rs}{mod(\r+5,12)}
+      \draw[gray!55,line width=0.7pt] (U\r) -- (U\rn);
+      \draw[gray!55,line width=0.7pt] (U\r) -- (V\r);
+      \draw[gray!55,line width=0.7pt] (V\r) -- (V\rs);
+    }
+    % Color the 6 V_4 orbits:
+    % o0: 0,6,V3,V9 (blue); o1: 1,7,V4,V10 (red); o2: 2,8,V5,V11 (teal)
+    % o3: 3,9,V0,V6 (orange); o4: 4,10,V1,V7 (violet); o5: 5,11,V2,V8 (olive)
+    \foreach \u/\col in {0/blue,6/blue,1/red!80!black,7/red!80!black,2/teal,8/teal,3/orange!85!black,9/orange!85!black,4/violet,10/violet,5/olive!85!black,11/olive!85!black} {
+      \node[circle,draw=\col,fill=white,line width=1.2pt,inner sep=1.2pt,minimum size=12pt] at (U\u) {\tiny $u_{\u}$};
+    }
+    \foreach \v/\col in {3/blue,9/blue,4/red!80!black,10/red!80!black,5/teal,11/teal,0/orange!85!black,6/orange!85!black,1/violet,7/violet,2/olive!85!black,8/olive!85!black} {
+      \node[circle,draw=\col,fill=white,line width=1.2pt,inner sep=1.2pt,minimum size=12pt] at (V\v) {\tiny $v_{\v}$};
+    }
+    \node[align=center,gray!75!black] at (0,-3.05) {6 colors $\times$ 4 vertices $= 24$; collapsing colors yields $K_{3,3}$\\($\Gamma_Y \trianglelefteq_{V_4} \Gamma(3)$, genus-$4$ Shimura curve $X^6(\Gamma(3))$).};
+  \end{scope}
+
+  % Right: Reduced degree-6 gonality prime hexagon D_hex
+  \begin{scope}[xshift=6.8cm]
+    \node[font=\small\bfseries] at (0,3.25) {(b) Reduced Gonality Witness $\operatorname{gon}(Y) = 6$};
+    \foreach \r in {0,...,11} {
+      \pgfmathsetmacro{\ang}{90 - \r*30}
+      \coordinate (U\r) at (\ang:2.45);
+      \coordinate (V\r) at (\ang:1.42);
+    }
+    \foreach \r in {0,...,11} {
+      \pgfmathtruncatemacro{\rn}{mod(\r+1,12)}
+      \pgfmathtruncatemacro{\rs}{mod(\r+5,12)}
+      \draw[gray!35,line width=0.6pt] (U\r) -- (U\rn);
+      \draw[gray!35,line width=0.6pt] (U\r) -- (V\r);
+      \draw[gray!35,line width=0.6pt] (V\r) -- (V\rs);
+    }
+    % Highlight exact prime hexagon: U0--U1--U2--V2--V7--V0--U0
+    \draw[blue!80!black,line width=2.0pt] (U0) -- (U1) -- (U2) -- (V2) -- (V7) -- (V0) -- cycle;
+    \foreach \r/\lab in {0/C,1/C\sharp,2/D,3/E\flat,4/E,5/F,6/F\sharp,7/G,8/A\flat,9/A,10/B\flat,11/B} {
+      \node[circle,draw=gray!50,fill=white,inner sep=1pt,minimum size=12pt,text=gray!60] at (U\r) {\tiny $\lab$};
+    }
+    \foreach \r/\lab in {0/f\sharp,1/g,2/a\flat,3/a,4/b\flat,5/b,6/c,7/c\sharp,8/d,9/e\flat,10/e,11/f} {
+      \node[circle,draw=gray!50,fill=white,inner sep=1pt,minimum size=12pt,text=gray!60] at (V\r) {\tiny $\lab$};
+    }
+    % Redraw highlighted nodes
+    \foreach \nd/\lab in {U0/C,U1/C\sharp,U2/D,V2/a\flat m,V7/c\sharp m,V0/f\sharp m} {
+      \node[circle,draw=blue!80!black,fill=blue!12,line width=1.3pt,inner sep=1pt,minimum size=14pt,font=\tiny\bfseries] at (\nd) {$\lab$};
+    }
+    \node[align=center,gray!75!black] at (0,-3.05) {Single prime cadence $D_{\mathrm{hex}} = \mathrm{C}+\mathrm{C}\sharp+\mathrm{D}+\mathrm{a}\flat\mathrm{m}+\mathrm{c}\sharp\mathrm{m}+\mathrm{f}\sharp\mathrm{m}$\\achieves $r(D_{\mathrm{hex}}) = 1$ (exhaustively proved $\operatorname{gon}(Y) = 6$).};
+  \end{scope}
+\end{tikzpicture}
+\end{document}
+"""
+    compile_tikz_figure(fig2_tex, fig_dir / "fig2_nauru_towers.pdf")
+    generated.append("fig2_nauru_towers.pdf")
+
+    # Figure 3: Fricke-Vogt Moduli Curves & Exact 3 Rational Arithmetic Jewels
+    fig3_tex = r"""\documentclass[tikz,border=6pt]{standalone}
+\pdfinfo{/Producer () /Creator ()}
+\usepackage{pgfplots,amsmath,amssymb}
+\pgfplotsset{compat=1.18}
+\begin{document}
+\begin{tikzpicture}
+  \begin{axis}[
+    width=12.4cm, height=6.4cm,
+    xmin=-0.6, xmax=4.75,
+    ymin=-0.4, ymax=10.5,
+    xlabel={$2$-adic Lam\'e modulus $x = \tau(ta) \in \mathbb{Q}_2$ ($v_2(x) = -1$)},
+    ylabel={Hyperbolic trace invariant $\tau(w) = \operatorname{tr}(w)^2 / \det(w)$},
+    title={\bfseries Fricke--Vogt Moduli Space of $S_3 *_{\mathbb{Z}_2} V_4 \subset PGL_2(\mathbb{Q}_2)$ and Exact Arithmetic Points},
+    grid=major,
+    grid style={dashed,gray!30},
+    legend pos=north west,
+    legend style={font=\scriptsize,fill=white,fill opacity=0.9},
+  ]
+    % Shaded definite arithmetic window 0 < x < 3, 0 <= tau <= 4
+    \addplot[draw=none,fill=green!14,forget plot] coordinates {(0,0) (3,0) (3,4) (0,4)} \closedcycle;
+    \node[green!45!black,font=\scriptsize\bfseries,anchor=north west] at (axis cs:0.06,3.88) {Definite window $0 < x < 3$ ($B(x)\otimes\mathbb{R}\cong\mathbb{H}$)};
+
+    % Compact ceiling tau = 4
+    \addplot[red!75!black,thick,dashed,domain=-0.6:4.75] {4};
+    \addlegendentry{Archimedean compact bound $\tau \le 4$}
+
+    % tau(w_2) = (x - 1)^2
+    \addplot[orange!85!black,thick,domain=-0.6:4.25,samples=120] {(x-1)^2};
+    \addlegendentry{$\tau(ta\cdot ta^2) = (x-1)^2$}
+
+    % tau(w_3) = x(x - 2)^2
+    \addplot[violet,thick,domain=-0.5:3.8,samples=120] {x*(x-2)^2};
+    \addlegendentry{$\tau((ta)^2 ta^2) = x(x-2)^2$}
+
+    % tau(gamma_6) = (x^3 - 6x^2 + 9x - 2)^2
+    \addplot[blue!80!black,very thick,domain=-0.12:3.7,samples=240] {(x^3 - 6*x^2 + 9*x - 2)^2};
+    \addlegendentry{$\tau(\gamma_6) = (x^3 - 6x^2 + 9x - 2)^2$}
+
+    % Exact 3 rational arithmetic points on tau(gamma_6)
+    \addplot[only marks,mark=*,mark size=3pt,draw=black,fill=green!65!black,forget plot]
+      coordinates {(0.5, 1.265625) (1.5, 1.890625) (2.5, 1.890625)};
+    \node[font=\scriptsize\bfseries,anchor=south] at (axis cs:0.5,1.45) {$\frac{1}{2}$ ($B_5$: $\frac{81}{64}$)};
+    \node[font=\scriptsize\bfseries,anchor=south] at (axis cs:1.5,2.10) {$\frac{3}{2}$ ($B_3$: $\frac{121}{64}$)};
+    \node[font=\scriptsize\bfseries,anchor=south] at (axis cs:2.5,2.10) {$\frac{5}{2}$ ($B_5$: $\frac{121}{64}$)};
+
+    % Non-arithmetic annotation at x = 9/2 (off-scale arrow)
+    \node[draw=red!70!black,fill=red!6,rounded corners=2pt,font=\scriptsize,align=left,anchor=east] at (axis cs:4.68,8.5)
+      {Non-arithmetic witnesses:\\$x=\frac{9}{2}$: $\tau(\gamma_6)=\frac{4225}{64}\approx 66.02$\\Tonnetz $X$: $\tau(\gamma_0)=\frac{7225}{256}\approx 28.22$};
+  \end{axis}
+\end{tikzpicture}
+\end{document}
+"""
+    compile_tikz_figure(fig3_tex, fig_dir / "fig3_fricke_vogt_moduli.pdf")
+    generated.append("fig3_fricke_vogt_moduli.pdf")
+
+    # Figure 4: F_2 Elliptic Weil Multiplicity Bar Chart (Nauru vs Tonnetz) + 3-Adic Dic_6 Spectrum
+    fig4_tex = r"""\documentclass[tikz,border=6pt]{standalone}
+\pdfinfo{/Producer () /Creator ()}
+\usepackage{pgfplots,amsmath,amssymb}
+\pgfplotsset{compat=1.18}
+\begin{document}
+\begin{tikzpicture}
+  % Left: All 5 F_2 elliptic isogeny classes in Nauru Y
+  \begin{axis}[
+    width=6.6cm, height=5.0cm,
+    ybar,
+    bar width=16pt,
+    ymin=0, ymax=7.2,
+    xlabel={Frobenius trace $a_2 \in \{-2,-1,0,+1,+2\}$},
+    ylabel={Multiplicity in $\zeta_Y(u)^{-1}$},
+    title={\bfseries (a) Nauru $Y$: All $5/5$ $\mathbb{F}_2$-Elliptic Classes},
+    xtick={-2,-1,0,1,2},
+    xticklabels={$-2$,$-1$,$0$,$+1$,$+2$},
+    nodes near coords,
+    every node near coord/.append style={font=\scriptsize},
+    grid=major,
+    grid style={dashed,gray!30},
+  ]
+    \addplot[fill=teal!60,draw=teal!80!black] coordinates {(-2,6) (-1,3) (0,4) (1,3) (2,6)};
+    \node[font=\scriptsize,gray!70!black,align=center] at (axis cs:0,6.35) {Total $22$ quadratic factors\\(zero higher-genus factors!)};
+  \end{axis}
+
+  % Right: 3-adic Dic_6 4-regular Ramanujan spectrum on Bruhat-Tits T_4
+  \begin{axis}[
+    xshift=7.4cm,
+    width=6.6cm, height=5.0cm,
+    ybar,
+    bar width=11pt,
+    ymin=0, ymax=7.2,
+    xmin=-4.6, xmax=4.6,
+    xlabel={Adjacency eigenvalue $\lambda$ of $Z_{\mathrm{Dic}_6}$},
+    ylabel={Multiplicity (sum $= 24$)},
+    title={\bfseries (b) $3$-Adic $\mathrm{Dic}_6$ Twin on $T_4$ ($\lambda_{\mathrm{nt}}=3 < 2\sqrt{3}$)},
+    xtick={-4,-3,-1.732,-1,0,1,1.732,3,4},
+    xticklabels={$-4$,$-3$,$-\sqrt{3}$,$-1$,$0$,$1$,$\sqrt{3}$,$3$,$4$},
+    xticklabel style={font=\tiny},
+    grid=major,
+    grid style={dashed,gray!30},
+  ]
+    \addplot[fill=blue!55,draw=blue!80!black] coordinates {(-4,1) (-3,2) (-1.732,4) (-1,2) (0,6) (1,2) (1.732,4) (3,2) (4,1)};
+    \draw[red!75!black,thick,dashed] (axis cs:3.464,0) -- (axis cs:3.464,7.0);
+    \draw[red!75!black,thick,dashed] (axis cs:-3.464,0) -- (axis cs:-3.464,7.0);
+    \node[red!75!black,font=\tiny,anchor=south] at (axis cs:3.464,6.1) {$2\sqrt{3}$};
+    \node[red!75!black,font=\tiny,anchor=south] at (axis cs:-3.464,6.1) {$-2\sqrt{3}$};
+  \end{axis}
+\end{tikzpicture}
+\end{document}
+"""
+    compile_tikz_figure(fig4_tex, fig_dir / "fig4_elliptic_shimura_comparison.pdf")
+    generated.append("fig4_elliptic_shimura_comparison.pdf")
+    return generated
+
+
+def main() -> int:
+    paper_root = pathlib.Path(__file__).resolve().parent.parent
+    data_dir = paper_root / "data"
+    fig_dir = paper_root / "paper" / "figures"
+    data_dir.mkdir(parents=True, exist_ok=True)
+
+    print("Running 12-gate D/R/P/Seam verification suite (zero cached data reads)...")
+    d1 = verify_d1_non_fusion()
+    print("  [PASS] Gate D1: Non-fusion & normalizer tower (144 / 288 != 288 / 576 / 1152)")
+    d2 = verify_d2_utt_census()
+    print("  [PASS] Gate D2: Exhaustive 24-subgroup UTT census across 8 isomorphism classes")
+    d3 = verify_d3_nauru_weil()
+    print("  [PASS] Gate D3: Nauru GP(12,5), 5/5 F_2 elliptic atlas, pi_Y(m), G_12 quotient")
+    d4 = verify_d4_tropical()
+    print("  [PASS] Gate D4: Raynaud SNF |K(Y)|=162,000,000 & exhaustive Dhar gon(Y)=6")
+    d5, d6, d7 = verify_d5_d6_d7_2adic_arithmetic()
+    print("  [PASS] Gate D5: |Aut(Y)|=144=12(g-1), Lame amalgam & universal Fricke-Vogt law")
+    print("  [PASS] Gate D6: Rational arithmetic classification x in {1/2, 3/2, 5/2} & Q_2 lift")
+    print("  [PASS] Gate D7: Non-congruence towers Y->K_{3,3} (B_3) & Y->Q_3->K_4 (B_5)")
+    d8 = verify_d8_shimura_manin()
+    print("  [PASS] Gate D8: Zero-PARI Manin T_2 audit across all 18 levels (0/19 survivors)")
+    d9 = verify_d9_dic6_3adic()
+    print("  [PASS] Gate D9: 3-adic Bruhat-Tits T_4 companion Dic_6 (g=25, lambda_nt=3)")
+    r1 = verify_r1_runtime_guards()
+    print("  [PASS] Gate R1: Global Laplacian PSD nullity-1 & 5/5 adversarial fault rejections")
+    p1 = verify_p1_rct_control()
+    print(f"  [PASS] Gate P1: Keyed SplitMix64 RCT N=200 (0/200 match Nauru lambda=2, replay exact)")
+
+    figs = generate_all_figures(fig_dir)
+    print(f"  [PASS] Gate S1: Generated {len(figs)} metadata-free vector PDF figures")
+
+    payload = {
+        "schema_version": "1.0.0",
+        "paper": "Uniform Triadic Wreath Products, the Nauru Graph, and 2-Adic Arithmeticity",
+        "gates_passed": 12,
+        "gates_total": 12,
+        "D1_non_fusion": d1,
+        "D2_utt_census": d2,
+        "D3_nauru_weil": d3,
+        "D4_tropical": d4,
+        "D5_lame_fricke_vogt": d5,
+        "D6_rational_arithmetic": d6,
+        "D7_non_congruence_towers": d7,
+        "D8_manin_shimura_audit": d8,
+        "D9_dic6_3adic": d9,
+        "R1_runtime_guards": r1,
+        "P1_rct_null_control": p1,
+        "S1_figures": figs,
+    }
+    cal_path = data_dir / "triadic_nauru_calibration.json"
+    cal_bytes = (json.dumps(payload, indent=2, sort_keys=True) + "\n").encode("utf-8")
+    cal_path.write_bytes(cal_bytes)
+    sha = hashlib.sha256(cal_bytes).hexdigest()
+    (data_dir / "MANIFEST.sha256").write_text(f"{sha}  triadic_nauru_calibration.json\n", encoding="utf-8")
+    print(f"Wrote data/triadic_nauru_calibration.json (sha256={sha[:16]}...) -- 12/12 GATES PASS.")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

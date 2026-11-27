@@ -84,12 +84,14 @@ jobs:
             "papers/horizon_synthesis/piece1_propulsion_hardware/paper/piece1_propulsion_hardware.pdf"
             "papers/horizon_synthesis/piece2_smallbody_crtbp/paper/piece2_smallbody_crtbp.pdf"
             "papers/horizon_synthesis/piece3_nullcone_tuft_hagedorn/paper/piece3_nullcone_tuft_hagedorn.pdf"
+            "papers/triadic_wreath_nauru/paper/triadic_wreath_nauru.pdf"
           )
           TARS=(
             "arxiv/prime-cadences-arxiv.tar.gz"
             "papers/horizon_synthesis/piece1_propulsion_hardware/arxiv/piece1-propulsion-hardware-arxiv.tar.gz"
             "papers/horizon_synthesis/piece2_smallbody_crtbp/arxiv/piece2-smallbody-crtbp-arxiv.tar.gz"
             "papers/horizon_synthesis/piece3_nullcone_tuft_hagedorn/arxiv/piece3-nullcone-tuft-hagedorn-arxiv.tar.gz"
+            "papers/triadic_wreath_nauru/arxiv/triadic-wreath-nauru-arxiv.tar.gz"
           )
 
           for f in "${PDFS[@]}" "${TARS[@]}"; do
@@ -104,12 +106,14 @@ jobs:
               "papers/horizon_synthesis/piece1_propulsion_hardware/paper/piece1_propulsion_hardware.pdf",
               "papers/horizon_synthesis/piece2_smallbody_crtbp/paper/piece2_smallbody_crtbp.pdf",
               "papers/horizon_synthesis/piece3_nullcone_tuft_hagedorn/paper/piece3_nullcone_tuft_hagedorn.pdf",
+              "papers/triadic_wreath_nauru/paper/triadic_wreath_nauru.pdf",
           ]
           tars = [
               "arxiv/prime-cadences-arxiv.tar.gz",
               "papers/horizon_synthesis/piece1_propulsion_hardware/arxiv/piece1-propulsion-hardware-arxiv.tar.gz",
               "papers/horizon_synthesis/piece2_smallbody_crtbp/arxiv/piece2-smallbody-crtbp-arxiv.tar.gz",
               "papers/horizon_synthesis/piece3_nullcone_tuft_hagedorn/arxiv/piece3-nullcone-tuft-hagedorn-arxiv.tar.gz",
+              "papers/triadic_wreath_nauru/arxiv/triadic-wreath-nauru-arxiv.tar.gz",
           ]
 
           rx = re.compile(rb"(/home/[A-Za-z0-9._-]+/|/Users/[A-Za-z0-9._-]+/|[A-Za-z]:\\Users\\[A-Za-z0-9._-]+\\|" + b"file:" + b"///)")

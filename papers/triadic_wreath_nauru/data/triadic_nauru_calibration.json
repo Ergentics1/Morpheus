@@ -1,0 +1,564 @@
+{
+  "D1_non_fusion": {
+    "I0_in_UTT": false,
+    "N_Sym24_T_order": 1152,
+    "Q_hook_order": 24,
+    "TI_PLR": {
+      "abelianization_order": 16,
+      "center_order": 2,
+      "commutator_order": 18,
+      "involutions": 99,
+      "max_order": 12,
+      "order": 288,
+      "order_24_elements": 0,
+      "order_spectrum": {
+        "1": 1,
+        "12": 80,
+        "2": 99,
+        "3": 8,
+        "4": 28,
+        "6": 72
+      }
+    },
+    "TI_PLR_isomorphic_UTT": false,
+    "T_PLR": {
+      "abelianization_order": 24,
+      "center_order": 12,
+      "commutator_order": 6,
+      "involutions": 15,
+      "max_order": 12,
+      "order": 144,
+      "order_24_elements": 0,
+      "order_spectrum": {
+        "1": 1,
+        "12": 56,
+        "2": 15,
+        "3": 8,
+        "4": 16,
+        "6": 48
+      }
+    },
+    "UTT": {
+      "abelianization_order": 24,
+      "center_order": 12,
+      "commutator_order": 12,
+      "involutions": 15,
+      "max_order": 24,
+      "order": 288,
+      "order_24_elements": 48,
+      "order_spectrum": {
+        "1": 1,
+        "12": 120,
+        "2": 15,
+        "24": 48,
+        "3": 8,
+        "4": 24,
+        "6": 48,
+        "8": 24
+      }
+    },
+    "UTT_semidirect_I0_order": 576,
+    "pass": true
+  },
+  "D2_utt_census": {
+    "classes": {
+      "D_12 (PLR)": {
+        "best_cubic_lambda": 2.236068,
+        "count": 1,
+        "coxeter_ramanujan_per_group": 168,
+        "coxeter_triples_per_group": 192,
+        "involutions": 13,
+        "mixed_cubic_per_group": 24,
+        "mixed_ramanujan_per_group": 24,
+        "u": 11
+      },
+      "Dic_6": {
+        "best_cubic_lambda": null,
+        "count": 1,
+        "coxeter_ramanujan_per_group": 0,
+        "coxeter_triples_per_group": 0,
+        "involutions": 1,
+        "mixed_cubic_per_group": 0,
+        "mixed_ramanujan_per_group": 0,
+        "u": 11
+      },
+      "S_3 x Z_4": {
+        "best_cubic_lambda": 2.0,
+        "count": 2,
+        "coxeter_ramanujan_per_group": 0,
+        "coxeter_triples_per_group": 0,
+        "involutions": 7,
+        "mixed_cubic_per_group": 24,
+        "mixed_ramanujan_per_group": 24,
+        "u": 5
+      },
+      "Z_12 x Z_2": {
+        "best_cubic_lambda": 2.732051,
+        "count": 6,
+        "coxeter_ramanujan_per_group": 0,
+        "coxeter_triples_per_group": 0,
+        "involutions": 3,
+        "mixed_cubic_per_group": 8,
+        "mixed_ramanujan_per_group": 8,
+        "u": 1
+      },
+      "Z_24": {
+        "best_cubic_lambda": 2.931852,
+        "count": 6,
+        "coxeter_ramanujan_per_group": 0,
+        "coxeter_triples_per_group": 0,
+        "involutions": 1,
+        "mixed_cubic_per_group": 4,
+        "mixed_ramanujan_per_group": 0,
+        "u": 1
+      },
+      "Z_3 >< Z_8": {
+        "best_cubic_lambda": null,
+        "count": 2,
+        "coxeter_ramanujan_per_group": 0,
+        "coxeter_triples_per_group": 0,
+        "involutions": 1,
+        "mixed_cubic_per_group": 0,
+        "mixed_ramanujan_per_group": 0,
+        "u": 5
+      },
+      "Z_3 x D_4": {
+        "best_cubic_lambda": 2.0,
+        "count": 3,
+        "coxeter_ramanujan_per_group": 0,
+        "coxeter_triples_per_group": 0,
+        "involutions": 5,
+        "mixed_cubic_per_group": 16,
+        "mixed_ramanujan_per_group": 16,
+        "u": 7
+      },
+      "Z_3 x Q_8": {
+        "best_cubic_lambda": null,
+        "count": 3,
+        "coxeter_ramanujan_per_group": 0,
+        "coxeter_triples_per_group": 0,
+        "involutions": 1,
+        "mixed_cubic_per_group": 0,
+        "mixed_ramanujan_per_group": 0,
+        "u": 7
+      }
+    },
+    "isomorphism_classes": 8,
+    "pass": true,
+    "ramanujan_bound_cubic": 2.828427,
+    "total_subgroups": 24
+  },
+  "D3_nauru_weil": {
+    "G12_spectrum": {
+      "-1": 3,
+      "-2": 3,
+      "0": 2,
+      "2": 3,
+      "3": 1
+    },
+    "f2_elliptic_atlas": [
+      {
+        "N1_F2": 1,
+        "a2": 2,
+        "equation": "y^2 + y = x^3 + x + 1",
+        "multiplicity": 6
+      },
+      {
+        "N1_F2": 2,
+        "a2": 1,
+        "equation": "y^2 + xy = x^3 + x^2 + 1",
+        "multiplicity": 3
+      },
+      {
+        "N1_F2": 3,
+        "a2": 0,
+        "equation": "y^2 + y = x^3",
+        "multiplicity": 4
+      },
+      {
+        "N1_F2": 4,
+        "a2": -1,
+        "equation": "y^2 + xy = x^3 + 1",
+        "multiplicity": 3
+      },
+      {
+        "N1_F2": 5,
+        "a2": -2,
+        "equation": "y^2 + y = x^3 + x",
+        "multiplicity": 6
+      }
+    ],
+    "pass": true,
+    "prime_cadences_even": {
+      "10": 216,
+      "12": 564,
+      "14": 2232,
+      "16": 8820,
+      "18": 28560,
+      "20": 104292,
+      "22": 380664,
+      "24": 1401744,
+      "6": 24,
+      "8": 108
+    },
+    "spectrum": {
+      "-1": 3,
+      "-2": 6,
+      "-3": 1,
+      "0": 4,
+      "1": 3,
+      "2": 6,
+      "3": 1
+    },
+    "traces_1_to_8": [
+      0,
+      72,
+      0,
+      360,
+      0,
+      2232,
+      0,
+      16200
+    ]
+  },
+  "D4_tropical": {
+    "divisors_tested_deg_2_to_5": 20474,
+    "gonality": 6,
+    "pass": true,
+    "sandpile_invariants": [
+      5,
+      5,
+      5,
+      30,
+      120,
+      360
+    ],
+    "sandpile_order": 162000000,
+    "witness_is_prime_hexagon": true,
+    "witness_triads": [
+      "C",
+      "C#",
+      "D",
+      "f#m",
+      "abm",
+      "c#m"
+    ],
+    "witness_vertices": [
+      0,
+      1,
+      2,
+      12,
+      14,
+      19
+    ]
+  },
+  "D5_lame_fricke_vogt": {
+    "amalgam_euler_char": "-1/12",
+    "aut_order": 144,
+    "edge_stab": 4,
+    "fricke_vogt_samples": [
+      {
+        "tau_gamma6": "4225/64",
+        "u": "0",
+        "x": "9/2"
+      },
+      {
+        "tau_gamma6": "207579560881/64",
+        "u": "2",
+        "x": "81/2"
+      },
+      {
+        "tau_gamma6": "67081/64",
+        "u": "-2",
+        "x": "-3/2"
+      },
+      {
+        "tau_gamma6": "1184942929/308915776",
+        "u": "-2/5",
+        "x": "81/26"
+      }
+    ],
+    "involutions": 39,
+    "min_involution_quotient_b1": 4,
+    "pass": true,
+    "vertex_stab": 6
+  },
+  "D6_rational_arithmetic": {
+    "hensel_precision_bits": 40,
+    "hensel_q_mod_64": 38,
+    "non_arithmetic_tau_gamma6": "4225/64",
+    "non_arithmetic_witness_x": "9/2",
+    "pass": true,
+    "rational_arithmetic_points": {
+      "x=1/2": {
+        "nrd_t": "2",
+        "quaternion_algebra": "(-3, -5)_Q",
+        "reduced_discriminant": 5,
+        "shimura_discriminant_D": 10,
+        "tau_gamma6": "81/64",
+        "tau_ta": "1/2"
+      },
+      "x=3/2": {
+        "nrd_t": "6",
+        "quaternion_algebra": "(-3, -1)_Q",
+        "reduced_discriminant": 3,
+        "shimura_discriminant_D": 6,
+        "tau_gamma6": "121/64",
+        "tau_ta": "3/2"
+      },
+      "x=5/2": {
+        "nrd_t": "10",
+        "quaternion_algebra": "(-3, -5)_Q",
+        "reduced_discriminant": 5,
+        "shimura_discriminant_D": 10,
+        "tau_gamma6": "121/64",
+        "tau_ta": "5/2"
+      }
+    }
+  },
+  "D7_non_congruence_towers": {
+    "B3_base_graph": "K_{3,3} (genus 4, X^6(Gamma(3)))",
+    "B3_deck_group": "V_4 (order 4)",
+    "B3_mod3_order": 36,
+    "B3_mod5_joint_order": 8640,
+    "B5_x52_base_graph": "K_4 (genus 3, X^{10}(Gamma(3))) via Cube Q_3 (genus 5)",
+    "B5_x52_deck_group": "S_3 (order 6)",
+    "B5_x52_mod3_order": 24,
+    "pass": true
+  },
+  "D8_manin_shimura_audit": {
+    "distinct_levels": 18,
+    "levels": [
+      {
+        "M": 105,
+        "dim": 13,
+        "nauru_feasible": false,
+        "null_0": 2,
+        "null_neg1": 4,
+        "null_neg2": 0,
+        "null_pos2": 0,
+        "tr_T2": -5
+      },
+      {
+        "M": 111,
+        "dim": 11,
+        "nauru_feasible": false,
+        "null_0": 2,
+        "null_neg1": 0,
+        "null_neg2": 2,
+        "null_pos2": 0,
+        "tr_T2": -1
+      },
+      {
+        "M": 117,
+        "dim": 13,
+        "nauru_feasible": false,
+        "null_0": 0,
+        "null_neg1": 1,
+        "null_neg2": 0,
+        "null_pos2": 0,
+        "tr_T2": -7
+      },
+      {
+        "M": 123,
+        "dim": 13,
+        "nauru_feasible": false,
+        "null_0": 1,
+        "null_neg1": 0,
+        "null_neg2": 1,
+        "null_pos2": 0,
+        "tr_T2": -3
+      },
+      {
+        "M": 133,
+        "dim": 11,
+        "nauru_feasible": false,
+        "null_0": 2,
+        "null_neg1": 0,
+        "null_neg2": 0,
+        "null_pos2": 0,
+        "tr_T2": -1
+      },
+      {
+        "M": 135,
+        "dim": 17,
+        "nauru_feasible": false,
+        "null_0": 2,
+        "null_neg1": 3,
+        "null_neg2": 1,
+        "null_pos2": 1,
+        "tr_T2": -13
+      },
+      {
+        "M": 143,
+        "dim": 13,
+        "nauru_feasible": false,
+        "null_0": 1,
+        "null_neg1": 0,
+        "null_neg2": 2,
+        "null_pos2": 0,
+        "tr_T2": -1
+      },
+      {
+        "M": 151,
+        "dim": 12,
+        "nauru_feasible": false,
+        "null_0": 0,
+        "null_neg1": 0,
+        "null_neg2": 0,
+        "null_pos2": 0,
+        "tr_T2": -1
+      },
+      {
+        "M": 161,
+        "dim": 15,
+        "nauru_feasible": false,
+        "null_0": 0,
+        "null_neg1": 1,
+        "null_neg2": 0,
+        "null_pos2": 0,
+        "tr_T2": -3
+      },
+      {
+        "M": 165,
+        "dim": 21,
+        "nauru_feasible": false,
+        "null_0": 0,
+        "null_neg1": 2,
+        "null_neg2": 4,
+        "null_pos2": 0,
+        "tr_T2": -5
+      },
+      {
+        "M": 167,
+        "dim": 14,
+        "nauru_feasible": false,
+        "null_0": 0,
+        "null_neg1": 0,
+        "null_neg2": 0,
+        "null_pos2": 0,
+        "tr_T2": 1
+      },
+      {
+        "M": 195,
+        "dim": 25,
+        "nauru_feasible": false,
+        "null_0": 0,
+        "null_neg1": 5,
+        "null_neg2": 0,
+        "null_pos2": 3,
+        "tr_T2": -5
+      },
+      {
+        "M": 213,
+        "dim": 23,
+        "nauru_feasible": false,
+        "null_0": 0,
+        "null_neg1": 0,
+        "null_neg2": 0,
+        "null_pos2": 0,
+        "tr_T2": -1
+      },
+      {
+        "M": 215,
+        "dim": 21,
+        "nauru_feasible": false,
+        "null_0": 1,
+        "null_neg1": 0,
+        "null_neg2": 2,
+        "null_pos2": 0,
+        "tr_T2": -1
+      },
+      {
+        "M": 237,
+        "dim": 25,
+        "nauru_feasible": false,
+        "null_0": 0,
+        "null_neg1": 2,
+        "null_neg2": 0,
+        "null_pos2": 0,
+        "tr_T2": -1
+      },
+      {
+        "M": 273,
+        "dim": 33,
+        "nauru_feasible": false,
+        "null_0": 2,
+        "null_neg1": 2,
+        "null_neg2": 3,
+        "null_pos2": 1,
+        "tr_T2": -5
+      },
+      {
+        "M": 285,
+        "dim": 37,
+        "nauru_feasible": false,
+        "null_0": 4,
+        "null_neg1": 3,
+        "null_neg2": 4,
+        "null_pos2": 0,
+        "tr_T2": -5
+      },
+      {
+        "M": 345,
+        "dim": 45,
+        "nauru_feasible": false,
+        "null_0": 2,
+        "null_neg1": 3,
+        "null_neg2": 1,
+        "null_pos2": 3,
+        "tr_T2": -5
+      }
+    ],
+    "pass": true,
+    "survivors": 0,
+    "total_genus13_pairs": 19
+  },
+  "D9_dic6_3adic": {
+    "connected_4reg_cayley": 18,
+    "genus": 25,
+    "girth": 4,
+    "optimal_lambda_nt": 3.0,
+    "pass": true,
+    "ramanujan_bound_4reg": 3.464102,
+    "sandpile_invariants": [
+      4,
+      52,
+      52,
+      1820,
+      21840
+    ],
+    "sandpile_order": 429923020800,
+    "strict_ramanujan_4reg_cayley": 12,
+    "weak_ramanujan_4reg_cayley": 18
+  },
+  "P1_rct_null_control": {
+    "bit_exact_replay": true,
+    "n_trials": 200,
+    "nauru_girth": 6,
+    "nauru_lambda_nt": 2.0,
+    "pass": true,
+    "random_girth_ge_6_count": 1,
+    "random_matching_or_beating_nauru_lambda": 0,
+    "random_mean_lambda_nt": 2.567314,
+    "random_min_lambda_nt": 2.324775,
+    "random_ramanujan_count": 197,
+    "seed_hex": "0x2ad1caa0125"
+  },
+  "R1_runtime_guards": {
+    "faults_injected": 5,
+    "faults_rejected": 5,
+    "global_laplacian_psd_nullity_1": true,
+    "pass": true
+  },
+  "S1_figures": [
+    "fig1_utt_census.pdf",
+    "fig2_nauru_towers.pdf",
+    "fig3_fricke_vogt_moduli.pdf",
+    "fig4_elliptic_shimura_comparison.pdf"
+  ],
+  "gates_passed": 12,
+  "gates_total": 12,
+  "paper": "Uniform Triadic Wreath Products, the Nauru Graph, and 2-Adic Arithmeticity",
+  "schema_version": "1.0.0"
+}

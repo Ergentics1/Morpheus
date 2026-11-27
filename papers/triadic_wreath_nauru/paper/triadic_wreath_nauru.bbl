@@ -1,0 +1,98 @@
+\providecommand{\bysame}{\leavevmode\hbox to3em{\hrulefill}\thinspace}
+\providecommand{\MR}{\relax\ifhmode\unskip\space\fi MR }
+% \MRhref is called by the amsart/book/proc definition of \MR.
+\providecommand{\MRhref}[2]{%
+  \href{http://www.ams.org/mathscinet-getitem?mr=#1}{#2}
+}
+\providecommand{\href}[2]{#2}
+\begin{thebibliography}{10}
+
+\bibitem{baker2008}
+Matthew Baker, \emph{Specialization of linear systems from curves to graphs},
+  Algebra \& Number Theory \textbf{2} (2008), no.~6, 613--653.
+
+\bibitem{bn2007}
+Matthew Baker and Serguei Norine, \emph{Riemann--{R}och and {A}bel--{J}acobi
+  theory on a finite graph}, Advances in Mathematics \textbf{215} (2007),
+  no.~2, 766--788.
+
+\bibitem{bass1992}
+Hyman Bass, \emph{The {I}hara--{S}elberg zeta function of a tree lattice},
+  International Journal of Mathematics \textbf{3} (1992), no.~6, 717--797.
+
+\bibitem{chan2013}
+Melody Chan, \emph{Tropical hyperelliptic curves}, Journal of Algebraic
+  Combinatorics \textbf{37} (2013), no.~2, 331--359.
+
+\bibitem{ck2002}
+Gunther Cornelissen and Fumiharu Kato, \emph{Mumford curves with maximal
+  automorphism group {II}: {L}am\'e type groups in genus $5$--$8$}, Geometriae
+  Dedicata \textbf{102} (2003), 127--142.
+
+\bibitem{cfs2009}
+Alissa~S. Crans, Thomas~M. Fiore, and Ramon Satyendra, \emph{Musical actions of
+  dihedral groups}, American Mathematical Monthly \textbf{116} (2009), no.~6,
+  479--495.
+
+\bibitem{drinfeld1976}
+V.~G. Drinfeld, \emph{Coverings of $p$-adic symmetric domains}, Functional
+  Analysis and Its Applications \textbf{10} (1976), no.~2, 107--115.
+
+\bibitem{ergentics2026pc}
+Ergentics, \emph{Prime cadences: {I}hara zeta, graphene, and voice-leading
+  homology on the {T}onnetz},  (2026), Morpheus Paper \#01 (\texttt{v0.3.1},
+  \texttt{paper/prime-cadences.tex}).
+
+\bibitem{gvdp1980}
+Lothar Gerritzen and Marius van~der Put, \emph{Schottky groups and {M}umford
+  curves}, Lecture Notes in Mathematics, vol. 817, Springer, 1980.
+
+\bibitem{herrlich1980}
+Frank Herrlich, \emph{Die {O}rdnung der {A}utomorphismengruppe einer
+  $p$-adischen {S}chottkykurve}, Mathematische Annalen \textbf{246} (1980),
+  125--130.
+
+\bibitem{hook2002}
+Julian Hook, \emph{Uniform triadic transformations}, Journal of Music Theory
+  \textbf{46} (2002), no.~1--2, 57--126.
+
+\bibitem{ihara1966}
+Yasutaka Ihara, \emph{On discrete subgroups of the two by two projective linear
+  group over $\mathfrak{p}$-adic fields}, Journal of the Mathematical Society
+  of Japan \textbf{18} (1966), no.~3, 219--235.
+
+\bibitem{lewin1987}
+David Lewin, \emph{Generalized musical intervals and transformations}, Yale
+  University Press, New Haven, 1987.
+
+\bibitem{lps1988}
+Alexander Lubotzky, Ralph Phillips, and Peter Sarnak, \emph{Ramanujan graphs},
+  Combinatorica \textbf{8} (1988), no.~3, 261--277.
+
+\bibitem{mumford1972}
+David Mumford, \emph{An analytic construction of degenerating curves over
+  complete local rings}, Compositio Mathematica \textbf{24} (1972), no.~2,
+  129--174.
+
+\bibitem{raynaud1970}
+Michel Raynaud, \emph{Sp\'ecialisation du foncteur de {P}icard}, Publications
+  Math\'ematiques de l'IH\'ES \textbf{38} (1970), 27--76.
+
+\bibitem{ribet1990}
+Kenneth~A. Ribet, \emph{On modular representations of
+  $\mathrm{Gal}(\overline{\mathbb{q}}/\mathbb{Q})$ arising from modular forms},
+  Inventiones Mathematicae \textbf{100} (1990), 431--476.
+
+\bibitem{serre1980}
+Jean-Pierre Serre, \emph{Trees}, Springer, 1980.
+
+\bibitem{sunada1986}
+Toshikazu Sunada, \emph{$l$-functions in geometry and some applications},
+  Lecture Notes in Mathematics \textbf{1201} (1986), 266--284.
+
+\bibitem{cerednik1976}
+I.~V. \v{C}erednik, \emph{Uniformization of algebraic curves by discrete
+  arithmetic subgroups of $\mathrm{PGL}_2(k_w)$ with compact quotient spaces},
+  Matematicheskii Sbornik \textbf{100 (142)} (1976), 59--88.
+
+\end{thebibliography}
