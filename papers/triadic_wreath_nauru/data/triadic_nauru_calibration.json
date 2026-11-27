@@ -1,4 +1,256 @@
 {
+  "D10_eisenstein_nauru": {
+    "dirac_zeros": 4,
+    "even_parity_decomp_verified": true,
+    "f31_corrupt_ideal_norm": 4,
+    "iso_edges_preserved": 36,
+    "max_bloch_error": 4.440892098500626e-16,
+    "pass": true,
+    "spectral_gap_ratio_Y_over_X": 1.309017,
+    "van_hove_pm1": 6
+  },
+  "D11_su2_and_hurwitz_dic6": {
+    "G_mod8_order": 384,
+    "aut_Z_order": 96,
+    "canonical_3adic_dic6_tau_w4": "1156/81",
+    "congruence_closure_index": 48,
+    "double_coset_quotient_K44_all_32": true,
+    "hensel_sqrt_minus2_mod_3pow12": 1,
+    "hurwitz_tau_w4": "100/81",
+    "hurwitz_w4": [
+      5,
+      6,
+      -2,
+      4
+    ],
+    "non_congruence_cyclic_index": 3,
+    "non_principal_lvl8_lifts": 16,
+    "pass": true,
+    "principal_Gamma4_lifts": 16,
+    "su2_wilson_actions": {
+      "dic6_hurwitz_B2_w4": "4/9",
+      "nauru_B3_B5_gamma6": "5/16",
+      "nauru_B5_half_gamma6": "7/16",
+      "nauru_B5_w8": "19/32"
+    },
+    "unit_norm_kernel_index": 144,
+    "valid_surjections": 32
+  },
+  "D12_3adic_shimura_manin": {
+    "all_19_results": [
+      {
+        "D": 6,
+        "M": 230,
+        "N": 115,
+        "dim": 33,
+        "e2": 0,
+        "e3": 0,
+        "null_T3sq_m3": 0,
+        "null_T3sq_m9": 0
+      },
+      {
+        "D": 6,
+        "M": 238,
+        "N": 119,
+        "dim": 33,
+        "e2": 0,
+        "e3": 0,
+        "null_T3sq_m3": 0,
+        "null_T3sq_m9": 0
+      },
+      {
+        "D": 15,
+        "M": 110,
+        "N": 22,
+        "dim": 15,
+        "e2": 0,
+        "e3": 0,
+        "null_T3sq_m3": 0,
+        "null_T3sq_m9": 0
+      },
+      {
+        "D": 21,
+        "M": 112,
+        "N": 16,
+        "dim": 13,
+        "e2": 0,
+        "e3": 0,
+        "null_T3sq_m3": 0,
+        "null_T3sq_m9": 0
+      },
+      {
+        "D": 21,
+        "M": 161,
+        "N": 23,
+        "dim": 15,
+        "e2": 0,
+        "e3": 0,
+        "null_T3sq_m3": 0,
+        "null_T3sq_m9": 0
+      },
+      {
+        "D": 39,
+        "M": 104,
+        "N": 8,
+        "dim": 11,
+        "e2": 0,
+        "e3": 0,
+        "null_T3sq_m3": 0,
+        "null_T3sq_m9": 3
+      },
+      {
+        "D": 39,
+        "M": 143,
+        "N": 11,
+        "dim": 13,
+        "e2": 0,
+        "e3": 0,
+        "null_T3sq_m3": 0,
+        "null_T3sq_m9": 0
+      },
+      {
+        "D": 57,
+        "M": 133,
+        "N": 7,
+        "dim": 11,
+        "e2": 0,
+        "e3": 0,
+        "null_T3sq_m3": 0,
+        "null_T3sq_m9": 0
+      },
+      {
+        "D": 1110,
+        "M": 370,
+        "N": 1,
+        "dim": 53,
+        "e2": 0,
+        "e3": 0,
+        "null_T3sq_m3": 0,
+        "null_T3sq_m9": 4
+      },
+      {
+        "D": 6,
+        "M": 250,
+        "N": 125,
+        "dim": 36,
+        "e2": 4,
+        "e3": 0,
+        "null_T3sq_m3": 0,
+        "null_T3sq_m9": 0
+      },
+      {
+        "D": 6,
+        "M": 266,
+        "N": 133,
+        "dim": 37,
+        "e2": 0,
+        "e3": 8,
+        "null_T3sq_m3": 0,
+        "null_T3sq_m9": 0
+      },
+      {
+        "D": 6,
+        "M": 298,
+        "N": 149,
+        "dim": 36,
+        "e2": 4,
+        "e3": 0,
+        "null_T3sq_m3": 0,
+        "null_T3sq_m9": 0
+      },
+      {
+        "D": 6,
+        "M": 302,
+        "N": 151,
+        "dim": 37,
+        "e2": 0,
+        "e3": 4,
+        "null_T3sq_m3": 0,
+        "null_T3sq_m9": 1
+      },
+      {
+        "D": 6,
+        "M": 314,
+        "N": 157,
+        "dim": 38,
+        "e2": 4,
+        "e3": 4,
+        "null_T3sq_m3": 0,
+        "null_T3sq_m9": 0
+      },
+      {
+        "D": 15,
+        "M": 185,
+        "N": 37,
+        "dim": 17,
+        "e2": 0,
+        "e3": 4,
+        "null_T3sq_m3": 0,
+        "null_T3sq_m9": 2
+      },
+      {
+        "D": 447,
+        "M": 149,
+        "N": 1,
+        "dim": 12,
+        "e2": 0,
+        "e3": 2,
+        "null_T3sq_m3": 0,
+        "null_T3sq_m9": 0
+      },
+      {
+        "D": 453,
+        "M": 151,
+        "N": 1,
+        "dim": 12,
+        "e2": 4,
+        "e3": 0,
+        "null_T3sq_m3": 0,
+        "null_T3sq_m9": 0
+      },
+      {
+        "D": 1122,
+        "M": 374,
+        "N": 1,
+        "dim": 51,
+        "e2": 0,
+        "e3": 8,
+        "null_T3sq_m3": 4,
+        "null_T3sq_m9": 0
+      },
+      {
+        "D": 1230,
+        "M": 410,
+        "N": 1,
+        "dim": 59,
+        "e2": 0,
+        "e3": 8,
+        "null_T3sq_m3": 0,
+        "null_T3sq_m9": 4
+      }
+    ],
+    "elliptic_torsion_pairs": 10,
+    "lmfdb_ground_truth_checked": [
+      11,
+      14,
+      23,
+      37
+    ],
+    "pass": true,
+    "sole_sqrt3_survivor_M374": {
+      "D": 1122,
+      "M": 374,
+      "N": 1,
+      "dim": 51,
+      "e2": 0,
+      "e3": 8,
+      "null_T3sq_m3": 4,
+      "null_T3sq_m9": 0
+    },
+    "survivors": 0,
+    "torsion_free_pairs": 9,
+    "total_genus25_pairs": 19
+  },
   "D1_non_fusion": {
     "Aff_Z12_wr_Z2_order": 4608,
     "CFS_duality_verified": true,
@@ -616,10 +868,11 @@
     "fig1_utt_census.pdf",
     "fig2_nauru_towers.pdf",
     "fig3_fricke_vogt_moduli.pdf",
-    "fig4_elliptic_shimura_comparison.pdf"
+    "fig4_elliptic_shimura_comparison.pdf",
+    "fig5_eisenstein_hurwitz_mirror.pdf"
   ],
-  "gates_passed": 12,
-  "gates_total": 12,
-  "paper": "Uniform Triadic Wreath Products, the Nauru Graph, and 2-Adic Arithmeticity",
-  "schema_version": "1.0.0"
+  "gates_passed": 15,
+  "gates_total": 15,
+  "paper": "Uniform Triadic Wreath Products, the Nauru Graph, and Dual-Prime D=6 Arithmeticity",
+  "schema_version": "1.1.0"
 }

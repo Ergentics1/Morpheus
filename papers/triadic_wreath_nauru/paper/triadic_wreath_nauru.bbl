@@ -69,6 +69,11 @@ David Lewin, \emph{Generalized musical intervals and transformations}, Yale
 Alexander Lubotzky, Ralph Phillips, and Peter Sarnak, \emph{Ramanujan graphs},
   Combinatorica \textbf{8} (1988), no.~3, 261--277.
 
+\bibitem{merel1994}
+Lo\"ic Merel, \emph{Universal {F}ourier expansions of modular forms}, On
+  {A}rtin's Conjecture for Odd $2$-Dimensional Representations, Lecture Notes
+  in Mathematics, vol. 1585, Springer, 1994, pp.~59--94.
+
 \bibitem{mumford1972}
 David Mumford, \emph{An analytic construction of degenerating curves over
   complete local rings}, Compositio Mathematica \textbf{24} (1972), no.~2,
@@ -86,6 +91,10 @@ Kenneth~A. Ribet, \emph{On modular representations of
 \bibitem{serre1980}
 Jean-Pierre Serre, \emph{Trees}, Springer, 1980.
 
+\bibitem{stein2007}
+William Stein, \emph{Modular forms, a computational approach}, Graduate Studies
+  in Mathematics, vol.~79, American Mathematical Society, 2007.
+
 \bibitem{sunada1986}
 Toshikazu Sunada, \emph{$l$-functions in geometry and some applications},
   Lecture Notes in Mathematics \textbf{1201} (1986), 266--284.
@@ -94,5 +103,21 @@ Toshikazu Sunada, \emph{$l$-functions in geometry and some applications},
 I.~V. \v{C}erednik, \emph{Uniformization of algebraic curves by discrete
   arithmetic subgroups of $\mathrm{PGL}_2(k_w)$ with compact quotient spaces},
   Matematicheskii Sbornik \textbf{100 (142)} (1976), 59--88.
+
+\bibitem{vigneras1980}
+Marie-France Vign\'eras, \emph{Arithm\'etique des alg\`ebres de quaternions},
+  Lecture Notes in Mathematics, vol. 800, Springer, 1980.
+
+\bibitem{voight2021}
+John Voight, \emph{Quaternion algebras}, Graduate Texts in Mathematics, vol.
+  288, Springer, 2021.
+
+\bibitem{wallace1947}
+P.~R. Wallace, \emph{The band theory of graphite}, Physical Review \textbf{71}
+  (1947), no.~9, 622--634.
+
+\bibitem{wilson1974}
+Kenneth~G. Wilson, \emph{Confinement of quarks}, Physical Review D \textbf{10}
+  (1974), no.~8, 2445--2459.
 
 \end{thebibliography}
