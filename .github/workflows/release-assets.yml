@@ -85,6 +85,7 @@ jobs:
             "papers/horizon_synthesis/piece2_smallbody_crtbp/paper/piece2_smallbody_crtbp.pdf"
             "papers/horizon_synthesis/piece3_nullcone_tuft_hagedorn/paper/piece3_nullcone_tuft_hagedorn.pdf"
             "papers/triadic_wreath_nauru/paper/triadic_wreath_nauru.pdf"
+            "papers/triadic_3adic_frontier/paper/triadic_3adic_frontier.pdf"
           )
           TARS=(
             "arxiv/prime-cadences-arxiv.tar.gz"
@@ -92,6 +93,7 @@ jobs:
             "papers/horizon_synthesis/piece2_smallbody_crtbp/arxiv/piece2-smallbody-crtbp-arxiv.tar.gz"
             "papers/horizon_synthesis/piece3_nullcone_tuft_hagedorn/arxiv/piece3-nullcone-tuft-hagedorn-arxiv.tar.gz"
             "papers/triadic_wreath_nauru/arxiv/triadic-wreath-nauru-arxiv.tar.gz"
+            "papers/triadic_3adic_frontier/arxiv/triadic-3adic-frontier-arxiv.tar.gz"
           )
 
           for f in "${PDFS[@]}" "${TARS[@]}"; do
@@ -107,6 +109,7 @@ jobs:
               "papers/horizon_synthesis/piece2_smallbody_crtbp/paper/piece2_smallbody_crtbp.pdf",
               "papers/horizon_synthesis/piece3_nullcone_tuft_hagedorn/paper/piece3_nullcone_tuft_hagedorn.pdf",
               "papers/triadic_wreath_nauru/paper/triadic_wreath_nauru.pdf",
+              "papers/triadic_3adic_frontier/paper/triadic_3adic_frontier.pdf",
           ]
           tars = [
               "arxiv/prime-cadences-arxiv.tar.gz",
@@ -114,6 +117,7 @@ jobs:
               "papers/horizon_synthesis/piece2_smallbody_crtbp/arxiv/piece2-smallbody-crtbp-arxiv.tar.gz",
               "papers/horizon_synthesis/piece3_nullcone_tuft_hagedorn/arxiv/piece3-nullcone-tuft-hagedorn-arxiv.tar.gz",
               "papers/triadic_wreath_nauru/arxiv/triadic-wreath-nauru-arxiv.tar.gz",
+              "papers/triadic_3adic_frontier/arxiv/triadic-3adic-frontier-arxiv.tar.gz",
           ]
 
           rx = re.compile(rb"(/home/[A-Za-z0-9._-]+/|/Users/[A-Za-z0-9._-]+/|[A-Za-z]:\\Users\\[A-Za-z0-9._-]+\\|" + b"file:" + b"///)")

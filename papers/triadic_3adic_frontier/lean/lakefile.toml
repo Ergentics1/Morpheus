@@ -1,0 +1,11 @@
+name = "triadic_3adic_frontier"
+version = "0.1.0"
+defaultTargets = ["Triadic3AdicFrontier", "triadic-3adic-lean"]
+moreLeanArgs = ["-DwarningAsError=true", "-DautoImplicit=false"]
+
+[[lean_lib]]
+name = "Triadic3AdicFrontier"
+
+[[lean_exe]]
+name = "triadic-3adic-lean"
+root = "Main"

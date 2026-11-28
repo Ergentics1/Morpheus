@@ -1,0 +1,164 @@
+\providecommand{\bysame}{\leavevmode\hbox to3em{\hrulefill}\thinspace}
+\providecommand{\MR}{\relax\ifhmode\unskip\space\fi MR }
+% \MRhref is called by the amsart/book/proc definition of \MR.
+\providecommand{\MRhref}[2]{%
+  \href{http://www.ams.org/mathscinet-getitem?mr=#1}{#2}
+}
+\providecommand{\href}[2]{#2}
+\begin{thebibliography}{10}
+
+\bibitem{baker2008}
+Matthew Baker, \emph{Specialization of linear systems from curves to graphs},
+  Algebra \& Number Theory \textbf{2} (2008), no.~6, 613--653.
+
+\bibitem{bakernorine2007}
+Matthew Baker and Serguei Norine, \emph{Riemann--{R}och and {A}bel--{J}acobi
+  theory on a finite graph}, Advances in Mathematics \textbf{215} (2007),
+  no.~2, 766--788.
+
+\bibitem{bpr2013}
+Matthew Baker, Sam Payne, and Joseph Rabinoff, \emph{On the structure of
+  non-{A}rchimedean analytic curves}, Tropical and Non-{A}rchimedean Geometry,
+  Contemporary Mathematics, vol. 605, American Mathematical Society,
+  Providence, RI, 2013, pp.~93--121.
+
+\bibitem{bass1992}
+Hyman Bass, \emph{The {I}hara--{S}elberg zeta function of a tree lattice},
+  International Journal of Mathematics \textbf{3} (1992), no.~6, 717--797.
+
+\bibitem{burnside1911}
+William Burnside, \emph{Theory of groups of finite order}, 2nd ed., Cambridge
+  University Press, Cambridge, 1911.
+
+\bibitem{cohn2012}
+Richard Cohn, \emph{Audacious euphony: Chromaticism and the triad's second
+  nature}, Oxford University Press, New York, 2012.
+
+\bibitem{ck2005}
+Gunther Cornelissen and Fumiharu Kato, \emph{The $p$-adic icosahedron}, Notices
+  of the American Mathematical Society \textbf{52} (2005), no.~7, 720--727.
+
+\bibitem{mouraullrich2021}
+Leonardo de~Moura and Sebastian Ullrich, \emph{The {L}ean 4 theorem prover and
+  programming language}, Automated Deduction -- CADE 28 (Cham), Lecture Notes
+  in Computer Science, vol. 12699, Springer, 2021, pp.~625--635.
+
+\bibitem{dhar1990}
+Deepak Dhar, \emph{Self-organized critical state of sandpile automaton models},
+  Physical Review Letters \textbf{64} (1990), no.~14, 1613--1616.
+
+\bibitem{drinfeld1976}
+Vladimir~G. Drinfeld, \emph{Coverings of $p$-adic symmetric regions},
+  Functional Analysis and Its Applications \textbf{10} (1976), no.~2, 107--115.
+
+\bibitem{edmondskarp1972}
+Jack Edmonds and Richard~M. Karp, \emph{Theoretical improvements in algorithmic
+  efficiency for network flow problems}, Journal of the ACM \textbf{19} (1972),
+  no.~2, 248--264.
+
+\bibitem{eichler1955}
+Martin Eichler, \emph{Zur {Z}ahlentheorie der {Q}uaternionen-{A}lgebren},
+  Journal f\"ur die reine und angewandte Mathematik \textbf{195} (1955),
+  127--151.
+
+\bibitem{ergentics2026pc}
+Ergentics, \emph{Prime cadences: {I}hara zeta, graphene, and voice-leading
+  homology on the {T}onnetz}, November 2026, Morpheus Paper \#01
+  (\texttt{v0.3.1}).
+
+\bibitem{ergentics2026pc2}
+\bysame, \emph{Uniform triadic wreath products, the {N}auru graph, and
+  dual-prime {$D=6$} arithmeticity}, November 2026, Morpheus Paper \#08 /
+  \texttt{PC-II} (\texttt{v0.7.1}).
+
+\bibitem{gvdp1980}
+Lothar Gerritzen and Marius van~der Put, \emph{Schottky groups and mumford
+  curves}, Lecture Notes in Mathematics, vol. 817, Springer-Verlag, Berlin,
+  1980.
+
+\bibitem{goursat1889}
+\'Edouard Goursat, \emph{Sur les substitutions orthogonales et les divisions
+  r\'eguli\`eres de l'espace}, Annales Scientifiques de l'\'Ecole Normale
+  Sup\'erieure \textbf{6} (1889), 9--102.
+
+\bibitem{hjjs2022}
+Marchelle Harp, Darren Jackson, David Jensen, and Noah Speeter, \emph{A new
+  lower bound on graph gonality}, Discrete Applied Mathematics \textbf{309}
+  (2022), 172--179.
+
+\bibitem{hashimoto1989}
+Ki-ichiro Hashimoto, \emph{Zeta functions of finite graphs and representations
+  of $p$-adic groups}, Automorphic Forms and Geometry of Arithmetic Varieties,
+  Advanced Studies in Pure Mathematics, vol.~15, Academic Press, 1989,
+  pp.~211--280.
+
+\bibitem{ihara1966}
+Yasutaka Ihara, \emph{On discrete subgroups of the two by two projective linear
+  group over $\mathfrak{p}$-adic fields}, Journal of the Mathematical Society
+  of Japan \textbf{18} (1966), 219--235.
+
+\bibitem{kato2005}
+Fumiharu Kato, \emph{Non-{A}rchimedean orbifolds covered by {M}umford curves},
+  Journal of Algebraic Geometry \textbf{14} (2005), no.~1, 1--34.
+
+\bibitem{lps1988}
+Alexander Lubotzky, Ralph Phillips, and Peter Sarnak, \emph{Ramanujan graphs},
+  Combinatorica \textbf{8} (1988), no.~3, 261--277.
+
+\bibitem{moore1966}
+Ramon~E. Moore, \emph{Interval analysis}, Prentice-Hall, Englewood Cliffs, NJ,
+  1966.
+
+\bibitem{mumford1972}
+David Mumford, \emph{An analytic construction of degenerating curves over
+  complete local rings}, Compositio Mathematica \textbf{24} (1972), 129--174.
+
+\bibitem{odlyzko1990}
+Andrew~M. Odlyzko, \emph{Bounds for discriminants and related estimates for
+  class numbers, regulators and zeros of zeta functions: a survey of recent
+  results}, S\'eminaire de Th\'eorie des Nombres de Bordeaux, vol.~2, 1990,
+  pp.~119--141.
+
+\bibitem{poitou1977}
+Georges Poitou, \emph{Minorations de discriminants (d'apr\`es {A}. {M}.
+  {O}dlyzko)}, S\'eminaire Bourbaki, 1975/76, Expos\'e 479, Lecture Notes in
+  Mathematics, vol. 567, Springer-Verlag, Berlin, 1977, pp.~136--153.
+
+\bibitem{riehm1970}
+Carl Riehm, \emph{The norm $1$ group of a $\mathfrak{p}$-adic division
+  algebra}, American Journal of Mathematics \textbf{92} (1970), no.~2,
+  499--523.
+
+\bibitem{serre1980}
+Jean-Pierre Serre, \emph{Trees}, Springer-Verlag, Berlin, 1980.
+
+\bibitem{shimura1967}
+Goro Shimura, \emph{Construction of class fields and zeta functions of
+  algebraic curves}, Annals of Mathematics \textbf{85} (1967), no.~1, 58--159.
+
+\bibitem{siegel1969}
+Carl~Ludwig Siegel, \emph{Berechnung von {Z}etafunktionen an ganzzahligen
+  {S}tellen}, Nachrichten der Akademie der Wissenschaften in G\"ottingen,
+  Mathematisch-Physikalische Klasse \textbf{1969} (1969), 87--102.
+
+\bibitem{starkterras1996}
+Harold~M. Stark and Audrey~A. Terras, \emph{Zeta functions of finite graphs and
+  coverings}, Advances in Mathematics \textbf{121} (1996), no.~1, 124--165.
+
+\bibitem{terras2011}
+Audrey~A. Terras, \emph{Zeta functions of graphs: A stroll through the garden},
+  Cambridge University Press, Cambridge, 2011.
+
+\bibitem{tymoczko2011}
+Dmitri Tymoczko, \emph{A geometry of music: Harmony and counterpoint in the
+  extended common practice}, Oxford University Press, New York, 2011.
+
+\bibitem{vigneras1980}
+Marie-France Vign\'eras, \emph{Arithm\'etique des alg\`ebres de quaternions},
+  Lecture Notes in Mathematics, vol. 800, Springer-Verlag, Berlin, 1980.
+
+\bibitem{voight2021}
+John Voight, \emph{Quaternion algebras}, Graduate Texts in Mathematics, vol.
+  288, Springer, Cham, 2021.
+
+\end{thebibliography}
