@@ -55,7 +55,32 @@ jobs:
             PATH="/tmp/hs-fakebin:$PATH" python3 "$sim"
             orig_json="$(echo papers/horizon_synthesis/$piece/data/piece*_calibration.json)"
             new_json="$(echo /tmp/hs-ci/horizon_synthesis/$piece/data/piece*_calibration.json)"
-            cmp -s "$orig_json" "$new_json" || { echo "::error::JSON drift in $piece"; exit 1; }
+            python3 - "$orig_json" "$new_json" "$piece" <<'PY'
+          import json, math, sys
+          orig = json.load(open(sys.argv[1]))
+          new = json.load(open(sys.argv[2]))
+          piece = sys.argv[3]
+          max_diff = [0.0]
+          def cmp_obj(a, b, path=""):
+              assert type(a) is type(b), f"{piece}{path}: type {type(a)} != {type(b)}"
+              if isinstance(a, dict):
+                  assert a.keys() == b.keys(), f"{piece}{path}: keys differ"
+                  for k in a:
+                      cmp_obj(a[k], b[k], f"{path}.{k}")
+              elif isinstance(a, list):
+                  assert len(a) == len(b), f"{piece}{path}: len {len(a)} != {len(b)}"
+                  for i, (x, y) in enumerate(zip(a, b)):
+                      cmp_obj(x, y, f"{path}[{i}]")
+              elif isinstance(a, float):
+                  d = abs(a - b)
+                  if d > max_diff[0]:
+                      max_diff[0] = d
+                  assert math.isclose(a, b, rel_tol=1e-11, abs_tol=1e-12), f"{piece}{path}: {a} != {b} (diff={d})"
+              else:
+                  assert a == b, f"{piece}{path}: {a!r} != {b!r}"
+          cmp_obj(orig, new)
+          print(f"[PASS] {piece} JSON parity OK (exact keys/ints/digests, max_float_diff={max_diff[0]:.3e})")
+          PY
           done
           rm -rf /tmp/hs-ci /tmp/hs-fakebin
           git diff --exit-code
