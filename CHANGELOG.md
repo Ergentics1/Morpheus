@@ -4,6 +4,13 @@ All notable changes to **Morpheus** are documented here. Manuscript updates cut 
 
 ## [Unreleased]
 
+## [0.7.1] - 2026-11-27
+
+### Fixed & Hardened — Paper `PC-II` Prime-Cadence Prose Erratum & Twin-Duality Precision (`NEG-M24`)
+- **Repaired Confirmed `v0.5.0`–`v0.7.0` Prose Transcription Erratum (`NEG-M24`, Theorem 4.1):** Replaced `31,824` → **`28,560`** for $\pi_Y(18)$ ($N_{18} = 514{,}224$, sitting strictly inside Nauru's Ramanujan trace corridor $[501{,}786, 546{,}842]$ whereas `31,824` breached the ceiling by `+1,444`) and `384,792` → **`380,664`** for $\pi_Y(22)$ ($N_{22} = 8{,}374{,}608$) in `triadic_wreath_nauru.tex` and `triadic_wreath_nauru.md` (already exact in `data/triadic_nauru_calibration.json`, caught by an independent clean-room cross-audit because line `691` of `triadic_nauru_verify.py` omitted `18` and `22` from its `assert`).
+- **Exact Algebraic Twin Duality Precision (Theorem 6.1):** Made the canonical surjection $\rho_6$ and the universal twin duality $\tau((bt)a) = 3 - x$ swapping $\rho_6 \leftrightarrow \rho_{12}$ explicit, sharpening Theorem 6.1 to $(B_5, \frac52, \rho_6) \cong (B_5, \frac12, \rho_{12})$ (congruence $\Gamma(3\mathfrak{P}_5)$) vs. $(B_5, \frac12, \rho_6) \cong (B_5, \frac52, \rho_{12})$ (strictly non-congruence $V_4$-cover of $X^{10}(\Gamma(3\mathfrak{P}_5))/V_4 \leftrightarrow K_{3,3}$).
+- **Three-Plane Permanent Regression Guards:** Added explicit `pi_Y[18] == 28560`, `pi_Y[22] == 380664`, and $m = 18$ Ramanujan corridor assertions to Python Gate `D3`; added direct `72×72` Hashimoto trace verifier `verify_nauru_hashimoto_prime_cadences()` (`test_d3`, Gate 11) to Pure Rust (`12/12` tests, `11/11` suites; `53/53` repo-wide Rust tests); added Lean 4.36.0 Theorem 38 (`thm38_nauru_pi18_ramanujan_and_twin_duality`, `38/38` `PC-II`, `129/129` repo-wide, `0 sorryAx`, `0 ofReduceBool`); rebuilt zero-warning 23 pp PDF and standalone-verified 8-member neutral `0/0` arXiv bundle; logged `NEG-M24`.
+
 ## [0.7.0] - 2026-11-27
 
 ### Added & Resolved — Complete Paper `PC-II` Closure (All-Primes $B_5$ Congruence Discovery `NEG-M23`, Kernel-Checked SNF, Exact $\operatorname{gon}(Z)=8$, & 71-Gate CI)

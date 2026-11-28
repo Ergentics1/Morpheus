@@ -688,7 +688,12 @@ def verify_d3_nauru_weil() -> Dict[str, object]:
 
     assert all(pi_Y[m] == 0 for m in range(1, 6))
     assert pi_Y[6] == 24 and pi_Y[8] == 108 and pi_Y[10] == 216 and pi_Y[12] == 564
-    assert pi_Y[14] == 2232 and pi_Y[16] == 8820 and pi_Y[20] == 104292 and pi_Y[24] == 1401744
+    assert pi_Y[14] == 2232 and pi_Y[16] == 8820 and pi_Y[18] == 28560
+    assert pi_Y[20] == 104292 and pi_Y[22] == 380664 and pi_Y[24] == 1401744
+    # NEG-M24 guard: N_18 = 514,224 lies inside Nauru's Ramanujan corridor [501,786, 546,842],
+    # whereas the v0.5.0-v0.7.0 prose typo 31,824 forces N_18 = 572,976 > 546,842.
+    assert N_m[6] == 144 and N_m[18] == 514224 and N_m[22] == 8374608
+    assert 501786 <= N_m[18] <= 546842 < 18 * 31824 + N_m[6]
 
     # 4. Verify all 5 elliptic curves over F_2 (exact point counts #E(F_2) = 3 - a_2)
     f2_curves = [

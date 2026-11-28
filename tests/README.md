@@ -29,5 +29,5 @@ Runs automatically on every push to `main`, every pull request, weekly schedule,
 
 1. **`content-integrity`**: Runs `python3 tests/content_integrity_audit.py` (`10/10` gates).
 2. **`python-verifiers`**: Runs zero-dependency from-scratch Python verifiers (`triadic_nauru_verify.py --check-only` `15/15`, `g4n_r1_xcheck.py` `4/4`, `wp030`–`wp035` `34/34`, and isolated Horizon Synthesis `piece{1,2,3}_sim.py` `18/18` with exact structural/digest + `1e-11` float JSON parity = `71/71` gates) and asserts zero unexpected working-tree drift (`git diff --exit-code`).
-3. **`rust-and-cpp-verifiers`**: Builds and tests all `8/8` zero-crate Rust crates (`cargo test --release`, `52/52` tests) plus Pure C++20 `ErgenticsCXX` (`cmake` + `ctest`, `-O2 -Wall -Wextra -Werror`).
-4. **`lean-formal-oracles`**: Installs `elan` + `leanprover/lean4:v4.36.0` (cached), builds and executes all `8/8` zero-Mathlib Lean 4 projects (`128/128` kernel-checked theorems), and asserts `0` `sorryAx` and `0` `Lean.ofReduceBool` across live `#print axioms` output.
+3. **`rust-and-cpp-verifiers`**: Builds and tests all `8/8` zero-crate Rust crates (`cargo test --release`, `53/53` tests) plus Pure C++20 `ErgenticsCXX` (`cmake` + `ctest`, `-O2 -Wall -Wextra -Werror`).
+4. **`lean-formal-oracles`**: Installs `elan` + `leanprover/lean4:v4.36.0` (cached), builds and executes all `8/8` zero-Mathlib Lean 4 projects (`129/129` kernel-checked theorems), and asserts `0` `sorryAx` and `0` `Lean.ofReduceBool` across live `#print axioms` output.

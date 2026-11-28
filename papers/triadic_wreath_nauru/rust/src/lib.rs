@@ -1988,3 +1988,97 @@ pub fn verify_dic6_tropical_invariants_exact() -> (usize, usize) {
     (total_checked, 8)
 }
 
+/// Gate D3 (NEG-M24): Direct 72x72 Hashimoto non-backtracking operator traces `N_m(Y) = tr(T_Y^m)`
+/// and exact Mobius prime-cadence counts `pi_Y(6..24)`, explicitly verifying `pi_Y(18) = 28,560`
+/// (inside Nauru's Ramanujan trace corridor `[501,786, 546,842]`, falsifying `31,824`) and
+/// `pi_Y(22) = 380,664` (falsifying `384,792`).
+pub fn verify_nauru_hashimoto_prime_cadences() -> [u64; 10] {
+    let adj = nauru_adj();
+    let mut oedges = [(0usize, 0usize); 72];
+    let mut idx = 0usize;
+    for u in 0..24 {
+        for &v in &adj[u] {
+            oedges[idx] = (u, v);
+            idx += 1;
+        }
+    }
+    assert_eq!(idx, 72);
+    let mut nxt = [[0usize; 2]; 72];
+    for i in 0..72 {
+        let (u, v) = oedges[i];
+        let mut c = 0usize;
+        for &w in &adj[v] {
+            if w != u {
+                let pos = oedges.iter().position(|&e| e == (v, w)).unwrap();
+                nxt[i][c] = pos;
+                c += 1;
+            }
+        }
+        assert_eq!(c, 2);
+    }
+
+    let mut n_m = [0u64; 25];
+    for s in 0..72 {
+        let mut vec = [0u64; 72];
+        vec[s] = 1;
+        for m in 1..=24 {
+            let mut nvec = [0u64; 72];
+            for i in 0..72 {
+                let val = vec[i];
+                if val != 0 {
+                    nvec[nxt[i][0]] += val;
+                    nvec[nxt[i][1]] += val;
+                }
+            }
+            vec = nvec;
+            n_m[m] += vec[s];
+        }
+    }
+
+    let mobius = |mut n: usize| -> i64 {
+        let mut cnt = 0;
+        let mut p = 2;
+        while p * p <= n {
+            if n % p == 0 {
+                cnt += 1;
+                n /= p;
+                if n % p == 0 {
+                    return 0;
+                }
+            }
+            p += 1;
+        }
+        if n > 1 {
+            cnt += 1;
+        }
+        if cnt % 2 == 1 { -1 } else { 1 }
+    };
+
+    let mut pi_y = [0u64; 25];
+    for m in 1..=24 {
+        let mut acc: i128 = 0;
+        for d in 1..=m {
+            if m % d == 0 {
+                acc += (mobius(m / d) as i128) * (n_m[d] as i128);
+            }
+        }
+        assert!(acc >= 0 && acc % (m as i128) == 0);
+        pi_y[m] = (acc / (m as i128)) as u64;
+    }
+
+    let expected: [u64; 10] = [
+        24, 108, 216, 564, 2_232, 8_820, 28_560, 104_292, 380_664, 1_401_744,
+    ];
+    let mut out = [0u64; 10];
+    for (k, &m) in [6, 8, 10, 12, 14, 16, 18, 20, 22, 24].iter().enumerate() {
+        out[k] = pi_y[m];
+        assert_eq!(out[k], expected[k]);
+    }
+    assert_eq!(n_m[6], 144);
+    assert_eq!(n_m[18], 514_224);
+    assert_eq!(n_m[22], 8_374_608);
+    assert!(501_786 <= n_m[18] && n_m[18] <= 546_842);
+    assert!(546_842 < 18 * 31_824 + n_m[6]);
+    out
+}
+

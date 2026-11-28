@@ -38,8 +38,9 @@ import TriadicNauru
 #print axioms TriadicNauru.thm35_dic6_exact_unimodular_snf
 #print axioms TriadicNauru.thm36_b5_congruence_and_noncongruence_arithmetic
 #print axioms TriadicNauru.thm37_dic6_gonality_witness_and_six_ring
+#print axioms TriadicNauru.thm38_nauru_pi18_ramanujan_and_twin_duality
 
 def main : IO Unit := do
-  IO.println "TriadicNauru Lean 4.36.0 Oracle: ALL 37 THEOREMS KERNEL-CHECKED (0 sorryAx, 0 ofReduceBool)."
+  IO.println "TriadicNauru Lean 4.36.0 Oracle: ALL 38 THEOREMS KERNEL-CHECKED (0 sorryAx, 0 ofReduceBool)."
   IO.println s!"  O3 gamma6 = ({TriadicNauru.o3Gamma6.c0}, {TriadicNauru.o3Gamma6.c1}, {TriadicNauru.o3Gamma6.c2}, {TriadicNauru.o3Gamma6.c3}), trd={TriadicNauru.o3Trd TriadicNauru.o3Gamma6}, nrd={TriadicNauru.o3Nrd TriadicNauru.o3Gamma6}"
   IO.println s!"  O2 Hurwitz w4 = ({TriadicNauru.hbW4.c0}, {TriadicNauru.hbW4.c1}, {TriadicNauru.hbW4.c2}, {TriadicNauru.hbW4.c3}), trd={TriadicNauru.qbTrd TriadicNauru.hbW4}, nrd={TriadicNauru.qbNrd TriadicNauru.hbW4}"
