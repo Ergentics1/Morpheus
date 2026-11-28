@@ -2353,11 +2353,20 @@ def verify_d11_su2_and_hurwitz_dic6() -> Dict[str, object]:
         return o2_mod(tuple(t * inv3 for t in x), m)
 
     qgens = [(0, 2, 2, 0), (0, 2, -2, 0), (0, 2, 2, 2), (0, 2, -2, 2)]
+    # Order-3 central deck automorphism L_{x^4} of Z -> K_{4,4}
+    Lx4 = tuple(d_idx[dic6_mul((4, 0), e)] for e in d_elems)
+    assert Lx4 in auts_z and p_comp(Lx4, p_comp(Lx4, Lx4)) == ident
+
     principal_lifts = 0
     level8_lifts = 0
     distinct_H8: set = set()
+    lx4_normal_in_H8 = 0
+    mod16_stabilized = 0
+    mod5_surj_A5 = 0
     id8 = o2_mod((2, 0, 0, 0), 8)
     id4 = o2_mod((2, 0, 0, 0), 4)
+    id16 = o2_mod((2, 0, 0, 0), 16)
+    id5 = o2_mod((2, 0, 0, 0), 5)
 
     for ga, gb, gtx, gty in valid_homs:
         pgens = [ga, gb, gtx, gty]
@@ -2371,8 +2380,7 @@ def verify_d11_su2_and_hurwitz_dic6() -> Dict[str, object]:
                 if h not in coset_rep:
                     coset_rep[h] = hmul(rg, sq)
                     dq.append(h)
-        img8 = set()
-        img4 = set()
+        img8, img4, img16, img5 = set(), set(), set(), set()
         for g, rg in coset_rep.items():
             for sp, sq in zip(pgens, qgens):
                 h = p_comp(g, sp)
@@ -2380,24 +2388,25 @@ def verify_d11_su2_and_hurwitz_dic6() -> Dict[str, object]:
                 gq = hmul(hmul(rg, sq), qconj(rh))
                 img8.add(hmod_o2(gq, 8))
                 img4.add(hmod_o2(gq, 4))
-        H8 = {id8}
-        dq2 = deque([id8])
-        while dq2:
-            u = dq2.popleft()
-            for sg in img8:
-                v = o2_mul_mod(u, sg, 8)
-                if v not in H8:
-                    H8.add(v)
-                    dq2.append(v)
-        H4 = {id4}
-        dq3 = deque([id4])
-        while dq3:
-            u = dq3.popleft()
-            for sg in img4:
-                v = o2_mul_mod(u, sg, 4)
-                if v not in H4:
-                    H4.add(v)
-                    dq3.append(v)
+                img16.add(hmod_o2(gq, 16))
+                img5.add(hmod_o2(gq, 5))
+
+        def close_mod(seed: set, idm: Tuple[int, int, int, int], m: int) -> set:
+            S = {idm}
+            dq_m = deque([idm])
+            while dq_m:
+                u = dq_m.popleft()
+                for sg in seed:
+                    v = o2_mul_mod(u, sg, m)
+                    if v not in S:
+                        S.add(v)
+                        dq_m.append(v)
+            return S
+
+        H8 = close_mod(img8, id8, 8)
+        H4 = close_mod(img4, id4, 4)
+        H16 = close_mod(img16, id16, 16)
+        H5 = close_mod(img5, id5, 5)
         assert len(H8) == 8
         if len(H4) == 1:
             principal_lifts += 1
@@ -2405,9 +2414,16 @@ def verify_d11_su2_and_hurwitz_dic6() -> Dict[str, object]:
             level8_lifts += 1
         else:
             raise AssertionError(f"Unexpected |H4|={len(H4)}")
+        if hmod_o2(coset_rep[Lx4], 8) in H8:
+            lx4_normal_in_H8 += 1
+        if len(H16) == 64:
+            mod16_stabilized += 1
+        if len(H5) == 60:
+            mod5_surj_A5 += 1
         distinct_H8.add(frozenset(H8))
 
     assert principal_lifts == 16 and level8_lifts == 16 and len(distinct_H8) == 2
+    assert lx4_normal_in_H8 == 32 and mod16_stabilized == 32 and mod5_surj_A5 == 32
 
     # Verify exact double-coset quotient H8 \ G_mod8 / U == K_{4,4} for BOTH distinct H8 subgroups!
     hurwitz_24 = []
@@ -2462,7 +2478,11 @@ def verify_d11_su2_and_hurwitz_dic6() -> Dict[str, object]:
         "G_mod8_order": 384,
         "congruence_closure_index": 48,
         "unit_norm_kernel_index": 144,
+        "normalizer_kernel_index": 576,
         "non_congruence_cyclic_index": 3,
+        "lx4_normal_in_H8_all_32": lx4_normal_in_H8,
+        "mod16_stabilized_idx48_all_32": mod16_stabilized,
+        "mod5_surj_A5_all_32": mod5_surj_A5,
         "double_coset_quotient_K44_all_32": True,
         "pass": True,
     }
@@ -2766,6 +2786,7 @@ def verify_d12_3adic_shimura_manin() -> Dict[str, object]:
 
 
 def main() -> int:
+    check_only = "--check-only" in sys.argv
     paper_root = pathlib.Path(__file__).resolve().parent.parent
     data_dir = paper_root / "data"
     fig_dir = paper_root / "paper" / "figures"
@@ -2791,7 +2812,7 @@ def main() -> int:
     d10 = verify_d10_eisenstein_nauru()
     print("  [PASS] Gate D10: Eisenstein-Nauru {6,3}_{(2,2)} 36/36 iso, Dirac K,K', C_6 gap +30.9%, F31")
     d11 = verify_d11_su2_and_hurwitz_dic6()
-    print("  [PASS] Gate D11: Intrinsic SU(2) Wilson S_W & Hurwitz B_2 (D=6,p=3) 32-hom K_{4,4} closure")
+    print("  [PASS] Gate D11: Intrinsic SU(2) Wilson S_W & Hurwitz B_2 (D=6,p=3) 32-hom K_{4,4} + L_x4 + mod16/5")
     d12 = verify_d12_3adic_shimura_manin()
     print("  [PASS] Gate D12: Exhaustive 19-pair genus-25 3-adic Borel Shimura Manin T_3 (0/19 survivors)")
     r1 = verify_r1_runtime_guards()
@@ -2799,11 +2820,24 @@ def main() -> int:
     p1 = verify_p1_rct_control()
     print("  [PASS] Gate P1: Keyed SplitMix64 RCT N=200 (0/200 match Nauru lambda=2, replay exact)")
 
-    figs = generate_all_figures(fig_dir)
-    print(f"  [PASS] Gate S1: Generated {len(figs)} metadata-free vector PDF figures")
+    expected_figs = [
+        "fig1_utt_census.pdf",
+        "fig2_nauru_towers.pdf",
+        "fig3_fricke_vogt_moduli.pdf",
+        "fig4_elliptic_shimura_comparison.pdf",
+        "fig5_eisenstein_hurwitz_mirror.pdf",
+    ]
+    if check_only:
+        for fn in expected_figs:
+            assert (fig_dir / fn).is_file(), f"Missing figure PDF: {fn}"
+        figs = expected_figs
+        print(f"  [PASS] Gate S1 (--check-only): Verified all {len(figs)} tracked vector PDF figures exist")
+    else:
+        figs = generate_all_figures(fig_dir)
+        print(f"  [PASS] Gate S1: Generated {len(figs)} metadata-free vector PDF figures")
 
     payload = {
-        "schema_version": "1.1.0",
+        "schema_version": "1.1.1",
         "paper": "Uniform Triadic Wreath Products, the Nauru Graph, and Dual-Prime D=6 Arithmeticity",
         "gates_passed": 15,
         "gates_total": 15,
@@ -2825,10 +2859,19 @@ def main() -> int:
     }
     cal_path = data_dir / "triadic_nauru_calibration.json"
     cal_bytes = (json.dumps(payload, indent=2, sort_keys=True) + "\n").encode("utf-8")
-    cal_path.write_bytes(cal_bytes)
     sha = hashlib.sha256(cal_bytes).hexdigest()
-    (data_dir / "MANIFEST.sha256").write_text(f"{sha}  triadic_nauru_calibration.json\n", encoding="utf-8")
-    print(f"Wrote data/triadic_nauru_calibration.json (sha256={sha[:16]}...) -- 15/15 GATES PASS.")
+    if check_only:
+        stored = cal_path.read_bytes()
+        stored_sha = hashlib.sha256(stored).hexdigest()
+        assert stored == cal_bytes, f"Calibration drift detected! computed={sha} stored={stored_sha}"
+        print(f"Verified data/triadic_nauru_calibration.json bit-exact (sha256={sha[:16]}...) -- 15/15 GATES PASS.")
+    else:
+        cal_path.write_bytes(cal_bytes)
+        (data_dir / "MANIFEST.sha256").write_text(
+            f"{sha}  papers/triadic_wreath_nauru/data/triadic_nauru_calibration.json\n",
+            encoding="utf-8",
+        )
+        print(f"Wrote data/triadic_nauru_calibration.json (sha256={sha[:16]}...) -- 15/15 GATES PASS.")
     return 0
 
 

@@ -33,8 +33,9 @@ import TriadicNauru
 #print axioms TriadicNauru.thm30_hurwitz_T4_all_lengths_freeness
 #print axioms TriadicNauru.thm31_hurwitz_euler_char_and_congruence_index
 #print axioms TriadicNauru.thm32_psl2_order_gt_s3_for_all_ge_5
+#print axioms TriadicNauru.thm33_hurwitz_normalizer_and_F3_quaternion
 
 def main : IO Unit := do
-  IO.println "TriadicNauru Lean 4.36.0 Oracle: ALL 32 THEOREMS KERNEL-CHECKED (0 sorryAx, 0 ofReduceBool)."
+  IO.println "TriadicNauru Lean 4.36.0 Oracle: ALL 33 THEOREMS KERNEL-CHECKED (0 sorryAx, 0 ofReduceBool)."
   IO.println s!"  O3 gamma6 = ({TriadicNauru.o3Gamma6.c0}, {TriadicNauru.o3Gamma6.c1}, {TriadicNauru.o3Gamma6.c2}, {TriadicNauru.o3Gamma6.c3}), trd={TriadicNauru.o3Trd TriadicNauru.o3Gamma6}, nrd={TriadicNauru.o3Nrd TriadicNauru.o3Gamma6}"
   IO.println s!"  O2 Hurwitz w4 = ({TriadicNauru.hbW4.c0}, {TriadicNauru.hbW4.c1}, {TriadicNauru.hbW4.c2}, {TriadicNauru.hbW4.c3}), trd={TriadicNauru.qbTrd TriadicNauru.hbW4}, nrd={TriadicNauru.qbNrd TriadicNauru.hbW4}"

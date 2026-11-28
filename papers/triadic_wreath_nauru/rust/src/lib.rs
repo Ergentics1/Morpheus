@@ -1093,14 +1093,20 @@ pub fn verify_hurwitz_b2_dic6_k44() -> bool {
         }
         let mut img8: HashSet<Q4> = HashSet::new();
         let mut img4: HashSet<Q4> = HashSet::new();
+        let mut img16: HashSet<Q4> = HashSet::new();
+        let mut img5: HashSet<Q4> = HashSet::new();
         for (&g, &rg) in &reps {
             for k in 0..4 {
                 let h = comp(&g, &pgens[k]);
                 let gq = hmul(hmul(rg, qgens[k]), qconj(reps[&h]));
                 let Some(m8) = hmod_o2(gq, 8) else { return false };
                 let Some(m4) = hmod_o2(gq, 4) else { return false };
+                let Some(m16) = hmod_o2(gq, 16) else { return false };
+                let Some(m5) = hmod_o2(gq, 5) else { return false };
                 img8.insert(m8);
                 img4.insert(m4);
+                img16.insert(m16);
+                img5.insert(m5);
             }
         }
         let close = |seed: &HashSet<Q4>, idm: Q4, m: i64| -> Vec<Q4> {
@@ -1119,7 +1125,17 @@ pub fn verify_hurwitz_b2_dic6_k44() -> bool {
         };
         let h8 = close(&img8, id8, 8);
         let h4 = close(&img4, id4, 4);
-        if h8.len() != 8 {
+        let h16 = close(&img16, o2_mod([2, 0, 0, 0], 16), 16);
+        let h5 = close(&img5, o2_mod([2, 0, 0, 0], 5), 5);
+        if h8.len() != 8 || h16.len() != 64 || h5.len() != 60 {
+            return false;
+        }
+        let mut lx4 = [0u8; 24];
+        for u in 0..24 {
+            lx4[u] = dic6_mul(4, u) as u8;
+        }
+        let Some(lx4_m8) = hmod_o2(reps[&lx4], 8) else { return false };
+        if !h8.contains(&lx4_m8) {
             return false;
         }
         match h4.len() {

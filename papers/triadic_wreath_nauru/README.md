@@ -3,7 +3,7 @@
 **Companion & Sequel to Paper #01 ([*Prime Cadences*](../../prime_cadences_paper.md))**
 
 - **Read on GitHub (GFM mirror):** [`triadic_wreath_nauru.md`](triadic_wreath_nauru.md)
-- **Canonical PDF (21 pp, 0 LaTeX warnings/hboxes, `v0.6.0` Dual-Prime $D = 6$ Mirror):** [`paper/triadic_wreath_nauru.pdf`](paper/triadic_wreath_nauru.pdf)
+- **Canonical PDF (21 pp, 0 LaTeX warnings/hboxes, `v0.6.1` Lead Audit):** [`paper/triadic_wreath_nauru.pdf`](paper/triadic_wreath_nauru.pdf)
 - **AMS LaTeX & BibTeX source:** [`paper/triadic_wreath_nauru.tex`](paper/triadic_wreath_nauru.tex), [`paper/references.bib`](paper/references.bib), [`paper/triadic_wreath_nauru.bbl`](paper/triadic_wreath_nauru.bbl)
 - **Neutral `0/0` arXiv bundle:** [`arxiv/triadic-wreath-nauru-arxiv.tar.gz`](arxiv/triadic-wreath-nauru-arxiv.tar.gz) (8 members, standalone compile verified)
 
@@ -19,23 +19,24 @@
    - **$\mathbb{F}_2$ Weil splitting & Tropical invariants:** All `5/5` $\mathbb{F}_2$ elliptic isogeny classes realized; pure $5$-smooth Raynaud group $|K(Y)| = 162{,}000{,}000 = 2^7\cdot 3^4\cdot 5^6$; exhaustive divisorial gonality $\operatorname{gon}(Y) = 6$ via single reduced prime hexagon $D_{\mathrm{hex}}$; $0/39$ tree-quotient involutions.
    - **Lamé Moduli, Exact Rational Classification & Non-Congruence Covers (`NEG-M17`, `NEG-M18`):** Rational arithmetic Nauru curves occur iff $x \in \{\frac{1}{2}, \frac{3}{2}, \frac{5}{2}\}$ inside $B_3 = (-3,-1)_{\mathbb{Q}}$ ($D = 6$) and $B_5 = (-3,-5)_{\mathbb{Q}}$ ($D = 10$), realized as non-congruence $V_4/S_3$-covers of level-$3$ Shimura curves ($K_{3,3}, K_4$ via $Q_3$), excluding all `19/19` Borel $X_0^D(N)$ and `22/22` Brandt graphs.
    - **Intrinsic $\mathrm{SU}(2)$ Wilson actions:** Every definite arithmetic uniformization yields exact rational $S_W(w) = 1 - \frac12\sqrt{\tau(w)} \in \{\frac{5}{16}, \frac{7}{16}, \frac{19}{32}, \frac{4}{9}\} \subset (0, 1)$, strictly separated from all four non-arithmetic hyperbolic walls ($\tau > 4$).
-4. **Complete $3$-Adic Arithmetic Resolution of $\mathrm{Dic}_6$ via Hurwitz $B_2$ ($D = 6, p = 3$; `NEG-M20`, `NEG-M21`, `F33`):**
+4. **Complete $3$-Adic Arithmetic Resolution of $\mathrm{Dic}_6$ via Hurwitz $B_2$ ($D = 6, p = 3$; `NEG-M20`, `NEG-M21`, `NEG-M22`, `F33`):**
    - `18` connected bipartite $4$-regular Cayley graphs ($g = 25$): `12` strictly Ramanujan $Z$ ($\operatorname{tr}(A^4) = 912, |\operatorname{Aut}(Z)| = 96, Z/\langle x^4\rangle \cong K_{4,4}, \lambda_{\mathrm{nt}} = 3 < 2\sqrt{3}$) vs. `6` boundary $C_{12}[2K_1]$. Canonical $3$-adic Schottky lift fails at $\tau(w_4) = \frac{1156}{81} > 4$ (`NEG-M21`).
-   - Swapping primes in $D = 6$ to the Hurwitz algebra $B_2 = (-1,-1)_{\mathbb{Q}}$ ($p = 3$) builds an explicit arithmetic genus-$25$ Mumford curve $C_Z/\mathbb{Q}_3$ with corrected relator $w_4 = (t_y b)(t_x a)(b t_y)(t_x a)/4 = 5 + 6i - 2j + 4k$ ($\tau = \frac{100}{81} < 4, S_W = \frac{4}{9}$, falsifier `F33`), Hensel $s = \sqrt{-2} \equiv 356{,}989 \pmod{3^{12}}$, universal all-lengths $T_4$ freeness, exact `32` surjections splitting `16/16` into $\Gamma(4)$ vs. level-$8\mathcal{O}_2$ with universal double-coset congruence quotient $K_{4,4}$ (strict non-congruence cyclic $C_3$-cover index `3`), and `0/19` genus-$25$ $3$-adic Borel Shimura realizations via Manin $T_3$ (`NEG-M20`).
+   - Swapping primes in $D = 6$ to the Hurwitz algebra $B_2 = (-1,-1)_{\mathbb{Q}}$ ($p = 3$) builds an explicit arithmetic genus-$25$ Mumford curve $C_Z/\mathbb{Q}_3$ with corrected relator $w_4 = (t_y b)(t_x a)(b t_y)(t_x a)/4 = 5 + 6i - 2j + 4k$ ($\tau = \frac{100}{81} < 4, S_W = \frac{4}{9}$, falsifier `F33`), Hensel $s = \sqrt{-2} \equiv 356{,}989 \pmod{3^{12}}$, universal all-lengths $T_4$ freeness, exact `32` surjections splitting `16/16` into $\Gamma(4)$ vs. level-$8\mathcal{O}_2$ inside $\mathcal{O}_2[\frac13]^1/\{\pm 1\} \trianglelefteq_4 \mathrm{Norm}_{B_2^\times}(\mathcal{O}_2[\frac13])/\mathbb{Q}^\times$ (`NEG-M22`) with universal double-coset congruence quotient $K_{4,4}$, constructive normality $q_{x^4} \in H_8$ across `32/32`, permanent mod-$16$ stabilization $|H_{16}|=64$, full mod-$5$ $A_5$ surjection (`|H_5|=60`, strict non-congruence cyclic $C_3$-cover index `3`), and `0/19` genus-$25$ $3$-adic Borel Shimura realizations via Manin $T_3$ (`NEG-M20`).
 
 ## Three-Plane Zero-Shared-Data Verification
 
 | Plane | Path | License | Scope & Result |
 | :--- | :--- | :--- | :--- |
-| **Pure Python (zero deps)** | [`code/triadic_nauru_verify.py`](code/triadic_nauru_verify.py) | MIT | **15/15 D/R/P/Seam gates PASS** (incl. Eisenstein–Nauru `36/36`, $\mathrm{SU}(2)$ Wilson, Hurwitz $B_2$ `32` surj / $K_{4,4}$, 19-pair $3$-adic Manin $T_3$, 5 vector PDFs) |
-| **Lean 4.36.0 (zero Mathlib)** | [`lean/TriadicNauru/Core.lean`](lean/TriadicNauru/Core.lean) | MIT | **32/32 theorems kernel-checked** (`0 sorryAx`, `0 Lean.ofReduceBool`, incl. all-lengths $T_4$ freeness `thm30` & corrected `w_4` `thm28`) |
-| **Pure Rust (zero crates)** | [`rust/src/lib.rs`](rust/src/lib.rs) | MIT | **9/9 integration tests + 8/8 core suites PASS** (`0.56s` release) |
-| **Data Model (SHA-256)** | [`data/triadic_nauru_calibration.json`](data/triadic_nauru_calibration.json) | CC BY 4.0 | Immutable calibration record verified by [`data/MANIFEST.sha256`](data/MANIFEST.sha256) |
+| **Pure Python (zero deps)** | [`code/triadic_nauru_verify.py`](code/triadic_nauru_verify.py) | MIT | **15/15 D/R/P/Seam gates PASS** (incl. Eisenstein–Nauru `36/36`, $\mathrm{SU}(2)$ Wilson, Hurwitz $B_2$ `32` surj / $K_{4,4}$ / $q_{x^4} \in H_8$ / mod-16 / mod-5, 19-pair $3$-adic Manin $T_3$, `--check-only` CI mode) |
+| **Lean 4.36.0 (zero Mathlib)** | [`lean/TriadicNauru/Core.lean`](lean/TriadicNauru/Core.lean) | MIT | **33/33 theorems kernel-checked** (`0 sorryAx`, `0 Lean.ofReduceBool`, incl. direct `nauruAdj` traces `thm9`, all-lengths $T_4$ freeness `thm30`, $\mathbb{F}_3$ quaternion & normalizer tower `thm33`) |
+| **Pure Rust (zero crates)** | [`rust/src/lib.rs`](rust/src/lib.rs) | MIT | **9/9 integration tests + 8/8 core suites PASS** (`0.58s` release) |
+| **Data Model (SHA-256)** | [`data/triadic_nauru_calibration.json`](data/triadic_nauru_calibration.json) | CC BY 4.0 | Immutable calibration record verified by repo-root-relative [`data/MANIFEST.sha256`](data/MANIFEST.sha256) |
 
 ### Reproduce Locally
 
 ```bash
-python3 papers/triadic_wreath_nauru/code/triadic_nauru_verify.py
+python3 papers/triadic_wreath_nauru/code/triadic_nauru_verify.py --check-only
+sha256sum -c papers/triadic_wreath_nauru/data/MANIFEST.sha256
 (cd papers/triadic_wreath_nauru/lean && lake build && .lake/build/bin/triadic-nauru-lean)
 (cd papers/triadic_wreath_nauru/rust && cargo test --release && cargo run --release)
 ```
