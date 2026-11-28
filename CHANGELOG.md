@@ -4,6 +4,18 @@ All notable changes to **Morpheus** are documented here. Manuscript updates cut 
 
 ## [Unreleased]
 
+## [0.6.1] - 2026-11-27
+
+### Added & Fixed — Lead Content-Integrity Audit & Continuous Testing Infrastructure (`NEG-M22`)
+- **Paper `PC-II` Mathematical & Formal Hardening (`papers/triadic_wreath_nauru/`, `NEG-M22`):**
+  - **Corrected Eq. (7.4) Hurwitz Normalizer Inclusion:** Replaced the erroneous `v0.6.0` inclusion $\mathcal{O}_2[\frac13]^1/\{\pm 1\} \trianglelefteq \tilde{\Gamma}_3$ ($\chi = -\frac16$ vs. $-\frac14$) with the exact normalizer tower $\mathcal{O}_2[\frac13]^1/\{\pm 1\} \trianglelefteq_4 N = \mathrm{Norm}_{B_2^\times}(\mathcal{O}_2[\frac13])/\mathbb{Q}^\times$ ($\chi = -\frac{1}{24}$, $[N:\tilde{\Gamma}_3] = 6$, $[N:\Gamma_Z] = 576 = 4\cdot 144 = 6\cdot 96$).
+  - **Constructive Normality, Mod-$16$ Stabilization & Mod-$5$ $A_5$ Surjection:** Upgraded both Python Gate `D11` (`triadic_nauru_verify.py`, adding `--check-only` CI mode and repo-root-relative `MANIFEST.sha256`) and Pure Rust `verify_hurwitz_b2_dic6_k44()` (`rust/src/lib.rs`) to verify across all `32/32` surjections that $L_{x^4}$ lifts to $q_{x^4} \in \tilde{\Gamma}_3 \cap \mathcal{O}_2[\frac13]^1/\{\pm 1\}$ landing in $H_8 \bmod 8\mathcal{O}_2$ (directly proving $\Gamma_Z \trianglelefteq_{C_3} \Gamma_{\mathrm{cong}}$), permanent mod-$16$ stabilization (`|H_16| = 64`, index `48`), and full mod-$5$ $A_5$ surjection (`|H_5| = 60`).
+  - **Lean 4.36.0 Formal Honesty (`33/33` theorems, `0 sorryAx`, `0 ofReduceBool`):** Upgraded `thm9_nauru_exact_spectral_traces` from an arithmetic power sum to direct `nauruAdj` matrix traces (`72, 360, 2232`), added `thm33_hurwitz_normalizer_and_F3_quaternion` proving the $\mathbb{F}_3$ Hurwitz quaternion basis and normalizer tower indices, clarified `thm11` scope (`NEG-W29` standard: exact `23x23` SNF in Python Gate `D4`; order factorization in Lean), cited `ck2004` in Proposition 5.1 (eliminating the lone unused `.bib` entry), and recompiled the zero-warning 21 pp PDF and 8-member neutral `0/0` arXiv bundle (`triadic-wreath-nauru-arxiv.tar.gz`).
+- **Permanent Repo-Wide Continuous Testing & Content-Integrity CI (`tests/`, `.github/workflows/continuous-testing.yml`):**
+  - Added zero-dependency MIT audit harness [`tests/content_integrity_audit.py`](tests/content_integrity_audit.py) (`10/10` automated gates covering all `11` `MANIFEST.sha256` files, every `PROVENANCE.md` SHA-256 checksum row, all `5` arXiv tarballs `0/0` headers & byte-for-byte parity vs. `paper/`, PDF/PNG metadata privacy, all `5` `.tex`/`.bib` cross-references, all Markdown relative links, all `8` Lean projects `0 sorry`/`admit`/`native_decide`/`unsafe`, `NEGATIVES.md`/`CHANGELOG.md`/`CITATION.cff` consistency, Code-vs-Data separation, and frozen-baseline SHA-256 locks) and [`tests/README.md`](tests/README.md).
+  - Added 4-job GitHub Actions workflow [`.github/workflows/continuous-testing.yml`](.github/workflows/continuous-testing.yml) (`content-integrity`, `python-verifiers` `53/53` zero-dep gates, `rust-and-cpp-verifiers` all `8` Rust crates `50/50` tests + C++20 `ErgenticsCXX`, and `lean-formal-oracles` building and running all `8` Lean 4.36.0 projects with `124/124` theorems & `0 sorryAx`/`0 ofReduceBool`) triggered on push to `main`, PRs, weekly schedule, and manual dispatch.
+  - Reconciled `PROVENANCE.md` (updated `CONTRIBUTIONS.md` SHA-256, added complete Paper Package 8 `PC-II` + `tests/` SHA-256 inventory) while preserving all frozen baselines (`paper/`, `code/`, `cleanroom/`, `papers/wp03*`, `papers/horizon_synthesis/`) byte-identical.
+
 ## [0.6.0] - 2026-11-27
 
 ### Added & Resolved

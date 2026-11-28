@@ -1,0 +1,120 @@
+name: Continuous Testing & Content Integrity
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  schedule:
+    - cron: "0 9 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  content-integrity:
+    name: Content Integrity (10 Gates)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Run 10-gate repository-wide content-integrity audit
+        run: python3 tests/content_integrity_audit.py
+
+  python-verifiers:
+    name: Pure-Python Verifiers (53 Gates)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Run zero-dependency Python verification suites
+        run: |
+          set -euo pipefail
+          python3 papers/triadic_wreath_nauru/code/triadic_nauru_verify.py --check-only
+          python3 reconciliation/horizon_round1/code/g4n_r1_xcheck.py
+          for script in papers/wp03*/code/wp03*_audit.py; do
+            echo "=== Running $script ==="
+            python3 "$script"
+          done
+          git diff --exit-code
+
+  rust-and-cpp-verifiers:
+    name: Rust (8 Crates) & C++20 (ErgenticsCXX)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Build and test all 8 zero-crate Rust verifiers
+        run: |
+          set -euo pipefail
+          for manifest in Cargo.toml rust/Cargo.toml papers/*/rust/Cargo.toml; do
+            if [[ -f "$manifest" ]]; then
+              echo "=== cargo test --release --manifest-path $manifest ==="
+              cargo test --release --manifest-path "$manifest"
+            fi
+          done
+          echo "=== cargo run --release (PC-II 8 core suites) ==="
+          cargo run --release --manifest-path papers/triadic_wreath_nauru/rust/Cargo.toml
+
+      - name: Build and test C++20 ErgenticsCXX (-Wall -Wextra -Werror)
+        run: |
+          set -euo pipefail
+          cmake -S swiftpp -B /tmp/ergentics-cxx-build -DCMAKE_BUILD_TYPE=Release
+          cmake --build /tmp/ergentics-cxx-build --parallel
+          ctest --test-dir /tmp/ergentics-cxx-build --output-on-failure
+
+  lean-formal-oracles:
+    name: Lean 4.36.0 Formal Oracles (8 Projects / 124 Theorems)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Cache elan Lean 4.36.0 toolchain
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ~/.elan
+          key: elan-linux-v4.36.0
+
+      - name: Install elan and Lean 4.36.0
+        run: |
+          set -euo pipefail
+          if [[ ! -x "$HOME/.elan/bin/elan" ]]; then
+            curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh \
+              | sh -s -- -y --default-toolchain leanprover/lean4:v4.36.0 --no-modify-path
+          fi
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          "$HOME/.elan/bin/elan" toolchain install leanprover/lean4:v4.36.0
+          "$HOME/.elan/bin/lean" --version
+
+      - name: Build and execute all 8 Lean 4.36.0 formal oracle projects
+        run: |
+          set -euo pipefail
+          PROJECTS=(
+            "lean:morpheus-lean"
+            "papers/triadic_wreath_nauru/lean:triadic-nauru-lean"
+            "papers/wp030_shape_propulsion/lean:wp030-lean"
+            "papers/wp031_3d_j2_hil/lean:wp031-lean"
+            "papers/wp032_bennu_3body/lean:wp032-lean"
+            "papers/wp033_halo_tag_guidance/lean:wp033-lean"
+            "papers/wp034_null_cone_gravity/lean:wp034-lean"
+            "papers/wp035_tuft_hagedorn_repair/lean:wp035-lean"
+          )
+          for spec in "${PROJECTS[@]}"; do
+            dir="${spec%%:*}"
+            bin="${spec##*:}"
+            echo "=== Building and auditing $dir ($bin) ==="
+            (
+              cd "$dir"
+              lake build 2>&1 | tee /tmp/lean_build.log
+              if grep -E "sorryAx|Lean\.ofReduceBool" /tmp/lean_build.log; then
+                echo "::error::Forbidden axiom detected during lake build of $dir"
+                exit 1
+              fi
+              ".lake/build/bin/$bin"
+            )
+          done
