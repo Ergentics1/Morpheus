@@ -14,14 +14,17 @@ permissions:
 
 jobs:
   content-integrity:
-    name: Content Integrity (11 Gates)
+    name: Content Integrity (12 Gates)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - name: Run 11-gate repository-wide content-integrity & cross-paper seam audit
-        run: python3 tests/content_integrity_audit.py
+      - name: Run 12-gate repository-wide content-integrity, cross-paper seam & Universal Lexicon audit
+        run: |
+          set -euo pipefail
+          python3 tests/content_integrity_audit.py
+          python3 tests/lexicon_audit.py --self-test
 
   python-verifiers:
     name: Pure-Python Verifiers (88 Gates)
@@ -88,16 +91,16 @@ jobs:
           git diff --exit-code
 
   rust-and-cpp-verifiers:
-    name: Rust (10 Crates / 68 Tests) & Dual-Compiler C++20 (g++ & clang++)
+    name: Rust (11 Crates / 72 Tests) & Dual-Compiler C++20 (g++ & clang++)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - name: Build and test all 10 zero-crate Rust verifiers
+      - name: Build and test all 11 zero-crate Rust verifiers
         run: |
           set -euo pipefail
-          for manifest in Cargo.toml rust/Cargo.toml papers/*/rust/Cargo.toml; do
+          for manifest in Cargo.toml rust/Cargo.toml tests/*/Cargo.toml papers/*/rust/Cargo.toml; do
             if [[ -f "$manifest" ]]; then
               echo "=== cargo test --release --manifest-path $manifest ==="
               cargo test --release --manifest-path "$manifest"
@@ -109,6 +112,8 @@ jobs:
           cargo run --release --manifest-path papers/triadic_3adic_frontier/rust/Cargo.toml
           echo "=== cargo run --release (PC-IV 6 core suites) ==="
           cargo run --release --manifest-path papers/arithmetic_frontiers_closure/rust/Cargo.toml
+          echo "=== cargo run --release (CI-12 Universal Lexicon 6 gates) ==="
+          cargo run --release --manifest-path tests/lexicon_rust/Cargo.toml
 
       - name: Build and test C++20 ErgenticsCXX, PC-III & PC-IV Hardware FENV under BOTH g++ and clang++ (-Wall -Wextra -Werror)
         run: |
