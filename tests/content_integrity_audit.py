@@ -65,6 +65,12 @@ CANONICAL_PAPERS: List[Tuple[str, str, str, str]] = [
         "papers/triadic_3adic_frontier/paper/references.bib",
         "papers/triadic_3adic_frontier/arxiv/triadic-3adic-frontier-arxiv.tar.gz",
     ),
+    (
+        "Paper PC-IV (Closing All Four Open Arithmetic Frontiers)",
+        "papers/arithmetic_frontiers_closure/paper/arithmetic_frontiers_closure.tex",
+        "papers/arithmetic_frontiers_closure/paper/references.bib",
+        "papers/arithmetic_frontiers_closure/arxiv/arithmetic-frontiers-closure-arxiv.tar.gz",
+    ),
 ]
 
 # Rule 5 frozen-baseline waiver for Horizon Synthesis Piece II (v0.4.0 immutable).
@@ -111,8 +117,8 @@ def git_tracked_files() -> List[str]:
 def gate_ci1_manifests() -> Tuple[bool, str]:
     """CI-1: Verify all MANIFEST.sha256 files using repo-root-relative paths."""
     manifests = sorted(ROOT.rglob("MANIFEST.sha256"))
-    if len(manifests) < 12:
-        return False, f"Expected >= 12 MANIFEST.sha256 files, found {len(manifests)}"
+    if len(manifests) < 13:
+        return False, f"Expected >= 13 MANIFEST.sha256 files, found {len(manifests)}"
     checked_entries = 0
     errors: List[str] = []
     for mf in manifests:
@@ -353,10 +359,10 @@ def strip_lean_comments(src: str) -> str:
 
 
 def gate_ci7_lean_static_trust() -> Tuple[bool, str]:
-    """CI-7: Verify all 9 Lean 4.36.0 projects contain zero sorry/admit/native_decide/unsafe/axiom."""
+    """CI-7: Verify all 10 Lean 4.36.0 projects contain zero sorry/admit/native_decide/unsafe/axiom."""
     lakefiles = sorted(ROOT.rglob("lakefile.toml"))
-    if len(lakefiles) < 9:
-        return False, f"Expected >= 9 Lean projects, found {len(lakefiles)}"
+    if len(lakefiles) < 10:
+        return False, f"Expected >= 10 Lean projects, found {len(lakefiles)}"
     forbidden = re.compile(r"\b(sorry|admit|native_decide|unsafe|axiom)\b")
     lean_files_checked = 0
     theorem_count = 0
@@ -483,6 +489,7 @@ def gate_ci11_cross_paper_seam_parity() -> Tuple[bool, str]:
     p1 = load_json("data/calibrations/theorem_d_pincer_swiftpp.json")
     p2 = load_json("papers/triadic_wreath_nauru/data/triadic_nauru_calibration.json")
     p3 = load_json("papers/triadic_3adic_frontier/data/triadic_3adic_calibration.json")
+    p4 = load_json("papers/arithmetic_frontiers_closure/data/arithmetic_frontiers_calibration.json")
     w30 = load_json("papers/wp030_shape_propulsion/data/wp030_g4n_cycle1_calibration.json")
     w33 = load_json("papers/wp033_halo_tag_guidance/data/wp033_g4n_cycle1_calibration.json")
     w35 = load_json("papers/wp035_tuft_hagedorn_repair/data/wp035_g4n_cycle1_calibration.json")
@@ -573,7 +580,57 @@ def gate_ci11_cross_paper_seam_parity() -> Tuple[bool, str]:
         errors.append("PC-III schema 1.1.0 R1/P1 cross-language SplitMix64 seam contract failed")
     checks += 1
 
-    # 4. WP 030-035 <-> Horizon Synthesis headline invariant seams
+    # 4. PC-IV <-> Paper #01 / PC-II / PC-III arithmetic closure & SplitMix64 seams
+    p4_a1 = p4.get("A1_cubic_lame_noncongruence", {})
+    p4_a2 = p4.get("A2_q33_level4_full_congruence", {})
+    p4_a3 = p4.get("A3_real_quadratic_dic6_atlas", {})
+    p4_a4 = p4.get("A4_genus25_brandt_b3_atlas", {})
+    p4_a5 = p4.get("A5_degree8_poitou_odlyzko_closure", {})
+    p4_r1 = p4.get("R1_runtime_guards_and_fault_injection", {})
+    p4_p1 = p4.get("P1_keyed_prng_rct_and_seam_replay", {})
+    p3_tf_dn = {(c["D"], c["N"]) for c in f7["curves"] if c["e2"] == 0 and c["e3"] == 0}
+    p4_tf_dn = {(c["D"], c["N"]) for c in p4_a4.get("curves", [])}
+    p3_d8 = p3["F8_poitou_odlyzko_audit"]["degree_8_gap"]
+    if not (
+        p4_a1.get("congruence_count") == 0
+        and p4_a1.get("total_realizations") == 8
+        and p4_a2.get("Q33_A", {}).get("congruence_realizations") == 4
+        and p4_a2.get("Q33_B_twin", {}).get("congruence_realizations") == 4
+        and p4_a3.get("congruence_realizations_total") == 8
+        and p4_a3.get("total_realizations") == 128
+    ):
+        errors.append("PC-IV Frontiers 1-2 congruence atlas seam mismatch")
+    checks += 1
+
+    if not (
+        p4_a4.get("total_torsion_free_curves") == 9
+        and p4_a4.get("simple_curves") == 1
+        and p4_a4.get("curves_realizing_Z") == 0
+        and p4_tf_dn == p3_tf_dn
+    ):
+        errors.append("PC-IV<->PC-III 9/9 torsion-free genus-25 Borel Brandt curve set mismatch")
+    checks += 1
+
+    if not (
+        math.isclose(p4_a5.get("UB_max_8_1", 0.0), p3_d8["UB_max_8_1"], rel_tol=0.0, abs_tol=1e-10)
+        and math.isclose(p4_a5.get("baseline_c2_1_peak_exp_LB", 0.0), p3_d8["continuous_opt_exp_LB"], rel_tol=0.0, abs_tol=1e-10)
+        and math.isclose(p4_a5.get("anti_facade_f_bad_pm1", 0.0), p3["F8_poitou_odlyzko_audit"]["anti_facade_f_bad_pm1"], rel_tol=0.0, abs_tol=1e-12)
+    ):
+        errors.append("PC-IV<->PC-III degree-8 (8,1,1,E) Poitou-Odlyzko seam mismatch")
+    checks += 1
+
+    if not (
+        p4_r1.get("pass") is True
+        and p4_r1.get("faults_rejected") == 6
+        and p4_p1.get("pass") is True
+        and p4_p1.get("order_invariant_replay") is True
+        and p4_p1.get("xor_order_invariant_digest") == "0x37b4f6b8da592957"
+        and p4_p1.get("rct_splitmix64_digest") == "0xb7fbf6c71c86c218"
+    ):
+        errors.append("PC-IV R1/P1 cross-language SplitMix64 seam contract failed")
+    checks += 1
+
+    # 5. WP 030-035 <-> Horizon Synthesis headline invariant seams
     wp_hs_pairs = [
         (
             "Thm G1 (WP030<->HS1)",
@@ -603,7 +660,7 @@ def gate_ci11_cross_paper_seam_parity() -> Tuple[bool, str]:
             errors.append(f"{label} mismatch: {a_val} vs {b_val}")
         checks += 1
 
-    # 5. Lean 4.36.0 #print axioms coverage guard across all 9 projects
+    # 6. Lean 4.36.0 #print axioms coverage guard across all 10 projects
     lakefiles = sorted(ROOT.rglob("lakefile.toml"))
     ax_total = 0
     for lf in lakefiles:
@@ -617,13 +674,13 @@ def gate_ci11_cross_paper_seam_parity() -> Tuple[bool, str]:
         if c < 7:
             errors.append(f"Lean project {proj.relative_to(ROOT)} has only {c} #print axioms audits")
         ax_total += c
-    if ax_total < 149:
-        errors.append(f"Expected >= 149 total #print axioms audits across 9 Lean projects, found {ax_total}")
+    if ax_total < 167:
+        errors.append(f"Expected >= 167 total #print axioms audits across 10 Lean projects, found {ax_total}")
     checks += 1
 
     if errors:
         return False, "; ".join(errors[:5])
-    return True, f"{checks} cross-paper seams verified (Paper#01<->PC-II<->PC-III, WP030-035<->HS, {ax_total} Lean #print axioms)"
+    return True, f"{checks} cross-paper seams verified (Paper#01<->PC-II<->PC-III<->PC-IV, WP030-035<->HS, {ax_total} Lean #print axioms)"
 
 
 def main() -> int:

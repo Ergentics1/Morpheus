@@ -1,0 +1,88 @@
+\providecommand{\bysame}{\leavevmode\hbox to3em{\hrulefill}\thinspace}
+\providecommand{\MR}{\relax\ifhmode\unskip\space\fi MR }
+% \MRhref is called by the amsart/book/proc definition of \MR.
+\providecommand{\MRhref}[2]{%
+  \href{http://www.ams.org/mathscinet-getitem?mr=#1}{#2}
+}
+\providecommand{\href}[2]{#2}
+\begin{thebibliography}{10}
+
+\bibitem{mouraullrich2021}
+Leonardo de~Moura and Sebastian Ullrich, \emph{The {L}ean 4 theorem prover and
+  programming language}, Automated Deduction -- CADE 28, Lecture Notes in
+  Computer Science, vol. 12699, Springer, 2021, pp.~625--635.
+
+\bibitem{drinfeld1976}
+Vladimir~G. Drinfeld, \emph{Coverings of $p$-adic symmetric regions},
+  Functional Analysis and Its Applications \textbf{10} (1976), no.~2, 107--115.
+
+\bibitem{eichler1955}
+Martin Eichler, \emph{Zur {Z}ahlentheorie der {Q}uaternionen-{A}lgebren},
+  Journal f\"ur die reine und angewandte Mathematik \textbf{195} (1955),
+  127--151.
+
+\bibitem{ergentics2026pc3}
+{Ergentics}, \emph{The 3-adic dicyclic companion, exact level
+  {$3\mathfrak{P}_5$} and level {$(3)$} congruence on {N}auru, and the
+  real-quadratic {L}am\'e {S}himura curve atlas}, 2026, Morpheus Paper \#09 /
+  \texttt{PC-III} (\texttt{v0.8.0}).
+
+\bibitem{ergentics2026pc}
+\bysame, \emph{Prime cadences: Spectral zeta functions, $p$-adic {M}umford
+  uniformization, and arithmetic obstructions on the {N}eo-{R}iemannian
+  {T}onnetz}, 2026, Morpheus Paper \#01 (\texttt{v0.3.1}).
+
+\bibitem{ergentics2026pc2}
+\bysame, \emph{Uniform triadic wreath products, the {N}auru graph, and
+  dual-prime {$D = 6$} arithmeticity}, 2026, Morpheus Paper \#08 /
+  \texttt{PC-II} (\texttt{v0.7.1}).
+
+\bibitem{lps1988}
+Alexander Lubotzky, Ralph Phillips, and Peter Sarnak, \emph{Ramanujan graphs},
+  Combinatorica \textbf{8} (1988), no.~3, 261--277.
+
+\bibitem{moore1966}
+Ramon~E. Moore, \emph{Interval analysis}, Prentice-Hall, Englewood Cliffs, NJ,
+  1966.
+
+\bibitem{odlyzko1990}
+Andrew~M. Odlyzko, \emph{Bounds for discriminants and related estimates for
+  class numbers, regulators and zeros of zeta functions: a survey of recent
+  results}, S\'eminaire de Th\'eorie des Nombres de Bordeaux \textbf{2} (1990),
+  no.~1, 119--141.
+
+\bibitem{pizer1980}
+Arnold Pizer, \emph{An algorithm for computing modular forms on
+  {$\Gamma_0(N)$}}, Journal of Algebra \textbf{64} (1980), no.~2, 340--390.
+
+\bibitem{poitou1977}
+Georges Poitou, \emph{Minorations de discriminants (d'apr\`es {A}. {M}.
+  {O}dlyzko)}, S\'eminaire Bourbaki, Vol.\ 1975/76, Expos\'e 479, Lecture Notes
+  in Mathematics, vol. 567, Springer-Verlag, Berlin, 1977, pp.~136--153.
+
+\bibitem{riehm1970}
+Carl Riehm, \emph{The norm $1$ group of a $\mathfrak{p}$-adic division
+  algebra}, American Journal of Mathematics \textbf{92} (1970), no.~2,
+  499--523.
+
+\bibitem{serre1980}
+Jean-Pierre Serre, \emph{Trees}, Springer-Verlag, Berlin, 1980.
+
+\bibitem{shimura1967}
+Goro Shimura, \emph{Construction of class fields and zeta functions of
+  algebraic curves}, Annals of Mathematics \textbf{85} (1967), no.~1, 58--159.
+
+\bibitem{vigneras1980}
+Marie-France Vign\'eras, \emph{Arithm\'etique des alg\`ebres de quaternions},
+  Lecture Notes in Mathematics \textbf{800} (1980).
+
+\bibitem{voight2021}
+John Voight, \emph{Quaternion algebras}, Graduate Texts in Mathematics, vol.
+  288, Springer, Cham, 2021.
+
+\bibitem{zagier1976}
+Don Zagier, \emph{On the values at negative integers of the zeta-function of a
+  real quadratic field}, L'Enseignement Math\'ematique \textbf{22} (1976),
+  55--95.
+
+\end{thebibliography}

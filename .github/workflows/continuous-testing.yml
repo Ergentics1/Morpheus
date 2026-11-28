@@ -24,17 +24,18 @@ jobs:
         run: python3 tests/content_integrity_audit.py
 
   python-verifiers:
-    name: Pure-Python Verifiers (81 Gates)
+    name: Pure-Python Verifiers (88 Gates)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - name: Run zero-dependency Python verification suites (PC-II, PC-III, Horizon Round 1, WP030-035)
+      - name: Run zero-dependency Python verification suites (PC-II, PC-III, PC-IV, Horizon Round 1, WP030-035)
         run: |
           set -euo pipefail
           python3 papers/triadic_wreath_nauru/code/triadic_nauru_verify.py --check-only
           python3 papers/triadic_3adic_frontier/code/triadic_3adic_verify.py --check-only
+          python3 papers/arithmetic_frontiers_closure/code/arithmetic_frontiers_verify.py --check-only --no-figs
           python3 reconciliation/horizon_round1/code/g4n_r1_xcheck.py
           for script in papers/wp03*/code/wp03*_audit.py; do
             echo "=== Running $script ==="
@@ -87,13 +88,13 @@ jobs:
           git diff --exit-code
 
   rust-and-cpp-verifiers:
-    name: Rust (9 Crates / 62 Tests) & Dual-Compiler C++20 (g++ & clang++)
+    name: Rust (10 Crates / 68 Tests) & Dual-Compiler C++20 (g++ & clang++)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - name: Build and test all 9 zero-crate Rust verifiers
+      - name: Build and test all 10 zero-crate Rust verifiers
         run: |
           set -euo pipefail
           for manifest in Cargo.toml rust/Cargo.toml papers/*/rust/Cargo.toml; do
@@ -106,8 +107,10 @@ jobs:
           cargo run --release --manifest-path papers/triadic_wreath_nauru/rust/Cargo.toml
           echo "=== cargo run --release (PC-III 9 core suites) ==="
           cargo run --release --manifest-path papers/triadic_3adic_frontier/rust/Cargo.toml
+          echo "=== cargo run --release (PC-IV 6 core suites) ==="
+          cargo run --release --manifest-path papers/arithmetic_frontiers_closure/rust/Cargo.toml
 
-      - name: Build and test C++20 ErgenticsCXX & PC-III Hardware FENV under BOTH g++ and clang++ (-Wall -Wextra -Werror)
+      - name: Build and test C++20 ErgenticsCXX, PC-III & PC-IV Hardware FENV under BOTH g++ and clang++ (-Wall -Wextra -Werror)
         run: |
           set -euo pipefail
           echo "=== ErgenticsCXX (g++) ==="
@@ -127,10 +130,19 @@ jobs:
             papers/triadic_3adic_frontier/cpp/fenv_oracle.cpp -o /tmp/pc3_fenv_clang
           /tmp/pc3_fenv_clang | tee /tmp/pc3_clang.out
           diff -u <(grep -v 'Jacobi res' /tmp/pc3_gxx.out) <(grep -v 'Jacobi res' /tmp/pc3_clang.out)
-          rm -rf /tmp/ergentics-cxx-gxx /tmp/ergentics-cxx-clang /tmp/pc3_fenv_gxx /tmp/pc3_fenv_clang /tmp/pc3_gxx.out /tmp/pc3_clang.out
+          echo "=== PC-IV C++20 Hardware FENV Oracle (g++) ==="
+          g++ -O2 -std=c++20 -frounding-math -ffp-contract=off -Wall -Wextra -Werror \
+            papers/arithmetic_frontiers_closure/cpp/fenv_oracle.cpp -o /tmp/pc4_fenv_gxx -lm
+          /tmp/pc4_fenv_gxx | tee /tmp/pc4_gxx.out
+          echo "=== PC-IV C++20 Hardware FENV Oracle (clang++) ==="
+          clang++ -O2 -std=c++20 -frounding-math -ffp-contract=off -Wall -Wextra -Werror \
+            papers/arithmetic_frontiers_closure/cpp/fenv_oracle.cpp -o /tmp/pc4_fenv_clang -lm
+          /tmp/pc4_fenv_clang | tee /tmp/pc4_clang.out
+          diff -u /tmp/pc4_gxx.out /tmp/pc4_clang.out
+          rm -rf /tmp/ergentics-cxx-gxx /tmp/ergentics-cxx-clang /tmp/pc3_fenv_gxx /tmp/pc3_fenv_clang /tmp/pc3_gxx.out /tmp/pc3_clang.out /tmp/pc4_fenv_gxx /tmp/pc4_fenv_clang /tmp/pc4_gxx.out /tmp/pc4_clang.out
 
   lean-formal-oracles:
-    name: Lean 4.36.0 Formal Oracles (9 Projects / 149 Theorems)
+    name: Lean 4.36.0 Formal Oracles (10 Projects / 167 Theorems)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -153,13 +165,14 @@ jobs:
           "$HOME/.elan/bin/elan" toolchain install leanprover/lean4:v4.36.0
           "$HOME/.elan/bin/lean" --version
 
-      - name: Build and execute all 9 Lean 4.36.0 formal oracle projects
+      - name: Build and execute all 10 Lean 4.36.0 formal oracle projects
         run: |
           set -euo pipefail
           PROJECTS=(
             "lean:morpheus-lean"
             "papers/triadic_wreath_nauru/lean:triadic-nauru-lean"
             "papers/triadic_3adic_frontier/lean:triadic-3adic-lean"
+            "papers/arithmetic_frontiers_closure/lean:arithmetic-frontiers-lean"
             "papers/wp030_shape_propulsion/lean:wp030-lean"
             "papers/wp031_3d_j2_hil/lean:wp031-lean"
             "papers/wp032_bennu_3body/lean:wp032-lean"

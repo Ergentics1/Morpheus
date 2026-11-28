@@ -1,0 +1,11 @@
+name = "arithmetic_frontiers_closure"
+version = "0.1.0"
+defaultTargets = ["ArithmeticFrontiers", "arithmetic-frontiers-lean"]
+moreLeanArgs = ["-DwarningAsError=true", "-DautoImplicit=false"]
+
+[[lean_lib]]
+name = "ArithmeticFrontiers"
+
+[[lean_exe]]
+name = "arithmetic-frontiers-lean"
+root = "Main"

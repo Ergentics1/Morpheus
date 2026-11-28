@@ -1,0 +1,8 @@
+[package]
+name = "arithmetic-frontiers-closure-rust"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+description = "Zero-dependency independent Rust verifier for Paper #10 (PC-IV): Closing All Four Open Arithmetic Frontiers."
+
+[dependencies]
