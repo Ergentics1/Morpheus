@@ -1435,3 +1435,556 @@ pub fn verify_all_19_3adic_shimura_levels_excluded() -> bool {
     }
     true
 }
+
+/// Gate D7b (Rust, NEG-M23): Complete all-primes congruence vs. non-congruence classification of
+/// B_5 = (-3,-5)_Q (D = 10) at BOTH x = 5/2 (CONGRUENCE: Gamma_Y = Gamma(3) \cap Gamma(P_5) of exact
+/// index 36 = 12 * 3, quotients Q_3 & Theta_3) AND x = 1/2 (NON-CONGRUENCE V_4-cover of index 4
+/// over K_{3,3} = T_3/(Gamma_3^{V_4} \cap Gamma(P_5)) of index 9, mod-9/25 stable, mod-7 PSL_2(F_7)).
+pub fn verify_b5_congruence_and_noncongruence_towers() -> bool {
+    const MT52: [[[i128; 4]; 4]; 4] = [
+        [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]],
+        [[0, 1, 0, 0], [-1, -1, 0, 0], [0, 0, 0, 1], [0, 0, -1, -1]],
+        [[0, 0, 1, 0], [-5, 0, -1, -1], [-10, 0, 0, 0], [10, 10, -5, 0]],
+        [[0, 0, 0, 1], [0, -5, 1, 0], [0, -10, 0, 0], [-10, 0, 0, -5]],
+    ];
+    const MT12: [[[i128; 4]; 4]; 4] = [
+        [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]],
+        [[0, 1, 0, 0], [-1, -1, 0, 0], [0, 0, 0, 1], [0, 0, -1, -1]],
+        [[0, 0, 1, 0], [-1, 0, -1, -1], [-2, 0, 0, 0], [2, 2, -1, 0]],
+        [[0, 0, 0, 1], [0, -1, 1, 0], [0, -2, 0, 0], [-2, 0, 0, -1]],
+    ];
+    const CONJ52: [[i128; 4]; 4] = [[1, 0, 0, 0], [-1, -1, 0, 0], [0, 0, -1, 0], [-5, 0, 0, -1]];
+    const CONJ12: [[i128; 4]; 4] = [[1, 0, 0, 0], [-1, -1, 0, 0], [0, 0, -1, 0], [-1, 0, 0, -1]];
+
+    let adj_y = nauru_adj();
+    let auts = find_nauru_auts();
+    let ident: Perm24 = std::array::from_fn(|i| i as u8);
+    let stab0: Vec<Perm24> = auts.iter().copied().filter(|g| g[0] == 0).collect();
+    let a_y = *stab0.iter().find(|g| order24(g) == 3).unwrap();
+    let b_y = *stab0
+        .iter()
+        .find(|g| order24(g) == 2 && g[adj_y[0][0]] as usize == adj_y[0][0])
+        .unwrap();
+    let e0 = adj_y[0][0];
+    let t_y = *auts
+        .iter()
+        .find(|g| {
+            order24(g) == 2
+                && g[0] as usize == e0
+                && g[e0] == 0
+                && comp(g, &b_y) == comp(&b_y, g)
+        })
+        .unwrap();
+
+    let gcd128 = |mut a: i128, mut b: i128| -> i128 {
+        a = a.abs();
+        b = b.abs();
+        while b != 0 {
+            let t = a % b;
+            a = b;
+            b = t;
+        }
+        a
+    };
+    let prim = |mut u: [i128; 4]| -> [i128; 4] {
+        let g = gcd128(gcd128(u[0], u[1]), gcd128(u[2], u[3]));
+        if g > 1 {
+            for x in &mut u {
+                *x /= g;
+            }
+        }
+        for x in u {
+            if x != 0 {
+                if x < 0 {
+                    for y in &mut u {
+                        *y = -*y;
+                    }
+                }
+                break;
+            }
+        }
+        u
+    };
+    let omul = |u: [i128; 4], v: [i128; 4], mt: &[[[i128; 4]; 4]; 4]| -> [i128; 4] {
+        let mut out = [0i128; 4];
+        for r in 0..4 {
+            if u[r] == 0 {
+                continue;
+            }
+            for c in 0..4 {
+                if v[c] == 0 {
+                    continue;
+                }
+                let uv = u[r] * v[c];
+                for k in 0..4 {
+                    out[k] += uv * mt[r][c][k];
+                }
+            }
+        }
+        out
+    };
+    let oconj = |u: [i128; 4], cm: &[[i128; 4]; 4]| -> [i128; 4] {
+        let mut out = [0i128; 4];
+        for r in 0..4 {
+            for k in 0..4 {
+                out[k] += u[r] * cm[r][k];
+            }
+        }
+        out
+    };
+    let onrd = |u: [i128; 4], mt: &[[[i128; 4]; 4]; 4], cm: &[[i128; 4]; 4]| -> i128 {
+        omul(u, oconj(u, cm), mt)[0]
+    };
+
+    for is_52 in [true, false] {
+        let mt = if is_52 { &MT52 } else { &MT12 };
+        let cm = if is_52 { &CONJ52 } else { &CONJ12 };
+        let a_o: [i128; 4] = [0, 1, 0, 0];
+        let b_o: [i128; 4] = if is_52 { [-5, 0, -1, -2] } else { [-1, 0, -1, -2] };
+        let t_o: [i128; 4] = [0, 0, 1, 0];
+
+        // Compute P_5 / 5O_5 = {u mod 5 : 5 | nrd(u)} (must have exact size 25)
+        let mut p5_vecs: Vec<[i64; 4]> = Vec::new();
+        for c0 in 0..5i64 {
+            for c1 in 0..5i64 {
+                for c2 in 0..5i64 {
+                    for c3 in 0..5i64 {
+                        if onrd([c0 as i128, c1 as i128, c2 as i128, c3 as i128], mt, cm).rem_euclid(5) == 0 {
+                            p5_vecs.push([c0, c1, c2, c3]);
+                        }
+                    }
+                }
+            }
+        }
+        if p5_vecs.len() != 25 {
+            return false;
+        }
+        let mod_p5_pm = |u: [i64; 4]| -> [i64; 4] {
+            let mut best = [5i64; 4];
+            for &z in &p5_vecs {
+                let c1 = std::array::from_fn(|k| (u[k] + z[k]).rem_euclid(5));
+                let c2 = std::array::from_fn(|k| (-u[k] + z[k]).rem_euclid(5));
+                if c1 < best {
+                    best = c1;
+                }
+                if c2 < best {
+                    best = c2;
+                }
+            }
+            best
+        };
+        let mod_pm = |u: [i64; 4], m: i64| -> [i64; 4] {
+            let v: [i64; 4] = std::array::from_fn(|k| u[k].rem_euclid(m));
+            let nv: [i64; 4] = std::array::from_fn(|k| (-v[k]).rem_euclid(m));
+            v.min(nv)
+        };
+
+        // BFS 144 coset reps of Gamma_tilde / Gamma_Y
+        let mut coset: HashMap<Perm24, [i128; 4]> = HashMap::new();
+        coset.insert(ident, [1, 0, 0, 0]);
+        let mut dq = VecDeque::new();
+        dq.push_back(ident);
+        while let Some(g) = dq.pop_front() {
+            let rg = coset[&g];
+            for (sp, sq) in [(&a_y, a_o), (&b_y, b_o), (&t_y, t_o)] {
+                let h = comp(&g, sp);
+                if !coset.contains_key(&h) {
+                    coset.insert(h, prim(omul(rg, sq, mt)));
+                    dq.push_back(h);
+                }
+            }
+        }
+        if coset.len() != 144 {
+            return false;
+        }
+
+        // Collect Schreier generators of Gamma_Y (every one must have nrd = 2^{2a})
+        let mut sch: Vec<[i128; 4]> = Vec::new();
+        for (&g, &rg) in &coset {
+            for (sp, sq) in [(&a_y, a_o), (&b_y, b_o), (&t_y, t_o)] {
+                let h = comp(&g, sp);
+                let rh = coset[&h];
+                let gen = prim(omul(omul(rg, sq, mt), oconj(rh, cm), mt));
+                let mut nr = onrd(gen, mt, cm);
+                let mut v2 = 0u32;
+                while nr % 2 == 0 {
+                    nr /= 2;
+                    v2 += 1;
+                }
+                if nr != 1 || v2 % 2 != 0 {
+                    return false;
+                }
+                sch.push(gen);
+            }
+        }
+
+        let norm_sl1 = |u: [i128; 4], m: i64| -> [i64; 4] {
+            let mut nr = onrd(u, mt, cm);
+            let mut v2 = 0u32;
+            while nr % 2 == 0 {
+                nr /= 2;
+                v2 += 1;
+            }
+            let half_pow = {
+                let mut acc = 1i64;
+                for _ in 0..(v2 / 2) {
+                    acc = (acc * 2) % m;
+                }
+                acc
+            };
+            let inv = mod_inv_i64(half_pow, m);
+            std::array::from_fn(|k| ((u[k].rem_euclid(m as i128) as i64) * inv).rem_euclid(m))
+        };
+
+        let close_mod = |m: i64| -> HashSet<[i64; 4]> {
+            let mut seed = HashSet::new();
+            for &g in &sch {
+                seed.insert(mod_pm(norm_sl1(g, m), m));
+            }
+            let idm = mod_pm([1, 0, 0, 0], m);
+            let mut s = HashSet::new();
+            s.insert(idm);
+            let mut q = VecDeque::new();
+            q.push_back(idm);
+            while let Some(cur) = q.pop_front() {
+                let ci: [i128; 4] = std::array::from_fn(|k| cur[k] as i128);
+                for &sg in &seed {
+                    let sgi: [i128; 4] = std::array::from_fn(|k| sg[k] as i128);
+                    let pr = omul(ci, sgi, mt);
+                    let pr64: [i64; 4] = std::array::from_fn(|k| pr[k].rem_euclid(m as i128) as i64);
+                    let nxt = mod_pm(pr64, m);
+                    if s.insert(nxt) {
+                        q.push_back(nxt);
+                    }
+                }
+            }
+            s
+        };
+
+        let h3 = close_mod(3);
+        let h9 = close_mod(9);
+        let h5 = close_mod(5);
+        let h25 = close_mod(25);
+        let h7 = close_mod(7);
+        let id_p5 = mod_p5_pm([1, 0, 0, 0]);
+        let sch_p5_trivial = sch.iter().all(|&g| mod_p5_pm(norm_sl1(g, 5)) == id_p5);
+        if !sch_p5_trivial || h5.len() != 25 || h25.len() != 3125 || h7.len() != 168 {
+            return false;
+        }
+
+        // Elements of Aut(Y) lying in O_5[1/2]^1/{+-1} (exact index 36)
+        let mut sl1_auts: Vec<Perm24> = Vec::new();
+        for (&g, &rg) in &coset {
+            let mut nr = onrd(rg, mt, cm);
+            let (mut v2, mut v5) = (0u32, 0u32);
+            while nr % 2 == 0 {
+                nr /= 2;
+                v2 += 1;
+            }
+            while nr % 5 == 0 {
+                nr /= 5;
+                v5 += 1;
+            }
+            if nr == 1 && v2 % 2 == 0 && v5 % 2 == 0 {
+                sl1_auts.push(g);
+            }
+        }
+        if sl1_auts.len() != 36 {
+            return false;
+        }
+        let cong_deck: Vec<Perm24> = sl1_auts
+            .iter()
+            .copied()
+            .filter(|g| {
+                let rg = coset[g];
+                h3.contains(&mod_pm(norm_sl1(rg, 3), 3)) && mod_p5_pm(norm_sl1(rg, 5)) == id_p5
+            })
+            .collect();
+
+        if is_52 {
+            // x = 5/2: CONGRUENCE! |H_3|=1 (idx 12), |H_9|=27 (idx 12), cong_deck = {id} (idx 36 = 12*3)
+            if h3.len() != 1 || h9.len() != 27 || cong_deck.len() != 1 {
+                return false;
+            }
+        } else {
+            // x = 1/2: NON-CONGRUENCE! |H_3|=4 (idx 3), |H_9|=108 (idx 3), cong_deck = V_4 (order 4) -> K_{3,3}
+            if h3.len() != 4 || h9.len() != 108 || cong_deck.len() != 4 {
+                return false;
+            }
+            let inv_cnt = cong_deck.iter().filter(|g| order24(g) == 2).count();
+            if inv_cnt != 3 {
+                return false;
+            }
+            // Verify quotient Y / cong_deck is K_{3,3} (6 vertices, 3-regular, 9 simple edges)
+            let mut v2o = [255usize; 24];
+            let mut n_orb = 0usize;
+            for v in 0..24 {
+                if v2o[v] == 255 {
+                    for g in &cong_deck {
+                        v2o[g[v] as usize] = n_orb;
+                    }
+                    n_orb += 1;
+                }
+            }
+            if n_orb != 6 {
+                return false;
+            }
+            let mut qadj = vec![BTreeSet::new(); 6];
+            for u in 0..24 {
+                for &v in &adj_y[u] {
+                    qadj[v2o[u]].insert(v2o[v]);
+                }
+            }
+            if !qadj.iter().all(|s| s.len() == 3) {
+                return false;
+            }
+        }
+    }
+    true
+}
+
+/// Gate D9b (Rust): Complete tropical invariants of 3-adic Dic_6 twin Z:
+///   - |Aut(Z)| = 96, 43 involutions with quotient b1 in {7^2, 11^24, 13^17} (0 tree quotients)
+///   - Exhaustive Baker-Norine Dhar burning over all canonical divisors of deg <= 7 (0 hits)
+///   - Exact divisorial gonality gon(Z) = 8 with 4 canonical degree-8 witnesses (incl. reduced <y> + x<y>).
+pub fn verify_dic6_tropical_invariants_exact() -> (usize, usize) {
+    let dic6_mul = |u: usize, v: usize| -> usize {
+        let (k1, f1) = (u % 12, u / 12);
+        let (k2, f2) = (v % 12, v / 12);
+        if f1 == 0 {
+            f2 * 12 + (k1 + k2) % 12
+        } else if f2 == 0 {
+            12 + (k1 + 12 - k2) % 12
+        } else {
+            (k1 + 18 - k2) % 12
+        }
+    };
+    let s_z = [1usize, 11, 12, 18];
+    let mut adj = [[0usize; 4]; 24];
+    for u in 0..24 {
+        for (i, &g) in s_z.iter().enumerate() {
+            adj[u][i] = dic6_mul(u, g);
+        }
+    }
+    let has_edge = |u: usize, v: usize| -> bool { adj[u].contains(&v) };
+
+    // Full Aut(Z) (order 96)
+    let mut bfs = vec![0usize];
+    let mut seen = [false; 24];
+    seen[0] = true;
+    let mut bi = 0;
+    while bi < bfs.len() {
+        let u = bfs[bi];
+        bi += 1;
+        for &v in &adj[u] {
+            if !seen[v] {
+                seen[v] = true;
+                bfs.push(v);
+            }
+        }
+    }
+    let mut auts: Vec<Perm24> = Vec::new();
+    let mut perm = [255u8; 24];
+    let mut used = [false; 24];
+    fn bt(
+        pos: usize,
+        bfs: &[usize],
+        adj: &[[usize; 4]; 24],
+        perm: &mut [u8; 24],
+        used: &mut [bool; 24],
+        auts: &mut Vec<Perm24>,
+    ) {
+        if pos == 24 {
+            auts.push(*perm);
+            return;
+        }
+        let u = bfs[pos];
+        if pos == 0 {
+            for c in 0..24 {
+                perm[u] = c as u8;
+                used[c] = true;
+                bt(1, bfs, adj, perm, used, auts);
+                perm[u] = 255;
+                used[c] = false;
+            }
+            return;
+        }
+        let first_m = adj[u].iter().find_map(|&w| (perm[w] != 255).then_some(perm[w] as usize)).unwrap();
+        for &c in &adj[first_m] {
+            if used[c] {
+                continue;
+            }
+            let ok = adj[u]
+                .iter()
+                .all(|&w| perm[w] == 255 || adj[c].contains(&(perm[w] as usize)));
+            if ok {
+                perm[u] = c as u8;
+                used[c] = true;
+                bt(pos + 1, bfs, adj, perm, used, auts);
+                perm[u] = 255;
+                used[c] = false;
+            }
+        }
+    }
+    bt(0, &bfs, &adj, &mut perm, &mut used, &mut auts);
+    assert_eq!(auts.len(), 96);
+
+    // Involution census (43 involutions, b1 in {7^2, 11^24, 13^17}, 0 tree quotients)
+    let mut b1_counts: BTreeMap<usize, usize> = BTreeMap::new();
+    let mut inv_total = 0usize;
+    for g in &auts {
+        if order24(g) != 2 {
+            continue;
+        }
+        inv_total += 1;
+        let mut v_orb = [255usize; 24];
+        let mut nv = 0usize;
+        for v in 0..24 {
+            if v_orb[v] == 255 {
+                v_orb[v] = nv;
+                v_orb[g[v] as usize] = nv;
+                nv += 1;
+            }
+        }
+        let mut e_orbs: BTreeSet<(usize, usize)> = BTreeSet::new();
+        for u in 0..24 {
+            for &v in &adj[u] {
+                if u < v {
+                    let (gu, gv) = (g[u] as usize, g[v] as usize);
+                    if gu == v && gv == u {
+                        continue; // inverted edge folds to twig (contributes 0 to b1)
+                    }
+                    let e1 = (u, v);
+                    let e2 = (gu.min(gv), gu.max(gv));
+                    e_orbs.insert(e1.min(e2));
+                }
+            }
+        }
+        let b1 = e_orbs.len() + 1 - nv;
+        *b1_counts.entry(b1).or_insert(0) += 1;
+    }
+    assert_eq!(inv_total, 43);
+    assert_eq!(b1_counts.get(&0).copied().unwrap_or(0), 0);
+    assert_eq!(b1_counts.get(&7).copied().unwrap_or(0), 2);
+    assert_eq!(b1_counts.get(&11).copied().unwrap_or(0), 24);
+    assert_eq!(b1_counts.get(&13).copied().unwrap_or(0), 17);
+    let _ = has_edge;
+
+    // Dhar burning test on Z
+    let dhar_reach = |d_in: &[i8; 24], q: usize| -> bool {
+        if d_in[q] >= 1 {
+            return true;
+        }
+        let mut d = *d_in;
+        let mut queue = [0usize; 24];
+        loop {
+            let mut burnt = [false; 24];
+            let mut fires = [0i8; 24];
+            burnt[q] = true;
+            queue[0] = q;
+            let (mut head, mut tail) = (0usize, 1usize);
+            while head < tail {
+                let u = queue[head];
+                head += 1;
+                for &v in &adj[u] {
+                    if !burnt[v] {
+                        fires[v] += 1;
+                        if fires[v] > d[v] {
+                            burnt[v] = true;
+                            queue[tail] = v;
+                            tail += 1;
+                        }
+                    }
+                }
+            }
+            if tail == 24 {
+                return false;
+            }
+            for u in 0..24 {
+                if !burnt[u] {
+                    for &v in &adj[u] {
+                        if burnt[v] {
+                            d[u] -= 1;
+                            d[v] += 1;
+                        }
+                    }
+                }
+            }
+            if d[q] >= 1 {
+                return true;
+            }
+        }
+    };
+    const Q_ORDER: [usize; 23] = [
+        6, 15, 21, 3, 9, 18, 12, 4, 8, 2, 10, 14, 16, 20, 22, 1, 5, 7, 11, 13, 17, 19, 23,
+    ];
+    let has_rank_ge_1 = |d: &[i8; 24]| -> bool { Q_ORDER.iter().all(|&q| dhar_reach(d, q)) };
+
+    let stab0: Vec<Perm24> = auts.iter().copied().filter(|g| g[0] == 0).collect();
+    assert_eq!(stab0.len(), 4);
+
+    // Exhaustive search over all canonical divisors with D(0) >= 1 of degrees 4..=7
+    let mut total_checked = 0usize;
+    fn dfs_low(
+        rem: usize,
+        start_v: usize,
+        cur: &mut Vec<usize>,
+        d: &mut [i8; 24],
+        stab0: &[Perm24],
+        has_r1: &dyn Fn(&[i8; 24]) -> bool,
+        checked: &mut usize,
+        hits: &mut usize,
+    ) {
+        if rem == 0 {
+            let m = cur.len();
+            let mut mapped = [0usize; 8];
+            for s in &stab0[1..] {
+                for i in 0..m {
+                    mapped[i] = s[cur[i]] as usize;
+                }
+                mapped[..m].sort_unstable();
+                if mapped[..m] < cur[..] {
+                    return;
+                }
+            }
+            *checked += 1;
+            if has_r1(d) {
+                *hits += 1;
+            }
+            return;
+        }
+        for v in start_v..24 {
+            cur.push(v);
+            d[v] += 1;
+            dfs_low(rem - 1, v, cur, d, stab0, has_r1, checked, hits);
+            d[v] -= 1;
+            cur.pop();
+        }
+    }
+    for deg in 4..=7 {
+        let mut d = [0i8; 24];
+        d[0] = 1;
+        let mut cur = Vec::with_capacity(deg);
+        let mut hits = 0usize;
+        dfs_low(deg - 1, 0, &mut cur, &mut d, &stab0, &has_rank_ge_1, &mut total_checked, &mut hits);
+        assert_eq!(hits, 0, "Unexpected rank>=1 divisor on Z at degree {deg}");
+    }
+    assert_eq!(total_checked, 789 + 4_946 + 26_509 + 124_922);
+
+    // Verify all 4 canonical degree-8 two-coset witnesses <y> + x^k <y> (k = 0, 1, 2, 3)
+    let witnesses: [[usize; 8]; 4] = [
+        [0, 0, 6, 6, 12, 12, 18, 18],
+        [0, 1, 6, 7, 12, 13, 18, 19],
+        [0, 2, 6, 8, 12, 14, 18, 20],
+        [0, 3, 6, 9, 12, 15, 18, 21],
+    ];
+    for w in &witnesses {
+        let mut d = [0i8; 24];
+        for &v in w {
+            d[v] += 1;
+        }
+        assert!(has_rank_ge_1(&d));
+    }
+    (total_checked, 8)
+}
+

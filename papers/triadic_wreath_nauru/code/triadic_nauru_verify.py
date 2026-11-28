@@ -1140,53 +1140,234 @@ def verify_d5_d6_d7_2adic_arithmetic() -> Tuple[Dict[str, object], Dict[str, obj
                 fr5.append(nx)
     assert len(jt5) == 144 * 60 == 8640
 
-    # Tower II: B_5 at x = 5/2 mod 3 -> S_4 (order 24, K_4) and deck group S_3 (order 6)
-    t5 = (Fraction(0), Fraction(5, 3), Fraction(0), Fraction(1, 3))
-    b5_basis = [one, a_q, t5, qmul_gen(a_q, t5, Fraction(-3), Fraction(-5))]
-    mt5 = [[tuple(int(x) for x in solve4(b5_basis, qmul_gen(b5_basis[r], b5_basis[c], Fraction(-3), Fraction(-5)))) for c in range(4)] for r in range(4)]
+    # Tower II & III: Complete B_5 = (-3,-5)_Q (D=10) classification at BOTH x = 5/2 & x = 1/2 (NEG-M23)
+    b5_reports: Dict[str, object] = {}
+    for label, t_q in [
+        ("x_5_2", (Fraction(0), Fraction(5, 3), Fraction(0), Fraction(1, 3))),
+        ("x_1_2", (Fraction(0), Fraction(1, 3), Fraction(0), Fraction(1, 3))),
+    ]:
+        b5_basis = [one, a_q, t_q, qmul_gen(a_q, t_q, Fraction(-3), Fraction(-5))]
+        mt5 = [
+            [
+                tuple(int(x) for x in solve4(b5_basis, qmul_gen(b5_basis[r], b5_basis[c], Fraction(-3), Fraction(-5))))
+                for c in range(4)
+            ]
+            for r in range(4)
+        ]
+        cm5 = [tuple(int(x) for x in solve4(b5_basis, qconj(e))) for e in b5_basis]
 
-    def o5_mul(u, v):
-        out = [0, 0, 0, 0]
-        for r in range(4):
-            if u[r] == 0:
-                continue
-            for c in range(4):
-                if v[c] == 0:
+        def o5_mul(u, v, mt=mt5):
+            out = [0, 0, 0, 0]
+            for r in range(4):
+                if u[r] == 0:
                     continue
-                p = mt5[r][c]
-                uv = u[r] * v[c]
-                for k in range(4):
-                    out[k] += uv * p[k]
-        return tuple(out)
+                for c in range(4):
+                    if v[c] == 0:
+                        continue
+                    p_vec = mt[r][c]
+                    uv = u[r] * v[c]
+                    for k in range(4):
+                        out[k] += uv * p_vec[k]
+            return tuple(out)
 
-    a_o5 = (0, 1, 0, 0)
-    b_o5 = tuple(int(x) for x in solve4(b5_basis, b_q))
-    t_o5 = (0, 0, 1, 0)
-    ga_b5, gb_b5, gt_b5 = np_mod(a_o5, 3, 3), np_mod(b_o5, 3, 3), np_mod(t_o5, 3, 3)
-    id_b5 = (1, 0, 0, 0)
-    jt_b5 = {(ident, id_b5)}
-    fr_b5 = deque([(ident, id_b5)])
-    while fr_b5:
-        yc, mc = fr_b5.popleft()
-        for yg, mg in ((a_Y, ga_b5), (b_Y, gb_b5), (t_Y, gt_b5)):
-            nx = (p_comp(yc, yg), np_mod(o5_mul(mc, mg), 3, 3))
-            if nx not in jt_b5:
-                jt_b5.add(nx)
-                fr_b5.append(nx)
-    assert len(jt_b5) == 144
-    q24 = {m for _, m in jt_b5}
-    assert len(q24) == 24
-    N6 = [y for y, m in jt_b5 if m == id_b5]
-    assert len(N6) == 6 and Counter(p_order(g) for g in N6) == {1: 1, 2: 3, 3: 2}
+        def o5_conj(u, cm=cm5):
+            out = [0, 0, 0, 0]
+            for r in range(4):
+                if u[r] == 0:
+                    continue
+                for k in range(4):
+                    out[k] += u[r] * cm[r][k]
+            return tuple(out)
+
+        def o5_nrd(u, mt=mt5, cm=cm5):
+            return o5_mul(u, o5_conj(u, cm), mt)[0]
+
+        def o5_prim(u):
+            g = 0
+            for x in u:
+                g = math.gcd(g, abs(x))
+            if g > 1:
+                u = tuple(x // g for x in u)
+            for x in u:
+                if x != 0:
+                    if x < 0:
+                        u = tuple(-y for y in u)
+                    break
+            return u
+
+        a_o5 = (0, 1, 0, 0)
+        b_o5 = tuple(int(x) for x in solve4(b5_basis, b_q))
+        t_o5 = (0, 0, 1, 0)
+
+        # Two-sided ramified maximal ideal P_5 / 5 O_5 = {u mod 5 : 5 | nrd(u)} (size 25, F_25 quotient)
+        p5_vecs = [
+            (c0, c1, c2, c3)
+            for c0 in range(5)
+            for c1 in range(5)
+            for c2 in range(5)
+            for c3 in range(5)
+            if o5_nrd((c0, c1, c2, c3)) % 5 == 0
+        ]
+        assert len(p5_vecs) == 25
+
+        def mod_p5_pm(u, p5=p5_vecs):
+            c1 = min(tuple((u[k] + z[k]) % 5 for k in range(4)) for z in p5)
+            c2 = min(tuple((-u[k] + z[k]) % 5 for k in range(4)) for z in p5)
+            return min(c1, c2)
+
+        def mod_pm(u, m):
+            v = tuple(c % m for c in u)
+            nv = tuple((-c) % m for c in v)
+            return min(v, nv)
+
+        # BFS 144 coset reps & Schreier generators of Gamma_Y inside O_5[1/2]^1/{+-1}
+        coset_b5 = {ident: (1, 0, 0, 0)}
+        dq_b5 = deque([ident])
+        while dq_b5:
+            g = dq_b5.popleft()
+            rg = coset_b5[g]
+            for sp, sq in ((a_Y, a_o5), (b_Y, b_o5), (t_Y, t_o5)):
+                h = p_comp(g, sp)
+                if h not in coset_b5:
+                    coset_b5[h] = o5_prim(o5_mul(rg, sq))
+                    dq_b5.append(h)
+        assert len(coset_b5) == 144
+
+        sch_b5 = set()
+        for g, rg in coset_b5.items():
+            for sp, sq in ((a_Y, a_o5), (b_Y, b_o5), (t_Y, t_o5)):
+                h = p_comp(g, sp)
+                rh = coset_b5[h]
+                gen = o5_prim(o5_mul(o5_mul(rg, sq), o5_conj(rh)))
+                nr = o5_nrd(gen)
+                v2 = 0
+                while nr % 2 == 0:
+                    nr //= 2
+                    v2 += 1
+                assert nr == 1 and v2 % 2 == 0
+                sch_b5.add(gen)
+
+        def norm_sl1_b5(u, m):
+            nr = o5_nrd(u)
+            v2 = 0
+            while nr % 2 == 0:
+                nr //= 2
+                v2 += 1
+            assert nr == 1 and v2 % 2 == 0
+            inv2 = pow(2 ** (v2 // 2), -1, m)
+            return tuple((c * inv2) % m for c in u)
+
+        def close_sl1_b5(m):
+            seed = {mod_pm(norm_sl1_b5(g, m), m) for g in sch_b5}
+            idm = mod_pm((1, 0, 0, 0), m)
+            S_m = {idm}
+            q_m = deque([idm])
+            while q_m:
+                cur = q_m.popleft()
+                for sg in seed:
+                    nxt = mod_pm(o5_mul(cur, sg), m)
+                    if nxt not in S_m:
+                        S_m.add(nxt)
+                        q_m.append(nxt)
+            return S_m
+
+        H3 = close_sl1_b5(3)
+        H9 = close_sl1_b5(9)
+        H5 = close_sl1_b5(5)
+        H25 = close_sl1_b5(25)
+        H7 = close_sl1_b5(7)
+        id_p5 = mod_p5_pm((1, 0, 0, 0))
+        assert all(mod_p5_pm(norm_sl1_b5(g, 5)) == id_p5 for g in sch_b5)
+        assert len(H5) == 25 and len(H25) == 3125 and len(H7) == 168
+
+        sl1_auts = []
+        for g, rg in coset_b5.items():
+            nr = o5_nrd(rg)
+            v2, v5 = 0, 0
+            while nr % 2 == 0:
+                nr //= 2
+                v2 += 1
+            while nr % 5 == 0:
+                nr //= 5
+                v5 += 1
+            if nr == 1 and v2 % 2 == 0 and v5 % 2 == 0:
+                sl1_auts.append(g)
+        assert len(sl1_auts) == 36
+        cong_deck = [
+            g for g in sl1_auts
+            if mod_pm(norm_sl1_b5(coset_b5[g], 3), 3) in H3 and mod_p5_pm(norm_sl1_b5(coset_b5[g], 5)) == id_p5
+        ]
+
+        if label == "x_5_2":
+            # Exact CONGRUENCE subgroup: Gamma_Y(5/2) = Gamma(3) cap Gamma(P_5) of index 12*3 = 36!
+            assert len(H3) == 1 and len(H9) == 27 and len(cong_deck) == 1
+            # Also verify PGL_2(F_3) = S_4 (order 24, K_4) and Cube Q_3 (Gamma(3) inside SL1, order 3 deck)
+            ga_b5, gb_b5, gt_b5 = np_mod(a_o5, 3, 3), np_mod(b_o5, 3, 3), np_mod(t_o5, 3, 3)
+            id_b5 = (1, 0, 0, 0)
+            jt_b5 = {(ident, id_b5)}
+            fr_b5 = deque([(ident, id_b5)])
+            while fr_b5:
+                yc, mc = fr_b5.popleft()
+                for yg, mg in ((a_Y, ga_b5), (b_Y, gb_b5), (t_Y, gt_b5)):
+                    nx = (p_comp(yc, yg), np_mod(o5_mul(mc, mg), 3, 3))
+                    if nx not in jt_b5:
+                        jt_b5.add(nx)
+                        fr_b5.append(nx)
+            assert len(jt_b5) == 144 and len({m for _, m in jt_b5}) == 24
+            N6 = [y for y, m in jt_b5 if m == id_b5]
+            assert len(N6) == 6 and Counter(p_order(g) for g in N6) == {1: 1, 2: 3, 3: 2}
+            b5_reports[label] = {
+                "is_congruence": True,
+                "congruence_level": "3 * P_5 (index 36 = 12 * 3 in O_5[1/2]^1/{+-1})",
+                "H3_order": len(H3),
+                "H9_order": len(H9),
+                "H5_order": len(H5),
+                "H25_order": len(H25),
+                "H7_order": len(H7),
+                "non_congruence_index": 1,
+                "mod3_pgl_order": 24,
+                "mod3_deck_group": "S_3 (order 6) -> K_4 via Cube Q_3",
+                "modP5_base_graph": "Theta_3 (genus 2, X^{10}(Gamma(P_5)))",
+            }
+        else:
+            # Strict NON-CONGRUENCE V_4-cover (index 4) of K_{3,3} = T_3/(Gamma_3^{V_4} cap Gamma(P_5)) (index 9)!
+            assert len(H3) == 4 and len(H9) == 108 and len(cong_deck) == 4
+            assert Counter(p_order(g) for g in cong_deck) == {1: 1, 2: 3}
+            # Verify Y / cong_deck == K_{3,3}
+            v2o = {}
+            n_orb = 0
+            for v in range(24):
+                if v not in v2o:
+                    for g in cong_deck:
+                        v2o[g[v]] = n_orb
+                    n_orb += 1
+            assert n_orb == 6
+            q_adj = [set() for _ in range(6)]
+            for u in range(24):
+                for v in adj[u]:
+                    q_adj[v2o[u]].add(v2o[v])
+            assert all(len(s) == 3 for s in q_adj)
+            b5_reports[label] = {
+                "is_congruence": False,
+                "congruence_closure": "Gamma_3^{V_4} cap Gamma(P_5) (index 9 = 3 * 3 in O_5[1/2]^1/{+-1})",
+                "H3_order": len(H3),
+                "H9_order": len(H9),
+                "H5_order": len(H5),
+                "H25_order": len(H25),
+                "H7_order": len(H7),
+                "non_congruence_index": 4,
+                "deck_group": "V_4 (order 4)",
+                "base_graph": "K_{3,3} (genus 4, X^{10}(Gamma_3^{V_4} cap Gamma(P_5)))",
+            }
 
     d7_res = {
+        "B3_x32_is_congruence": False,
         "B3_mod3_order": len(q36),
         "B3_deck_group": "V_4 (order 4)",
         "B3_base_graph": "K_{3,3} (genus 4, X^6(Gamma(3)))",
         "B3_mod5_joint_order": len(jt5),
-        "B5_x52_mod3_order": len(q24),
-        "B5_x52_deck_group": "S_3 (order 6)",
-        "B5_x52_base_graph": "K_4 (genus 3, X^{10}(Gamma(3))) via Cube Q_3 (genus 5)",
+        "B5_x52": b5_reports["x_5_2"],
+        "B5_x12": b5_reports["x_1_2"],
         "pass": True,
     }
     return d5_res, d6_res, d7_res
@@ -1523,7 +1704,140 @@ def verify_d9_dic6_3adic() -> Dict[str, object]:
     order_K = 1
     for d in invs:
         order_K *= d
+    assert invs == [4, 52, 52, 1820, 21840]
     assert order_K == 429_923_020_800 == (2 ** 12) * 3 * (5 ** 2) * (7 ** 2) * (13 ** 4)
+
+    # Full Aut(Z) (order 96), 43-involution Chan non-hyperellipticity census, and exact gon(Z) = 8
+    adj_z = [[j for j in range(24) if A_opt[i][j] == 1] for i in range(24)]
+    adj_z_sets = [set(nb) for nb in adj_z]
+    bfs_z = [0]
+    seen_z = {0}
+    dq_z = deque([0])
+    while dq_z:
+        u = dq_z.popleft()
+        for v in adj_z[u]:
+            if v not in seen_z:
+                seen_z.add(v)
+                bfs_z.append(v)
+                dq_z.append(v)
+    auts_z: List[Tuple[int, ...]] = []
+    perm_z = [-1] * 24
+    used_z = [False] * 24
+
+    def bt_z(pos: int) -> None:
+        if pos == 24:
+            auts_z.append(tuple(perm_z))
+            return
+        u = bfs_z[pos]
+        if pos == 0:
+            cands = list(range(24))
+        else:
+            mapped = [perm_z[w] for w in adj_z[u] if perm_z[w] != -1]
+            cands = [c for c in adj_z[mapped[0]] if all(c in adj_z_sets[m] for m in mapped[1:])]
+        for c in cands:
+            if not used_z[c]:
+                perm_z[u] = c
+                used_z[c] = True
+                bt_z(pos + 1)
+                perm_z[u] = -1
+                used_z[c] = False
+
+    bt_z(0)
+    assert len(auts_z) == 96
+    ident_z = tuple(range(24))
+    invs_z = [g for g in auts_z if g != ident_z and p_comp(g, g) == ident_z]
+    assert len(invs_z) == 43
+
+    b1_dist_z: Counter = Counter()
+    for g in invs_z:
+        v_orbs = {}
+        nv = 0
+        for v in range(24):
+            if v not in v_orbs:
+                v_orbs[v] = nv
+                v_orbs[g[v]] = nv
+                nv += 1
+        e_orbs = set()
+        for u in range(24):
+            for v in adj_z[u]:
+                if u < v:
+                    if g[u] == v and g[v] == u:
+                        continue  # folded edge -> degree-1 twig, 0 contribution to b1
+                    e1 = (u, v)
+                    e2 = (min(g[u], g[v]), max(g[u], g[v]))
+                    e_orbs.add(min(e1, e2))
+        b1_dist_z[len(e_orbs) - nv + 1] += 1
+    assert dict(sorted(b1_dist_z.items())) == {7: 2, 11: 24, 13: 17} and b1_dist_z[0] == 0
+
+    def dhar_z_reach(D_in: List[int], q: int) -> bool:
+        if D_in[q] >= 1:
+            return True
+        D = list(D_in)
+        while True:
+            burnt = [False] * 24
+            burnt[q] = True
+            queue = [q]
+            head = 0
+            fires = [0] * 24
+            while head < len(queue):
+                u = queue[head]
+                head += 1
+                for v in adj_z[u]:
+                    if not burnt[v]:
+                        fv = fires[v] + 1
+                        fires[v] = fv
+                        if fv > D[v]:
+                            burnt[v] = True
+                            queue.append(v)
+            if len(queue) == 24:
+                return False
+            for u in range(24):
+                if not burnt[u]:
+                    for v in adj_z[u]:
+                        if burnt[v]:
+                            D[u] -= 1
+                            D[v] += 1
+            if D[q] >= 1:
+                return True
+
+    q_order_z = (6, 15, 21, 3, 9, 18, 12, 4, 8, 2, 10, 14, 16, 20, 22, 1, 5, 7, 11, 13, 17, 19, 23)
+
+    def has_rank1_z(D: List[int]) -> bool:
+        return all(dhar_z_reach(D, q) for q in q_order_z)
+
+    stab0_z = [g for g in auts_z if g[0] == 0]
+    assert len(stab0_z) == 4
+    s1, s2, s3 = stab0_z[1], stab0_z[2], stab0_z[3]
+    canonical_checked = 0
+    for deg in (4, 5, 6, 7):
+        for comb in combinations_with_replacement(range(24), deg - 1):
+            if tuple(sorted(s1[v] for v in comb)) < comb:
+                continue
+            if tuple(sorted(s2[v] for v in comb)) < comb:
+                continue
+            if tuple(sorted(s3[v] for v in comb)) < comb:
+                continue
+            canonical_checked += 1
+            D = [0] * 24
+            D[0] = 1
+            for v in comb:
+                D[v] += 1
+            if has_rank1_z(D):
+                raise AssertionError(f"Unexpected rank>=1 divisor on Z at degree {deg}: {(0,) + comb}")
+    assert canonical_checked == 157_166
+
+    # All 4 canonical degree-8 two-coset witnesses <y> + x^k <y> (k = 0, 1, 2, 3)
+    deg8_witnesses = [
+        [0, 0, 6, 6, 12, 12, 18, 18],
+        [0, 1, 6, 7, 12, 13, 18, 19],
+        [0, 2, 6, 8, 12, 14, 18, 20],
+        [0, 3, 6, 9, 12, 15, 18, 21],
+    ]
+    for w in deg8_witnesses:
+        D = [0] * 24
+        for v in w:
+            D[v] += 1
+        assert has_rank1_z(D)
 
     return {
         "connected_4reg_cayley": connected_cnt,
@@ -1535,6 +1849,14 @@ def verify_d9_dic6_3adic() -> Dict[str, object]:
         "girth": 4,
         "sandpile_invariants": invs,
         "sandpile_order": order_K,
+        "aut_order": len(auts_z),
+        "involutions": len(invs_z),
+        "involution_quotient_b1_dist": {str(k): v for k, v in sorted(b1_dist_z.items())},
+        "tree_quotients": 0,
+        "non_hyperelliptic": True,
+        "gonality_canonical_checked_deg4_to_7": canonical_checked,
+        "divisorial_gonality": 8,
+        "reduced_deg8_witness": deg8_witnesses[1],
         "pass": True,
     }
 
@@ -2787,6 +3109,7 @@ def verify_d12_3adic_shimura_manin() -> Dict[str, object]:
 
 def main() -> int:
     check_only = "--check-only" in sys.argv
+    no_figs = "--no-figs" in sys.argv
     paper_root = pathlib.Path(__file__).resolve().parent.parent
     data_dir = paper_root / "data"
     fig_dir = paper_root / "paper" / "figures"
@@ -2804,11 +3127,11 @@ def main() -> int:
     d5, d6, d7 = verify_d5_d6_d7_2adic_arithmetic()
     print("  [PASS] Gate D5: |Aut(Y)|=144=12(g-1), Lame amalgam & universal Fricke-Vogt law")
     print("  [PASS] Gate D6: Rational arithmetic classification x in {1/2, 3/2, 5/2} & Q_2 lift")
-    print("  [PASS] Gate D7: Non-congruence towers Y->K_{3,3} (B_3) & Y->Q_3->K_4 (B_5)")
+    print("  [PASS] Gate D7: All-primes B_3/B_5 classification: x=5/2 CONGRUENCE Gamma(3*P_5); x=3/2,1/2 non-cong V_4->K_{3,3} (NEG-M23)")
     d8 = verify_d8_shimura_manin()
     print("  [PASS] Gate D8: Zero-PARI Manin T_2 audit across all 18 levels (0/19 survivors)")
     d9 = verify_d9_dic6_3adic()
-    print("  [PASS] Gate D9: 3-adic Bruhat-Tits T_4 companion Dic_6 (g=25, lambda_nt=3)")
+    print("  [PASS] Gate D9: 3-adic Dic_6 (g=25, lambda_nt=3, K(Z)=[4,52,52,1820,21840], 43 invs b1>=7, exact gon(Z)=8)")
     d10 = verify_d10_eisenstein_nauru()
     print("  [PASS] Gate D10: Eisenstein-Nauru {6,3}_{(2,2)} 36/36 iso, Dirac K,K', C_6 gap +30.9%, F31")
     d11 = verify_d11_su2_and_hurwitz_dic6()
@@ -2827,17 +3150,18 @@ def main() -> int:
         "fig4_elliptic_shimura_comparison.pdf",
         "fig5_eisenstein_hurwitz_mirror.pdf",
     ]
-    if check_only:
+    if check_only or no_figs:
         for fn in expected_figs:
             assert (fig_dir / fn).is_file(), f"Missing figure PDF: {fn}"
         figs = expected_figs
-        print(f"  [PASS] Gate S1 (--check-only): Verified all {len(figs)} tracked vector PDF figures exist")
+        mode_tag = "--check-only" if check_only else "--no-figs"
+        print(f"  [PASS] Gate S1 ({mode_tag}): Verified all {len(figs)} tracked vector PDF figures exist")
     else:
         figs = generate_all_figures(fig_dir)
         print(f"  [PASS] Gate S1: Generated {len(figs)} metadata-free vector PDF figures")
 
     payload = {
-        "schema_version": "1.1.1",
+        "schema_version": "1.2.0",
         "paper": "Uniform Triadic Wreath Products, the Nauru Graph, and Dual-Prime D=6 Arithmeticity",
         "gates_passed": 15,
         "gates_total": 15,

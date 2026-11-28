@@ -24,13 +24,13 @@ jobs:
         run: python3 tests/content_integrity_audit.py
 
   python-verifiers:
-    name: Pure-Python Verifiers (53 Gates)
+    name: Pure-Python Verifiers (71 Gates)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - name: Run zero-dependency Python verification suites
+      - name: Run zero-dependency Python verification suites (PC-II, Horizon Round 1, WP030-035)
         run: |
           set -euo pipefail
           python3 papers/triadic_wreath_nauru/code/triadic_nauru_verify.py --check-only
@@ -39,6 +39,50 @@ jobs:
             echo "=== Running $script ==="
             python3 "$script"
           done
+          git diff --exit-code
+
+      - name: Run Horizon Synthesis simulators (18 gates) in isolated temp workspace & verify JSON parity
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/hs-ci /tmp/hs-fakebin
+          mkdir -p /tmp/hs-ci /tmp/hs-fakebin
+          cp -r papers/horizon_synthesis /tmp/hs-ci/
+          printf '#!/bin/sh\ntouch fig.pdf\n' > /tmp/hs-fakebin/pdflatex
+          chmod +x /tmp/hs-fakebin/pdflatex
+          for piece in piece1_propulsion_hardware piece2_smallbody_crtbp piece3_nullcone_tuft_hagedorn; do
+            sim="$(echo /tmp/hs-ci/horizon_synthesis/$piece/code/piece*_sim.py)"
+            echo "=== Running isolated $piece ==="
+            PATH="/tmp/hs-fakebin:$PATH" python3 "$sim"
+            orig_json="$(echo papers/horizon_synthesis/$piece/data/piece*_calibration.json)"
+            new_json="$(echo /tmp/hs-ci/horizon_synthesis/$piece/data/piece*_calibration.json)"
+            python3 - "$orig_json" "$new_json" "$piece" <<'PY'
+          import json, math, sys
+          orig = json.load(open(sys.argv[1]))
+          new = json.load(open(sys.argv[2]))
+          piece = sys.argv[3]
+          max_diff = [0.0]
+          def cmp_obj(a, b, path=""):
+              assert type(a) is type(b), f"{piece}{path}: type {type(a)} != {type(b)}"
+              if isinstance(a, dict):
+                  assert a.keys() == b.keys(), f"{piece}{path}: keys differ"
+                  for k in a:
+                      cmp_obj(a[k], b[k], f"{path}.{k}")
+              elif isinstance(a, list):
+                  assert len(a) == len(b), f"{piece}{path}: len {len(a)} != {len(b)}"
+                  for i, (x, y) in enumerate(zip(a, b)):
+                      cmp_obj(x, y, f"{path}[{i}]")
+              elif isinstance(a, float):
+                  d = abs(a - b)
+                  if d > max_diff[0]:
+                      max_diff[0] = d
+                  assert math.isclose(a, b, rel_tol=1e-11, abs_tol=1e-12), f"{piece}{path}: {a} != {b} (diff={d})"
+              else:
+                  assert a == b, f"{piece}{path}: {a!r} != {b!r}"
+          cmp_obj(orig, new)
+          print(f"[PASS] {piece} JSON parity OK (exact keys/ints/digests, max_float_diff={max_diff[0]:.3e})")
+          PY
+          done
+          rm -rf /tmp/hs-ci /tmp/hs-fakebin
           git diff --exit-code
 
   rust-and-cpp-verifiers:
@@ -57,7 +101,7 @@ jobs:
               cargo test --release --manifest-path "$manifest"
             fi
           done
-          echo "=== cargo run --release (PC-II 8 core suites) ==="
+          echo "=== cargo run --release (PC-II 10 core suites) ==="
           cargo run --release --manifest-path papers/triadic_wreath_nauru/rust/Cargo.toml
 
       - name: Build and test C++20 ErgenticsCXX (-Wall -Wextra -Werror)
@@ -68,7 +112,7 @@ jobs:
           ctest --test-dir /tmp/ergentics-cxx-build --output-on-failure
 
   lean-formal-oracles:
-    name: Lean 4.36.0 Formal Oracles (8 Projects / 124 Theorems)
+    name: Lean 4.36.0 Formal Oracles (8 Projects / 128 Theorems)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository

@@ -638,9 +638,32 @@
     "B3_deck_group": "V_4 (order 4)",
     "B3_mod3_order": 36,
     "B3_mod5_joint_order": 8640,
-    "B5_x52_base_graph": "K_4 (genus 3, X^{10}(Gamma(3))) via Cube Q_3 (genus 5)",
-    "B5_x52_deck_group": "S_3 (order 6)",
-    "B5_x52_mod3_order": 24,
+    "B3_x32_is_congruence": false,
+    "B5_x12": {
+      "H25_order": 3125,
+      "H3_order": 4,
+      "H5_order": 25,
+      "H7_order": 168,
+      "H9_order": 108,
+      "base_graph": "K_{3,3} (genus 4, X^{10}(Gamma_3^{V_4} cap Gamma(P_5)))",
+      "congruence_closure": "Gamma_3^{V_4} cap Gamma(P_5) (index 9 = 3 * 3 in O_5[1/2]^1/{+-1})",
+      "deck_group": "V_4 (order 4)",
+      "is_congruence": false,
+      "non_congruence_index": 4
+    },
+    "B5_x52": {
+      "H25_order": 3125,
+      "H3_order": 1,
+      "H5_order": 25,
+      "H7_order": 168,
+      "H9_order": 27,
+      "congruence_level": "3 * P_5 (index 36 = 12 * 3 in O_5[1/2]^1/{+-1})",
+      "is_congruence": true,
+      "mod3_deck_group": "S_3 (order 6) -> K_4 via Cube Q_3",
+      "mod3_pgl_order": 24,
+      "modP5_base_graph": "Theta_3 (genus 2, X^{10}(Gamma(P_5)))",
+      "non_congruence_index": 1
+    },
     "pass": true
   },
   "D8_manin_shimura_audit": {
@@ -832,12 +855,32 @@
     "total_genus13_pairs": 19
   },
   "D9_dic6_3adic": {
+    "aut_order": 96,
     "connected_4reg_cayley": 18,
+    "divisorial_gonality": 8,
     "genus": 25,
     "girth": 4,
+    "gonality_canonical_checked_deg4_to_7": 157166,
+    "involution_quotient_b1_dist": {
+      "11": 24,
+      "13": 17,
+      "7": 2
+    },
+    "involutions": 43,
+    "non_hyperelliptic": true,
     "optimal_lambda_nt": 3.0,
     "pass": true,
     "ramanujan_bound_4reg": 3.464102,
+    "reduced_deg8_witness": [
+      0,
+      1,
+      6,
+      7,
+      12,
+      13,
+      18,
+      19
+    ],
     "sandpile_invariants": [
       4,
       52,
@@ -847,6 +890,7 @@
     ],
     "sandpile_order": 429923020800,
     "strict_ramanujan_4reg_cayley": 12,
+    "tree_quotients": 0,
     "weak_ramanujan_4reg_cayley": 18
   },
   "P1_rct_null_control": {
@@ -878,5 +922,5 @@
   "gates_passed": 15,
   "gates_total": 15,
   "paper": "Uniform Triadic Wreath Products, the Nauru Graph, and Dual-Prime D=6 Arithmeticity",
-  "schema_version": "1.1.1"
+  "schema_version": "1.2.0"
 }
