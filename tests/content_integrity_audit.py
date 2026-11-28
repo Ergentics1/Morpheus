@@ -2,11 +2,11 @@
 """Morpheus Repository-Wide Content-Integrity Audit Harness (MIT License).
 
 Zero external dependencies (Python 3.12+ standard library only). Enforces
-10 deterministic repository-wide integrity gates covering Data Model manifests,
+11 deterministic repository-wide integrity gates covering Data Model manifests,
 PROVENANCE.md SHA-256 inventories, arXiv bundle hygiene & byte parity, binary
 metadata privacy, LaTeX/BibTeX cross-reference integrity, Markdown links,
 Lean 4 static trust boundaries, governance ledgers, Code-vs-Data separation,
-and frozen baseline immutability locks.
+frozen baseline immutability locks, and cross-paper mathematical seam parity.
 
 Usage:
     python3 tests/content_integrity_audit.py
@@ -15,6 +15,8 @@ Usage:
 from __future__ import annotations
 
 import hashlib
+import json
+import math
 import pathlib
 import re
 import struct
@@ -466,6 +468,164 @@ def gate_ci10_frozen_baselines() -> Tuple[bool, str]:
     return True, f"{len(FROZEN_BASELINE_SHA256)}/{len(FROZEN_BASELINE_SHA256)} frozen baseline anchors intact"
 
 
+def gate_ci11_cross_paper_seam_parity() -> Tuple[bool, str]:
+    """CI-11: Verify cross-paper mathematical invariants across Data Model JSONs and Lean axiom audits."""
+    errors: List[str] = []
+    checks = 0
+
+    def load_json(rel: str) -> dict:
+        p = ROOT / rel
+        if not p.is_file():
+            errors.append(f"Missing calibration JSON: {rel}")
+            return {}
+        return json.loads(p.read_text(encoding="utf-8"))
+
+    p1 = load_json("data/calibrations/theorem_d_pincer_swiftpp.json")
+    p2 = load_json("papers/triadic_wreath_nauru/data/triadic_nauru_calibration.json")
+    p3 = load_json("papers/triadic_3adic_frontier/data/triadic_3adic_calibration.json")
+    w30 = load_json("papers/wp030_shape_propulsion/data/wp030_g4n_cycle1_calibration.json")
+    w33 = load_json("papers/wp033_halo_tag_guidance/data/wp033_g4n_cycle1_calibration.json")
+    w35 = load_json("papers/wp035_tuft_hagedorn_repair/data/wp035_g4n_cycle1_calibration.json")
+    hs1 = load_json("papers/horizon_synthesis/piece1_propulsion_hardware/data/piece1_calibration.json")
+    hs2 = load_json("papers/horizon_synthesis/piece2_smallbody_crtbp/data/piece2_calibration.json")
+    hs3 = load_json("papers/horizon_synthesis/piece3_nullcone_tuft_hagedorn/data/piece3_calibration.json")
+    if errors:
+        return False, "; ".join(errors[:5])
+
+    # 1. Paper #01 <-> PC-III Poitou-Odlyzko (6, 16, 1, 2) margin & FENV bracket
+    p1_margin = p1["three_pincer_results"]["deg6_u16_h1_margin"]
+    w616 = p3["F8_poitou_odlyzko_audit"]["witness_6_16_1_2"]
+    p3_gap = w616["gap"]
+    p3_diff = w616["exp_LB_GL128"] - w616["UB_6_16"]
+    if not (
+        math.isclose(p1_margin, p3_gap, rel_tol=0.0, abs_tol=1e-12)
+        and math.isclose(p3_diff, p3_gap, rel_tol=0.0, abs_tol=1e-12)
+        and 0.013629809157 <= p1_margin <= 0.013629809162
+    ):
+        errors.append(f"Paper#01<->PC-III Poitou (6,16,1,2) mismatch: {p1_margin} vs {p3_gap}")
+    checks += 1
+
+    # 2. PC-II <-> PC-III shared arithmetic graph & Shimura invariants
+    if p2["D3_nauru_weil"]["prime_cadences_even"] != p3["F1_rational_nauru_and_errata"]["nauru_pi_6_to_24"]:
+        errors.append("PC-II<->PC-III Nauru pi_Y(6..24) cadence mismatch")
+    checks += 1
+
+    if not (p2["D5_lame_fricke_vogt"]["aut_order"] == p3["F1_rational_nauru_and_errata"]["aut_Y_order"] == 144):
+        errors.append("PC-II<->PC-III |Aut(Y)| != 144")
+    checks += 1
+
+    p2_tplr = p2["D1_non_fusion"]["T_PLR"]
+    p3_tplr = p3["F1_rational_nauru_and_errata"]["tplr_group"]
+    if (p2_tplr["order"], p2_tplr["commutator_order"], p2_tplr["abelianization_order"]) != (
+        p3_tplr["order"],
+        p3_tplr["commutator_order"],
+        p3_tplr["abelianization_order"],
+    ) or p3_tplr["order"] != 144:
+        errors.append("PC-II<->PC-III <T,P,L,R> invariant mismatch")
+    checks += 1
+
+    f2 = p3["F2_nauru_metric_gonality"]
+    if not (p2["D4_tropical"]["gonality"] == f2["star_scramble_h"] == f2["star_scramble_e"] == 6):
+        errors.append("PC-II<->PC-III Nauru gonality != 6")
+    checks += 1
+
+    d9 = p2["D9_dic6_3adic"]
+    f5 = p3["F5_dic6_cayley_spectrum_gonality"]
+    if not (
+        d9["divisorial_gonality"] == f5["scramble_S4"]["hitting_number"] == f5["scramble_S4"]["egg_cut_number"] == 8
+        and d9["aut_order"] == f5["aut_Z_order"] == 96
+        and d9["connected_4reg_cayley"] == f5["connected_cayley_count"] == 18
+        and d9["strict_ramanujan_4reg_cayley"] == f5["ramanujan_class_size"] == 12
+        and d9["weak_ramanujan_4reg_cayley"] == f5["ramanujan_class_size"] + f5["boundary_class_size"] == 18
+        and d9["involutions"] == f5["involution_count"] == 43
+    ):
+        errors.append("PC-II<->PC-III Dic_6 Cayley/gonality/involution mismatch")
+    checks += 1
+
+    d12 = p2["D12_3adic_shimura_manin"]
+    f7 = p3["F7_genus25_borel_census"]
+    p2_curves = {(c["D"], c["N"], c["e2"], c["e3"]) for c in d12["all_19_results"]}
+    p3_curves = {(c["D"], c["N"], c["e2"], c["e3"]) for c in f7["curves"]}
+    if not (
+        d12["total_genus25_pairs"] == f7["total_curves"] == 19
+        and d12["torsion_free_pairs"] == f7["torsion_free_count"] == 9
+        and d12["survivors"] == f7["pc2_thm73_manin_T3_survivors"] == 0
+        and p2_curves == p3_curves
+    ):
+        errors.append("PC-II<->PC-III genus-25 Borel census mismatch")
+    checks += 1
+
+    # 3. PC-III schema 1.1.0 R1/P1 cross-language SplitMix64 digest seam
+    p3_r1 = p3.get("R1_runtime_guards_and_fault_injection", {})
+    p3_p1 = p3.get("P1_keyed_prng_rct_and_seam_replay", {})
+    if not (
+        p3.get("schema_version") == "1.1.0"
+        and p3_r1.get("pass") is True
+        and p3_r1.get("faults_injected") == 6
+        and p3_r1.get("faults_rejected") == 6
+        and p3_r1.get("laplacian_rank_Y") == 23
+        and p3_r1.get("laplacian_rank_Z") == 23
+        and p3_p1.get("pass") is True
+        and p3_p1.get("order_invariant_replay") is True
+        and p3_p1.get("xor_order_invariant_digest") == "0x8aee1bed32dffe97"
+        and p3_p1.get("rct_splitmix64_digest") == "0x76597d8f13155b2c"
+    ):
+        errors.append("PC-III schema 1.1.0 R1/P1 cross-language SplitMix64 seam contract failed")
+    checks += 1
+
+    # 4. WP 030-035 <-> Horizon Synthesis headline invariant seams
+    wp_hs_pairs = [
+        (
+            "Thm G1 (WP030<->HS1)",
+            w30["checks"]["D3_equilateral_hopf_and_T_shape_divergence"]["t_ratio_q0p95"],
+            hs1["results"]["D2"]["g1_ke_q95"],
+        ),
+        (
+            "Thm G3 (WP033<->HS2)",
+            w33["checks"]["D1_k11_c149_and_theorem_g3"]["didymos_y_exact_resonance_L_m"],
+            hs2["results"]["D4"]["didymos_L_y_star_m"],
+        ),
+        (
+            "NEG-W22 (WP035<->HS3)",
+            w35["results"]["D1_trackA_spectral_zeta_eq65_and_neg_w22"]["metrics"]["neg_w22_s3_true_ratio"],
+            hs3["results"]["D4"]["S3_true_ratio"],
+        ),
+        (
+            "Thm G6 (WP035<->HS3)",
+            w35["results"]["D4_theorem_g6_hagedorn_equivalence_breaking"]["metrics"]["hagedorn_regimes"][
+                "chandrasekaran_clock"
+            ]["canonical_gamma_rms_disp"],
+            hs3["results"]["D5_P1"]["theorem_g6_exact"]["chandrasekaran_257_90"]["gamma_sigma_over_mean"],
+        ),
+    ]
+    for label, a_val, b_val in wp_hs_pairs:
+        if not math.isclose(a_val, b_val, rel_tol=0.0, abs_tol=1e-12):
+            errors.append(f"{label} mismatch: {a_val} vs {b_val}")
+        checks += 1
+
+    # 5. Lean 4.36.0 #print axioms coverage guard across all 9 projects
+    lakefiles = sorted(ROOT.rglob("lakefile.toml"))
+    ax_total = 0
+    for lf in lakefiles:
+        proj = lf.parent
+        c = 0
+        for lean_file in sorted(proj.rglob("*.lean")):
+            if ".lake" in lean_file.parts:
+                continue
+            code = strip_lean_comments(lean_file.read_text(encoding="utf-8"))
+            c += len(re.findall(r"^\s*#print\s+axioms\b", code, flags=re.M))
+        if c < 7:
+            errors.append(f"Lean project {proj.relative_to(ROOT)} has only {c} #print axioms audits")
+        ax_total += c
+    if ax_total < 149:
+        errors.append(f"Expected >= 149 total #print axioms audits across 9 Lean projects, found {ax_total}")
+    checks += 1
+
+    if errors:
+        return False, "; ".join(errors[:5])
+    return True, f"{checks} cross-paper seams verified (Paper#01<->PC-II<->PC-III, WP030-035<->HS, {ax_total} Lean #print axioms)"
+
+
 def main() -> int:
     gates = [
         ("CI-1", "Data Model MANIFEST.sha256", gate_ci1_manifests),
@@ -478,9 +638,10 @@ def main() -> int:
         ("CI-8", "Governance ledgers consistency", gate_ci8_governance_ledgers),
         ("CI-9", "Code-vs-Data Model separation", gate_ci9_code_data_separation),
         ("CI-10", "Frozen baseline SHA-256 locks", gate_ci10_frozen_baselines),
+        ("CI-11", "Cross-paper mathematical seam parity", gate_ci11_cross_paper_seam_parity),
     ]
     passed = 0
-    print("Running Morpheus 10-gate repository-wide content-integrity audit...")
+    print("Running Morpheus 11-gate repository-wide content-integrity audit...")
     for gid, title, fn in gates:
         ok, detail = fn()
         tag = "PASS" if ok else "FAIL"

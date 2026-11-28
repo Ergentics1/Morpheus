@@ -33,11 +33,11 @@
 
 | Plane | Path | License | Scope & Result |
 | :--- | :--- | :--- | :--- |
-| **Pure Python (zero deps)** | [`code/triadic_3adic_verify.py`](code/triadic_3adic_verify.py) | MIT | **8/8 gates (`F1`–`F8`) PASS** + `--check-only` & `--no-figs` modes + 4 runtime metadata-free TikZ vector PDFs |
-| **Pure Rust (zero crates)** | [`rust/src/lib.rs`](rust/src/lib.rs) | MIT | **6/6 integration tests + 6/6 core suites PASS** (incl. `573,300` exhaustive deg-6/7 Dhar, `0/80` CRT left-mult, Hurwitz `L_8/\{\pm 1\}=64`, Riehm mod 8, $\mathcal{O}_7^{\max}$ mod `(3)`) |
-| **Zero-Heap C++20 `FENV`** | [`cpp/fenv_oracle.cpp`](cpp/fenv_oracle.cpp) | MIT | **6/6 gates PASS** (`-O2 -std=c++20 -frounding-math -Wall -Wextra -Werror`; hardware `FE_DOWNWARD`/`FE_UPWARD` intervals, Jacobi $\le 2.11\times 10^{-15}$, `573,300` exhaustive Dhar, Poitou gap $> 0$, genus-25 census) |
+| **Pure Python (zero deps)** | [`code/triadic_3adic_verify.py`](code/triadic_3adic_verify.py) | MIT | **10/10 gates (`F1`–`F8`, `R1`, `P1`) PASS** + `--check-only` & `--no-figs` modes + `6/6` fault injections + `SplitMix64` RCTs (`0x8aee1bed32dffe97`, `0x76597d8f13155b2c`) + 4 metadata-free TikZ PDFs |
+| **Pure Rust (zero crates)** | [`rust/src/lib.rs`](rust/src/lib.rs) | MIT | **9/9 integration tests + 9/9 core suites PASS** (incl. all 4 real-quadratic orders `R7`, continuous equilateral Dhar `132/132` & `168/168` + `S_4` cuts `R8`, `573,300` deg-6/7 Dhar, `0/80` CRT left-mult, Hurwitz `L_8/\{\pm 1\}=64`, Riehm mod 8, & bit-exact `R1`/`P1` `SplitMix64` parity `R9`) |
+| **Zero-Heap C++20 `FENV`** | [`cpp/fenv_oracle.cpp`](cpp/fenv_oracle.cpp) | MIT | **8/8 gates PASS under BOTH `g++` & `clang++`** (`-O2 -std=c++20 -frounding-math -Wall -Wextra -Werror`; bit-exact `diff -u` parity `0x40d8ca4bb1c14732`, hardware `FE_DOWNWARD`/`FE_UPWARD` intervals, `573,300` Dhar, `R-Type` faults, & `SplitMix64` seam parity) |
 | **Lean 4.36.0 (zero Mathlib)** | [`lean/Triadic3AdicFrontier/`](lean/Triadic3AdicFrontier.lean) | MIT | **20/20 theorems live kernel-compiled** (`-DwarningAsError=true -DautoImplicit=false`, `0 sorryAx`, `0 Lean.ofReduceBool`) |
-| **Data Model (SHA-256)** | [`data/triadic_3adic_calibration.json`](data/triadic_3adic_calibration.json) | CC BY 4.0 | Immutable calibration record (`schema_version 1.0.0`) verified by repo-root-relative [`data/MANIFEST.sha256`](data/MANIFEST.sha256) |
+| **Data Model (SHA-256)** | [`data/triadic_3adic_calibration.json`](data/triadic_3adic_calibration.json) | CC BY 4.0 | Immutable calibration record (`schema_version 1.1.0`) verified by repo-root-relative [`data/MANIFEST.sha256`](data/MANIFEST.sha256) |
 
 ### Reproduce Locally
 
@@ -45,6 +45,8 @@
 python3 papers/triadic_3adic_frontier/code/triadic_3adic_verify.py --check-only
 sha256sum -c papers/triadic_3adic_frontier/data/MANIFEST.sha256
 (cd papers/triadic_3adic_frontier/rust && cargo test --release && cargo run --release)
-g++ -O2 -std=c++20 -frounding-math -Wall -Wextra -Werror papers/triadic_3adic_frontier/cpp/fenv_oracle.cpp -o /tmp/pc3_fenv && /tmp/pc3_fenv && rm -f /tmp/pc3_fenv
+g++ -O2 -std=c++20 -frounding-math -Wall -Wextra -Werror papers/triadic_3adic_frontier/cpp/fenv_oracle.cpp -o /tmp/pc3_gxx && /tmp/pc3_gxx > /tmp/pc3_gxx.out
+clang++ -O2 -std=c++20 -frounding-math -Wall -Wextra -Werror papers/triadic_3adic_frontier/cpp/fenv_oracle.cpp -o /tmp/pc3_clang && /tmp/pc3_clang > /tmp/pc3_clang.out
+diff -u /tmp/pc3_gxx.out /tmp/pc3_clang.out && rm -f /tmp/pc3_gxx /tmp/pc3_clang /tmp/pc3_gxx.out /tmp/pc3_clang.out
 (cd papers/triadic_3adic_frontier/lean && lake build && .lake/build/bin/triadic-3adic-lean)
 ```

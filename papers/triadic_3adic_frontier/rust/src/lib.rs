@@ -1699,3 +1699,1071 @@ pub fn verify_r6_genus25_and_poitou_odlyzko() {
     assert!((lb8_3 - 12.5937296518).abs() < 1e-8);
     assert!((lb8_p - 12.5955757277).abs() < 1e-7 && lb8_p < ub81);
 }
+
+// ============================================================================
+// Suite R7: Pillar II — Full Independent Rust Cross-Check of Q(sqrt(17)), Q(sqrt(2)), Q(sqrt(3))
+// ============================================================================
+
+type Qf = (Frac, Frac);
+
+fn qf_add_g(u: Qf, v: Qf) -> Qf {
+    (u.0.add(v.0), u.1.add(v.1))
+}
+fn qf_sub_g(u: Qf, v: Qf) -> Qf {
+    (u.0.sub(v.0), u.1.sub(v.1))
+}
+fn qf_neg_g(u: Qf) -> Qf {
+    (u.0.neg(), u.1.neg())
+}
+fn qf_mul_g(u: Qf, v: Qf, tr_w: i128, nr_w: i128) -> Qf {
+    // w^2 = tr_w * w - nr_w
+    let b1b2 = u.1.mul(v.1);
+    (
+        u.0.mul(v.0).sub(Frac::from_i(nr_w).mul(b1b2)),
+        u.0.mul(v.1).add(u.1.mul(v.0)).add(Frac::from_i(tr_w).mul(b1b2)),
+    )
+}
+fn qf_norm_g(u: Qf, tr_w: i128, nr_w: i128) -> Frac {
+    u.0.mul(u.0)
+        .add(Frac::from_i(tr_w).mul(u.0.mul(u.1)))
+        .add(Frac::from_i(nr_w).mul(u.1.mul(u.1)))
+}
+fn qf_inv_g(u: Qf, tr_w: i128, nr_w: i128) -> Qf {
+    let n = qf_norm_g(u, tr_w, nr_w);
+    (u.0.add(Frac::from_i(tr_w).mul(u.1)).div(n), u.1.neg().div(n))
+}
+fn qmul_f(x: [Qf; 4], y: [Qf; 4], a: Qf, b: Qf, tr_w: i128, nr_w: i128) -> [Qf; 4] {
+    let m = |u: Qf, v: Qf| qf_mul_g(u, v, tr_w, nr_w);
+    let ab = m(a, b);
+    [
+        qf_add_g(
+            qf_add_g(m(x[0], y[0]), m(a, m(x[1], y[1]))),
+            qf_sub_g(m(b, m(x[2], y[2])), m(ab, m(x[3], y[3]))),
+        ),
+        qf_add_g(
+            qf_add_g(m(x[0], y[1]), m(x[1], y[0])),
+            qf_sub_g(m(b, m(x[3], y[2])), m(b, m(x[2], y[3]))),
+        ),
+        qf_add_g(
+            qf_add_g(m(x[0], y[2]), m(x[2], y[0])),
+            qf_sub_g(m(a, m(x[1], y[3])), m(a, m(x[3], y[1]))),
+        ),
+        qf_add_g(
+            qf_add_g(m(x[0], y[3]), m(x[3], y[0])),
+            qf_sub_g(m(x[1], y[2]), m(x[2], y[1])),
+        ),
+    ]
+}
+fn qinv_f(x: [Qf; 4], a: Qf, b: Qf, tr_w: i128, nr_w: i128) -> [Qf; 4] {
+    let m = |u: Qf, v: Qf| qf_mul_g(u, v, tr_w, nr_w);
+    let ab = m(a, b);
+    let nr = qf_add_g(
+        qf_sub_g(m(x[0], x[0]), m(a, m(x[1], x[1]))),
+        qf_sub_g(m(ab, m(x[3], x[3])), m(b, m(x[2], x[2]))),
+    );
+    let ni = qf_inv_g(nr, tr_w, nr_w);
+    [m(x[0], ni), m(qf_neg_g(x[1]), ni), m(qf_neg_g(x[2]), ni), m(qf_neg_g(x[3]), ni)]
+}
+
+fn mat_inv_frac_n(m: &[Vec<Frac>]) -> Vec<Vec<Frac>> {
+    let n = m.len();
+    let z = Frac::from_i(0);
+    let one = Frac::from_i(1);
+    let mut aug: Vec<Vec<Frac>> = (0..n)
+        .map(|i| {
+            let mut row = m[i].clone();
+            row.extend((0..n).map(|j| if i == j { one } else { z }));
+            row
+        })
+        .collect();
+    for i in 0..n {
+        let piv = (i..n).find(|&r| aug[r][i].n != 0).unwrap();
+        aug.swap(i, piv);
+        let pi = one.div(aug[i][i]);
+        for c in 0..(2 * n) {
+            aug[i][c] = aug[i][c].mul(pi);
+        }
+        for r in 0..n {
+            if r != i && aug[r][i].n != 0 {
+                let fac = aug[r][i];
+                for c in 0..(2 * n) {
+                    let v = aug[i][c];
+                    aug[r][c] = aug[r][c].sub(fac.mul(v));
+                }
+            }
+        }
+    }
+    aug.into_iter().map(|row| row[n..].to_vec()).collect()
+}
+
+fn mat_det_frac_n(m: &[Vec<Frac>]) -> Frac {
+    let n = m.len();
+    let mut a = m.to_vec();
+    let mut det = Frac::from_i(1);
+    for i in 0..n {
+        let piv = match (i..n).find(|&r| a[r][i].n != 0) {
+            Some(p) => p,
+            None => return Frac::from_i(0),
+        };
+        if piv != i {
+            a.swap(i, piv);
+            det = det.neg();
+        }
+        det = det.mul(a[i][i]);
+        let inv_p = Frac::from_i(1).div(a[i][i]);
+        for r in (i + 1)..n {
+            if a[r][i].n != 0 {
+                let fac = a[r][i].mul(inv_p);
+                for c in i..n {
+                    let v = a[i][c];
+                    a[r][c] = a[r][c].sub(fac.mul(v));
+                }
+            }
+        }
+    }
+    det
+}
+
+fn hnf_rows_i128(rows: &[Vec<i128>]) -> Vec<Vec<i128>> {
+    let ncols = rows[0].len();
+    let mut mat: Vec<Vec<i128>> = rows.iter().filter(|r| r.iter().any(|&v| v != 0)).cloned().collect();
+    let mut cur_r = 0usize;
+    for col in 0..ncols {
+        loop {
+            let nz: Vec<usize> = (cur_r..mat.len()).filter(|&r| mat[r][col] != 0).collect();
+            if nz.is_empty() {
+                break;
+            }
+            let piv = *nz.iter().min_by_key(|&&r| mat[r][col].abs()).unwrap();
+            mat.swap(cur_r, piv);
+            if mat[cur_r][col] < 0 {
+                for v in &mut mat[cur_r] {
+                    *v = -*v;
+                }
+            }
+            let mut changed = false;
+            for r in (cur_r + 1)..mat.len() {
+                if mat[r][col] != 0 {
+                    let q = mat[r][col].div_euclid(mat[cur_r][col]);
+                    for c in col..ncols {
+                        let pv = mat[cur_r][c];
+                        mat[r][c] -= q * pv;
+                    }
+                    changed = true;
+                }
+            }
+            if !changed {
+                for r in 0..cur_r {
+                    if mat[r][col] != 0 {
+                        let q = mat[r][col].div_euclid(mat[cur_r][col]);
+                        for c in col..ncols {
+                            let pv = mat[cur_r][c];
+                            mat[r][c] -= q * pv;
+                        }
+                    }
+                }
+                cur_r += 1;
+                break;
+            }
+        }
+    }
+    mat.into_iter().take(cur_r).collect()
+}
+
+fn lcm_i128(a: i128, b: i128) -> i128 {
+    (a / gcd_i128(a, b)) * b
+}
+
+fn close_ring_8_sqrt_d(gens: &[[Qf; 4]], a: Qf, b: Qf, d: i128) -> Vec<[Qf; 4]> {
+    let to8 = |q: &[Qf; 4]| -> Vec<Frac> {
+        vec![q[0].0, q[0].1, q[1].0, q[1].1, q[2].0, q[2].1, q[3].0, q[3].1]
+    };
+    let from8 = |v: &[Frac]| -> [Qf; 4] { [(v[0], v[1]), (v[2], v[3]), (v[4], v[5]), (v[6], v[7])] };
+    let reduce = |list: &[[Qf; 4]]| -> Vec<[Qf; 4]> {
+        let mut den = 1i128;
+        for q in list {
+            for c in to8(q) {
+                den = lcm_i128(den, c.d);
+            }
+        }
+        let int_rows: Vec<Vec<i128>> = list
+            .iter()
+            .map(|q| to8(q).into_iter().map(|c| c.n * (den / c.d)).collect())
+            .collect();
+        hnf_rows_i128(&int_rows)
+            .into_iter()
+            .map(|r| from8(&r.into_iter().map(|v| Frac::new(v, den)).collect::<Vec<_>>()))
+            .collect()
+    };
+    let mut basis = reduce(gens);
+    for _ in 0..12 {
+        let mut prods = basis.clone();
+        for &x in &basis {
+            for &y in &basis {
+                prods.push(qmul_f(x, y, a, b, 0, -d));
+            }
+        }
+        let next = reduce(&prods);
+        if next == basis {
+            return basis;
+        }
+        basis = next;
+    }
+    panic!("Z-rank-8 ring failed to close");
+}
+
+fn ad8_mats_f(
+    gens: &[[Qf; 4]],
+    basis: &[[Qf; 4]],
+    binv: &[Vec<Frac>],
+    a: Qf,
+    b: Qf,
+    d: i128,
+) -> (Vec<i128>, Vec<Vec<Vec<Frac>>>) {
+    let mut denoms = Vec::new();
+    let mut mats = Vec::new();
+    for &g in gens {
+        let gi = qinv_f(g, a, b, 0, -d);
+        let mut mat = Vec::with_capacity(8);
+        let mut den = 1i128;
+        for &e in basis {
+            let w = qmul_f(qmul_f(g, e, a, b, 0, -d), gi, a, b, 0, -d);
+            let wv = [w[0].0, w[0].1, w[1].0, w[1].1, w[2].0, w[2].1, w[3].0, w[3].1];
+            let mut row = Vec::with_capacity(8);
+            for k in 0..8 {
+                let mut acc = Frac::from_i(0);
+                for t in 0..8 {
+                    acc = acc.add(wv[t].mul(binv[t][k]));
+                }
+                den = lcm_i128(den, acc.d);
+                row.push(acc);
+            }
+            mat.push(row);
+        }
+        denoms.push(den);
+        mats.push(mat);
+    }
+    (denoms, mats)
+}
+
+fn reduce_8_mod_prime_ideal(
+    ad8_list: &[Vec<Vec<Frac>>],
+    basis: &[[Qf; 4]],
+    binv: &[Vec<Frac>],
+    a: Qf,
+    b: Qf,
+    d: i128,
+    p: u32,
+    root_mod_p: i128,
+) -> Vec<Vec<u16>> {
+    let z = Frac::from_i(0);
+    let zf = (z, z);
+    let elem: [Qf; 4] = [(Frac::from_i(-root_mod_p), Frac::from_i(1)), zf, zf, zf];
+    let p_i = p as i128;
+    let mut mat = vec![vec![0i128; 8]; 8];
+    for (ei, &e) in basis.iter().enumerate() {
+        let w = qmul_f(elem, e, a, b, 0, -d);
+        let wv = [w[0].0, w[0].1, w[1].0, w[1].1, w[2].0, w[2].1, w[3].0, w[3].1];
+        for k in 0..8 {
+            let mut acc = z;
+            for t in 0..8 {
+                acc = acc.add(wv[t].mul(binv[t][k]));
+            }
+            assert_eq!(acc.d, 1);
+            mat[ei][k] = acc.n.rem_euclid(p_i);
+        }
+    }
+    let inv_mod_p = |x: i128| -> i128 { Frac::new(1, x.rem_euclid(p_i)).mod_u32(p) as i128 };
+    let mut piv_cols = Vec::new();
+    let mut r_idx = 0usize;
+    for col in 0..8 {
+        let piv = match (r_idx..8).find(|&r| mat[r][col] % p_i != 0) {
+            Some(pv) => pv,
+            None => continue,
+        };
+        mat.swap(r_idx, piv);
+        let inv_v = inv_mod_p(mat[r_idx][col]);
+        for c in 0..8 {
+            mat[r_idx][c] = (mat[r_idx][c] * inv_v).rem_euclid(p_i);
+        }
+        for r in 0..8 {
+            if r != r_idx && mat[r][col] != 0 {
+                let fac = mat[r][col];
+                for c in 0..8 {
+                    let v = mat[r_idx][c];
+                    mat[r][c] = (mat[r][c] - fac * v).rem_euclid(p_i);
+                }
+            }
+        }
+        piv_cols.push(col);
+        r_idx += 1;
+    }
+    assert_eq!(piv_cols.len(), 4);
+    let free_cols: Vec<usize> = (0..8).filter(|c| !piv_cols.contains(c)).collect();
+    let mut proj = vec![vec![0i128; 4]; 8];
+    for j in 0..8 {
+        let mut v = vec![0i128; 8];
+        v[j] = 1;
+        for (ri, &pc) in piv_cols.iter().enumerate() {
+            let fac = v[pc];
+            if fac != 0 {
+                for c in 0..8 {
+                    v[c] = (v[c] - fac * mat[ri][c]).rem_euclid(p_i);
+                }
+            }
+        }
+        for (bi, &fc) in free_cols.iter().enumerate() {
+            proj[j][bi] = v[fc];
+        }
+    }
+    ad8_list
+        .iter()
+        .map(|m8| {
+            let mut m4 = Vec::with_capacity(16);
+            for &fc in &free_cols {
+                let row8: Vec<i128> = (0..8).map(|c| m8[fc][c].mod_u32(p) as i128).collect();
+                for bi in 0..4 {
+                    let mut s = 0i128;
+                    for k in 0..8 {
+                        s += row8[k] * proj[k][bi];
+                    }
+                    m4.push(s.rem_euclid(p_i) as u16);
+                }
+            }
+            m4
+        })
+        .collect()
+}
+
+fn quotient_mults_nauru(y: &[[usize; 3]; 24], ker: &[Perm24]) -> (usize, usize, BTreeMap<usize, usize>) {
+    let mut orb_id = [usize::MAX; 24];
+    let mut n_orb = 0usize;
+    for v in 0..24 {
+        if orb_id[v] == usize::MAX {
+            for p in ker {
+                orb_id[p[v] as usize] = n_orb;
+            }
+            n_orb += 1;
+        }
+    }
+    let mut seen_e = [[false; 24]; 24];
+    let mut n_e_orbits = 0usize;
+    let mut mhist: BTreeMap<usize, usize> = BTreeMap::new();
+    for u in 0..24 {
+        for &v in &y[u] {
+            if u < v && !seen_e[u][v] {
+                let mut orb_sz = 0usize;
+                for p in ker {
+                    let gu = p[u] as usize;
+                    let gv = p[v] as usize;
+                    let (a, b) = if gu < gv { (gu, gv) } else { (gv, gu) };
+                    if !seen_e[a][b] {
+                        seen_e[a][b] = true;
+                        orb_sz += 1;
+                    }
+                }
+                n_e_orbits += 1;
+                *mhist.entry(orb_sz).or_insert(0) += 1;
+            }
+        }
+    }
+    (n_orb, n_e_orbits, mhist)
+}
+
+pub fn verify_r7_all_four_real_quadratic_orders() {
+    let y = build_nauru();
+    let (a_y, b_y, t0, t1) = nauru_generators();
+    let f = Frac::new;
+    let z = Frac::from_i(0);
+    let one = Frac::from_i(1);
+    let zf: Qf = (z, z);
+    let of: Qf = (one, z);
+    let one_q: [Qf; 4] = [of, zf, zf, zf];
+
+    // 1. Field Q(sqrt(17)), phi^2 - phi - 4 = 0 (tr=1, nr=-4): O_17^max mod v^2 -> Q_3
+    let (tr17, nr17) = (1i128, -4i128);
+    let (a17_c, b17_c): (Qf, Qf) = ((Frac::from_i(-3), z), (Frac::from_i(-1), z));
+    let a17: [Qf; 4] = [(f(1, 2), z), (f(1, 2), z), zf, zf];
+    let b17: [Qf; 4] = [zf, zf, of, zf];
+    let t17: [Qf; 4] = [zf, (f(1, 3), z), zf, (f(-2, 3), f(1, 3))];
+    let o17: [[Qf; 4]; 4] = [a17, t17, [zf, zf, (f(1, 2), z), (f(1, 2), z)], [zf, zf, zf, of]];
+    // Invert 4x4 over Q(phi)
+    let mut aug = [[zf; 8]; 4];
+    for i in 0..4 {
+        for j in 0..4 {
+            aug[i][j] = o17[i][j];
+        }
+        aug[i][4 + i] = of;
+    }
+    for i in 0..4 {
+        let piv = (i..4).find(|&r| aug[r][i].0.n != 0 || aug[r][i].1.n != 0).unwrap();
+        aug.swap(i, piv);
+        let pi = qf_inv_g(aug[i][i], tr17, nr17);
+        for c in 0..8 {
+            aug[i][c] = qf_mul_g(aug[i][c], pi, tr17, nr17);
+        }
+        for r in 0..4 {
+            if r != i && (aug[r][i].0.n != 0 || aug[r][i].1.n != 0) {
+                let fac = aug[r][i];
+                for c in 0..8 {
+                    aug[r][c] = qf_sub_g(aug[r][c], qf_mul_g(fac, aug[i][c], tr17, nr17));
+                }
+            }
+        }
+    }
+    // Verify ring closure of O_17^max over Z[phi]
+    for &e1 in &o17 {
+        for &e2 in &o17 {
+            let w = qmul_f(e1, e2, a17_c, b17_c, tr17, nr17);
+            for k in 0..4 {
+                let mut c = zf;
+                for j in 0..4 {
+                    c = qf_add_g(c, qf_mul_g(w[j], aug[j][4 + k], tr17, nr17));
+                }
+                assert_eq!((c.0.d, c.1.d), (1, 1), "O_17^max not ring-closed");
+            }
+        }
+    }
+    let ad17: Vec<Vec<u16>> = [a17, b17, t17]
+        .iter()
+        .map(|&g| {
+            let gi = qinv_f(g, a17_c, b17_c, tr17, nr17);
+            let mut flat = Vec::with_capacity(16);
+            for &e in &o17 {
+                let w = qmul_f(qmul_f(g, e, a17_c, b17_c, tr17, nr17), gi, a17_c, b17_c, tr17, nr17);
+                for k in 0..4 {
+                    let mut c = zf;
+                    for j in 0..4 {
+                        c = qf_add_g(c, qf_mul_g(w[j], aug[j][4 + k], tr17, nr17));
+                    }
+                    // phi = 0 mod v^2 (Z/4Z)
+                    flat.push(c.0.mod_u32(4));
+                }
+            }
+            flat
+        })
+        .collect();
+    let (ad17_ord, j17_6, k17_6, ker17_6) = bfs_mat_joint(&ad17, &[a_y, b_y, t0], 4, 4);
+    let (_, j17_12, k17_12, _) = bfs_mat_joint(&ad17, &[a_y, b_y, t1], 4, 4);
+    assert_eq!((ad17_ord, j17_6, k17_6, j17_12, k17_12), (48, 144, 3, 576, 12));
+    let (vq17, eq17, mh17) = quotient_mults_nauru(&y, &ker17_6);
+    assert_eq!((vq17, eq17, mh17.into_iter().collect::<Vec<_>>()), (8, 12, vec![(3, 12)]));
+
+    // 2. Field Q(sqrt(2)): Eichler order E(q_7), T_8-det = 49 * 8^4, non-isomorphic kernels C_6xC_2 vs A_4
+    let (a2_c, b2_c): (Qf, Qf) = ((Frac::from_i(-3), z), (Frac::from_i(-3), Frac::from_i(-1)));
+    let sq2: [Qf; 4] = [(z, one), zf, zf, zf];
+    let a2: [Qf; 4] = [(f(1, 2), z), (f(1, 2), z), zf, zf];
+    let b2: [Qf; 4] = [zf, zf, of, zf];
+    let t2: [Qf; 4] = [zf, (f(1, 3), f(1, 3)), zf, (f(1, 3), z)];
+    let eq7 = close_ring_8_sqrt_d(&[one_q, sq2, a2, b2, t2], a2_c, b2_c, 2);
+    assert_eq!(eq7.len(), 8);
+    let t8_q7: Vec<Vec<Frac>> = eq7
+        .iter()
+        .map(|&x| {
+            eq7.iter()
+                .map(|&yv| Frac::from_i(4).mul(qmul_f(x, yv, a2_c, b2_c, 0, -2)[0].0))
+                .collect()
+        })
+        .collect();
+    let det_q7 = mat_det_frac_n(&t8_q7);
+    assert_eq!((det_q7.n, det_q7.d), (200704, 1));
+    let eq7_rows: Vec<Vec<Frac>> = eq7
+        .iter()
+        .map(|q| vec![q[0].0, q[0].1, q[1].0, q[1].1, q[2].0, q[2].1, q[3].0, q[3].1])
+        .collect();
+    let eq7_inv = mat_inv_frac_n(&eq7_rows);
+    let (q2_denoms, q2_mats) = ad8_mats_f(&[a2, b2, t2], &eq7, &eq7_inv, a2_c, b2_c, 2);
+    assert_eq!(q2_denoms, vec![1, 1, 2]);
+    let q2_mod_q7 = reduce_8_mod_prime_ideal(&q2_mats, &eq7, &eq7_inv, a2_c, b2_c, 2, 7, 4);
+    let (ad_q7, j_q7_6, k_q7_6, ker_q7_6) = bfs_mat_joint(&q2_mod_q7, &[a_y, b_y, t0], 4, 7);
+    let (_, j_q7_12, k_q7_12, ker_q7_12) = bfs_mat_joint(&q2_mod_q7, &[a_y, b_y, t1], 4, 7);
+    assert_eq!((ad_q7, j_q7_6, k_q7_6, j_q7_12, k_q7_12), (588, 7056, 12, 7056, 12));
+    let (vq2_6, eq2_6, mh2_6) = quotient_mults_nauru(&y, &ker_q7_6);
+    assert_eq!((vq2_6, eq2_6, mh2_6.into_iter().collect::<Vec<_>>()), (2, 3, vec![(12, 3)]));
+    let mut h6: BTreeMap<usize, usize> = BTreeMap::new();
+    let mut h12: BTreeMap<usize, usize> = BTreeMap::new();
+    for p in &ker_q7_6 {
+        *h6.entry(perm_order(p)).or_insert(0) += 1;
+    }
+    for p in &ker_q7_12 {
+        *h12.entry(perm_order(p)).or_insert(0) += 1;
+    }
+    assert_eq!(h6.into_iter().collect::<Vec<_>>(), vec![(1, 1), (2, 3), (3, 2), (6, 6)]); // C_6 x C_2
+    assert_eq!(h12.into_iter().collect::<Vec<_>>(), vec![(1, 1), (2, 3), (3, 8)]); // A_4
+    // Norm-1 subgroup Delta_2^1 mod q_7 (147, 12), mod q_7' (168, 36), mod (3) (360, 36)
+    let bt2 = qmul_f(b2, t2, a2_c, b2_c, 0, -2);
+    let conj2 = |g: [Qf; 4]| qmul_f(qmul_f(g, a2, a2_c, b2_c, 0, -2), qinv_f(g, a2_c, b2_c, 0, -2), a2_c, b2_c, 0, -2);
+    let d1_q2 = [a2, conj2(b2), conj2(t2), conj2(bt2)];
+    let d1_p6 = [
+        a_y,
+        perm_comp(&b_y, &perm_comp(&a_y, &b_y)),
+        perm_comp(&t0, &perm_comp(&a_y, &t0)),
+        perm_comp(&perm_comp(&b_y, &t0), &perm_comp(&a_y, &perm_comp(&t0, &b_y))),
+    ];
+    let (_, d1_q2_mats) = ad8_mats_f(&d1_q2, &eq7, &eq7_inv, a2_c, b2_c, 2);
+    let d1_q7_m4 = reduce_8_mod_prime_ideal(&d1_q2_mats, &eq7, &eq7_inv, a2_c, b2_c, 2, 7, 4);
+    let (ad1_q7, _, ker1_q7, _) = bfs_mat_joint(&d1_q7_m4, &d1_p6, 4, 7);
+    let d1_q7p_m4 = reduce_8_mod_prime_ideal(&d1_q2_mats, &eq7, &eq7_inv, a2_c, b2_c, 2, 7, 3);
+    let (ad1_q7p, _, ker1_q7p, _) = bfs_mat_joint(&d1_q7p_m4, &d1_p6, 4, 7);
+    let d1_m3: Vec<Vec<u16>> = d1_q2_mats
+        .iter()
+        .map(|m| (0..8).flat_map(|r| (0..8).map(move |c| m[r][c].mod_u32(3))).collect())
+        .collect();
+    let (ad1_m3, _, ker1_m3, _) = bfs_mat_joint(&d1_m3, &d1_p6, 8, 3);
+    assert_eq!((ad1_q7, ker1_q7, ad1_q7p, ker1_q7p, ad1_m3, ker1_m3), (147, 12, 168, 36, 360, 36));
+
+    // 3. Field Q(sqrt(3)): Eichler order E(p_3), T_8-det = 9 * 12^4, 2-part tiers 243 / 486 / 972
+    let (a3_c, b3_c): (Qf, Qf) = ((Frac::from_i(-3), z), (Frac::from_i(-2), z));
+    let sq3: [Qf; 4] = [(z, one), zf, zf, zf];
+    let a3: [Qf; 4] = [(f(1, 2), z), (f(1, 2), z), zf, zf];
+    let bp3: [Qf; 4] = [zf, zf, (f(-1, 2), f(1, 2)), zf];
+    let tp3: [Qf; 4] = [zf, (z, f(1, 3)), zf, (f(1, 2), f(-1, 6))];
+    let ep3 = close_ring_8_sqrt_d(&[one_q, sq3, a3, bp3, tp3], a3_c, b3_c, 3);
+    assert_eq!(ep3.len(), 8);
+    let t8_p3: Vec<Vec<Frac>> = ep3
+        .iter()
+        .map(|&x| {
+            ep3.iter()
+                .map(|&yv| Frac::from_i(4).mul(qmul_f(x, yv, a3_c, b3_c, 0, -3)[0].0))
+                .collect()
+        })
+        .collect();
+    let det_p3 = mat_det_frac_n(&t8_p3);
+    assert_eq!((det_p3.n, det_p3.d), (186624, 1));
+    let ep3_rows: Vec<Vec<Frac>> = ep3
+        .iter()
+        .map(|q| vec![q[0].0, q[0].1, q[1].0, q[1].1, q[2].0, q[2].1, q[3].0, q[3].1])
+        .collect();
+    let ep3_inv = mat_inv_frac_n(&ep3_rows);
+    let (q3_denoms, q3_mats) = ad8_mats_f(&[a3, bp3, tp3], &ep3, &ep3_inv, a3_c, b3_c, 3);
+    assert_eq!(q3_denoms, vec![1, 1, 2]);
+    let to_m3 = |mats: &[Vec<Vec<Frac>>]| -> Vec<Vec<u16>> {
+        mats.iter()
+            .map(|m| (0..8).flat_map(|r| (0..8).map(move |c| m[r][c].mod_u32(3))).collect())
+            .collect()
+    };
+    let q3_m3 = to_m3(&q3_mats);
+    let (ad_q3, j_q3_6, k_q3_6, _) = bfs_mat_joint(&q3_m3, &[a_y, b_y, t0], 8, 3);
+    let (_, j_q3_12, k_q3_12, _) = bfs_mat_joint(&q3_m3, &[a_y, b_y, t1], 8, 3);
+    let bt3 = qmul_f(bp3, tp3, a3_c, b3_c, 0, -3);
+    let conj3 = |g: [Qf; 4], x: [Qf; 4]| {
+        qmul_f(qmul_f(g, x, a3_c, b3_c, 0, -3), qinv_f(g, a3_c, b3_c, 0, -3), a3_c, b3_c, 0, -3)
+    };
+    let (_, d1_q3_mats) = ad8_mats_f(&[a3, conj3(bp3, a3), conj3(tp3, a3), conj3(bt3, a3)], &ep3, &ep3_inv, a3_c, b3_c, 3);
+    let (ad1_q3, _, ker1_q3, _) = bfs_mat_joint(&to_m3(&d1_q3_mats), &d1_p6, 8, 3);
+    let dp_p6 = [a_y, b_y, perm_comp(&t0, &perm_comp(&a_y, &t0)), perm_comp(&t0, &perm_comp(&b_y, &t0))];
+    let (_, dp_q3_mats) = ad8_mats_f(&[a3, bp3, conj3(tp3, a3), conj3(tp3, bp3)], &ep3, &ep3_inv, a3_c, b3_c, 3);
+    let (adp_q3, _, kerp_q3, _) = bfs_mat_joint(&to_m3(&dp_q3_mats), &dp_p6, 8, 3);
+    assert_eq!(
+        (ad_q3, j_q3_6, k_q3_6, j_q3_12, k_q3_12, ad1_q3, ker1_q3, adp_q3, kerp_q3),
+        (972, 3888, 4, 3888, 4, 243, 4, 486, 4)
+    );
+}
+
+// ============================================================================
+// Suite R8: Continuous Equilateral Metric Dhar (132/132 on Y; 168/168 on Z) & S_4 Cuts
+// ============================================================================
+
+fn discrete_dhar_generic<const DEG: usize>(adj: &[[usize; DEG]; 24], chips: &[i32; 24], target: usize) -> (bool, usize) {
+    let mut d = *chips;
+    for step in 0..=100 {
+        if d[target] > 0 {
+            return (true, step);
+        }
+        let mut burnt = [false; 24];
+        let mut bcnt = [0i32; 24];
+        let mut q = [0usize; 24];
+        let (mut qh, mut qt) = (0usize, 0usize);
+        burnt[target] = true;
+        q[qt] = target;
+        qt += 1;
+        while qh < qt {
+            let u = q[qh];
+            qh += 1;
+            for &nb in &adj[u] {
+                if !burnt[nb] {
+                    bcnt[nb] += 1;
+                    if bcnt[nb] > d[nb] {
+                        burnt[nb] = true;
+                        q[qt] = nb;
+                        qt += 1;
+                    }
+                }
+            }
+        }
+        let mut any_unburnt = false;
+        for u in 0..24 {
+            if !burnt[u] {
+                any_unburnt = true;
+                for &v in &adj[u] {
+                    if burnt[v] {
+                        d[u] -= 1;
+                        d[v] += 1;
+                    }
+                }
+            }
+        }
+        if !any_unburnt {
+            return (false, step);
+        }
+    }
+    (false, 100)
+}
+
+fn continuous_metric_dhar_cell<const DEG: usize>(
+    adj: &[[usize; DEG]; 24],
+    chips: &[i32; 24],
+    mut u0: usize,
+    mut v0: usize,
+    mut regime: usize,
+) -> (bool, usize) {
+    use std::cmp::Reverse;
+    use std::collections::BinaryHeap;
+    if regime == 2 {
+        std::mem::swap(&mut u0, &mut v0);
+        regime = 0;
+    }
+    let (l_step, d_u0, d_v0) = if regime == 0 { (4i32, 1i32, 3i32) } else { (2i32, 1i32, 1i32) };
+    let mut d = *chips;
+    for step in 0..25 {
+        const INF: i32 = 1_000_000_000;
+        let mut burn_time = [INF; 24];
+        let mut arrived_cnt = [0i32; 24];
+        let mut arrived_src = [0u32; 24]; // bits 0..23 for vertices, 24 for -1, 25 for -2
+        let mut pq: BinaryHeap<Reverse<(i32, usize, usize)>> = BinaryHeap::new();
+        pq.push(Reverse((d_u0, u0, 24)));
+        pq.push(Reverse((d_v0, v0, 25)));
+        while let Some(Reverse((t, w, src))) = pq.pop() {
+            if burn_time[w] <= t || ((arrived_src[w] >> src) & 1) != 0 {
+                continue;
+            }
+            arrived_src[w] |= 1u32 << src;
+            arrived_cnt[w] += 1;
+            if arrived_cnt[w] > d[w] {
+                burn_time[w] = t;
+                for &nb in &adj[w] {
+                    if (w == u0 && nb == v0) || (w == v0 && nb == u0) {
+                        continue;
+                    }
+                    if burn_time[nb] == INF {
+                        pq.push(Reverse((t + l_step, nb, w)));
+                    }
+                }
+            }
+        }
+        let mut unburnt = [false; 24];
+        let mut any_unburnt = false;
+        for v in 0..24 {
+            if burn_time[v] == INF {
+                unburnt[v] = true;
+                any_unburnt = true;
+            }
+        }
+        if !any_unburnt {
+            return (false, step);
+        }
+        if unburnt[u0] || unburnt[v0] {
+            return (true, step + 1);
+        }
+        for u in 0..24 {
+            if unburnt[u] {
+                for &v in &adj[u] {
+                    if !unburnt[v] {
+                        d[u] -= 1;
+                        d[v] += 1;
+                    }
+                }
+            }
+        }
+    }
+    (false, 25)
+}
+
+pub fn verify_r8_continuous_metric_dhar_and_scramble_maxflow() {
+    let y = build_nauru();
+    let z = build_dic6_z();
+
+    // 1. Nauru Y: D_hex = {0, 1, 2, 14, 19, 12} -> 24 discrete (<=2) + 108 continuous (<=3) = 132/132
+    let mut chips_y = [0i32; 24];
+    for v in [0usize, 1, 2, 14, 19, 12] {
+        chips_y[v] = 1;
+    }
+    for v in 0..24 {
+        let (ok, st) = discrete_dhar_generic(&y, &chips_y, v);
+        assert!(ok && st <= 2);
+    }
+    let mut y_ecells = 0usize;
+    for u in 0..24 {
+        for &v in &y[u] {
+            if u < v {
+                for reg in 0..3 {
+                    let (ok, st) = continuous_metric_dhar_cell(&y, &chips_y, u, v, reg);
+                    assert!(ok && st <= 3);
+                    y_ecells += 1;
+                }
+            }
+        }
+    }
+    assert_eq!(y_ecells, 108);
+
+    // 2. Dicyclic Z: BOTH D_8 = <x^3> + <x^3>y AND PC-II's D_Dic6 -> 24 discrete + 144 continuous = 168/168 each
+    for (verts, max_d, max_c) in [
+        ([0usize, 3, 6, 9, 12, 15, 18, 21], 1usize, 2usize),
+        ([0usize, 1, 6, 7, 12, 13, 18, 19], 3usize, 4usize),
+    ] {
+        let mut chips_z = [0i32; 24];
+        for v in verts {
+            chips_z[v] = 1;
+        }
+        for v in 0..24 {
+            let (ok, st) = discrete_dhar_generic(&z, &chips_z, v);
+            assert!(ok && st <= max_d);
+        }
+        let mut z_ecells = 0usize;
+        for u in 0..24 {
+            for &v in &z[u] {
+                if u < v {
+                    for reg in 0..3 {
+                        let (ok, st) = continuous_metric_dhar_cell(&z, &chips_z, u, v, reg);
+                        assert!(ok && st <= max_c);
+                        z_ecells += 1;
+                    }
+                }
+            }
+        }
+        assert_eq!(z_ecells, 144);
+    }
+
+    // 3. Optimal 4-path scramble S_4 on Z: 276/276 pairs, exact Edmonds-Karp cuts {8: 48, 10: 108}
+    let mut eggs = [0u32; 24];
+    for g in 0..24 {
+        let mut mask = 0u32;
+        for v in [0usize, 1, 2, 20] {
+            mask |= 1u32 << dic6_mul(g, v);
+        }
+        eggs[g] = mask;
+    }
+    let (mut inter, mut cut8, mut cut10) = (0usize, 0usize, 0usize);
+    for i in 0..24 {
+        for j in (i + 1)..24 {
+            if (eggs[i] & eggs[j]) != 0 {
+                inter += 1;
+            } else {
+                match edmonds_karp(&z, eggs[i], eggs[j]) {
+                    8 => cut8 += 1,
+                    10 => cut10 += 1,
+                    c => panic!("unexpected S_4 cut {}", c),
+                }
+            }
+        }
+    }
+    assert_eq!((inter, cut8, cut10), (120, 48, 108));
+}
+
+// ============================================================================
+// Suite R9: R-Type Fault Injection & P-Type Keyed SplitMix64 Bit-Exact Parity
+// ============================================================================
+
+struct SplitMix64 {
+    state: u64,
+}
+impl SplitMix64 {
+    fn new(seed: u64) -> Self {
+        Self { state: seed }
+    }
+    fn next_u64(&mut self) -> u64 {
+        self.state = self.state.wrapping_add(0x9E3779B97F4A7C15);
+        let mut z = self.state;
+        z = (z ^ (z >> 30)).wrapping_mul(0xBF58476D1CE4E5B9);
+        z = (z ^ (z >> 27)).wrapping_mul(0x94D049BB133111EB);
+        z ^ (z >> 31)
+    }
+}
+
+struct Fnv64 {
+    h: u64,
+}
+impl Fnv64 {
+    fn new() -> Self {
+        Self { h: 14695981039346656037 }
+    }
+    fn mix(&mut self, v: u64) {
+        for shift in (0..64).step_by(8) {
+            self.h ^= (v >> shift) & 0xFF;
+            self.h = self.h.wrapping_mul(1099511628211);
+        }
+    }
+}
+
+fn jacobi_12_lambda_nt(bbt: &[[i32; 12]; 12]) -> f64 {
+    let mut a = [[0.0f64; 12]; 12];
+    for i in 0..12 {
+        for j in 0..12 {
+            a[i][j] = bbt[i][j] as f64;
+        }
+    }
+    for _ in 0..60 {
+        let mut off = 0.0f64;
+        for p in 0..12 {
+            for q in (p + 1)..12 {
+                off += a[p][q] * a[p][q];
+            }
+        }
+        if off < 1e-26 {
+            break;
+        }
+        for p in 0..12 {
+            for q in (p + 1)..12 {
+                let apq = a[p][q];
+                if apq.abs() < 1e-15 {
+                    continue;
+                }
+                let tau = (a[q][q] - a[p][p]) / (2.0 * apq);
+                let t = if tau >= 0.0 {
+                    1.0 / (tau + (1.0 + tau * tau).sqrt())
+                } else {
+                    -1.0 / (-tau + (1.0 + tau * tau).sqrt())
+                };
+                let c = 1.0 / (1.0 + t * t).sqrt();
+                let s = t * c;
+                let (app, aqq) = (a[p][p], a[q][q]);
+                a[p][p] = app - t * apq;
+                a[q][q] = aqq + t * apq;
+                a[p][q] = 0.0;
+                a[q][p] = 0.0;
+                for r in 0..12 {
+                    if r != p && r != q {
+                        let (arp, arq) = (a[r][p], a[r][q]);
+                        a[r][p] = c * arp - s * arq;
+                        a[p][r] = a[r][p];
+                        a[r][q] = s * arp + c * arq;
+                        a[q][r] = a[r][q];
+                    }
+                }
+            }
+        }
+    }
+    let mut eigs: Vec<f64> = (0..12).map(|i| a[i][i].max(0.0)).collect();
+    eigs.sort_by(|x, y| y.partial_cmp(x).unwrap());
+    eigs[1].sqrt()
+}
+
+pub fn verify_r9_r1_faults_and_p1_splitmix64_parity() {
+    let y = build_nauru();
+    let z = build_dic6_z();
+
+    // Part A: R-Type Global Invariants & 6/6 Fault Injections
+    let rank_mod_p = |deg: i64, edges: &[(usize, usize)]| -> usize {
+        const P: i64 = 1_000_000_007;
+        let mut m = [[0i64; 24]; 24];
+        for i in 0..24 {
+            m[i][i] = deg;
+        }
+        for &(u, v) in edges {
+            m[u][v] = P - 1;
+        }
+        let mod_pow = |mut base: i64, mut exp: i64| -> i64 {
+            let mut res = 1i64;
+            while exp > 0 {
+                if (exp & 1) != 0 {
+                    res = (res * base) % P;
+                }
+                base = (base * base) % P;
+                exp >>= 1;
+            }
+            res
+        };
+        let mut r = 0usize;
+        for c in 0..24 {
+            let piv = match (r..24).find(|&i| m[i][c] != 0) {
+                Some(p) => p,
+                None => continue,
+            };
+            m.swap(r, piv);
+            let inv = mod_pow(m[r][c], P - 2);
+            for j in c..24 {
+                m[r][j] = (m[r][j] * inv) % P;
+            }
+            for i in 0..24 {
+                if i != r && m[i][c] != 0 {
+                    let fac = m[i][c];
+                    for j in c..24 {
+                        m[i][j] = (m[i][j] - fac * m[r][j]).rem_euclid(P);
+                    }
+                }
+            }
+            r += 1;
+        }
+        r
+    };
+    let y_edges: Vec<(usize, usize)> = (0..24).flat_map(|u| y[u].iter().map(move |&v| (u, v))).collect();
+    let z_edges: Vec<(usize, usize)> = (0..24).flat_map(|u| z[u].iter().map(move |&v| (u, v))).collect();
+    assert_eq!(rank_mod_p(3, &y_edges), 23);
+    assert_eq!(rank_mod_p(4, &z_edges), 23);
+    assert_eq!((y_edges.len(), z_edges.len()), (72, 96));
+
+    let guarded_poitou = |b: f64, c1: f64, c2: f64| -> bool {
+        if !(b.is_finite() && c1.is_finite() && c2.is_finite()) || b <= 0.0 {
+            return false;
+        }
+        let pi = std::f64::consts::PI;
+        for k in 0..=200 {
+            let t = -1.0 + 2.0 * (k as f64) / 200.0;
+            let ft = 1.0 + (pi * t).cos() + c1 * (1.0 - (2.0 * pi * t).cos())
+                + c2 * ((pi * t).cos() + (3.0 * pi * t).cos());
+            if !ft.is_finite() || ft < -1e-12 {
+                return false;
+            }
+        }
+        true
+    };
+    assert!(!guarded_poitou(f64::NAN, 0.0, 0.0));
+    assert!(!guarded_poitou(f64::INFINITY, 0.0, 0.0) && !guarded_poitou(-1.0, 0.0, 0.0));
+    assert!(!guarded_poitou(6.0, -0.3, 0.3) && guarded_poitou(6.0, 0.0, 0.0));
+    // Disconnected egg {0, 6} rejected on Z
+    assert!(!z[0].contains(&6));
+    // Degree-7 divisor fails rank >= 1 on Z
+    let mut bad_d7 = [0i32; 24];
+    for v in [0usize, 1, 2, 3, 12, 13, 14] {
+        bad_d7[v] = 1;
+    }
+    assert!(!(0..24).all(|t| discrete_dhar_generic(&z, &bad_d7, t).0));
+
+    // Part B: P-Type & D<->P Seam Bit-Exact SplitMix64 RCT-PC3-1 (N=200) & RCT-PC3-2 (N=1000)
+    const PC3_SEED: u64 = 0x3AD1CF0272026001;
+    const PC3_DHAR_DOM: u64 = 0xD7D7D7D7D7D7D7D7;
+    let run_rct1 = |trial: usize| -> (bool, u64, f64) {
+        let mut rng = SplitMix64::new(PC3_SEED ^ ((trial as u64 + 1).wrapping_mul(0x9E3779B97F4A7C15)));
+        let mut eu = [0usize; 48];
+        let mut er = [0usize; 48];
+        let mut adj = [[false; 12]; 12];
+        for u in 0..12 {
+            for d in 0..4 {
+                let r = (u + d) % 12;
+                eu[4 * u + d] = u;
+                er[4 * u + d] = r;
+                adj[u][r] = true;
+            }
+        }
+        for _ in 0..48 {
+            let i1 = (rng.next_u64() % 48) as usize;
+            let i2 = (rng.next_u64() % 48) as usize;
+            let (u1, r1) = (eu[i1], er[i1]);
+            let (u2, r2) = (eu[i2], er[i2]);
+            if u1 != u2 && r1 != r2 && !adj[u1][r2] && !adj[u2][r1] {
+                adj[u1][r1] = false;
+                adj[u2][r2] = false;
+                adj[u1][r2] = true;
+                adj[u2][r1] = true;
+                er[i1] = r2;
+                er[i2] = r1;
+            }
+        }
+        let mut seen = [false; 24];
+        let mut q = [0usize; 24];
+        let (mut qh, mut qt) = (0usize, 0usize);
+        seen[0] = true;
+        q[qt] = 0;
+        qt += 1;
+        while qh < qt {
+            let v = q[qh];
+            qh += 1;
+            if v < 12 {
+                for r in 0..12 {
+                    if adj[v][r] && !seen[12 + r] {
+                        seen[12 + r] = true;
+                        q[qt] = 12 + r;
+                        qt += 1;
+                    }
+                }
+            } else {
+                let r = v - 12;
+                for u in 0..12 {
+                    if adj[u][r] && !seen[u] {
+                        seen[u] = true;
+                        q[qt] = u;
+                        qt += 1;
+                    }
+                }
+            }
+        }
+        let connected = qt == 24;
+        let mut bbt = [[0i32; 12]; 12];
+        let mut tr4 = 0u64;
+        for u1 in 0..12 {
+            for u2 in 0..12 {
+                let mut c = 0i32;
+                for r in 0..12 {
+                    if adj[u1][r] && adj[u2][r] {
+                        c += 1;
+                    }
+                }
+                bbt[u1][u2] = c;
+                tr4 += 2 * (c as u64) * (c as u64);
+            }
+        }
+        let lam_nt = if connected { jacobi_12_lambda_nt(&bbt) } else { 4.0 };
+        (connected, tr4, lam_nt)
+    };
+
+    let mut fnv = Fnv64::new();
+    let (mut xor_fwd, mut xor_rev) = (0u64, 0u64);
+    let (mut conn_cnt, mut ram_cnt, mut beat_z_cnt) = (0usize, 0usize, 0usize);
+    let (mut lam_sum, mut lam_min, mut c4_sum) = (0.0f64, 10.0f64, 0u64);
+    let ram_bound = 2.0 * 3.0f64.sqrt();
+    for t in 0..200 {
+        let (conn, tr4, lam) = run_rct1(t);
+        assert!(tr4 >= 672 && (tr4 - 672) % 8 == 0);
+        c4_sum += (tr4 - 672) / 8;
+        if conn {
+            conn_cnt += 1;
+            lam_sum += lam;
+            if lam < lam_min {
+                lam_min = lam;
+            }
+            if lam <= ram_bound + 1e-9 {
+                ram_cnt += 1;
+            }
+            if lam <= 3.0 + 1e-9 {
+                beat_z_cnt += 1;
+            }
+        }
+        let fp = ((t as u64 & 0xFFFF) << 40) | ((if conn { 1u64 } else { 0u64 }) << 32) | (tr4 & 0xFFFFFFFF);
+        fnv.mix(fp);
+        xor_fwd ^= SplitMix64::new(fp).next_u64();
+    }
+    for t in (0..200).rev() {
+        let (conn, tr4, _) = run_rct1(t);
+        let fp = ((t as u64 & 0xFFFF) << 40) | ((if conn { 1u64 } else { 0u64 }) << 32) | (tr4 & 0xFFFFFFFF);
+        xor_rev ^= SplitMix64::new(fp).next_u64();
+    }
+    assert_eq!(xor_fwd, xor_rev);
+    assert_eq!((conn_cnt, ram_cnt, beat_z_cnt), (200, 200, 153));
+    assert!(((lam_sum / 200.0) - 2.896584).abs() < 1e-5);
+    assert!((lam_min - 2.578675).abs() < 1e-5);
+    assert!(((c4_sum as f64 / 200.0) - 23.37).abs() < 1e-9);
+
+    let (mut dhar_hits, mut dhar_tot) = (0usize, 0usize);
+    for t in 0..1000 {
+        let mut rng = SplitMix64::new(PC3_SEED ^ PC3_DHAR_DOM ^ ((t as u64 + 1).wrapping_mul(0x9E3779B97F4A7C15)));
+        let mut chips = [0i32; 24];
+        for _ in 0..7 {
+            chips[(rng.next_u64() % 24) as usize] += 1;
+        }
+        let mut reached = 0usize;
+        for target in 0..24 {
+            if discrete_dhar_generic(&z, &chips, target).0 {
+                reached += 1;
+            }
+        }
+        if reached == 24 {
+            dhar_hits += 1;
+        }
+        dhar_tot += reached;
+        fnv.mix(((t as u64 & 0xFFFF) << 16) | (reached as u64 & 0xFFFF));
+    }
+    assert_eq!((dhar_hits, dhar_tot), (0, 6249));
+    // Bit-exact cross-language digest agreement across Python == Rust == C++20 (g++ & clang++)!
+    assert_eq!(xor_fwd, 0x8aee1bed32dffe97);
+    assert_eq!(fnv.h, 0x76597d8f13155b2c);
+}

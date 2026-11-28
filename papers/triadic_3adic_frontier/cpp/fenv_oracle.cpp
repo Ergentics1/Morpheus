@@ -823,8 +823,237 @@ int main() {
     fnv.mix(static_cast<uint64_t>(g25_tf));
     std::printf("  [PASS] C++6 Genus-25 3-adic Borel Shimura census: %d curves (%d torsion-free)\n", g25_tot, g25_tf);
 
+    // 7. R-Type Hardware-FENV Adversarial Fault Injection Guard (NaN / +Inf / b<=0 / Bochner / rounding restoration)
+    auto guarded_poitou_check = [](double b, double c1_v, double c2_v) -> bool {
+        if (!std::isfinite(b) || !std::isfinite(c1_v) || !std::isfinite(c2_v)) return false;
+        if (b <= 0.0) return false;
+        constexpr double PI_D = 3.14159265358979323846;
+        for (int k = 0; k <= 200; ++k) {
+            double t = -1.0 + 2.0 * static_cast<double>(k) / 200.0;
+            double ft = 1.0 + std::cos(PI_D * t) + c1_v * (1.0 - std::cos(2.0 * PI_D * t)) +
+                        c2_v * (std::cos(PI_D * t) + std::cos(3.0 * PI_D * t));
+            if (!std::isfinite(ft) || ft < -1e-12) return false;
+        }
+        return true;
+    };
+    int r1_rejected = 0;
+    if (!guarded_poitou_check(NAN, 0.0, 0.0)) ++r1_rejected;
+    if (!guarded_poitou_check(INFINITY, 0.0, 0.0) && !guarded_poitou_check(-1.0, 0.0, 0.0)) ++r1_rejected;
+    if (!guarded_poitou_check(6.0, -0.3, 0.3) && guarded_poitou_check(6.0, 0.0, 0.0)) ++r1_rejected;
+    // Row-sum & symmetry conservation on Y and Z Laplacians
+    bool lap_ok = true;
+    for (int i = 0; i < 24; ++i) {
+        int sy = 0, sz = 0;
+        for (int j = 0; j < 24; ++j) {
+            if (AY[i][j] != AY[j][i] || AZ[i][j] != AZ[j][i]) lap_ok = false;
+            sy += static_cast<int>(AY[i][j]);
+            sz += static_cast<int>(AZ[i][j]);
+        }
+        if (sy != 3 || sz != 4) lap_ok = false;
+    }
+    // Disconnected egg {0, 6} rejected on Z vs connected {0, 1, 2, 20} accepted
+    auto egg_connected_Z = [&](uint32_t mask) -> bool {
+        if (mask == 0) return false;
+        int start = 0;
+        while (((mask >> start) & 1U) == 0) ++start;
+        uint32_t seen = (1U << start);
+        std::array<int, 24> q{};
+        int qh = 0, qt = 0;
+        q[qt++] = start;
+        while (qh < qt) {
+            int u = q[qh++];
+            for (int nb : Z[u]) {
+                if (((mask >> nb) & 1U) && !((seen >> nb) & 1U)) {
+                    seen |= (1U << nb);
+                    q[qt++] = nb;
+                }
+            }
+        }
+        return seen == mask;
+    };
+    if (!egg_connected_Z((1U << 0) | (1U << 6)) &&
+        egg_connected_Z((1U << 0) | (1U << 1) | (1U << 2) | (1U << 20))) {
+        ++r1_rejected;
+    }
     std::fesetround(FE_TONEAREST);
-    std::printf("Summary: 6/6 C++20 Zero-Heap FENV gates PASS (FNV-1a64=0x%016llx).\n",
+    if (!(lap_ok && r1_rejected == 4 && std::fegetround() == FE_TONEAREST)) {
+        std::fprintf(stderr, "[FAIL] C++7 R-Type fault guard failed (rejected=%d)\n", r1_rejected);
+        return 1;
+    }
+    std::printf("  [PASS] C++7 R-Type hardware-FENV fault guard: %d/4 faults rejected, Laplacian conserved, FE_TONEAREST intact\n",
+                r1_rejected);
+
+    // 8. P-Type & D<->P Seam: Zero-Heap SplitMix64 RCT-PC3-1 (N=200) & RCT-PC3-2 (N=1000) Bit-Exact Replay Parity
+    struct SplitMix64 {
+        uint64_t state;
+        explicit SplitMix64(uint64_t s) : state(s) {}
+        uint64_t next_u64() {
+            state += 0x9E3779B97F4A7C15ULL;
+            uint64_t z = state;
+            z = (z ^ (z >> 30)) * 0xBF58476D1CE4E5B9ULL;
+            z = (z ^ (z >> 27)) * 0x94D049BB133111EBULL;
+            return z ^ (z >> 31);
+        }
+    };
+    constexpr uint64_t PC3_SEED = 0x3AD1CF0272026001ULL;
+    constexpr uint64_t PC3_DHAR_DOM = 0xD7D7D7D7D7D7D7D7ULL;
+
+    auto run_rct1_trial = [](int trial, bool& connected_out, uint64_t& tr_a4_out) {
+        SplitMix64 rng(PC3_SEED ^ (static_cast<uint64_t>(trial + 1) * 0x9E3779B97F4A7C15ULL));
+        std::array<int, 48> eu{}, er{};
+        std::array<std::array<bool, 12>, 12> adj{};
+        for (int u = 0; u < 12; ++u) {
+            for (int d = 0; d < 4; ++d) {
+                int r = (u + d) % 12;
+                eu[4 * u + d] = u;
+                er[4 * u + d] = r;
+                adj[u][r] = true;
+            }
+        }
+        for (int step = 0; step < 48; ++step) {
+            int i1 = static_cast<int>(rng.next_u64() % 48ULL);
+            int i2 = static_cast<int>(rng.next_u64() % 48ULL);
+            int u1 = eu[i1], r1 = er[i1];
+            int u2 = eu[i2], r2 = er[i2];
+            if (u1 != u2 && r1 != r2 && !adj[u1][r2] && !adj[u2][r1]) {
+                adj[u1][r1] = false;
+                adj[u2][r2] = false;
+                adj[u1][r2] = true;
+                adj[u2][r1] = true;
+                er[i1] = r2;
+                er[i2] = r1;
+            }
+        }
+        std::array<bool, 24> seen{};
+        std::array<int, 24> q{};
+        int qh = 0, qt = 0;
+        seen[0] = true;
+        q[qt++] = 0;
+        while (qh < qt) {
+            int v = q[qh++];
+            if (v < 12) {
+                for (int r = 0; r < 12; ++r) {
+                    if (adj[v][r] && !seen[12 + r]) {
+                        seen[12 + r] = true;
+                        q[qt++] = 12 + r;
+                    }
+                }
+            } else {
+                int r = v - 12;
+                for (int u = 0; u < 12; ++u) {
+                    if (adj[u][r] && !seen[u]) {
+                        seen[u] = true;
+                        q[qt++] = u;
+                    }
+                }
+            }
+        }
+        connected_out = (qt == 24);
+        uint64_t tr4 = 0;
+        for (int u1 = 0; u1 < 12; ++u1) {
+            for (int u2 = 0; u2 < 12; ++u2) {
+                uint64_t c = 0;
+                for (int r = 0; r < 12; ++r) {
+                    if (adj[u1][r] && adj[u2][r]) ++c;
+                }
+                tr4 += 2ULL * c * c;
+            }
+        }
+        tr_a4_out = tr4;
+    };
+
+    auto dhar_reaches_Z_target = [&](const std::array<int, 24>& init, int target) -> bool {
+        std::array<int, 24> d = init;
+        for (int step = 0; step <= 100; ++step) {
+            if (d[target] > 0) return true;
+            std::array<bool, 24> burnt{};
+            std::array<int, 24> bcnt{};
+            std::array<int, 24> q{};
+            int qh = 0, qt = 0;
+            burnt[target] = true;
+            q[qt++] = target;
+            while (qh < qt) {
+                int u = q[qh++];
+                for (int nb : Z[u]) {
+                    if (!burnt[nb]) {
+                        ++bcnt[nb];
+                        if (bcnt[nb] > d[nb]) {
+                            burnt[nb] = true;
+                            q[qt++] = nb;
+                        }
+                    }
+                }
+            }
+            bool any_unburnt = false;
+            for (int v = 0; v < 24; ++v) {
+                if (!burnt[v]) {
+                    any_unburnt = true;
+                    for (int nb : Z[v]) {
+                        if (burnt[nb]) {
+                            --d[v];
+                            ++d[nb];
+                        }
+                    }
+                }
+            }
+            if (!any_unburnt) return false;
+        }
+        return false;
+    };
+
+    Fnv64 rct_fnv;
+    uint64_t xor_fwd = 0, xor_rev = 0;
+    int rct1_conn = 0;
+    for (int t = 0; t < 200; ++t) {
+        bool conn = false;
+        uint64_t tr4 = 0;
+        run_rct1_trial(t, conn, tr4);
+        if (conn) ++rct1_conn;
+        uint64_t fp = (static_cast<uint64_t>(t & 0xFFFF) << 40) |
+                      (static_cast<uint64_t>(conn ? 1 : 0) << 32) | (tr4 & 0xFFFFFFFFULL);
+        rct_fnv.mix(fp);
+        xor_fwd ^= SplitMix64(fp).next_u64();
+    }
+    for (int t = 199; t >= 0; --t) {
+        bool conn = false;
+        uint64_t tr4 = 0;
+        run_rct1_trial(t, conn, tr4);
+        uint64_t fp = (static_cast<uint64_t>(t & 0xFFFF) << 40) |
+                      (static_cast<uint64_t>(conn ? 1 : 0) << 32) | (tr4 & 0xFFFFFFFFULL);
+        xor_rev ^= SplitMix64(fp).next_u64();
+    }
+    int rct2_hits = 0, rct2_tot_reached = 0;
+    for (int t = 0; t < 1000; ++t) {
+        SplitMix64 rng(PC3_SEED ^ PC3_DHAR_DOM ^ (static_cast<uint64_t>(t + 1) * 0x9E3779B97F4A7C15ULL));
+        std::array<int, 24> chips{};
+        for (int k = 0; k < 7; ++k) ++chips[static_cast<int>(rng.next_u64() % 24ULL)];
+        int reached = 0;
+        for (int target = 0; target < 24; ++target) {
+            if (dhar_reaches_Z_target(chips, target)) ++reached;
+        }
+        if (reached == 24) ++rct2_hits;
+        rct2_tot_reached += reached;
+        rct_fnv.mix((static_cast<uint64_t>(t & 0xFFFF) << 16) | static_cast<uint64_t>(reached & 0xFFFF));
+    }
+    constexpr uint64_t EXP_XOR = 0x8aee1bed32dffe97ULL;
+    constexpr uint64_t EXP_RCT_FNV = 0x76597d8f13155b2cULL;
+    if (!(rct1_conn == 200 && rct2_hits == 0 && rct2_tot_reached == 6249 &&
+          xor_fwd == xor_rev && xor_fwd == EXP_XOR && rct_fnv.h == EXP_RCT_FNV)) {
+        std::fprintf(stderr,
+                     "[FAIL] C++8 SplitMix64 seam parity mismatch: xor=0x%016llx (exp 0x%016llx), fnv=0x%016llx (exp 0x%016llx), reached=%d\n",
+                     static_cast<unsigned long long>(xor_fwd), static_cast<unsigned long long>(EXP_XOR),
+                     static_cast<unsigned long long>(rct_fnv.h), static_cast<unsigned long long>(EXP_RCT_FNV),
+                     rct2_tot_reached);
+        return 1;
+    }
+    fnv.mix(xor_fwd);
+    fnv.mix(rct_fnv.h);
+    std::printf(
+        "  [PASS] C++8 P-Type & D<->P SplitMix64 seam: 200/200 conn, 0/1000 deg-7 hits (reached=%d), xor=0x%016llx, rct_fnv=0x%016llx\n",
+        rct2_tot_reached, static_cast<unsigned long long>(xor_fwd), static_cast<unsigned long long>(rct_fnv.h));
+
+    std::fesetround(FE_TONEAREST);
+    std::printf("Summary: 8/8 C++20 Zero-Heap FENV gates PASS (FNV-1a64=0x%016llx).\n",
                 static_cast<unsigned long long>(fnv.h));
     return 0;
 }

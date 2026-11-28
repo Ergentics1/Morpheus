@@ -34,20 +34,20 @@ All verification follows Ergentics' **Correspondence Principle**, **Code-vs-Data
 
 ## 4. Dual Licensing & Dependencies
 
-- **Code Model (`code/`, `lean/`, `swiftpp/`, `rust/`, `media/*.py`, `Makefile`):** [MIT License](LICENSE) ([`LICENSES/MIT.txt`](LICENSES/MIT.txt)).
-- **Paper & Data Model (`paper/`, `arxiv/`, `figures/`, `audits/`, `data/`, `reconciliation/`, and documentation):** [CC BY 4.0](LICENSE-paper) ([`LICENSES/CC-BY-4.0.txt`](LICENSES/CC-BY-4.0.txt)).
+- **Code Model (`code/`, `ergentics/`, `lean/`, `swiftpp/`, `rust/`, `tests/`, `papers/<slug>/{code,cpp,lean,rust}/`, `reconciliation/*/code/`, `media/*.py`, `Makefile`):** [MIT License](LICENSE) ([`LICENSES/MIT.txt`](LICENSES/MIT.txt)).
+- **Paper & Data Model (`paper/`, `arxiv/`, `figures/`, `audits/`, `cleanroom/`, `data/`, `papers/<slug>/{paper,arxiv,data,cleanroom}/`, `reconciliation/`, and documentation):** [CC BY 4.0](LICENSE-paper) ([`LICENSES/CC-BY-4.0.txt`](LICENSES/CC-BY-4.0.txt)).
 - Third-party code dependencies must use MIT-compatible permissive licenses (e.g., MIT, Apache-2.0, BSD) unless explicitly approved by the maintainer.
 
-## 5. Repeatable Reconciliation & Release Workflow
+## 5. Repeatable Reconciliation, Continuous Testing & Release Workflow
 
 Every research or paper-update cycle follows a single consistent pattern:
 
-1. **ADPIE execution (`Assess → Diagnose → Plan → Implement → Evaluate`):** Develop and verify changes against first-principles tests and formal oracles without mutating prior tagged baselines in place.
-2. **Bidirectional cross-reconciliation (`reconciliation/`):** Exchange structured verification packets (`GEMINI4_NEON_RECONCILIATION.md`, `GROKBOT_RECONCILIATION_RESPONSE.md`, etc.) and run from-scratch cross-checks (`code/xcheck/`, `lean/`, `swiftpp/`, `rust/`) before folding new results into `paper/`.
-3. **Full manuscript & metadata sync:** Whenever `paper/prime-cadences.tex` is updated:
-   - Rebuild `paper/prime-cadences.pdf` and `.bbl` cleanly via `latexmk` (`0` errors, `0` undefined references) and remove LaTeX auxiliaries.
-   - Rebuild `arxiv/prime-cadences-arxiv.tar.gz` with neutral `0/0` ownership headers.
-   - Sync `prime_cadences_paper.md`, `CONTRIBUTIONS.md`, `CITATION.cff` (`version` & `date-released`), `NEGATIVES.md`, `README.md`, and `CHANGELOG.md` (moving released items from `[Unreleased]` into `## [X.Y.Z] - YYYY-MM-DD`).
-   - Recompute and verify every SHA-256 in `PROVENANCE.md` and `data/MANIFEST.sha256`.
-4. **Pre-commit & CI gate:** Run all `Makefile` audits + security hygiene scan (text, PNG chunks, PDF/MP4/tarball path check), commit cleanly, push to `main`, and verify GitHub Actions `Security Hygiene` CI succeeds.
-5. **Versioned immutable GitHub release on paper update:** Because GitHub Immutable Releases lock tags and assets upon publication (`NEG-E11`), cut future releases either by pushing tag `vX.Y.Z` on `main` or by creating a `--draft` release and triggering [`.github/workflows/release-assets.yml`](.github/workflows/release-assets.yml) via `workflow_dispatch`; the workflow verifies PDF and neutral-tar (`0/0`) hygiene, generates `SHA256SUMS.txt`, uploads `prime-cadences.pdf`, `prime-cadences-arxiv.tar.gz`, and `SHA256SUMS.txt` before publication, and atomically seals the immutable release.
+1. **ADPIE execution (`Assess → Diagnose → Plan → Implement → Evaluate`):** Develop and verify changes against first-principles tests and formal oracles without mutating prior tagged or frozen baselines (`CI-10` locks) in place.
+2. **Multi-plane zero-shared-data verification & reconciliation (`reconciliation/`):** Independently cross-check all claims across Pure Python (`--check-only`), Zero-Crate Rust, Dual-Compiler C++20 (`g++` & `clang++`), and Live Kernel-Compiled Zero-Mathlib Lean 4.36.0 (`0 sorryAx`, `0 Lean.ofReduceBool`), logging any bidirectional reconciliation packets or portfolio retrospectives in `reconciliation/`.
+3. **Full manuscript & metadata sync:** Whenever any canonical AMS `LaTeX` manuscript (`paper/prime-cadences.tex` or `papers/<slug>/paper/*.tex`) is added or updated:
+   - Rebuild the canonical `.pdf` and `.bbl` cleanly via `latexmk` (`0` errors, `0` warnings, `0` overfull hboxes, `0` local-path metadata) and remove LaTeX auxiliaries.
+   - Rebuild the standalone-verified neutral `0/0` ownership arXiv bundle under `arxiv/` or `papers/<slug>/arxiv/`.
+   - Sync the 1-to-1 GFM mirror, `CONTRIBUTIONS.md`, `NEGATIVES.md`, `CALIBRATIONS.md`, `README.md`, `papers/README.md`, and `CHANGELOG.md` (moving released items from `[Unreleased]` into `## [X.Y.Z] - YYYY-MM-DD`; update `CITATION.cff` when Paper #01 changes).
+   - Recompute and verify every SHA-256 in `PROVENANCE.md` and all repo-root-relative `MANIFEST.sha256` files.
+4. **Pre-commit & Continuous-Testing CI gate:** Run [`tests/content_integrity_audit.py`](tests/content_integrity_audit.py) (`11/11` gates incl. `CI-11` cross-paper mathematical seam parity) and verify all 5 GitHub Actions PR jobs pass green — [`.github/workflows/continuous-testing.yml`](.github/workflows/continuous-testing.yml) (`content-integrity`, `python-verifiers`, `rust-and-cpp-verifiers` under both `g++` & `clang++`, `lean-formal-oracles`) and [`.github/workflows/security.yml`](.github/workflows/security.yml) (`hygiene-check`).
+5. **Versioned immutable GitHub release on paper update (Rule 11):** Because GitHub Immutable Releases lock tags and assets upon publication (`NEG-E11`), cut releases only when a paper manuscript is added or updated (keeping non-manuscript code/CI/governance improvements under `CHANGELOG.md` `## [Unreleased]`). Trigger [`.github/workflows/release-assets.yml`](.github/workflows/release-assets.yml) by pushing an annotated `vX.Y.Z` tag on `main` (or via `workflow_dispatch` targeting a `--draft` release); the workflow verifies PDF and neutral-tar (`0/0`) hygiene across all canonical manuscripts (currently `6` PDFs + `6` arXiv tarballs + `SHA256SUMS.txt` = `13` assets), uploads all assets before publication, and atomically seals the immutable release.
