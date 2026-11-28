@@ -29,8 +29,20 @@ fn test_d6_d7_b3_arithmetic_non_congruence_tower() {
 }
 
 #[test]
+fn test_d7b_b5_congruence_x52_and_noncongruence_x12() {
+    assert!(verify_b5_congruence_and_noncongruence_towers());
+}
+
+#[test]
 fn test_d8_zero_pari_manin_t2_all_18_levels_excluded() {
     assert!(verify_all_18_shimura_levels_excluded());
+}
+
+#[test]
+fn test_d9b_dic6_tropical_43_involutions_and_exact_gonality_eight() {
+    let (checked, gon) = verify_dic6_tropical_invariants_exact();
+    assert_eq!(checked, 157_166);
+    assert_eq!(gon, 8);
 }
 
 #[test]
