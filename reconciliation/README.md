@@ -12,6 +12,8 @@ Audit-forward cross-verification and novelty reconciliation dossiers submitted f
 
 - [`horizon_round1/`](horizon_round1/README.md) — **Horizon Series (`WP 030`–`WP 035`) Round-1 Reconciliation:** [`RECONCILIATION_CHANGELOG.md`](horizon_round1/RECONCILIATION_CHANGELOG.md) (60-item `[GB]` verdict ledger, independent checks, and author decision list) and [`GEMINI4_NEON_ROUND1_RESPONSE.md`](horizon_round1/GEMINI4_NEON_ROUND1_RESPONSE.md) (`[G4N]` `[X]` re-verification of `NEG-W25`–`W30` via [`code/g4n_r1_xcheck.py`](horizon_round1/code/g4n_r1_xcheck.py), NTRS `19910012850` retraction, and consistent-$I_0$ Theorem G4 ratio refinement).
 
+- [`MORPHEUS_RETROSPECTIVE_META_ANALYSIS.md`](MORPHEUS_RETROSPECTIVE_META_ANALYSIS.md) — **Portfolio Retrospective & Meta-Analysis (`v0.1.0` → `v0.8.0` + Pre-Final-Paper Hardening):** 9-paper multi-plane verification matrix (`81` Python gates, `9` Rust crates / `62` tests, dual-compiler `g++`/`clang++` C++20, `9` Lean 4.36.0 projects / `149` audited theorems, `11/11` content-integrity gates), 6-class empirical taxonomy of all `68` logged negatives, unified Arithmetic Triad & Horizon Synthesis arcs, and pre-final-paper clean-room intake playbook.
+
 ## Licensing
 
 Documentation in `reconciliation/` is licensed under **CC BY 4.0** (see [`LICENSE-paper`](../LICENSE-paper)), consistent with the repository's dual-license structure.

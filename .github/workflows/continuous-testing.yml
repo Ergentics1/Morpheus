@@ -14,17 +14,17 @@ permissions:
 
 jobs:
   content-integrity:
-    name: Content Integrity (10 Gates)
+    name: Content Integrity (11 Gates)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - name: Run 10-gate repository-wide content-integrity audit
+      - name: Run 11-gate repository-wide content-integrity & cross-paper seam audit
         run: python3 tests/content_integrity_audit.py
 
   python-verifiers:
-    name: Pure-Python Verifiers (79 Gates)
+    name: Pure-Python Verifiers (81 Gates)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -87,7 +87,7 @@ jobs:
           git diff --exit-code
 
   rust-and-cpp-verifiers:
-    name: Rust (9 Crates) & C++20 (ErgenticsCXX + PC-III FENV)
+    name: Rust (9 Crates / 62 Tests) & Dual-Compiler C++20 (g++ & clang++)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -104,20 +104,30 @@ jobs:
           done
           echo "=== cargo run --release (PC-II 11 core suites) ==="
           cargo run --release --manifest-path papers/triadic_wreath_nauru/rust/Cargo.toml
-          echo "=== cargo run --release (PC-III 6 core suites) ==="
+          echo "=== cargo run --release (PC-III 9 core suites) ==="
           cargo run --release --manifest-path papers/triadic_3adic_frontier/rust/Cargo.toml
 
-      - name: Build and test C++20 ErgenticsCXX & PC-III Zero-Heap Hardware FENV (-Wall -Wextra -Werror)
+      - name: Build and test C++20 ErgenticsCXX & PC-III Hardware FENV under BOTH g++ and clang++ (-Wall -Wextra -Werror)
         run: |
           set -euo pipefail
-          cmake -S swiftpp -B /tmp/ergentics-cxx-build -DCMAKE_BUILD_TYPE=Release
-          cmake --build /tmp/ergentics-cxx-build --parallel
-          ctest --test-dir /tmp/ergentics-cxx-build --output-on-failure
-          echo "=== PC-III C++20 Hardware FENV Oracle ==="
+          echo "=== ErgenticsCXX (g++) ==="
+          cmake -S swiftpp -B /tmp/ergentics-cxx-gxx -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=g++
+          cmake --build /tmp/ergentics-cxx-gxx --parallel
+          ctest --test-dir /tmp/ergentics-cxx-gxx --output-on-failure
+          echo "=== ErgenticsCXX (clang++) ==="
+          cmake -S swiftpp -B /tmp/ergentics-cxx-clang -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=clang++
+          cmake --build /tmp/ergentics-cxx-clang --parallel
+          ctest --test-dir /tmp/ergentics-cxx-clang --output-on-failure
+          echo "=== PC-III C++20 Hardware FENV Oracle (g++) ==="
           g++ -O2 -std=c++20 -frounding-math -Wall -Wextra -Werror \
-            papers/triadic_3adic_frontier/cpp/fenv_oracle.cpp -o /tmp/pc3_fenv_oracle
-          /tmp/pc3_fenv_oracle
-          rm -f /tmp/pc3_fenv_oracle
+            papers/triadic_3adic_frontier/cpp/fenv_oracle.cpp -o /tmp/pc3_fenv_gxx
+          /tmp/pc3_fenv_gxx | tee /tmp/pc3_gxx.out
+          echo "=== PC-III C++20 Hardware FENV Oracle (clang++) ==="
+          clang++ -O2 -std=c++20 -frounding-math -Wall -Wextra -Werror \
+            papers/triadic_3adic_frontier/cpp/fenv_oracle.cpp -o /tmp/pc3_fenv_clang
+          /tmp/pc3_fenv_clang | tee /tmp/pc3_clang.out
+          diff -u /tmp/pc3_gxx.out /tmp/pc3_clang.out
+          rm -rf /tmp/ergentics-cxx-gxx /tmp/ergentics-cxx-clang /tmp/pc3_fenv_gxx /tmp/pc3_fenv_clang /tmp/pc3_gxx.out /tmp/pc3_clang.out
 
   lean-formal-oracles:
     name: Lean 4.36.0 Formal Oracles (9 Projects / 149 Theorems)

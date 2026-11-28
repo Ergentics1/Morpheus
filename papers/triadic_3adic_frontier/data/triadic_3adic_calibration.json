@@ -1011,7 +1011,38 @@
       "quad_diff": 1.066e-14
     }
   },
+  "P1_keyed_prng_rct_and_seam_replay": {
+    "Z_reference_c4": 30,
+    "Z_reference_lambda_nt": 3.0,
+    "order_invariant_replay": true,
+    "pass": true,
+    "rct_pc3_1_beating_or_matching_Z_lambda": 153,
+    "rct_pc3_1_connected": 200,
+    "rct_pc3_1_mean_c4": 23.37,
+    "rct_pc3_1_mean_lambda_nt": 2.896584,
+    "rct_pc3_1_min_lambda_nt": 2.578675,
+    "rct_pc3_1_ramanujan_count": 200,
+    "rct_pc3_1_trials": 200,
+    "rct_pc3_2_deg7_dhar_trials": 1000,
+    "rct_pc3_2_deg7_rank_ge_1_hits": 0,
+    "rct_pc3_2_non_div4_false_positives": 0,
+    "rct_pc3_2_total_targets_reached": 6249,
+    "rct_splitmix64_digest": "0x76597d8f13155b2c",
+    "seed_hex": "0x3ad1cf0272026001",
+    "xor_order_invariant_digest": "0x8aee1bed32dffe97"
+  },
+  "R1_runtime_guards_and_fault_injection": {
+    "faults_injected": 6,
+    "faults_rejected": 6,
+    "laplacian_rank_Y": 23,
+    "laplacian_rank_Z": 23,
+    "pass": true,
+    "trace_conservation": {
+      "tr_AY2": 72,
+      "tr_AZ2": 96
+    }
+  },
   "license": "CC-BY-4.0",
   "paper": "PC-III: The 3-Adic Dicyclic Companion, Exact Level 3P_5 and Level (3) Congruence on Nauru, and the Real-Quadratic Lame Shimura Curve Atlas",
-  "schema_version": "1.0.0"
+  "schema_version": "1.1.0"
 }
