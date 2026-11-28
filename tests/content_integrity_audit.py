@@ -2,11 +2,12 @@
 """Morpheus Repository-Wide Content-Integrity Audit Harness (MIT License).
 
 Zero external dependencies (Python 3.12+ standard library only). Enforces
-11 deterministic repository-wide integrity gates covering Data Model manifests,
+12 deterministic repository-wide integrity gates covering Data Model manifests,
 PROVENANCE.md SHA-256 inventories, arXiv bundle hygiene & byte parity, binary
 metadata privacy, LaTeX/BibTeX cross-reference integrity, Markdown links,
 Lean 4 static trust boundaries, governance ledgers, Code-vs-Data separation,
-frozen baseline immutability locks, and cross-paper mathematical seam parity.
+frozen baseline immutability locks, cross-paper mathematical seam parity, and
+three-tier Universal Lexicon / readability compliance.
 
 Usage:
     python3 tests/content_integrity_audit.py
@@ -109,7 +110,7 @@ def git_tracked_files() -> List[str]:
     tracked = {p for p in out.split("\0") if p}
     # Include untracked non-ignored files in tests/ during pre-commit local runs.
     for p in (ROOT / "tests").rglob("*"):
-        if p.is_file() and "__pycache__" not in p.parts:
+        if p.is_file() and "__pycache__" not in p.parts and "target" not in p.parts:
             tracked.add(p.relative_to(ROOT).as_posix())
     return sorted(tracked)
 
@@ -117,8 +118,8 @@ def git_tracked_files() -> List[str]:
 def gate_ci1_manifests() -> Tuple[bool, str]:
     """CI-1: Verify all MANIFEST.sha256 files using repo-root-relative paths."""
     manifests = sorted(ROOT.rglob("MANIFEST.sha256"))
-    if len(manifests) < 13:
-        return False, f"Expected >= 13 MANIFEST.sha256 files, found {len(manifests)}"
+    if len(manifests) < 14:
+        return False, f"Expected >= 14 MANIFEST.sha256 files, found {len(manifests)}"
     checked_entries = 0
     errors: List[str] = []
     for mf in manifests:
@@ -683,6 +684,18 @@ def gate_ci11_cross_paper_seam_parity() -> Tuple[bool, str]:
     return True, f"{checks} cross-paper seams verified (Paper#01<->PC-II<->PC-III<->PC-IV, WP030-035<->HS, {ax_total} Lean #print axioms)"
 
 
+def gate_ci12_universal_lexicon() -> Tuple[bool, str]:
+    """CI-12: Verify Morpheus three-tier Universal Lexicon, LEXICON.md parity, & traps."""
+    sys.path.insert(0, str(ROOT / "tests"))
+    try:
+        import lexicon_audit  # type: ignore[import-not-found]
+    finally:
+        if sys.path and sys.path[0] == str(ROOT / "tests"):
+            sys.path.pop(0)
+    ok, summary, _ = lexicon_audit.run_self_test(check_md_file=True)
+    return ok, summary
+
+
 def main() -> int:
     gates = [
         ("CI-1", "Data Model MANIFEST.sha256", gate_ci1_manifests),
@@ -696,9 +709,10 @@ def main() -> int:
         ("CI-9", "Code-vs-Data Model separation", gate_ci9_code_data_separation),
         ("CI-10", "Frozen baseline SHA-256 locks", gate_ci10_frozen_baselines),
         ("CI-11", "Cross-paper mathematical seam parity", gate_ci11_cross_paper_seam_parity),
+        ("CI-12", "Universal Lexicon & readability alignment", gate_ci12_universal_lexicon),
     ]
     passed = 0
-    print("Running Morpheus 11-gate repository-wide content-integrity audit...")
+    print("Running Morpheus 12-gate repository-wide content-integrity audit...")
     for gid, title, fn in gates:
         ok, detail = fn()
         tag = "PASS" if ok else "FAIL"

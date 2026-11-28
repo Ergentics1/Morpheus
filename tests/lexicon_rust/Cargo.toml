@@ -1,0 +1,8 @@
+[package]
+name = "morpheus-lexicon-audit"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+description = "Zero-crate freestanding Pure Rust cross-verifier for the Morpheus Standardized Universal Lexicon (CI-12)"
+
+[dependencies]

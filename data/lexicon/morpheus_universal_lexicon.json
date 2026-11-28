@@ -1,0 +1,674 @@
+{
+  "schema_version": "1.0.0",
+  "title": "Morpheus Standardized Universal Lexicon",
+  "license": "CC-BY-4.0",
+  "standard": "ISO 704:2022 Three-Tier Terminology Alignment",
+  "scope": "Morpheus 10-paper verified research corpus (Paper #01 Prime Cadences, Horizon WP 030-035 and Horizon Synthesis Pieces I-III, PC-II, PC-III, PC-IV); excludes external unarchived Swift++ WP 053 fluids/MHD and Atelier binary pipelines.",
+  "policy": {
+    "atelier_jwr_ceiling_pct": 2.5,
+    "atelier_fk_grade_min": 5.0,
+    "atelier_fk_grade_max": 12.5,
+    "research_deprecated_alias_ceiling": 0,
+    "prng_seed_hex": "0x55e1ec1020260012"
+  },
+  "tier3_jargon_markers": [
+    "abelian",
+    "adjoint",
+    "amalgam",
+    "automorphism",
+    "bipartite",
+    "borel",
+    "brandt",
+    "bruhat",
+    "cayley",
+    "congruence",
+    "crtbp",
+    "cyclotomic",
+    "dicyclic",
+    "discriminant",
+    "eichler",
+    "eigenvalue",
+    "floquet",
+    "fricke",
+    "gonality",
+    "hagedorn",
+    "hashimoto",
+    "hecke",
+    "hilbert",
+    "holonomy",
+    "homology",
+    "ihara",
+    "isomorphism",
+    "jacobian",
+    "laplacian",
+    "manin",
+    "monodromy",
+    "mumford",
+    "nuclearity",
+    "odlyzko",
+    "poitou",
+    "quadrupole",
+    "quaternion",
+    "ramanujan",
+    "raynaud",
+    "riehm",
+    "schottky",
+    "shimura",
+    "surjection",
+    "symplectic",
+    "tauberian",
+    "tits",
+    "tonnetz",
+    "unimodular",
+    "vogt",
+    "wreath"
+  ],
+  "disciplines": [
+    {
+      "id": "arithmetic_shimura_graphs",
+      "label": "Arithmetic & Shimura Graphs",
+      "expected_count": 22
+    },
+    {
+      "id": "horizon_orbital_gravity",
+      "label": "Horizon Orbital & Quantum Gravity",
+      "expected_count": 14
+    },
+    {
+      "id": "verified_compilers_provers",
+      "label": "Verified Compilers, Oracles & Provers",
+      "expected_count": 14
+    },
+    {
+      "id": "empirical_methodology_auditing",
+      "label": "Empirical Methodology & Integrity Auditing",
+      "expected_count": 10
+    }
+  ],
+  "scoped_symbols": [
+    {
+      "symbol_id": "Z_graph",
+      "latex": "\\mathcal{Z}_{\\mathrm{graph}}",
+      "discipline": "arithmetic_shimura_graphs",
+      "meaning": "4-regular 24-vertex Dicyclic Companion Cayley graph Cay(Dic_6, S) with 48 edges",
+      "disambiguated_from": "Z_part"
+    },
+    {
+      "symbol_id": "Z_part",
+      "latex": "Z_{\\mathrm{part}}(\\beta)",
+      "discipline": "horizon_orbital_gravity",
+      "meaning": "Canonical thermal partition function Tr(exp(-beta H)) in Hagedorn nuclearity analysis",
+      "disambiguated_from": "Z_graph"
+    },
+    {
+      "symbol_id": "D_quat",
+      "latex": "D_{\\mathrm{quat}}",
+      "discipline": "arithmetic_shimura_graphs",
+      "meaning": "Reduced discriminant of a definite quaternion algebra over a totally real field",
+      "disambiguated_from": "d_F"
+    },
+    {
+      "symbol_id": "d_F",
+      "latex": "d_{F}",
+      "discipline": "arithmetic_shimura_graphs",
+      "meaning": "Absolute field discriminant of a totally real number field F",
+      "disambiguated_from": "D_quat"
+    },
+    {
+      "symbol_id": "g_curve",
+      "latex": "g_{\\mathrm{curve}}",
+      "discipline": "arithmetic_shimura_graphs",
+      "meaning": "Arithmetic or tropical genus (first Betti number) of a Shimura or Mumford curve",
+      "disambiguated_from": "g_grav"
+    },
+    {
+      "symbol_id": "g_grav",
+      "latex": "g_{\\mathrm{grav}}",
+      "discipline": "horizon_orbital_gravity",
+      "meaning": "Local gravitational acceleration magnitude on Earth, Moon, or small-body regolith",
+      "disambiguated_from": "g_curve"
+    }
+  ],
+  "concepts": [
+    {
+      "id": "triad_tonnetz_graph",
+      "discipline": "arithmetic_shimura_graphs",
+      "tier1_plain": "24-Chord Voice Network",
+      "tier2_canonical": "Neo-Riemannian Triad Graph",
+      "tier3_literature": "3-regular 24-vertex Cayley graph X = Cay(T/I, {P, L, R}) of genus 13",
+      "first_use_gloss": "the 24-node, 36-edge network linking every major and minor triad by single-note P, L, and R moves",
+      "deprecated_aliases": ["triad web", "musical mesh"]
+    },
+    {
+      "id": "ihara_prime_cadence",
+      "discipline": "arithmetic_shimura_graphs",
+      "tier1_plain": "Indivisible Chord Loop",
+      "tier2_canonical": "Ihara Prime Cadence",
+      "tier3_literature": "Primitive reduced tailless closed walk in the Ihara zeta function Z_X(u)",
+      "first_use_gloss": "a closed chord progression with no immediate backtrack that is not a repeat of a shorter loop",
+      "deprecated_aliases": ["prime chord loop", "zeta cadence cycle"]
+    },
+    {
+      "id": "ramanujan_graph_corridor",
+      "discipline": "arithmetic_shimura_graphs",
+      "tier1_plain": "Optimal Mixing Bound",
+      "tier2_canonical": "Ramanujan Spectral Corridor",
+      "tier3_literature": "Optimal nontrivial adjacency bound |lambda_nt| <= 2 sqrt(q) and Hashimoto trace corridor",
+      "first_use_gloss": "the sharpest mathematical speed limit governing how evenly random walks spread across a regular network",
+      "deprecated_aliases": ["ramanujan magic bound", "optimal graph hallway"]
+    },
+    {
+      "id": "voice_leading_homology",
+      "discipline": "arithmetic_shimura_graphs",
+      "tier1_plain": "Pitch-Drift Loop Count",
+      "tier2_canonical": "Voice-Leading Homology",
+      "tier3_literature": "Lattice winding map H_1(X, Z) -> Z^2 on the hexagonal Tonnetz torus",
+      "first_use_gloss": "the exact net pitch-lattice winding accumulated after returning to the starting chord",
+      "deprecated_aliases": ["tone winding algebra", "chord loop drift"]
+    },
+    {
+      "id": "uniform_triadic_wreath",
+      "discipline": "arithmetic_shimura_graphs",
+      "tier1_plain": "Two-Mode Chord Symmetry Group",
+      "tier2_canonical": "Uniform Triadic Wreath Product",
+      "tier3_literature": "Hook group UTT = Z_12 wr Z_2 of order 288 and twin-diamond normalizer N_Sym(24)(UTT)",
+      "first_use_gloss": "the 288-element group of mode-preserving and mode-swapping uniform triad transformations",
+      "deprecated_aliases": ["hook chord wreath", "triad wreath pack"]
+    },
+    {
+      "id": "nauru_lame_graph",
+      "discipline": "arithmetic_shimura_graphs",
+      "tier1_plain": "Symmetric 36-Bridge Star Graph",
+      "tier2_canonical": "Nauru Generalized Petersen Graph",
+      "tier3_literature": "GP(12, 5) = {6,3}_{(2,2)} of order 24, |Aut(Y)| = 144, Lamé amalgam S_3 *_{Z_2} V_4",
+      "first_use_gloss": "the highly symmetric 24-vertex, 36-edge Ramanujan graph with 144 symmetries and Eisenstein honeycomb quotient",
+      "deprecated_aliases": ["nauru star mesh", "petersen 12-5 web"]
+    },
+    {
+      "id": "dicyclic_companion_graph",
+      "discipline": "arithmetic_shimura_graphs",
+      "tier1_plain": "48-Bridge Companion Network",
+      "tier2_canonical": "Dicyclic Companion Graph",
+      "tier3_literature": "4-regular Cayley graph Z_graph = Cay(Dic_6, S), V = 24, E = 48, g = 25, |Aut(Z)| = 96",
+      "first_use_gloss": "the 4-regular, 24-vertex, 48-edge Ramanujan companion graph built from the order-24 dicyclic group",
+      "deprecated_aliases": ["dic6 48-edge mesh", "dicyclic buddy graph"]
+    },
+    {
+      "id": "bruhat_tits_uniformization",
+      "discipline": "arithmetic_shimura_graphs",
+      "tier1_plain": "Infinite Branching Prime Tree",
+      "tier2_canonical": "Bruhat-Tits Tree Uniformization",
+      "tier3_literature": "p-adic Schottky quotient Gamma \\ T_{q+1} for PGL_2(F_v) yielding a Mumford curve",
+      "first_use_gloss": "unwrapping a finite graph into an infinite prime-branching tree to build a p-adic algebraic curve",
+      "deprecated_aliases": ["p-adic tree unwrapper", "schottky branch tree"]
+    },
+    {
+      "id": "raynaud_sandpile_snf",
+      "discipline": "arithmetic_shimura_graphs",
+      "tier1_plain": "Chip-Firing Signature Table",
+      "tier2_canonical": "Raynaud Component Group SNF",
+      "tier3_literature": "Smith normal form of reduced graph Laplacian K(G) = Phi(J(C_G))",
+      "first_use_gloss": "the exact finite abelian group invariant counting spanning trees and component-group torsors of a graph",
+      "deprecated_aliases": ["sandpile signature list", "laplacian torsion bag"]
+    },
+    {
+      "id": "metric_gonality_scramble",
+      "discipline": "arithmetic_shimura_graphs",
+      "tier1_plain": "Minimum Bottleneck Chip Count",
+      "tier2_canonical": "Equilateral Metric Gonality",
+      "tier3_literature": "Scramble lower bound sn(G) <= dgon(G) <= gon(Gamma_eq(G)) <= gon(C_G) via Dhar burning",
+      "first_use_gloss": "the smallest number of chips needed on a graph so that firing games can cover every vertex",
+      "deprecated_aliases": ["chip bottleneck number", "dhar gonality score"]
+    },
+    {
+      "id": "fricke_vogt_quaternion_surface",
+      "discipline": "arithmetic_shimura_graphs",
+      "tier1_plain": "Trace-Matched Parameter Map",
+      "tier2_canonical": "Fricke-Vogt Quaternion Surface",
+      "tier3_literature": "Quaternion algebra family B(x) = (-3, x(x-3)) and B_Z(u,v) parametrized by character traces",
+      "first_use_gloss": "the algebraic parameter space of quaternion algebras realizing a fixed graph quotient on a prime tree",
+      "deprecated_aliases": ["fricke trace sheet", "quaternion parameter plane"]
+    },
+    {
+      "id": "universal_twin_duality",
+      "discipline": "arithmetic_shimura_graphs",
+      "tier1_plain": "Mirror Parameter Swap",
+      "tier2_canonical": "Universal Algebraic Twin Duality",
+      "tier3_literature": "Involution tau((bt)a) = 3 - x exchanging surjections rho_6 <-> rho_12 across twin moduli",
+      "first_use_gloss": "an exact symmetry pairing two algebraic parameters while swapping their quotient maps identically",
+      "deprecated_aliases": ["parameter mirror flip", "twin trace swap"]
+    },
+    {
+      "id": "level_congruence_shimura",
+      "discipline": "arithmetic_shimura_graphs",
+      "tier1_plain": "Clock-Remainder Arithmetic Curve",
+      "tier2_canonical": "Full Congruence Shimura Curve",
+      "tier3_literature": "Arithmetic lattice containing principal congruence subgroup Gamma(M) in O[1/p]^1 / {+-1}",
+      "first_use_gloss": "a p-adic curve whose symmetry lattice is cut out entirely by modular remainder rules at a finite level",
+      "deprecated_aliases": ["clock-remainder curve", "modular congruence loop"]
+    },
+    {
+      "id": "non_congruence_cover",
+      "discipline": "arithmetic_shimura_graphs",
+      "tier1_plain": "Hidden Non-Modular Cover",
+      "tier2_canonical": "Strictly Non-Congruence Arithmetic Cover",
+      "tier3_literature": "Finite-index arithmetic subgroup Gamma not containing any principal congruence subgroup Gamma(M)",
+      "first_use_gloss": "an arithmetic curve cover that escapes every finite modular-remainder rule despite living inside a quaternion order",
+      "deprecated_aliases": ["non-modular sneaky cover", "uncongruent quilt"]
+    },
+    {
+      "id": "split_prime_diagonal_sign_flip",
+      "discipline": "arithmetic_shimura_graphs",
+      "tier1_plain": "Split-Mirror Sign Flip",
+      "tier2_canonical": "Split-Prime Diagonal Sign-Flip",
+      "tier3_literature": "Central element sigma = 1 - 2w equiv (+1, -1) mod (4) separating Ad_(4) from L_(4)/{+-1}",
+      "first_use_gloss": "an element acting as +1 on one split prime factor and -1 on the other, invisible to conjugation yet caught by left multiplication",
+      "deprecated_aliases": ["split sign trick", "diagonal mod-4 toggle"]
+    },
+    {
+      "id": "riehm_congruence_obstruction",
+      "discipline": "arithmetic_shimura_graphs",
+      "tier1_plain": "Coprime Normal-Subgroup Wall",
+      "tier2_canonical": "Riehm Congruence Obstruction",
+      "tier3_literature": "Normal subgroup classification in SL_1(O_v) forcing trivial abelian kernels when gcd(e, q) = 1",
+      "first_use_gloss": "a structural theorem ruling out hidden congruence subgroups whenever local quotient orders are coprime",
+      "deprecated_aliases": ["riehm local wall", "coprime kernel blocker"]
+    },
+    {
+      "id": "hecke_brandt_matrix",
+      "discipline": "arithmetic_shimura_graphs",
+      "tier1_plain": "Grid-Transition Table",
+      "tier2_canonical": "Hecke Brandt Matrix",
+      "tier3_literature": "Definite quaternion ideal-class adjacency matrix B(p) representing the Hecke operator T_p",
+      "first_use_gloss": "the integer transition matrix counting norm-p steps between ideal classes of a definite quaternion order",
+      "deprecated_aliases": ["brandt grid table", "ideal hop matrix"]
+    },
+    {
+      "id": "manin_modular_symbols",
+      "discipline": "arithmetic_shimura_graphs",
+      "tier1_plain": "Exact Modular Frequency Sieve",
+      "tier2_canonical": "Manin Modular Symbols",
+      "tier3_literature": "Finite-dimensional presentation of S_2(Gamma_0(M)) computing exact Hecke action T_p via Heilbronn matrices",
+      "first_use_gloss": "an exact algebraic presentation of weight-2 modular forms used to rule out matching Hecke spectra over finite fields",
+      "deprecated_aliases": ["manin symbol sieve", "modular form crusher"]
+    },
+    {
+      "id": "su2_wilson_holonomy",
+      "discipline": "arithmetic_shimura_graphs",
+      "tier1_plain": "Compact Rotation Loop Cost",
+      "tier2_canonical": "Compact SU(2) Wilson-Loop Action",
+      "tier3_literature": "Definite quaternion trace bound tau(w) = 4 cos^2(theta) <= 4 and S_W(w) = 1 - sqrt(tau(w))/2 in (0,1)",
+      "first_use_gloss": "the bounded rotation action of a closed loop in a definite quaternion algebra, strictly below every non-arithmetic hyperbolic wall",
+      "deprecated_aliases": ["wilson loop penalty", "su2 trace cost"]
+    },
+    {
+      "id": "poitou_odlyzko_explicit_formula",
+      "discipline": "arithmetic_shimura_graphs",
+      "tier1_plain": "Prime-Field Size Floor",
+      "tier2_canonical": "Poitou-Odlyzko Explicit Formula",
+      "tier3_literature": "Positivity-constrained Fourier kernel lower bound on d_F^{1/n} including Sym^2 positive kernels",
+      "first_use_gloss": "an analytic inequality using positive Fourier test functions to establish unconditional lower bounds on number-field discriminants",
+      "deprecated_aliases": ["odlyzko floor hack", "discriminant squeeze formula"]
+    },
+    {
+      "id": "three_pincer_hilbert_obstruction",
+      "discipline": "arithmetic_shimura_graphs",
+      "tier1_plain": "Three-Wall Degree Squeeze",
+      "tier2_canonical": "Three-Pincer Hilbert Class Field Obstruction",
+      "tier3_literature": "Joint Odlyzko, Hilbert class field, and decomposition-field bound collapsing n <= 14 to n <= 8",
+      "first_use_gloss": "three combined discriminant inequalities that eliminate all candidate arithmetic base fields above degree 8",
+      "deprecated_aliases": ["three-pincer crunch", "hilbert degree trap"]
+    },
+    {
+      "id": "genus25_borel_census",
+      "discipline": "arithmetic_shimura_graphs",
+      "tier1_plain": "Nine-Curve Genus-25 Catalog",
+      "tier2_canonical": "Torsion-Free Genus-25 Borel Census",
+      "tier3_literature": "Complete 19-curve (9 torsion-free) Eichler-Shimura list X_0^D(N) of genus 25 at p = 3",
+      "first_use_gloss": "the exhaustive list of all 9 torsion-free Borel Shimura curves of genus 25 checked directly against the dicyclic graph",
+      "deprecated_aliases": ["genus 25 curve roster", "borel 9-curve list"]
+    },
+    {
+      "id": "isoinertial_hopf_switching",
+      "discipline": "horizon_orbital_gravity",
+      "tier1_plain": "Constant-Inertia Shape Wave",
+      "tier2_canonical": "Iso-Inertial Hopf-Fibration Quadrupole Switching",
+      "tier3_literature": "Three-mass planar trajectory preserving total scalar moment of inertia I_0 = (2/3) M L^2 on the Hopf sphere",
+      "first_use_gloss": "deforming a three-mass spacecraft along a symmetric shape wave that keeps its scalar moment of inertia fixed",
+      "deprecated_aliases": ["hopf tether wiggle", "iso-inertia swing"]
+    },
+    {
+      "id": "noether_constant_p_bound",
+      "discipline": "horizon_orbital_gravity",
+      "tier1_plain": "Axial Momentum Conservation Law",
+      "tier2_canonical": "Noether Constant-p Conservation Bound",
+      "tier3_literature": "Exact invariance of axial angular momentum J_z under axisymmetric central and J_2 potentials",
+      "first_use_gloss": "the exact conservation law preventing axisymmetric gravity from changing vertical angular momentum",
+      "deprecated_aliases": ["noether p lock", "axial spin ceiling"]
+    },
+    {
+      "id": "shapere_wilczek_holonomy",
+      "discipline": "horizon_orbital_gravity",
+      "tier1_plain": "Shape-Cycle Rotation Shift",
+      "tier2_canonical": "Shapere-Wilczek Geometric Holonomy",
+      "tier3_literature": "Berry-Montgomery signed net orientation angle Delta theta = +-90 deg over a closed zero-angular-momentum loop",
+      "first_use_gloss": "the net spacecraft rotation produced solely by executing a closed internal deformation cycle with zero external torque",
+      "deprecated_aliases": ["shape loop twist", "geometric reorientation trick"]
+    },
+    {
+      "id": "zero_spin_kinetic_divergence",
+      "discipline": "horizon_orbital_gravity",
+      "tier1_plain": "High-Stretch Energy Spike",
+      "tier2_canonical": "Zero-Spin Kinetic Divergence (Theorem G1)",
+      "tier3_literature": "Exact shape kinetic energy T_shape = (1/8) I_0 beta_dot^2 + (q^2/(1-q^2))((1/2) I_0 omega_orb^2) on equilateral Hopf basis w_+-",
+      "first_use_gloss": "the steep energetic penalty that grows as q^2/(1-q^2) when pushing a three-mass tether near collinearity",
+      "deprecated_aliases": ["collinear energy blowup", "theorem g1 spike"]
+    },
+    {
+      "id": "mechanical_spring_drum_hub",
+      "discipline": "horizon_orbital_gravity",
+      "tier1_plain": "Coupled Spring-Drum Hub",
+      "tier2_canonical": "Mechanical Differential Spring-Drum Hub (Theorem G4)",
+      "tier3_literature": "Coupled elastic hub avoiding the >= 9.85x I_0-invariant electrical motor-winch waste-heat floor (13.92 W baseline)",
+      "first_use_gloss": "a mechanically coupled spring-drum center hub that recycles radial tether energy instead of burning it in independent electric winches",
+      "deprecated_aliases": ["tether spring box", "winch heat bypass"]
+    },
+    {
+      "id": "nonplanar_j2_symmetry_breaking",
+      "discipline": "horizon_orbital_gravity",
+      "tier1_plain": "Oblate-Planet Tilt Drift",
+      "tier2_canonical": "Non-Planar J_2 Symmetry Breaking",
+      "tier3_literature": "Differential inclination/nodal torque measured against the subtracted L = 0 point-mass J_2 control baseline",
+      "first_use_gloss": "the small orbital plane shift generated by coupling spacecraft shape to a planet's equatorial bulge after subtracting point-mass drift",
+      "deprecated_aliases": ["j2 tilt drift", "bulge plane nudge"]
+    },
+    {
+      "id": "safe_perigee_k9_eccentricity",
+      "discipline": "horizon_orbital_gravity",
+      "tier1_plain": "Best Safe-Altitude Orbit Shape",
+      "tier2_canonical": "Safe-Perigee Optimal Eccentricity (K9)",
+      "tier3_literature": "Unique optimal orbital eccentricity e_opt^* = 0.2817015579087740 maximizing safe-perigee quadrupole impulse",
+      "first_use_gloss": "the unique elliptical orbit shape that maximizes gravity-gradient delta-v without dipping into Earth's atmosphere",
+      "deprecated_aliases": ["k9 best ellipse", "perigee sweet spot"]
+    },
+    {
+      "id": "com_shifted_fdir_inertia",
+      "discipline": "horizon_orbital_gravity",
+      "tier1_plain": "Jammed-Winch Rebalance Law",
+      "tier2_canonical": "COM-Shifted Three-Arm FDIR Inertia Law (Theorem G2)",
+      "tier3_literature": "Exact center-of-mass-corrected inertia inversion yielding 21.0% peak tension relief under single-winch jam",
+      "first_use_gloss": "the fault-recovery rule that accounts for center-of-mass shift when one tether winch jams to cut peak cable stress by 21 percent",
+      "deprecated_aliases": ["winch jam workaround", "fdir inertia patch"]
+    },
+    {
+      "id": "transverse_y_halo_resonance",
+      "discipline": "horizon_orbital_gravity",
+      "tier1_plain": "Sideways Tether Halo Lock",
+      "tier2_canonical": "Transverse-y L_2 Halo Resonance Closure (Theorem G3)",
+      "tier3_literature": "Laplace-constrained 3D CRTBP multipole coupling closing Didymos-Dimorphos L_2 to 1:1 resonance at L_y^* = 40.44 m",
+      "first_use_gloss": "orienting a tether along the transverse y-axis so its gravity-gradient quadrupole locks a tiny asteroid L_2 orbit into exact 1:1 resonance",
+      "deprecated_aliases": ["didymos halo tweak", "y-axis l2 resonance hack"]
+    },
+    {
+      "id": "elevated_wu_floquet_branch",
+      "discipline": "horizon_orbital_gravity",
+      "tier1_plain": "Safe Lunar-Capture Highway",
+      "tier2_canonical": "Elevated Safe Lunar-Capture W^u Branch",
+      "tier3_literature": "42-ODE CRTBP unstable manifold branch clearing lunar radius (+327.2 km altitude) with 8,814x Floquet station-keeping",
+      "first_use_gloss": "an unstable halo-orbit departure trajectory that clears the Moon by 327.2 km instead of impacting the surface",
+      "deprecated_aliases": ["safe moon highway", "floquet capture lane"]
+    },
+    {
+      "id": "fluidized_bennu_tag_guidance",
+      "discipline": "horizon_orbital_gravity",
+      "tier1_plain": "Loose-Rubble Touch-and-Go Control",
+      "tier2_canonical": "Fluidized Regolith Bennu TAG Guidance",
+      "tier3_literature": "Closed-loop contact guidance validated across 500-700 kg/m^3 subsurface regolith density (MC200 200/200 SAFE)",
+      "first_use_gloss": "asteroid sampling touch-and-go control calibrated for low-density, ball-pit-like rubble beneath Bennu's crust",
+      "deprecated_aliases": ["bennu rubble landing", "tag dirt control"]
+    },
+    {
+      "id": "riemann_rearrangement_universality",
+      "discipline": "horizon_orbital_gravity",
+      "tier1_plain": "Order-Dependent Sum Breakdown",
+      "tier2_canonical": "Non-Hilbert-Schmidt Riemann Rearrangement Universality (Theorem G5)",
+      "tier3_literature": "Nested strong exhaustions on H = l^2(N) + l^2(N) driving closed-cut Z_P[X] to any prescribed real limit L",
+      "first_use_gloss": "a proof that an unregularized non-Hilbert-Schmidt gravitational trace can be reordered to hit any real number",
+      "deprecated_aliases": ["trace reordering paradox", "cut sum ambiguity"]
+    },
+    {
+      "id": "odd_sphere_spectral_zeta",
+      "discipline": "horizon_orbital_gravity",
+      "tier1_plain": "Curved-Sphere Mode Sum",
+      "tier2_canonical": "Odd-Sphere Spectral Zeta Regularization",
+      "tier3_literature": "Analytic continuation of Laplacian/Dirac mode sums on S^{2k+1} and lens spaces L(p,1) with 4-loop QED a_e check",
+      "first_use_gloss": "exact analytic evaluation of quantum vibration spectra on odd-dimensional spheres used to test unified-field claims",
+      "deprecated_aliases": ["sphere zeta test", "lens mode tally"]
+    },
+    {
+      "id": "hagedorn_equivalence_breaking",
+      "discipline": "horizon_orbital_gravity",
+      "tier1_plain": "Thermal-Temperature Spread Floor",
+      "tier2_canonical": "Hagedorn Canonical Equivalence-Breaking (Theorem G6)",
+      "tier3_literature": "Exact Gamma(alpha, alpha) canonical energy dispersion 1/sqrt(alpha) and 1/sqrt(alpha+2) truncation bridge",
+      "first_use_gloss": "an irreducible macroscopic energy fluctuation that persists at all scales whenever density of states grows exponentially",
+      "deprecated_aliases": ["hagedorn heat jitter", "canonical spread bug"]
+    },
+    {
+      "id": "correspondence_seam",
+      "discipline": "verified_compilers_provers",
+      "tier1_plain": "Limit Check",
+      "tier2_canonical": "Correspondence Seam",
+      "tier3_literature": "Dimensionless error bound |f_exact - f_limit| <= epsilon linking discrete algorithms to continuum limits (C_k)",
+      "first_use_gloss": "a quantitative error bound verifying that a discrete computation converges to its exact continuum limit",
+      "deprecated_aliases": ["correspondence glue", "limit error check"]
+    },
+    {
+      "id": "outward_rounded_interval",
+      "discipline": "verified_compilers_provers",
+      "tier1_plain": "Safe Number Box",
+      "tier2_canonical": "Outward-Rounded Interval",
+      "tier3_literature": "IEEE-754 hardware directed-rounding bracket [x_down, x_up] via FE_DOWNWARD / FE_UPWARD with -ffp-contract=off",
+      "first_use_gloss": "a hardware-rounded numeric interval guaranteed to trap the true real value between its lower and upper floating-point endpoints",
+      "deprecated_aliases": ["FENV bracket", "safe float range"]
+    },
+    {
+      "id": "zero_mathlib_lean_kernel",
+      "discipline": "verified_compilers_provers",
+      "tier1_plain": "Self-Contained Proof Kernel",
+      "tier2_canonical": "Zero-Mathlib Lean 4 Kernel Proof",
+      "tier3_literature": "Machine-checked proof compiled directly by Lean 4.36.0 Init kernel with -DwarningAsError=true -DautoImplicit=false",
+      "first_use_gloss": "a formal theorem checked directly by the minimal Lean 4 kernel with zero external mathematical libraries",
+      "deprecated_aliases": ["bare lean script", "mathlib-free hack"]
+    },
+    {
+      "id": "axiom_trust_boundary",
+      "discipline": "verified_compilers_provers",
+      "tier1_plain": "Zero-Shortcut Proof Audit",
+      "tier2_canonical": "Lean Axiom Trust Boundary",
+      "tier3_literature": "Live #print axioms verification enforcing 0 sorryAx and 0 Lean.ofReduceBool across every theorem",
+      "first_use_gloss": "an automated check proving that no formal theorem hides unfinished gaps or unverified compiler shortcuts",
+      "deprecated_aliases": ["sorry-free badge", "axiom shortcut scan"]
+    },
+    {
+      "id": "unimodular_snf_certificate",
+      "discipline": "verified_compilers_provers",
+      "tier1_plain": "Direct Integer-Matrix Proof",
+      "tier2_canonical": "Pure-Kernel Unimodular SNF Certificate",
+      "tier3_literature": "Explicit integer matrices U, V (det = +-1) proving U L V = diag(d_i) directly by kernel rfl",
+      "first_use_gloss": "an explicit pair of determinant-one integer matrices certifying exact Smith normal form directly inside the proof kernel",
+      "deprecated_aliases": ["snf witness blob", "matrix rfl shortcut"]
+    },
+    {
+      "id": "dual_compiler_fenv_parity",
+      "discipline": "verified_compilers_provers",
+      "tier1_plain": "Two-Compiler Bitwise Match",
+      "tier2_canonical": "Dual-Compiler Hardware-FENV Parity",
+      "tier3_literature": "Zero-byte diff -u equality between g++ and clang++ builds under -O2 -std=c++20 -frounding-math -ffp-contract=off",
+      "first_use_gloss": "compiling and running a hardware-rounded oracle under both GCC and Clang and requiring byte-identical output",
+      "deprecated_aliases": ["gcc clang match", "raw ARM64 emitter"]
+    },
+    {
+      "id": "freestanding_zero_heap_oracle",
+      "discipline": "verified_compilers_provers",
+      "tier1_plain": "Fixed-Memory Math Checker",
+      "tier2_canonical": "Freestanding Zero-Heap Oracle",
+      "tier3_literature": "Static-memory C++20 verification binary with zero dynamic allocations and deterministic IEEE-754 state restoration",
+      "first_use_gloss": "a compact compiled checker that runs entirely on fixed stack memory with no dynamic heap allocations",
+      "deprecated_aliases": ["no-malloc checker", "stack-only math stub"]
+    },
+    {
+      "id": "three_prime_crt_determinant",
+      "discipline": "verified_compilers_provers",
+      "tier1_plain": "Exact Multi-Prime Determinant",
+      "tier2_canonical": "Three-Prime CRT Exact Determinant",
+      "tier3_literature": "Overflow-free Gaussian elimination modulo three 31-bit primes reconstructed via Chinese Remainder Theorem",
+      "first_use_gloss": "computing an exact large integer determinant without overflow by solving modulo three primes and combining the remainders",
+      "deprecated_aliases": ["crt det trick", "modular det shortcut"]
+    },
+    {
+      "id": "keyed_splitmix64_replay",
+      "discipline": "verified_compilers_provers",
+      "tier1_plain": "Bit-Exact Random Replay",
+      "tier2_canonical": "Keyed SplitMix64 Cross-Language Replay",
+      "tier3_literature": "Deterministic 64-bit SplitMix64 stream and FNV-1a64 / XOR order-invariant digests matched across Python, Rust, and C++",
+      "first_use_gloss": "a fixed-seed pseudorandom generator that produces identical bit-for-bit test streams and checksums across every language",
+      "deprecated_aliases": ["seeded rng hash", "random replay checksum"]
+    },
+    {
+      "id": "code_data_separation",
+      "discipline": "verified_compilers_provers",
+      "tier1_plain": "Live Math vs. Saved Tables",
+      "tier2_canonical": "Code-vs-Data Model Separation",
+      "tier3_literature": "Rule 2 boundary separating executable MIT verifiers from immutable SHA-256 CC BY 4.0 data records (CI-9)",
+      "first_use_gloss": "keeping executable proof code strictly separate from saved JSON tables so tests recompute truth from scratch rather than reading cached answers",
+      "deprecated_aliases": ["code data firewall", "no cached JSON rule"]
+    },
+    {
+      "id": "frozen_baseline_lock",
+      "discipline": "verified_compilers_provers",
+      "tier1_plain": "Tamper-Proof Baseline Seal",
+      "tier2_canonical": "Frozen-Baseline SHA-256 Lock",
+      "tier3_literature": "Rule 5 cryptographic SHA-256 immutability verification of archived baseline papers and clean-room intakes (CI-10)",
+      "first_use_gloss": "a cryptographic hash lock guaranteeing that archived historical papers and clean-room intakes are never silently altered",
+      "deprecated_aliases": ["frozen hash guard", "immutable file pin"]
+    },
+    {
+      "id": "neutral_arxiv_bundle",
+      "discipline": "verified_compilers_provers",
+      "tier1_plain": "Clean Reproducible Source Archive",
+      "tier2_canonical": "Neutral-Header arXiv Bundle",
+      "tier3_literature": "Deterministic tar.gz archive with 0/0 numeric ownership, 1970-01-01 timestamps, and standalone pdflatex verification (CI-3)",
+      "first_use_gloss": "a stripped, deterministic LaTeX source archive containing zero local usernames, paths, or timestamps",
+      "deprecated_aliases": ["clean arxiv zip", "0/0 tar packet"]
+    },
+    {
+      "id": "cancellation_free_reformulation",
+      "discipline": "verified_compilers_provers",
+      "tier1_plain": "Loss-Free Formula Rewrite",
+      "tier2_canonical": "Cancellation-Free Floating-Point Reformulation",
+      "tier3_literature": "Algebraic rewriting eliminating catastrophic subtraction (0.0 error vs. 100% 106-bit double-double wipeout at s = 10^77)",
+      "first_use_gloss": "rearranging an equation analytically so nearly equal large terms never subtract and erase significant digits",
+      "deprecated_aliases": ["float cancel patch", "double-double rescue"]
+    },
+    {
+      "id": "cross_paper_seam_gate",
+      "discipline": "verified_compilers_provers",
+      "tier1_plain": "Cross-Paper Consistency Lock",
+      "tier2_canonical": "Cross-Paper Mathematical Seam Gate (CI-11)",
+      "tier3_literature": "Automated parity check enforcing exact numerical and structural agreement across Papers #01, PC-II, PC-III, PC-IV, and Horizon Synthesis",
+      "first_use_gloss": "an automated test asserting that shared constants, counts, and bounds match digit-for-digit across consecutive papers",
+      "deprecated_aliases": ["cross-paper glue check", "seam parity script"]
+    },
+    {
+      "id": "adpie_verification_cycle",
+      "discipline": "empirical_methodology_auditing",
+      "tier1_plain": "Five-Step Rigor Loop",
+      "tier2_canonical": "ADPIE Verification Cycle",
+      "tier3_literature": "Structured Assess -> Diagnose -> Plan -> Implement -> Evaluate research engineering cycle (METHODOLOGY.md)",
+      "first_use_gloss": "the five-stage discipline of assessing, diagnosing, planning, implementing, and evaluating every research change",
+      "deprecated_aliases": ["adpie loop hack", "five-stage sprint"]
+    },
+    {
+      "id": "mechanical_falsifier",
+      "discipline": "empirical_methodology_auditing",
+      "tier1_plain": "Trap Check",
+      "tier2_canonical": "Mechanical Falsifier",
+      "tier3_literature": "Deterministic negative control or adversarial input engineered to trigger explicit rejection on invalid assumptions",
+      "first_use_gloss": "an automated trap test that feeds known-bad or sign-violating inputs into a verifier to prove it rejects false claims",
+      "deprecated_aliases": ["anti-facade gate", "bad-input trap"]
+    },
+    {
+      "id": "permanent_negatives_ledger",
+      "discipline": "empirical_methodology_auditing",
+      "tier1_plain": "Open Dead-End Log",
+      "tier2_canonical": "Permanent Negatives Ledger",
+      "tier3_literature": "Immutable catalog (NEGATIVES.md: NEG-M*, NEG-E*, NEG-W*) preserving every refuted claim, erratum, and scope cliff",
+      "first_use_gloss": "a permanent public log preserving every disproved hypothesis, caught typo, and failed shortcut with its exact scope boundary",
+      "deprecated_aliases": ["failure notebook", "error graveyard"]
+    },
+    {
+      "id": "randomized_calibration_trial",
+      "discipline": "empirical_methodology_auditing",
+      "tier1_plain": "Keyed Random Null Test",
+      "tier2_canonical": "Randomized Controlled Calibration Trial (RCT)",
+      "tier3_literature": "Reproducible keyed-PRNG baseline comparison (CALIBRATIONS.md: RCT-1..RCT-9) separating genuine signal from random ensembles",
+      "first_use_gloss": "a fixed-seed randomized null experiment testing whether an observed mathematical structure stands out against random baselines",
+      "deprecated_aliases": ["monte carlo sanity check", "random baseline ping"]
+    },
+    {
+      "id": "drp_seam_swe_sweep",
+      "discipline": "empirical_methodology_auditing",
+      "tier1_plain": "Four-Layer Stress Sweep",
+      "tier2_canonical": "D/R/P/Seam SWE-Sweep",
+      "tier3_literature": "Joint verification across Deterministic (D), Runtime global-invariant (R), Probabilistic calibration (P), and cross-plane seams",
+      "first_use_gloss": "a comprehensive engineering sweep testing exact math, runtime invariants, statistical null controls, and cross-language seams together",
+      "deprecated_aliases": ["four-way stress test", "swe quality sweep"]
+    },
+    {
+      "id": "symmetric_multimodel_attribution",
+      "discipline": "empirical_methodology_auditing",
+      "tier1_plain": "Balanced Credit Tagging",
+      "tier2_canonical": "Symmetric Multi-Model Attribution",
+      "tier3_literature": "Uniform scholarly provenance tags ([E], [GB], [G4N], [lit.], [X]) recorded symmetrically in CONTRIBUTIONS.md and POLICY.md",
+      "first_use_gloss": "applying the exact same transparent attribution and verification rules to human and AI contributions alike",
+      "deprecated_aliases": ["ai credit label", "equal author tag"]
+    },
+    {
+      "id": "cleanroom_independent_xcheck",
+      "discipline": "empirical_methodology_auditing",
+      "tier1_plain": "From-Scratch Cross-Check",
+      "tier2_canonical": "Clean-Room Independent Cross-Verification",
+      "tier3_literature": "Zero-shared-data reproduction across independent codebases and formalisms marked [X] only after live recomputation",
+      "first_use_gloss": "rebuilding and re-proving a claim independently from scratch without reading the original code's cached output",
+      "deprecated_aliases": ["3-way check", "blind recheck pass"]
+    },
+    {
+      "id": "content_integrity_harness",
+      "discipline": "empirical_methodology_auditing",
+      "tier1_plain": "Automated Repository Guardian",
+      "tier2_canonical": "Content-Integrity Audit Harness",
+      "tier3_literature": "Zero-dependency CI suite (tests/content_integrity_audit.py, CI-1..CI-12) guarding hashes, links, LaTeX, Lean, and terminology",
+      "first_use_gloss": "an automated zero-dependency test suite that checks every hash, link, bibliography, formal proof, and terminology rule on every commit",
+      "deprecated_aliases": ["repo health script", "integrity bot check"]
+    },
+    {
+      "id": "three_tier_lexical_alignment",
+      "discipline": "empirical_methodology_auditing",
+      "tier1_plain": "Three-Level Shared Glossary",
+      "tier2_canonical": "Three-Tier Lexical Alignment",
+      "tier3_literature": "ISO 704 single-source-of-truth registry synchronizing Plain-English Tier 1, Canonical Tier 2, and Literature Tier 3 terms",
+      "first_use_gloss": "mapping every technical idea across plain-English storytelling, standardized research prose, and exact literature definitions from one registry",
+      "deprecated_aliases": ["glossary sync sheet", "jargon mapper"]
+    },
+    {
+      "id": "jargon_readability_gate",
+      "discipline": "empirical_methodology_auditing",
+      "tier1_plain": "Plain-Language Score",
+      "tier2_canonical": "Jargon-to-Word Ratio Gate",
+      "tier3_literature": "Automated JWR <= 2.5% and Flesch-Kincaid Grade [5.0, 12.5] readability check enforcing zero-alias research and plain broadcast prose (CI-12)",
+      "first_use_gloss": "the percentage of specialist jargon words in a script, kept at or below 2.5 percent for plain-English broadcast explanations",
+      "deprecated_aliases": ["jargon score cap", "readability throttle"]
+    }
+  ]
+}
