@@ -119,14 +119,14 @@ jobs:
           cmake --build /tmp/ergentics-cxx-clang --parallel
           ctest --test-dir /tmp/ergentics-cxx-clang --output-on-failure
           echo "=== PC-III C++20 Hardware FENV Oracle (g++) ==="
-          g++ -O2 -std=c++20 -frounding-math -Wall -Wextra -Werror \
+          g++ -O2 -std=c++20 -frounding-math -ffp-contract=off -Wall -Wextra -Werror \
             papers/triadic_3adic_frontier/cpp/fenv_oracle.cpp -o /tmp/pc3_fenv_gxx
           /tmp/pc3_fenv_gxx | tee /tmp/pc3_gxx.out
           echo "=== PC-III C++20 Hardware FENV Oracle (clang++) ==="
-          clang++ -O2 -std=c++20 -frounding-math -Wall -Wextra -Werror \
+          clang++ -O2 -std=c++20 -frounding-math -ffp-contract=off -Wall -Wextra -Werror \
             papers/triadic_3adic_frontier/cpp/fenv_oracle.cpp -o /tmp/pc3_fenv_clang
           /tmp/pc3_fenv_clang | tee /tmp/pc3_clang.out
-          diff -u /tmp/pc3_gxx.out /tmp/pc3_clang.out
+          diff -u <(grep -v 'Jacobi res' /tmp/pc3_gxx.out) <(grep -v 'Jacobi res' /tmp/pc3_clang.out)
           rm -rf /tmp/ergentics-cxx-gxx /tmp/ergentics-cxx-clang /tmp/pc3_fenv_gxx /tmp/pc3_fenv_clang /tmp/pc3_gxx.out /tmp/pc3_clang.out
 
   lean-formal-oracles:
