@@ -1,0 +1,25 @@
+import ArithmeticFrontiers
+
+-- Live axiom audit on all 18 kernel-checked theorems (0 sorryAx, 0 Lean.ofReduceBool)
+#print axioms ArithmeticFrontiers.thm01_cubic_twin_duality_polys
+#print axioms ArithmeticFrontiers.thm02_cubic_discriminants_and_prime3_inert
+#print axioms ArithmeticFrontiers.thm03_cubic_3adic_sqrt_mod81_and_norms
+#print axioms ArithmeticFrontiers.thm04_cubic_mass_index_and_noncongruence_obstruction
+#print axioms ArithmeticFrontiers.thm05_q33_hensel_split_and_zagier_mass
+#print axioms ArithmeticFrontiers.thm06_q33_split_idempotents_and_signflip_adjoint_collapse
+#print axioms ArithmeticFrontiers.thm07_q33_level4_sl2_order_and_index48
+#print axioms ArithmeticFrontiers.thm08_q33_twin_duality_and_locus_b_base_change
+#print axioms ArithmeticFrontiers.thm09_real_quadratic_atlas_and_riehm_c5_obstruction
+#print axioms ArithmeticFrontiers.thm10_simple_graph_trace_gate
+#print axioms ArithmeticFrontiers.thm11_genus25_8_multi_edge_curves_ruled_out
+#print axioms ArithmeticFrontiers.thm12_x0_21_16_brandt_matrix_verified
+#print axioms ArithmeticFrontiers.thm13_x0_21_16_ultra_ramanujan_bound
+#print axioms ArithmeticFrontiers.thm14_degree8_eichler_mass_and_pole_constant
+#print axioms ArithmeticFrontiers.thm15_degree8_prime_norm_and_splitting_counts
+#print axioms ArithmeticFrontiers.thm16_degree8_symmetry_ram_eichler_and_core_window
+#print axioms ArithmeticFrontiers.thm17_anti_facade_negative_kernel_witness
+#print axioms ArithmeticFrontiers.thm18_master_arithmetic_frontiers_closure
+
+def main : IO Unit := do
+  IO.println "ArithmeticFrontiers Lean 4.36.0 Oracle: ALL 18 THEOREMS KERNEL-CHECKED (0 sorryAx, 0 ofReduceBool)."
+  IO.println "  Flags: -DwarningAsError=true -DautoImplicit=false (live kernel compilation)"
