@@ -1,0 +1,1017 @@
+{
+  "F1_rational_nauru_and_errata": {
+    "aut_Y_order": 144,
+    "b5_1_2_norm1_refinement": {
+      "mod15_ad1": 900,
+      "mod15_ker1": 4,
+      "mod15_overlap1": "9/36",
+      "mod3_ad1": 12,
+      "mod3_ker1": 12,
+      "mod3_overlap1": "3/36",
+      "rho_delta1_order": 36
+    },
+    "b5_sylow5_order": 25,
+    "nauru_m18_corridor": {
+      "N18_exact": 514224,
+      "ceiling_breach": 1444,
+      "pi18_exact": 28560,
+      "pi18_falsified_31824_N18": 572976,
+      "ram_hi": 546842,
+      "ram_lo": 501786
+    },
+    "nauru_pi_6_to_24": {
+      "10": 216,
+      "12": 564,
+      "14": 2232,
+      "16": 8820,
+      "18": 28560,
+      "20": 104292,
+      "22": 380664,
+      "24": 1401744,
+      "6": 24,
+      "8": 108
+    },
+    "table2_rational_adjoints": [
+      {
+        "ad_order": 36,
+        "curve": "B3_3/2",
+        "joint_rho12": 144,
+        "joint_rho6": 144,
+        "ker_rho12": 4,
+        "ker_rho6": 4,
+        "mod": 3
+      },
+      {
+        "ad_order": 972,
+        "curve": "B3_3/2",
+        "joint_rho12": 3888,
+        "joint_rho6": 3888,
+        "ker_rho12": 4,
+        "ker_rho6": 4,
+        "mod": 9
+      },
+      {
+        "ad_order": 2160,
+        "curve": "B3_3/2",
+        "joint_rho12": 8640,
+        "joint_rho6": 8640,
+        "ker_rho12": 4,
+        "ker_rho6": 4,
+        "mod": 15
+      },
+      {
+        "ad_order": 24,
+        "curve": "B5_5/2",
+        "joint_rho12": 576,
+        "joint_rho6": 144,
+        "ker_rho12": 24,
+        "ker_rho6": 6,
+        "mod": 3
+      },
+      {
+        "ad_order": 300,
+        "curve": "B5_5/2",
+        "joint_rho12": 3600,
+        "joint_rho6": 3600,
+        "ker_rho12": 12,
+        "ker_rho6": 12,
+        "mod": 5
+      },
+      {
+        "ad_order": 3600,
+        "curve": "B5_5/2",
+        "joint_rho12": 14400,
+        "joint_rho6": 3600,
+        "ker_rho12": 4,
+        "ker_rho6": 1,
+        "mod": 15
+      },
+      {
+        "ad_order": 24,
+        "curve": "B5_1/2",
+        "joint_rho12": 144,
+        "joint_rho6": 576,
+        "ker_rho12": 6,
+        "ker_rho6": 24,
+        "mod": 3
+      },
+      {
+        "ad_order": 300,
+        "curve": "B5_1/2",
+        "joint_rho12": 3600,
+        "joint_rho6": 3600,
+        "ker_rho12": 12,
+        "ker_rho6": 12,
+        "mod": 5
+      },
+      {
+        "ad_order": 3600,
+        "curve": "B5_1/2",
+        "joint_rho12": 3600,
+        "joint_rho6": 14400,
+        "ker_rho12": 1,
+        "ker_rho6": 4,
+        "mod": 15
+      }
+    ],
+    "tplr_group": {
+      "abelianization_order": 24,
+      "commutator_order": 6,
+      "order": 144
+    },
+    "twin_duality_samples": {
+      "1/2": {
+        "tau_bta": "5/2",
+        "tau_ta": "1/2"
+      },
+      "11/5": {
+        "tau_bta": "4/5",
+        "tau_ta": "11/5"
+      },
+      "2/3": {
+        "tau_bta": "7/3",
+        "tau_ta": "2/3"
+      },
+      "3/2": {
+        "tau_bta": "3/2",
+        "tau_ta": "3/2"
+      },
+      "5/2": {
+        "tau_bta": "1/2",
+        "tau_ta": "5/2"
+      },
+      "7/4": {
+        "tau_bta": "5/4",
+        "tau_ta": "7/4"
+      }
+    }
+  },
+  "F2_nauru_metric_gonality": {
+    "D_hex": [
+      0,
+      1,
+      2,
+      14,
+      19,
+      12
+    ],
+    "continuous_edge_cells_passed": 108,
+    "continuous_max_steps": 3,
+    "cut_distribution": {
+      "6": 168
+    },
+    "discrete_max_steps": 2,
+    "discrete_vertices_passed": 24,
+    "disjoint_star_pairs": 168,
+    "exact_1_perfect_codes": [
+      [
+        0,
+        4,
+        8,
+        14,
+        18,
+        22
+      ],
+      [
+        1,
+        5,
+        9,
+        15,
+        19,
+        23
+      ],
+      [
+        2,
+        6,
+        10,
+        12,
+        16,
+        20
+      ],
+      [
+        3,
+        7,
+        11,
+        13,
+        17,
+        21
+      ]
+    ],
+    "star_scramble_e": 6,
+    "star_scramble_h": 6,
+    "total_cells_passed": 132
+  },
+  "F3_real_quadratic_and_cubic_census": {
+    "cubic_count": 4,
+    "cubic_moduli": [
+      {
+        "coeffs": [
+          2,
+          -8,
+          8,
+          -1
+        ],
+        "disc_poly": 148,
+        "recip_roots_mod16": []
+      },
+      {
+        "coeffs": [
+          2,
+          -9,
+          10,
+          -1
+        ],
+        "disc_poly": 316,
+        "recip_roots_mod16": [
+          2
+        ]
+      },
+      {
+        "coeffs": [
+          2,
+          -9,
+          10,
+          -2
+        ],
+        "disc_poly": 316,
+        "recip_roots_mod16": [
+          10
+        ]
+      },
+      {
+        "coeffs": [
+          2,
+          -10,
+          14,
+          -5
+        ],
+        "disc_poly": 148,
+        "recip_roots_mod16": []
+      }
+    ],
+    "real_quadratic_count": 6,
+    "real_quadratic_moduli": [
+      {
+        "DF": 8,
+        "disc": 8,
+        "p": 1,
+        "poly": "2x^2 - 4x + 1",
+        "s": 4
+      },
+      {
+        "DF": 17,
+        "disc": 17,
+        "p": 1,
+        "poly": "2x^2 - 5x + 1",
+        "s": 5
+      },
+      {
+        "DF": 28,
+        "disc": 28,
+        "p": 1,
+        "poly": "2x^2 - 6x + 1",
+        "s": 6
+      },
+      {
+        "DF": 12,
+        "disc": 12,
+        "p": 3,
+        "poly": "2x^2 - 6x + 3",
+        "s": 6
+      },
+      {
+        "DF": 17,
+        "disc": 17,
+        "p": 4,
+        "poly": "2x^2 - 7x + 4",
+        "s": 7
+      },
+      {
+        "DF": 8,
+        "disc": 8,
+        "p": 7,
+        "poly": "2x^2 - 8x + 7",
+        "s": 8
+      }
+    ],
+    "siegel_zeta_minus_one": {
+      "12": "1/6",
+      "17": "1/3",
+      "28": "2/3",
+      "8": "1/12"
+    }
+  },
+  "F4_real_quadratic_congruence": {
+    "Q_sqrt17": {
+      "ad_v2": 48,
+      "quotient_is_Q3": true,
+      "rho12_joint": 576,
+      "rho12_ker": 12,
+      "rho6_joint": 144,
+      "rho6_ker": 3
+    },
+    "Q_sqrt2": {
+      "T8_det": 200704,
+      "T8_det_div_8pow4": 49,
+      "denoms": [
+        1,
+        1,
+        2
+      ],
+      "ker12_rho12_orders": {
+        "1": 1,
+        "2": 3,
+        "3": 8
+      },
+      "ker12_rho6_orders": {
+        "1": 1,
+        "2": 3,
+        "3": 2,
+        "6": 6
+      },
+      "mod_3_ad": 720,
+      "mod_3_ad1": 360,
+      "mod_3q7_ad1": 52920,
+      "mod_q7_ad": 588,
+      "mod_q7_ad1": 147,
+      "mod_q7_joint": 7056,
+      "mod_q7_ker": 12,
+      "mod_q7p_ad": 336,
+      "mod_q7p_ad1": 168,
+      "quotient_is_Theta3": true
+    },
+    "Q_sqrt3": {
+      "T8_det": 186624,
+      "T8_det_div_12pow4": 9,
+      "denoms": [
+        1,
+        1,
+        2
+      ],
+      "mod3_ad1": 243,
+      "mod3_ad_full": 972,
+      "mod3_ad_plus": 486,
+      "mod3_joint": 3888,
+      "mod3_ker": 4
+    },
+    "Q_sqrt7": {
+      "congruence_both": true,
+      "mod_3_ad": 576,
+      "mod_3_joint_rho12": 576,
+      "mod_3_joint_rho6": 576,
+      "mod_3_ker_rho12": 1,
+      "mod_3_ker_rho6": 1,
+      "mod_p3_ad": 24,
+      "mod_p3_ker_rho12": 6,
+      "mod_p3_ker_rho6": 24,
+      "mod_p3p_ker_rho12": 24,
+      "mod_p3p_ker_rho6": 6
+    }
+  },
+  "F5_dic6_cayley_spectrum_gonality": {
+    "aut_Z_order": 96,
+    "boundary_class_size": 6,
+    "connected_cayley_count": 18,
+    "involution_b1_hist": {
+      "11": 24,
+      "13": 17,
+      "7": 2
+    },
+    "involution_count": 43,
+    "metric_dhar_D8": {
+      "e_max_steps": 2,
+      "edge_cells": 144,
+      "total_cells": 168,
+      "v_max_steps": 1,
+      "vertices": 24
+    },
+    "metric_dhar_D_pc2": {
+      "e_max_steps": 3,
+      "edge_cells": 144,
+      "total_cells": 168,
+      "v_max_steps": 2,
+      "vertices": 24
+    },
+    "norm_devs_Z": {
+      "10": -0.181257,
+      "12": 0.598017,
+      "14": -0.258573,
+      "16": -0.04878,
+      "4": 0.19697,
+      "6": -0.015152,
+      "8": -0.180135
+    },
+    "pi_Z_4_to_16": {
+      "10": 11616,
+      "12": 90172,
+      "14": 681504,
+      "16": 5379960,
+      "4": 60,
+      "6": 240,
+      "8": 1560
+    },
+    "ramanujan_class_size": 12,
+    "scramble_S4": {
+      "E0": [
+        0,
+        1,
+        2,
+        20
+      ],
+      "canonical_witness": [
+        0,
+        1,
+        2,
+        5,
+        8,
+        17,
+        19,
+        23
+      ],
+      "disjoint_pairs": 156,
+      "egg_cut_hist": {
+        "10": 108,
+        "8": 48
+      },
+      "egg_cut_number": 8,
+      "eggs": 24,
+      "hitting_number": 8,
+      "intersect_pairs": 120,
+      "total_touching": 276
+    },
+    "tr_A2": 96
+  },
+  "F6_dic6_fricke_vogt_and_crt_noncongruence": {
+    "b70_riehm_mod8": {
+      "abelianization_order": 3,
+      "commutator_order": 256,
+      "neg_I_in_commutator": true,
+      "order": 768
+    },
+    "fricke_vogt_10_pairs": [
+      {
+        "D": 11,
+        "div_by_4": false,
+        "pair": [
+          1,
+          1
+        ],
+        "ram_fin": [
+          11
+        ],
+        "symbol": [
+          -11,
+          -11
+        ],
+        "tau_tx_ty": "121/36"
+      },
+      {
+        "D": 11,
+        "div_by_4": false,
+        "pair": [
+          1,
+          2
+        ],
+        "ram_fin": [
+          11
+        ],
+        "symbol": [
+          -5,
+          -11
+        ],
+        "tau_tx_ty": "55/18"
+      },
+      {
+        "D": 2,
+        "div_by_4": true,
+        "pair": [
+          1,
+          4
+        ],
+        "ram_fin": [
+          2
+        ],
+        "symbol": [
+          -2,
+          -11
+        ],
+        "tau_tx_ty": "22/9"
+      },
+      {
+        "D": 7,
+        "div_by_4": false,
+        "pair": [
+          1,
+          5
+        ],
+        "ram_fin": [
+          7
+        ],
+        "symbol": [
+          -35,
+          -11
+        ],
+        "tau_tx_ty": "77/36"
+      },
+      {
+        "D": 2,
+        "div_by_4": true,
+        "pair": [
+          2,
+          2
+        ],
+        "ram_fin": [
+          2
+        ],
+        "symbol": [
+          -5,
+          -5
+        ],
+        "tau_tx_ty": "25/9"
+      },
+      {
+        "D": 5,
+        "div_by_4": true,
+        "pair": [
+          2,
+          4
+        ],
+        "ram_fin": [
+          5
+        ],
+        "symbol": [
+          -2,
+          -5
+        ],
+        "tau_tx_ty": "20/9"
+      },
+      {
+        "D": 5,
+        "div_by_4": false,
+        "pair": [
+          2,
+          5
+        ],
+        "ram_fin": [
+          5
+        ],
+        "symbol": [
+          -35,
+          -5
+        ],
+        "tau_tx_ty": "35/18"
+      },
+      {
+        "D": 2,
+        "div_by_4": true,
+        "pair": [
+          4,
+          4
+        ],
+        "ram_fin": [
+          2
+        ],
+        "symbol": [
+          -2,
+          -2
+        ],
+        "tau_tx_ty": "16/9"
+      },
+      {
+        "D": 70,
+        "div_by_4": true,
+        "pair": [
+          4,
+          5
+        ],
+        "ram_fin": [
+          2,
+          5,
+          7
+        ],
+        "symbol": [
+          -35,
+          -2
+        ],
+        "tau_tx_ty": "14/9"
+      },
+      {
+        "D": 7,
+        "div_by_4": false,
+        "pair": [
+          5,
+          5
+        ],
+        "ram_fin": [
+          7
+        ],
+        "symbol": [
+          -35,
+          -35
+        ],
+        "tau_tx_ty": "49/36"
+      }
+    ],
+    "hurwitz_level8_vs_ad16_reconciliation": {
+      "adjoint": {
+        "Ad_16": {
+          "ker_hist": {
+            "3": 16
+          },
+          "order": 1024
+        },
+        "Ad_4": {
+          "ker_hist": {
+            "3": 8,
+            "6": 8
+          },
+          "order": 32
+        },
+        "Ad_8": {
+          "ker_hist": {
+            "3": 8,
+            "6": 8
+          },
+          "order": 128
+        }
+      },
+      "all16_quotient_K44": true,
+      "left_mult": {
+        "L_16": {
+          "ker1_hist": {
+            "3": 16
+          },
+          "proj_order": 512,
+          "signed_order": 1024
+        },
+        "L_4": {
+          "ker1_hist": {
+            "3": 8,
+            "6": 8
+          },
+          "proj_order": 8,
+          "signed_order": 16
+        },
+        "L_8": {
+          "ker1_hist": {
+            "3": 16
+          },
+          "proj_order": 64,
+          "signed_order": 128
+        }
+      }
+    },
+    "surviving_count": 5,
+    "table7_crt_audit": [
+      {
+        "congruence_count": 0,
+        "crt_mods": [
+          16
+        ],
+        "crt_pre_pm1_order": 1024,
+        "crt_proj_order": 512,
+        "curve": "B2_4_4",
+        "denoms": [
+          1,
+          1,
+          3,
+          3
+        ],
+        "factor_raw_orders": [
+          1024
+        ],
+        "ker1_hist": {
+          "3": 16
+        },
+        "pair": [
+          4,
+          4
+        ],
+        "rd": 2
+      },
+      {
+        "congruence_count": 0,
+        "crt_mods": [
+          16,
+          5
+        ],
+        "crt_pre_pm1_order": 12288,
+        "crt_proj_order": 6144,
+        "curve": "B5_2_2_4",
+        "denoms": [
+          1,
+          1,
+          3,
+          3
+        ],
+        "factor_raw_orders": [
+          2048,
+          150
+        ],
+        "ker1_hist": {
+          "6": 16
+        },
+        "pair": [
+          2,
+          4
+        ],
+        "rd": 10
+      },
+      {
+        "congruence_count": 0,
+        "crt_mods": [
+          8,
+          5,
+          7
+        ],
+        "crt_pre_pm1_order": 36864,
+        "crt_proj_order": 18432,
+        "curve": "B70_4_5",
+        "denoms": [
+          1,
+          1,
+          3,
+          3
+        ],
+        "factor_raw_orders": [
+          768,
+          150,
+          392
+        ],
+        "ker1_hist": {
+          "2": 8,
+          "6": 8
+        },
+        "pair": [
+          4,
+          5
+        ],
+        "rd": 70
+      },
+      {
+        "congruence_count": 0,
+        "crt_mods": [
+          8,
+          5
+        ],
+        "crt_pre_pm1_order": 3072,
+        "crt_proj_order": 1536,
+        "curve": "B2_5_2_2",
+        "denoms": [
+          1,
+          1,
+          3,
+          3
+        ],
+        "factor_raw_orders": [
+          768,
+          100
+        ],
+        "ker1_hist": {
+          "12": 16
+        },
+        "pair": [
+          2,
+          2
+        ],
+        "rd": 10
+      },
+      {
+        "congruence_count": 0,
+        "crt_mods": [
+          8,
+          11
+        ],
+        "crt_pre_pm1_order": 7680,
+        "crt_proj_order": 3840,
+        "curve": "B2_11_1_4",
+        "denoms": [
+          1,
+          1,
+          3,
+          3
+        ],
+        "factor_raw_orders": [
+          768,
+          1210
+        ],
+        "ker1_hist": {
+          "12": 8,
+          "4": 8
+        },
+        "pair": [
+          1,
+          4
+        ],
+        "rd": 22
+      }
+    ],
+    "total_congruence": 0,
+    "total_realizations": 80,
+    "unique_normal_C3_verified": 80
+  },
+  "F7_genus25_borel_census": {
+    "curves": [
+      {
+        "D": 6,
+        "N": 115,
+        "e2": 0,
+        "e3": 0,
+        "omega": 2,
+        "tf": true,
+        "vol": 288
+      },
+      {
+        "D": 6,
+        "N": 119,
+        "e2": 0,
+        "e3": 0,
+        "omega": 2,
+        "tf": true,
+        "vol": 288
+      },
+      {
+        "D": 6,
+        "N": 125,
+        "e2": 4,
+        "e3": 0,
+        "omega": 2,
+        "tf": false,
+        "vol": 300
+      },
+      {
+        "D": 6,
+        "N": 133,
+        "e2": 0,
+        "e3": 8,
+        "omega": 2,
+        "tf": false,
+        "vol": 320
+      },
+      {
+        "D": 6,
+        "N": 149,
+        "e2": 4,
+        "e3": 0,
+        "omega": 2,
+        "tf": false,
+        "vol": 300
+      },
+      {
+        "D": 6,
+        "N": 151,
+        "e2": 0,
+        "e3": 4,
+        "omega": 2,
+        "tf": false,
+        "vol": 304
+      },
+      {
+        "D": 6,
+        "N": 157,
+        "e2": 4,
+        "e3": 4,
+        "omega": 2,
+        "tf": false,
+        "vol": 316
+      },
+      {
+        "D": 15,
+        "N": 22,
+        "e2": 0,
+        "e3": 0,
+        "omega": 2,
+        "tf": true,
+        "vol": 288
+      },
+      {
+        "D": 15,
+        "N": 37,
+        "e2": 0,
+        "e3": 4,
+        "omega": 2,
+        "tf": false,
+        "vol": 304
+      },
+      {
+        "D": 21,
+        "N": 16,
+        "e2": 0,
+        "e3": 0,
+        "omega": 2,
+        "tf": true,
+        "vol": 288
+      },
+      {
+        "D": 21,
+        "N": 23,
+        "e2": 0,
+        "e3": 0,
+        "omega": 2,
+        "tf": true,
+        "vol": 288
+      },
+      {
+        "D": 39,
+        "N": 8,
+        "e2": 0,
+        "e3": 0,
+        "omega": 2,
+        "tf": true,
+        "vol": 288
+      },
+      {
+        "D": 39,
+        "N": 11,
+        "e2": 0,
+        "e3": 0,
+        "omega": 2,
+        "tf": true,
+        "vol": 288
+      },
+      {
+        "D": 57,
+        "N": 7,
+        "e2": 0,
+        "e3": 0,
+        "omega": 2,
+        "tf": true,
+        "vol": 288
+      },
+      {
+        "D": 447,
+        "N": 1,
+        "e2": 0,
+        "e3": 2,
+        "omega": 2,
+        "tf": false,
+        "vol": 296
+      },
+      {
+        "D": 453,
+        "N": 1,
+        "e2": 4,
+        "e3": 0,
+        "omega": 2,
+        "tf": false,
+        "vol": 300
+      },
+      {
+        "D": 1110,
+        "N": 1,
+        "e2": 0,
+        "e3": 0,
+        "omega": 4,
+        "tf": true,
+        "vol": 288
+      },
+      {
+        "D": 1122,
+        "N": 1,
+        "e2": 0,
+        "e3": 8,
+        "omega": 4,
+        "tf": false,
+        "vol": 320
+      },
+      {
+        "D": 1230,
+        "N": 1,
+        "e2": 0,
+        "e3": 8,
+        "omega": 4,
+        "tf": false,
+        "vol": 320
+      }
+    ],
+    "omega2_count": 16,
+    "omega4_count": 3,
+    "pc2_thm73_manin_T3_survivors": 0,
+    "torsion_free_count": 9,
+    "total_curves": 19
+  },
+  "F8_poitou_odlyzko_audit": {
+    "anti_facade_f_bad_pm1": -0.6,
+    "degree_8_gap": {
+      "UB_max_8_1": 13.1423854579,
+      "continuous_opt_b": 3.039865,
+      "continuous_opt_exp_LB": 12.5955757277,
+      "exp_LB_b3_0": 12.5937296518,
+      "gap_preserved": true
+    },
+    "negative_kernel_rejected": true,
+    "positive_control_min_H1": 0.0,
+    "positive_control_min_f1": 0.0,
+    "witness_6_16_1_2": {
+      "UB_6_16": 18.647048562550157,
+      "certified_positive": true,
+      "exp_LB_GL128": 18.66067837170956,
+      "exp_LB_GL64": 18.66067837170955,
+      "gap": 0.013629809159404,
+      "quad_diff": 1.066e-14
+    }
+  },
+  "license": "CC-BY-4.0",
+  "paper": "PC-III: The 3-Adic Dicyclic Companion, Exact Level 3P_5 and Level (3) Congruence on Nauru, and the Real-Quadratic Lame Shimura Curve Atlas",
+  "schema_version": "1.0.0"
+}

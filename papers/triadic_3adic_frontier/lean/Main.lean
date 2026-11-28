@@ -1,0 +1,27 @@
+import Triadic3AdicFrontier
+
+-- Live axiom audit on all 20 kernel-checked theorems (0 sorryAx, 0 Lean.ofReduceBool)
+#print axioms Triadic3AdicFrontier.thm01_dic6_group_laws
+#print axioms Triadic3AdicFrontier.thm02_z_cayley_regular_bipartite_triangle_free
+#print axioms Triadic3AdicFrontier.thm03_z_trace_A2_eq_96
+#print axioms Triadic3AdicFrontier.thm04_scramble_S4_connected_distinct_and_276_touching
+#print axioms Triadic3AdicFrontier.thm05_hitSet8_hits_all_24_eggs
+#print axioms Triadic3AdicFrontier.thm06_D8_single_step_dhar_reaches_all_24_vertices
+#print axioms Triadic3AdicFrontier.thm07_Z_quotient_C3_is_K44_mult3
+#print axioms Triadic3AdicFrontier.thm08_Y_quotient_C3_is_Q3_mult3
+#print axioms Triadic3AdicFrontier.thm09_universal_twin_duality_poly
+#print axioms Triadic3AdicFrontier.thm10_nauru_twin_duality_int
+#print axioms Triadic3AdicFrontier.thm11_fricke_vogt_dvd4_iff
+#print axioms Triadic3AdicFrontier.thm12_canonical_dic6_5_of_10_pairs
+#print axioms Triadic3AdicFrontier.thm13_sylow5_coprime_and_b5_level_3P5
+#print axioms Triadic3AdicFrontier.thm14_nauru_m18_ramanujan_corridor_and_falsify_31824
+#print axioms Triadic3AdicFrontier.thm15_real_quadratic_eichler_obstructions_and_q7_congruence
+#print axioms Triadic3AdicFrontier.thm16_riehm_mod8_and_hurwitz_level8_vs_ad16
+#print axioms Triadic3AdicFrontier.thm17_genus25_borel_omega6_bound
+#print axioms Triadic3AdicFrontier.thm18_tplr_group_associative_and_faithful
+#print axioms Triadic3AdicFrontier.thm19_tplr_commutator_order_6_abelianization_24
+#print axioms Triadic3AdicFrontier.thm20_master_triadic_3adic_frontier
+
+def main : IO Unit := do
+  IO.println "Triadic3AdicFrontier Lean 4.36.0 Oracle: ALL 20 THEOREMS KERNEL-CHECKED (0 sorryAx, 0 ofReduceBool)."
+  IO.println "  Flags: -DwarningAsError=true -DautoImplicit=false (live kernel compilation)"

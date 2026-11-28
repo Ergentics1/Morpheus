@@ -57,6 +57,12 @@ CANONICAL_PAPERS: List[Tuple[str, str, str, str]] = [
         "papers/triadic_wreath_nauru/paper/references.bib",
         "papers/triadic_wreath_nauru/arxiv/triadic-wreath-nauru-arxiv.tar.gz",
     ),
+    (
+        "Paper PC-III (3-Adic Dic6 & Real-Quadratic Atlas)",
+        "papers/triadic_3adic_frontier/paper/triadic_3adic_frontier.tex",
+        "papers/triadic_3adic_frontier/paper/references.bib",
+        "papers/triadic_3adic_frontier/arxiv/triadic-3adic-frontier-arxiv.tar.gz",
+    ),
 ]
 
 # Rule 5 frozen-baseline waiver for Horizon Synthesis Piece II (v0.4.0 immutable).
@@ -103,8 +109,8 @@ def git_tracked_files() -> List[str]:
 def gate_ci1_manifests() -> Tuple[bool, str]:
     """CI-1: Verify all MANIFEST.sha256 files using repo-root-relative paths."""
     manifests = sorted(ROOT.rglob("MANIFEST.sha256"))
-    if len(manifests) < 11:
-        return False, f"Expected >= 11 MANIFEST.sha256 files, found {len(manifests)}"
+    if len(manifests) < 12:
+        return False, f"Expected >= 12 MANIFEST.sha256 files, found {len(manifests)}"
     checked_entries = 0
     errors: List[str] = []
     for mf in manifests:
@@ -286,7 +292,7 @@ def gate_ci5_latex_bibtex() -> Tuple[bool, str]:
 
     if errors:
         return False, "; ".join(errors[:5])
-    return True, f"5/5 LaTeX/BibTeX papers clean ({total_labels} labels, {total_cites} cited bib keys, 0 unresolved/unused)"
+    return True, f"{len(CANONICAL_PAPERS)}/{len(CANONICAL_PAPERS)} LaTeX/BibTeX papers clean ({total_labels} labels, {total_cites} cited bib keys, 0 unresolved/unused)"
 
 
 def strip_md_code(src: str) -> str:
@@ -345,10 +351,10 @@ def strip_lean_comments(src: str) -> str:
 
 
 def gate_ci7_lean_static_trust() -> Tuple[bool, str]:
-    """CI-7: Verify all 8 Lean 4.36.0 projects contain zero sorry/admit/native_decide/unsafe/axiom."""
+    """CI-7: Verify all 9 Lean 4.36.0 projects contain zero sorry/admit/native_decide/unsafe/axiom."""
     lakefiles = sorted(ROOT.rglob("lakefile.toml"))
-    if len(lakefiles) < 8:
-        return False, f"Expected >= 8 Lean projects, found {len(lakefiles)}"
+    if len(lakefiles) < 9:
+        return False, f"Expected >= 9 Lean projects, found {len(lakefiles)}"
     forbidden = re.compile(r"\b(sorry|admit|native_decide|unsafe|axiom)\b")
     lean_files_checked = 0
     theorem_count = 0
@@ -429,7 +435,7 @@ def gate_ci9_code_data_separation() -> Tuple[bool, str]:
     scanned = 0
     for rel in git_tracked_files():
         is_maintained_code = rel.startswith(code_roots) or bool(
-            re.match(r"^papers/.+/(code|lean|rust)/", rel)
+            re.match(r"^papers/.+/(code|cpp|lean|rust)/", rel)
         )
         if not is_maintained_code:
             continue

@@ -1,0 +1,8 @@
+[package]
+name = "triadic-3adic-frontier-rust"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+description = "Zero-dependency independent Rust verifier for Paper PC-III: The 3-Adic Dicyclic Companion, Exact Level 3P_5 and Level (3) Congruence on Nauru, and the Real-Quadratic Lame Shimura Curve Atlas."
+
+[dependencies]
