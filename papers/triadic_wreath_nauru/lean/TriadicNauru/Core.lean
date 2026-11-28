@@ -881,4 +881,33 @@ theorem thm37_dic6_gonality_witness_and_six_ring :
       ru = rv ∨ (ru + 1) % 6 = rv ∨ (rv + 1) % 6 = ru) := by
   decide
 
+/-- Theorem 38 (NEG-M24 Ramanujan Corridor for `pi_Y(18), pi_Y(22)` & Universal Twin Duality):
+    (1) Exact Nauru Hashimoto traces `N_6 = 144`, `N_18 = 514,224` (`pi_Y(18) = 28,560`), and
+    `N_22 = 8,374,608` (`pi_Y(22) = 380,664`) satisfy the bipartite 3-regular Ramanujan trace
+    corridor `2·2^18 + 26 - 44·2^9 = 501,786 ≤ 514,224 ≤ 546,842 = 2·2^18 + 26 + 44·2^9`,
+    strictly falsifying the v0.5.0–v0.7.0 prose typo `31,824` (`18·31,824 + 144 = 572,976 > 546,842`).
+    (2) Universal algebraic twin duality `tau((bt)a) = 3 - tau(ta)` on `B(x) = (-3, B)`:
+    for all integers `u, v, B`, clearing denominators yields the exact identity
+    `3·u^2 + (-3·B·v^2) = 3·(u^2 - B·v^2)` and `9·B^2·v^2 = (-3·B)·(-3·B·v^2)`. -/
+theorem thm38_nauru_pi18_ramanujan_and_twin_duality :
+    (2 * 2 ^ 18 + 26 - 44 * 2 ^ 9 = 501786) ∧
+    (2 * 2 ^ 18 + 26 + 44 * 2 ^ 9 = 546842) ∧
+    (18 * 28560 + 144 = 514224) ∧
+    (501786 ≤ 514224 ∧ 514224 ≤ 546842) ∧
+    (546842 < 18 * 31824 + 144) ∧
+    (22 * 380664 = 8374608) ∧
+    (∀ u v B : Int,
+      3 * (u * u) + (-(3 * (B * (v * v)))) = 3 * (u * u - B * (v * v)) ∧
+      9 * (B * B) * (v * v) = (-(3 * B)) * (-(3 * (B * (v * v))))) := by
+  refine ⟨by decide, by decide, by decide, by decide, by decide, by decide, ?_⟩
+  intro u v B
+  constructor
+  · omega
+  · have h1 : (-(3 * B)) * (-(3 * (B * (v * v)))) = (3 * B) * (3 * (B * (v * v))) :=
+      Int.neg_mul_neg (3 * B) (3 * (B * (v * v)))
+    rw [h1]
+    have h2 : (3 * B) * (3 * (B * (v * v))) = 9 * (B * B) * (v * v) := by
+      simp [Int.mul_assoc, Int.mul_left_comm, Int.mul_comm]
+    exact h2.symm
+
 end TriadicNauru

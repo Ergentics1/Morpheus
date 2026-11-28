@@ -17,6 +17,15 @@ fn test_d2_nauru_aut_order_144_and_involutions() {
 }
 
 #[test]
+fn test_d3_nauru_hashimoto_prime_cadences_neg_m24() {
+    let pi_y = verify_nauru_hashimoto_prime_cadences();
+    assert_eq!(
+        pi_y,
+        [24, 108, 216, 564, 2_232, 8_820, 28_560, 104_292, 380_664, 1_401_744]
+    );
+}
+
+#[test]
 fn test_d4_exhaustive_dhar_gonality_six() {
     let (tested, ok) = verify_nauru_gonality_exact();
     assert_eq!(tested, 20_474);

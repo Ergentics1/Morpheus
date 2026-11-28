@@ -101,7 +101,7 @@ jobs:
               cargo test --release --manifest-path "$manifest"
             fi
           done
-          echo "=== cargo run --release (PC-II 10 core suites) ==="
+          echo "=== cargo run --release (PC-II 11 core suites) ==="
           cargo run --release --manifest-path papers/triadic_wreath_nauru/rust/Cargo.toml
 
       - name: Build and test C++20 ErgenticsCXX (-Wall -Wextra -Werror)
@@ -112,7 +112,7 @@ jobs:
           ctest --test-dir /tmp/ergentics-cxx-build --output-on-failure
 
   lean-formal-oracles:
-    name: Lean 4.36.0 Formal Oracles (8 Projects / 128 Theorems)
+    name: Lean 4.36.0 Formal Oracles (8 Projects / 129 Theorems)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
